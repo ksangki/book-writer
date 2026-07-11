@@ -24,8 +24,9 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 
 1. 사용자 입력에서 **주제, 주요 내용, 대상 독자**를 추출한다. 셋 중 하나라도 불명확하면 사용자에게 짧게 질문한다 (AskUserQuestion 사용). 추가로 `저자: {이름}` 형태의 저자 지정이 있는지 확인한다 — 없으면 기본값 `Toby-AI`를 사용하고, 있으면 해당 값을 매니페스트·표지 메타까지 전파한다. `라이선스: {값}` 형태가 있는지도 확인한다 — 없으면 하네스 기본값 `CC BY-NC-SA 4.0`을 매니페스트에 그대로 두고(또는 `license` 필드를 비워두면 빌드 스크립트가 채움), 있으면 해당 값을 매니페스트의 `license` 필드로 전달한다.
 2. **장르 감지 + 확인.** `profiles/_registry.md`의 자동 감지 규칙으로 주제·주요 내용·대상 독자에서 장르를 추정한다 (`tech-book` / `narrative` / `practical` / `essay`, 기본 `tech-book`). 사용자가 `장르: {값}`을 명시했으면 그대로 채택. 아니면 `AskUserQuestion`으로 추정값을 첫 옵션·추천으로 제시해 **확인받는다** (단, 신호가 강하고 명백하면 추정값을 알리고 진행해도 된다). 확정된 `genre`는 이후 모든 Phase로 전파되고, Phase 4의 editor가 `book_manifest.json`의 `genre` 필드에 기록한다. 활성 프로필 경로는 `profiles/{genre}/`.
-3. 책 제목 후보(슬러그 포함)를 만든다. 예: `AI 시대의 개발자 철학` → 슬러그 `ai-developer-philosophy`.
-4. `{slug}/`의 존재 여부를 확인한다.
+3. **위임 다이얼 (운영자 학습 루프).** 사용자 입력에서 `모드: 학습` 명시 또는 "이 주제를 공부하려고/잘 몰라서" 류의 명확한 학습 신호를 확인한다. 있으면 `delegation_mode: learning`, 없으면 기본 `production` — **신호가 없으면 묻지 않는다.** 어차피 AskUserQuestion을 쓸 일이 있으면 그 질문에 다이얼 확인을 편승시켜도 된다 (추가 왕복 금지). 확정 값은 Phase 4의 editor에게 전달해 `book_manifest.json`의 `delegation_mode`에 기록하고 (재실행 결정성 — `genre`와 같은 취급), Phase 3·4·완료 보고의 학습 터치포인트가 이 값을 따른다. 정전 스펙은 `docs/learning-loop.md`.
+4. 책 제목 후보(슬러그 포함)를 만든다. 예: `AI 시대의 개발자 철학` → 슬러그 `ai-developer-philosophy`.
+5. `{slug}/`의 존재 여부를 확인한다.
    - **미존재** → 초기 실행, Phase 1부터 순차 실행
    - **존재 + 사용자가 부분 수정 요청** (예: "챕터 3만 다시", "계획만 수정") → 부분 재실행, 해당 Phase만 재호출. 이때 장르는 기존 `book_manifest.json`의 `genre`를 재사용한다 (사용자가 장르 변경을 명시하지 않는 한)
    - **존재 + 새 입력 제공** → 기존 `{slug}/`를 `{slug}_prev-{timestamp}/`로 이동 후 새 실행
@@ -68,6 +69,8 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 
 팀 해체 후 사용자에게 최종 계획을 제시하고 승인을 받는다. 사용자 피드백이 있으면 `book-planner`를 한 번 더 호출해 반영한다.
 
+**선판단 후공개 (운영자 학습 루프 1겹):** 계획을 보여주기 *직전*, 운영자에게 "이 주제·독자라면 어떤 챕터 흐름을 기대하시나요? (한두 줄, 건너뛰어도 됩니다)"를 초대한다 — `learning` 모드에서는 기본 단계로, `production` 모드에서는 승인 요청 메시지에 한 줄로 편승한다. 스케치가 오면 계획 제시 때 **운영자 예상과 갈라진 지점**을 짚어준다 (예측 오류가 학습 신호다). 응답이 없거나 자율 실행 중이면 조용히 생략한다 — 비블로킹. 계획 제시에는 `02_plan.md`의 "설계 근거" 섹션(채택 이유 + 기각 대안)이 포함되어야 한다.
+
 ## Phase 4: 챕터 저술 (에이전트 팀)
 
 **실행 모드:** 에이전트 팀 (핵심 Phase)
@@ -94,6 +97,8 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 7. `chapter-writer`가 style + (fact 또는 continuity) 피드백을 반영하고 `{NN}_final.md`로 저장한다 (미해소 `(사실 확인 필요)` 주석이 남으면 안 된다).
 8. 모든 챕터 완료 후 `editor`가 전환부를 점검하고 `{slug}/04_manuscript.md`에 통합 원고를 만든다. (narrative면 `continuity-keeper`에 통합 원고 일괄 대조 + 미회수 복선 점검을 요청한다.)
 9. 팀을 해체한다.
+
+**learning 모드 한정 (운영자 학습 루프 3겹):** 첫 챕터의 `{NN}_final.md`가 나오면 운영자에게 알리고 `profiles/{genre}/style-checklist.md`와 함께 직접 읽기를 권한다. 피드백이 오면 반영하고, 없으면 그대로 진행한다 — 저술 풀을 멈추지 않는다 (비블로킹). `production` 모드에서는 생략.
 
 **챕터 수가 3개를 초과하면** chapter-writer를 챕터 수만큼 만들지 않고, 3명으로 시작해 각자 여러 챕터를 순차 처리한다(풀 방식). 너무 많은 팀원은 조율 오버헤드를 만든다. **단 `narrative` 장르는** 연속성(인물·복선·타임라인)이 챕터 독립성보다 중요하므로 풀 크기를 1~2로 줄이거나 순차 저술을 우선한다 — 병렬 저술은 서사를 갈라놓기 쉽다.
 
@@ -179,9 +184,12 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 ## 실행 후 피드백
 
 모든 Phase 완료 및 EPUB 산출 후:
-1. 사용자에게 EPUB 경로 + 책 소개 markdown 경로 + 요약 보고
-2. "개선할 부분이 있나요?"를 짧게 물어본다 (강요하지 않음)
-3. 피드백이 오면 아래 **재실행 매트릭스**에 따라 해당 Phase만 재실행
+1. 사용자에게 EPUB 경로 + 책 소개 markdown 경로 + 요약 보고. 보고에 **설계 근거 요약**(`02_plan.md`의 "설계 근거" 섹션 — 구조적 선택과 기각한 대안)을 동봉한다
+2. **운영자 학습 루프 (자문 전용):**
+   - **설명 가능성 자문 한 줄** — "이 책의 핵심 논지를 남에게 한 문단으로 설명할 수 있는가? 막히는 지점이 직접 읽을 지점이다."
+   - **직접 검수 표적 제안** — 로그 기반 표적화: `factcheck_log.md`의 ⚠️/🕒 밀집 챕터, `style_log.md`의 최다 왕복 챕터, `05_acceptance.md`의 아슬한 통과 기준 중에서 `production`은 1개, `learning`은 3개를 15~30분 크기로 제안한다. 수행을 추적하거나 강요하지 않는다
+3. "개선할 부분이 있나요?"를 짧게 물어본다 (강요하지 않음)
+4. 피드백이 오면 아래 **재실행 매트릭스**에 따라 해당 Phase만 재실행
 
 ## 재실행 매트릭스
 
@@ -197,7 +205,17 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 
 **장르는 `book_manifest.json`의 `genre`를 재사용한다** — 사용자가 장르 변경을 명시하지 않는 한 다시 감지하지 않는다 (재실행 결정성). 챕터·표지·메타 수정은 모두 같은 장르 프로필·같은 EPUB 식별자(`urn:uuid:*`)를 유지하고, 책 버전(매니페스트 `version`)과 발행일만 증가한다.
 
-## 학습 루프 (append-only, 자문 전용)
+## 운영자 학습 루프 (자문 전용, 비블로킹)
+
+하네스 학습 루프(아래)가 하네스 자신의 누적 메모리라면, 이것은 **운영자(인간)의 판단력**이 하네스 사용 중에 마모되지 않게 하는 설계다. 정전 스펙·근거는 `docs/learning-loop.md`. 세 겹:
+
+1. **흐름 안 (항상):** Phase 3 선판단 후공개 + `02_plan.md`의 "설계 근거"(기각 대안 ≥2 포함) 동봉 + 완료 보고의 설명 가능성 자문
+2. **흐름 밖 (완료 보고):** 로그 기반 직접 검수 표적 제안 (`production` 1개 / `learning` 3개)
+3. **메타 (Phase 0):** 위임 다이얼 `delegation_mode: production|learning` — `learning`이면 Phase 3 초대 승격 + Phase 4 첫 챕터 직접 읽기 권유
+
+**불변 원칙:** 모든 터치포인트는 자문 전용·비블로킹이다. 응답이 없으면 조용히 생략하고 진행한다. 질문은 기존 상호작용 지점(Phase 0 확인·Phase 3 승인·완료 보고)에만 편승하며 새 대기 지점을 만들지 않는다.
+
+## 하네스 학습 루프 (append-only, 자문 전용)
 
 하네스가 책을 누적하며 배우도록 가벼운 메모리를 둔다. **읽기 전용 자문이며 절대 블로킹하지 않는다** — 파일이 없으면 조용히 건너뛴다.
 

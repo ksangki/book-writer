@@ -1,11 +1,11 @@
 # Book Writer — AI 책 저술 자동화 하네스
 
-[![Version](https://img.shields.io/badge/harness-v1.8.0-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Version](https://img.shields.io/badge/harness-v1.9.0-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 주제, 주요 내용, 대상 독자만 주면 리서치부터 EPUB 빌드까지 한 번에 수행하는 **에이전트 하네스**다. v1.3.0부터 **장르별 문체 프로필**을 지원한다 — 기술서(Toby 문체)·소설·실용서(요리/여행)·에세이. 장르는 자동 감지 후 확인하며, 기본값은 `tech-book`이다 (아래 [장르 프로필](#장르-프로필) 참고). 저자명은 기본값 `Toby-AI`에서 원하는 값으로 바꿀 수 있다 (아래 [저자명 변경](#저자명-변경) 참고).
 
 - **Repo:** https://github.com/tobyilee/book-writer
-- **하네스 버전:** `v1.8.0` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
+- **하네스 버전:** `v1.9.0` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
 - **라이선스:** 하네스 코드는 **MIT** ([`LICENSE`](LICENSE)). 산출되는 책 콘텐츠 기본값은 **CC BY-NC-SA 4.0** — `book_manifest.json`의 `license` 필드로 책별 오버라이드 가능
 - **실행 환경:** [Claude Code](https://claude.com/claude-code) + Claude Agent SDK
 - **저자 모델:** 판단·합성 Phase(리서치·계획·리뷰·챕터 저술·수락 검수)는 Claude Opus, 기계적 Phase(`epub-builder`·`cover-designer`)는 각 에이전트 frontmatter의 sonnet을 따른다
@@ -173,6 +173,16 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 
 요청 유형별 정확한 재실행 범위(리서치 보강→Phase 1, 구성·차례 변경→Phase 2~3, 특정 챕터 수정→Phase 4, 표지→Phase 5 cover, 메타·라이선스→Phase 5 epub)는 오케스트레이터의 **재실행 매트릭스**(`book-writing-orchestrator/SKILL.md`)를 따른다. 장르는 `book_manifest.json`의 `genre`를 재사용한다(사용자가 변경을 명시하지 않는 한).
 
+## 운영자 학습 루프 (v1.9.0+)
+
+하네스는 에이전트 파이프라인만 설계하지 않는다 — **운영자(사람)의 판단력이 완전 위임으로 마모되지 않도록** 세 겹의 학습 루프를 함께 설계한다 (정전 스펙: [`docs/learning-loop.md`](docs/learning-loop.md)).
+
+1. **흐름 안:** 계획 공개 직전 "어떤 챕터 흐름을 기대하시나요?" 한 줄 초대(선판단 후공개) + 계획에 "설계 근거"(기각한 대안 포함) 동봉 + 완료 보고의 설명 가능성 자문
+2. **흐름 밖:** 완료 보고에 로그 기반 **직접 검수 표적** 제안 — factcheck/style/acceptance 로그가 지목한 취약 지점을 15~30분 크기로
+3. **메타:** 위임 다이얼 — 프롬프트에 `모드: 학습`을 넣으면 `learning` 모드로 전환되어 첫 챕터 직접 읽기 권유·검수 표적 3개 등 학습 터치포인트가 늘어난다. 기본은 `production`(현행 동작 그대로)
+
+모든 터치포인트는 **자문 전용·비블로킹**이다 — 응답하지 않아도 파이프라인은 멈추지 않는다.
+
 ## 커스터마이징
 
 ### 장르 프로필
@@ -246,7 +256,8 @@ book-writer/
 │   ├── practical/                   # 〃
 │   └── essay/                       # 〃
 ├── docs/
-│   └── harness-roadmap.md           # 장르 확장 후속 백로그 (P2·P3·P4)
+│   ├── harness-roadmap.md           # 장르 확장 후속 백로그 (P2·P3·P4)
+│   └── learning-loop.md             # 운영자 학습 루프 정전 스펙 (v1.9.0+)
 ├── .gitignore                       # .omc 등 툴 로컬 파일 제외 (책 산출물은 버전 관리 대상)
 └── .claude/
     ├── agents/                      # 14개 에이전트 정의

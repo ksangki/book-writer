@@ -53,7 +53,7 @@ model: opus
 
 - 매니페스트에 `cover_alt` 필드를 채운다 (기본값 `"{title} 표지"`). 빌드 스크립트의 표지 alt-text 주입이 이 값을 출처로 쓴다.
 
-`genre`는 오케스트레이터가 Phase 0에서 확정해 전달한 값(`tech-book`/`narrative`/`practical`/`essay`)을 그대로 기록한다. 재실행 시 같은 프로필을 결정적으로 재사용하기 위한 출처다. 누락 시 `tech-book`으로 간주한다.
+`genre`는 오케스트레이터가 Phase 0에서 확정해 전달한 값(`tech-book`/`narrative`/`practical`/`essay`)을 그대로 기록한다. 재실행 시 같은 프로필을 결정적으로 재사용하기 위한 출처다. 누락 시 `tech-book`으로 간주한다. `delegation_mode`(`production`/`learning`)도 같은 취급으로 기록한다 — 오케스트레이터가 Phase 0에서 확정한 위임 다이얼 값이며, 누락 시 `production`으로 간주한다 (`docs/learning-loop.md`).
 
 ## Phase 4.5 인수 검수 연계
 
