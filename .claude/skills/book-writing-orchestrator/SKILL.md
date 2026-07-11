@@ -37,8 +37,10 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 
 `research-lead` 에이전트를 호출하고, 내부에서 `web-researcher`, `paper-researcher`, `community-researcher`를 `run_in_background: true`로 병렬 스폰한 뒤 결과를 종합하도록 지시한다.
 
-**입력:** 주제, 주요 내용, 대상 독자
-**출력:** `{slug}/01_reference.md` — 리서치 종합 문서 (섹션: 개념·정의, 주요 관점, 사례, 논쟁점, 참고문헌)
+**입력:** `genre` (Phase 0에서 확정 — 리서처의 장르별 소스 세트 선택 기준), 주제, 주요 내용, 대상 독자, 슬러그
+**출력:**
+- `{slug}/01_reference.md` — 리서치 종합 문서 (섹션: 개념·정의, 주요 관점, 사례, 논쟁점, 참고문헌)
+- `{slug}/research/web.md`·`papers.md`·`community.md` — 소스별 원본 리서치. `01_reference.md` 합성 후에도 **보존**한다 (Phase 4 `fact-checker`의 1차 대조 근거)
 
 **신선도 메타:** tech-book·최신 기술 주제에서는 리서처가 각 출처의 발행일과 검색 시점("검색: {날짜} 기준")을 기록한다. 버전·릴리스 정보는 "{버전}/{연도} 기준"으로 못 박는다. 이 메타가 Phase 4 `fact-checker`의 대조 기준이 된다.
 
@@ -111,6 +113,7 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 - `{slug}/style_log.md` — 스타일 검수 로그 (전 장르)
 - `{slug}/factcheck_log.md` — 사실 검증 로그 (**tech-book만**)
 - `{slug}/continuity_log.md` — 연속성 검수 로그 (**narrative만**)
+- `{slug}/length_report.md` — 챕터별 분량 리포트 (editor가 `book-editing` 스킬 절차로 작성 — Phase 4.5 분량 균형 판정의 근거)
 
 > 로그는 **단일 append-only 파일**이 단일 진실 원천이다. 풀(pool)로 여러 chapter-writer가 동시에 쓰더라도 같은 파일에 `## {NN}장` 섹션을 append 한다 — `style_log_1-6.md`처럼 샤딩하지 않는다. 샤딩하면 감사 추적이 갈라지고 fact-checker·continuity-keeper의 누적 판정이 흩어진다.
 
@@ -126,7 +129,7 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 
 챕터를 통합한 editor와 **별개의 새 눈**으로 통권을 게이트한다. `manuscript-reviewer` 에이전트를 `model: "opus"`, FRESH 컨텍스트로 스폰한다 (`manuscript-acceptance` 스킬). editor가 검수자를 겸하지 않는다.
 
-**입력:** `{slug}/04_manuscript.md`, `{slug}/02_plan.md`, 에스컬레이션 로그(`style_log.md`·`factcheck_log.md`·`continuity_log.md` 중 존재하는 것)
+**입력:** `{slug}/04_manuscript.md`, `{slug}/02_plan.md`, `{slug}/book_manifest.json`, 에스컬레이션 로그(`style_log.md`·`factcheck_log.md`·`continuity_log.md` 중 존재하는 것), (있으면) `{slug}/length_report.md` — 분량 균형 판정용
 **출력:** `{slug}/05_acceptance.md` — 통권 수락 판정 (계획 대비 커버리지·통권 일관성·미해소 에스컬레이션·금지 마커 잔존 여부, 종합 ACCEPT/BLOCK)
 
 - **ACCEPT** → Phase 5로 진행

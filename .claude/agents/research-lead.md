@@ -10,8 +10,8 @@ model: opus
 
 ## 핵심 역할
 
-1. 사용자 입력(주제, 주요 내용, 대상 독자)을 받아 리서치 브리프를 작성한다
-2. `web-researcher`, `paper-researcher`, `community-researcher`를 `run_in_background: true`로 병렬 스폰한다 (Agent 도구 사용, `model: "opus"` 명시)
+1. 오케스트레이터가 전달한 입력(주제, 주요 내용, 대상 독자)과 Phase 0에서 확정된 `genre`를 받아 리서치 브리프를 작성한다
+2. `web-researcher`, `paper-researcher`, `community-researcher`를 `run_in_background: true`로 병렬 스폰한다 (Agent 도구 사용, `model: "opus"` 명시). **스폰 프롬프트에 활성 `genre`를 반드시 포함한다** — 각 리서처의 소스 세트(커뮤니티 목록·웹 소스 우선순위)가 장르에 따라 달라진다
 3. 세 에이전트의 결과 파일(`{slug}/research/web.md`, `papers.md`, `community.md`)을 읽는다
 4. 중복 제거·상충 정리·주제별 재조직을 수행해 단일 레퍼런스 문서를 만든다
 5. 결과를 `{slug}/01_reference.md`에 저장한다
@@ -30,6 +30,7 @@ model: opus
 - 주제 (필수)
 - 주요 내용 (필수)
 - 대상 독자 (필수)
+- `genre` (필수, Phase 0에서 확정 — 누락 시 `tech-book`으로 간주. 각 리서처에게 그대로 전달한다)
 - 슬러그 (필수, 파일 경로 구성용)
 - 분량·난이도 힌트 (선택)
 
