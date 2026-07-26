@@ -18,6 +18,8 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 | 4.5. 통권 수락 검수 | 단일 서브(신선 컨텍스트) | editor와 분리된 새 눈이 통권을 게이트 — 자기 승인 방지 |
 | 5. 표지 + EPUB | 서브(부분 병렬) | cover-designer를 background로 띄우고 epub-builder의 cover-독립 준비를 병행, `cover.png` 소비 지점에서 join |
 
+**팀 도구 폴백 (`TeamCreate` 부재 시):** `TeamCreate`/팀 내 `SendMessage`를 쓸 수 없는 환경에서는 Phase 3·4를 **파일 기반 폴백**으로 진행한다 — 검수자(plan-reviewer·style-guardian·fact-checker·continuity-keeper)는 자기 로그 파일에 `## {NN}장` 섹션으로 **판정 + before/after 재작성안**을 쓰고, 오케스트레이터가 저술가에게 "해당 섹션을 읽고 반영하라"고 라우팅한다. **저술가에게 검수자를 직접 호출하라고 지시하지 마라** — 조용히 실패한다. 이때 검수자 지시는 반드시 **실행 가능한 재작성안**이어야 한다 — 저술가는 로그 파일만 보므로 "더 자연스럽게" 류 지시는 반영할 수 없다. 부수 효과로 검수 로그가 곧 감사 추적이 된다(팀 메시지는 휘발된다).
+
 ## Phase 0: 컨텍스트 확인
 
 워크플로우를 시작하기 전에 기존 산출물 존재 여부를 확인한다.
@@ -90,7 +92,7 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 1. `TeamCreate`로 위 팀을 구성한다. 팀 이름: `book-writing-team`.
 2. **(narrative만)** `continuity-keeper`가 `02_plan.md`를 읽어 `{slug}/story_bible.md`를 시드한다 (인물·관계·세계관·타임라인·복선 초기 정전). 챕터 저술 전에 끝낸다.
 3. `TaskCreate`로 각 챕터를 task로 등록한다. task당 `chapter-writer` 1명을 할당한다. narrative는 이전 챕터의 캐논이 확정된 뒤 다음 챕터로 넘어가도록 순차성을 우선한다.
-4. 각 `chapter-writer`는 자기 챕터 초안을 쓰고 `{slug}/chapters/{NN}_draft.md`에 저장한 뒤 `SendMessage`로 `style-guardian`에게 리뷰를 요청한다. (narrative는 `story_bible.md`를 읽고 캐논에 맞춰 쓴다.)
+4. 각 `chapter-writer`는 **저술 시작 전에 `{slug}/style_guide_active.md`·`{slug}/fact_rules_active.md`를 읽고**(없으면 건너뜀) 자기 챕터 초안을 쓰고 `{slug}/chapters/{NN}_draft.md`에 저장한 뒤 `SendMessage`로 `style-guardian`에게 리뷰를 요청한다. (narrative는 `story_bible.md`를 읽고 캐논에 맞춰 쓴다.)
 5. `style-guardian`은 활성 프로필의 체크리스트로 검수하고, 편차가 있으면 구체적 수정 제안을 작성해 `SendMessage`로 응답한다.
 6. **장르별 전문 검수 (style 합의 후):**
    - **tech-book** — `chapter-writer`가 `fact-checker`에게 검증 요청. 구체 사실 주장·`(사실 확인 필요)` 주석을 레퍼런스 대조로 판정·정정.
@@ -98,9 +100,17 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
    - 두 경우 모두 사실/연속성 오류(❌)는 반드시 반영한다 — style 이견과 달리 저술가 재량으로 덮지 않는다.
 7. `chapter-writer`가 style + (fact 또는 continuity) 피드백을 반영하고 `{NN}_final.md`로 저장한다 (미해소 `(사실 확인 필요)` 주석이 남으면 안 된다).
 8. 모든 챕터 완료 후 `editor`가 전환부를 점검하고 `{slug}/04_manuscript.md`에 통합 원고를 만든다. (narrative면 `continuity-keeper`에 통합 원고 일괄 대조 + 미회수 복선 점검을 요청한다.)
-9. 팀을 해체한다.
+9. **(tech-book) 뒷부속 검증 패스:** editor 산출 직후 `fact-checker`에게 `04_manuscript.md`의 **front/back matter 한정 검증**을 요청한다 — 서문·에필로그·**참고문헌(항목별 확인 등급 라벨·섹션 헤더·범례 포함)**을 `research/*.md` 원장과 대조한다. 챕터 재검증이 아니라 뒷부속 한정 1패스라 비용이 작다. 챕터 검수 루프는 `chapters/*_draft.md`만 입력으로 받으므로, 이 패스가 없으면 editor가 쓴 부속은 어떤 사실 검증도 없이 Phase 5로 간다.
+10. 팀을 해체한다.
 
 **learning 모드 한정 (운영자 학습 루프 3겹):** 첫 챕터의 `{NN}_final.md`가 나오면 운영자에게 알리고 `profiles/{genre}/style-checklist.md`와 함께 직접 읽기를 권한다. 피드백이 오면 반영하고, 없으면 그대로 진행한다 — 저술 풀을 멈추지 않는다 (비블로킹). `production` 모드에서는 생략.
+
+**파(wave) 간 지침 전파 (누적 파일):** 검수자의 통권 관찰은 오케스트레이터의 프롬프트 중계가 아니라 **파일로 전파한다** — 손수 옮기면 누락이 구조적으로 발생한다.
+- `style-guardian`은 검수 중 확장·구체화한 규약(카운트 정의 확장, 통권 변주 관찰, 금지 패턴)을 `{slug}/style_guide_active.md`에 누적 append 한다.
+- `fact-checker`는 파 종료 시 "다음 파 저술가에게 전할 규율"(관측된 실패 패턴·출처 취급 규칙)을 `{slug}/fact_rules_active.md`에 누적 append 한다.
+- 모든 `chapter-writer`는 저술 시작 전에 두 파일을 읽는다(절차 4). 이 규약이 지켜지면 파를 겹쳐 띄워도 최신 지침이 전달된다. 파일 전파를 쓸 수 없는 상황이면 **파 N의 검수가 끝나기 전에 파 N+1을 띄우지 않는다**(배리어 폴백 — 검수의 통권 관찰이 다음 파의 입력이기 때문이다).
+
+**검수 참조 버전 규칙:** 검수자의 자기 파 검수 대상은 `{NN}_draft.md`다. 그러나 **앞 파의 장을 참조할 때는 반드시 `{NN}_final.md`를 읽는다**(존재하면) — draft는 피드백 반영 전 상태라, draft 기준의 교차 참조 판정은 이미 해소된 항목을 미이행으로 오보한다.
 
 **챕터 수가 3개를 초과하면** chapter-writer를 챕터 수만큼 만들지 않고, 3명으로 시작해 각자 여러 챕터를 순차 처리한다(풀 방식). 너무 많은 팀원은 조율 오버헤드를 만든다. **단 `narrative` 장르는** 연속성(인물·복선·타임라인)이 챕터 독립성보다 중요하므로 풀 크기를 1~2로 줄이거나 순차 저술을 우선한다 — 병렬 저술은 서사를 갈라놓기 쉽다.
 
@@ -114,8 +124,11 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 - `{slug}/factcheck_log.md` — 사실 검증 로그 (**tech-book만**)
 - `{slug}/continuity_log.md` — 연속성 검수 로그 (**narrative만**)
 - `{slug}/length_report.md` — 챕터별 분량 리포트 (editor가 `book-editing` 스킬 절차로 작성 — Phase 4.5 분량 균형 판정의 근거)
+- `{slug}/style_guide_active.md`·`{slug}/fact_rules_active.md` — 파 간 지침 전파용 누적 파일 (위 "파 간 지침 전파" 참조)
 
 > 로그는 **단일 append-only 파일**이 단일 진실 원천이다. 풀(pool)로 여러 chapter-writer가 동시에 쓰더라도 같은 파일에 `## {NN}장` 섹션을 append 한다 — `style_log_1-6.md`처럼 샤딩하지 않는다. 샤딩하면 감사 추적이 갈라지고 fact-checker·continuity-keeper의 누적 판정이 흩어진다.
+>
+> 단, **한 파일에 쓰는 에이전트는 동시에 한 명**이다 (실제 구성이 그렇다 — 파당 style-guardian 1명·fact-checker 1명이 서로 다른 파일을 쓴다). 따라서 append 경합을 막으려고 "마지막에 한 번의 쓰기로 로그를 생성하라"고 지시하지 마라 — 경합은 애초에 없고, 복원력만 없앤다. 검수자는 **한 챕터 판정이 끝날 때마다 즉시 append** 한다. 마지막에 몰아서 쓰면 중단 시 전량 유실된다.
 
 **Phase 4 종료 기준 (모두 충족해야 Phase 4.5로 진행):**
 - 모든 챕터가 `{NN}_final.md`로 존재하고 `04_manuscript.md`에 통합됨
@@ -170,8 +183,10 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 | 계획이 인물·설정을 충분히 명시 안 해 story_bible 시드 부실 | 1장 초안에서 캐논을 추출해 bible 초기화, 이후 챕터에서 누적 보강 |
 | `04_manuscript.md`에 `(사실 확인 필요)`·`[리서치 공백]`·`[미완성]` 마커 잔존 | **Phase 5 진행 차단** — 해당 Phase로 되돌린다(`[리서치 공백]`→Phase 1, `(사실 확인 필요)`→fact-checker, `[미완성]`→chapter-writer) |
 | Phase 4.5 manuscript-reviewer가 BLOCK 판정 | Phase 4로 되돌린다(최대 1회 라운드). 1회 후에도 BLOCK이면 Phase 5로 진행하지 않고 사용자에 하드 스톱·에스컬레이션 |
+| 검수·저술 에이전트가 세션 한도·연결 끊김으로 중단 | **재시작보다 `SendMessage` 트랜스크립트 재개가 훨씬 싸다** — 이미 끝낸 측정·웹 조회 결과가 보존된다. 재개 실패 시에만 재시작. 즉시-append 규약 덕에 완료된 챕터 판정은 로그에 남아 있다 |
 | 표지 생성 실패 | 플레이스홀더 이미지(검은 배경 + 제목 텍스트)로 대체, 사용자에게 알림 |
 | EPUB 빌드 실패 | pandoc 에러 메시지 그대로 보고, 원고 마크다운은 보존 |
+| mermaid 렌더 실패 (빌드는 성공) | 원고에 ```` ```mermaid ```` 블록이 있는데 빌드 리포트의 `mermaid:` 줄이 `rendered to ...`가 아니면 epub-builder가 경고를 반환값에 올린다 — 다이어그램이 코드 펜스로 실린 채 조용히 출간하지 않는다. 렌더 환경(mmdc·Chrome)을 고치거나 사용자에 알리고 재빌드한다 |
 
 ## 데이터 전달 프로토콜
 

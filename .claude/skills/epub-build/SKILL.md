@@ -64,6 +64,8 @@ EPUB의 `urn:uuid:*` 식별자는 **신간에 1회 발급**되고 이후 재빌�
 
 구조·관계를 나타내는 그림은 본문에 ```` ```mermaid ```` fenced 블록 + `그림 N. {설명}` 캡션 줄로 작성한다(챕터별 N 번호). 빌드 시 `mmdc`가 설치되어 있으면 pandoc 전에 각 블록을 `{slug}/figures/fig-NN.svg`로 렌더하고 fence를 `![caption](figures/fig-NN.svg)`로 치환한다. `mmdc`가 없으면 fence를 그대로 두고(코드 블록으로 렌더) 경고만 남긴다 — **mmdc는 하드 의존성이 아니다**(옵션 epubcheck와 동일 패턴).
 
+**조용한 실패 방지 (v1.10.0):** mmdc의 puppeteer가 기대하는 Chrome 버전과 캐시 설치본이 어긋나면 렌더가 조용히 실패한다. 스크립트가 `PUPPETEER_EXECUTABLE_PATH` 미설정 시 `~/.cache/puppeteer/chrome/*`의 설치본을 **자동 탐지**해 export 하고, 원고에 mermaid 블록이 있는데 렌더되지 않았으면 **stdout에 WARNING을 출력**한다(에이전트가 결과 보고에 올릴 수 있도록). 실패 원인은 `{slug}/.mermaid_err`에 보존된다.
+
 ## 파일명 규칙
 
 - `{책-제목}-v{version}.epub`
@@ -92,6 +94,7 @@ EPUB의 `urn:uuid:*` 식별자는 **신간에 1회 발급**되고 이후 재빌�
 - [ ] 표지 alt 텍스트가 표지 xhtml에 실제로 들어갔는지 (`<img alt>` 또는 SVG `aria-label`/`<title>`)
 - [ ] 재빌드 후에도 `identifier`(`urn:uuid:*`)가 직전 빌드와 동일한지
 - [ ] 책 소개 md (`{책-제목}-v{version}.md`)가 EPUB 옆에 존재하고, 차례·저자·버전이 매니페스트와 일치
+- [ ] 원고에 ```` ```mermaid ```` 블록이 있으면 `build_log.md`의 `mermaid:` 줄이 `rendered to ...`인지 확인 — 아니면 경고를 결과 보고에 올린다 (다이어그램이 코드 펜스로 실린 채 조용히 출간 금지)
 - [ ] `unzip -p {output} OEBPS/content.opf | grep -i rights` — `rights` 메타에 라이선스 문구 포함 (`Licensed under {license}` 또는 매니페스트의 명시값)
 - [ ] `04_manuscript.md`의 `## 판권` 섹션이 매니페스트의 `license`/`version`/`pub_date`와 일치 (drift 시 editor 재호출)
 

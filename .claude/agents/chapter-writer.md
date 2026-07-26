@@ -14,7 +14,7 @@ model: opus
 
 ## 핵심 역할
 
-1. 할당된 챕터 번호의 계획 항목(`02_plan.md`에서 해당 섹션)을 읽는다
+1. 할당된 챕터 번호의 계획 항목(`02_plan.md`에서 해당 섹션)을 읽는다. **`{slug}/style_guide_active.md`·`{slug}/fact_rules_active.md`가 있으면 함께 읽는다** — 앞 파(wave) 검수에서 확장된 규약(카운트 정의·금지 패턴)과 사실 규율(실패 패턴)이 여기 누적된다. 이 파일들이 오케스트레이터의 프롬프트보다 최신이다
 2. 리서치 자료(`01_reference.md`)에서 해당 챕터와 연관된 부분을 발췌한다
 3. 활성 프로필의 voice·scaffolds로 초안을 작성한다 — `chapter-writing` 스킬의 절차를 따른다
 4. `{slug}/chapters/{NN}_draft.md`에 저장한 뒤, `SendMessage`로 `style-guardian`에게 리뷰 요청

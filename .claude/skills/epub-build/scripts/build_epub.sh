@@ -166,6 +166,17 @@ fi
 PANDOC_INPUT="$MANUSCRIPT"
 MERMAID_NOTE="not present in manuscript"
 if grep -q '```mermaid' "$MANUSCRIPT" 2>/dev/null; then
+  # Auto-detect a puppeteer-managed Chrome for mmdc when not configured. mmdc's
+  # pinned puppeteer may expect a different Chrome version than the newest one
+  # in the cache; an unset/wrong path fails the render silently, shipping the
+  # diagrams as code fences. Pointing at any installed Chrome-for-Testing works.
+  if [[ -z "${PUPPETEER_EXECUTABLE_PATH:-}" && -d "$HOME/.cache/puppeteer/chrome" ]]; then
+    CHROME_BIN=$(find "$HOME/.cache/puppeteer/chrome" -type f \( -name "Google Chrome for Testing" -o -name "chrome" \) -perm -u+x 2>/dev/null | sort | tail -1)
+    if [[ -n "$CHROME_BIN" ]]; then
+      export PUPPETEER_EXECUTABLE_PATH="$CHROME_BIN"
+      echo "info: mermaid: PUPPETEER_EXECUTABLE_PATH auto-detected → ${CHROME_BIN}" >&2
+    fi
+  fi
   if command -v mmdc >/dev/null 2>&1; then
     mkdir -p "${WS}/figures"
     RENDERED_INPUT="${WS}/.manuscript.mermaid.md"
@@ -386,9 +397,13 @@ fi
   fi
 } > "$LOG"
 
-# Cleanup (temp artifacts only — figures/ and the EPUB are kept).
+# Cleanup (temp artifacts only — figures/ and the EPUB are kept). Keep
+# .mermaid_err around when the pre-pass failed so the cause stays inspectable.
 rm -f "$META_YAML" "${WS}/.pandoc_err" "${WS}/.manuscript.mermaid.md" \
-      "${WS}/.mermaid_err" "${WS}/.coveralt_err" "${WS}/.coveralt.py"
+      "${WS}/.coveralt_err" "${WS}/.coveralt.py"
+if [[ "$MERMAID_NOTE" == rendered* || "$MERMAID_NOTE" == "not present in manuscript" ]]; then
+  rm -f "${WS}/.mermaid_err"
+fi
 
 if [[ $PANDOC_EXIT -ne 0 ]]; then
   echo "build failed — see $LOG" >&2
@@ -404,6 +419,13 @@ fi
 
 if [[ $SIZE -lt 50000 ]]; then
   echo "warning: output is suspiciously small (${SIZE} bytes)" >&2
+fi
+
+# Mermaid render check: when the manuscript HAS mermaid blocks but they were
+# NOT rendered, say so on stdout too — stderr alone is easy for the calling
+# agent to miss, and the diagrams would ship as code fences.
+if grep -q '```mermaid' "$MANUSCRIPT" 2>/dev/null && [[ "$MERMAID_NOTE" != rendered* ]]; then
+  echo "WARNING: mermaid diagrams NOT rendered (${MERMAID_NOTE}) — they will appear as raw code fences in the EPUB. Fix mmdc/Chrome (PUPPETEER_EXECUTABLE_PATH) and rebuild."
 fi
 
 echo "built: $OUTPUT ($SIZE bytes)"
