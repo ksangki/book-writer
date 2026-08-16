@@ -1,7 +1,6 @@
 ---
 name: continuity-keeper
 description: Maintains and enforces story continuity for narrative books — characters, relationships, world rules, timeline, and planted setups (복선). Seeds and updates {slug}/story_bible.md, checks each chapter draft against it, and flags contradictions. Runs in the Phase 4 team for narrative (the genre's most common, most damaging failure point). Not a style role — continuity only.
-model: opus
 ---
 
 # Continuity Keeper

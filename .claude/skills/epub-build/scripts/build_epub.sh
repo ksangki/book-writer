@@ -166,27 +166,24 @@ fi
 PANDOC_INPUT="$MANUSCRIPT"
 MERMAID_NOTE="not present in manuscript"
 if grep -q '```mermaid' "$MANUSCRIPT" 2>/dev/null; then
-  # Auto-detect a puppeteer-managed Chrome for mmdc when not configured. mmdc's
-  # pinned puppeteer may expect a different Chrome version than the newest one
-  # in the cache; an unset/wrong path fails the render silently, shipping the
-  # diagrams as code fences. Pointing at any installed Chrome-for-Testing works.
-  if [[ -z "${PUPPETEER_EXECUTABLE_PATH:-}" && -d "$HOME/.cache/puppeteer/chrome" ]]; then
-    CHROME_BIN=$(find "$HOME/.cache/puppeteer/chrome" -type f \( -name "Google Chrome for Testing" -o -name "chrome" \) -perm -u+x 2>/dev/null | sort | tail -1)
-    if [[ -n "$CHROME_BIN" ]]; then
-      export PUPPETEER_EXECUTABLE_PATH="$CHROME_BIN"
-      echo "info: mermaid: PUPPETEER_EXECUTABLE_PATH auto-detected → ${CHROME_BIN}" >&2
-    fi
-  fi
   if command -v mmdc >/dev/null 2>&1; then
     mkdir -p "${WS}/figures"
     RENDERED_INPUT="${WS}/.manuscript.mermaid.md"
+    # mermaid's default HTML labels wrap text in <foreignObject><span><p>, which
+    # is invalid XHTML content and fails epubcheck (RSC-005). htmlLabels:false
+    # renders labels as native <text>/<tspan>, keeping <br/> line breaks.
+    MERMAID_CONF="${WS}/.mermaid.json"
+    cat > "$MERMAID_CONF" <<'MJSON'
+{ "htmlLabels": false, "flowchart": { "htmlLabels": false } }
+MJSON
     # Python splits the manuscript on ```mermaid fences, renders each block to
     # an SVG with mmdc, and rewrites the fence to ![caption](figures/fig-NN.svg).
     # The caption is taken from a following "그림 N. ..." line if present.
-    if MMDC_BIN="$(command -v mmdc)" python3 - "$MANUSCRIPT" "$RENDERED_INPUT" "${WS}/figures" <<'PYMERMAID' 2>"${WS}/.mermaid_err"
+    if MMDC_BIN="$(command -v mmdc)" MMDC_CONF="$MERMAID_CONF" python3 - "$MANUSCRIPT" "$RENDERED_INPUT" "${WS}/figures" <<'PYMERMAID' 2>"${WS}/.mermaid_err"
 import os, re, subprocess, sys, tempfile
 src, dst, figdir = sys.argv[1], sys.argv[2], sys.argv[3]
 mmdc = os.environ["MMDC_BIN"]
+conf = os.environ.get("MMDC_CONF", "")
 text = open(src, encoding="utf-8").read()
 pat = re.compile(r"```mermaid[ \t]*\n(.*?)\n```", re.DOTALL)
 n = 0
@@ -198,24 +195,14 @@ def repl(m):
         tf.write(code)
         tfname = tf.name
     out = os.path.join(figdir, "fig-%02d.svg" % n)
+    cmd = [mmdc, "-i", tfname, "-o", out]
+    if conf and os.path.exists(conf):
+        cmd += ["-c", conf]
     try:
-        subprocess.run([mmdc, "-i", tfname, "-o", out], check=True,
+        subprocess.run(cmd, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     finally:
         os.unlink(tfname)
-    # mermaid/mmdc wraps each foreignObject label in <span class="nodeLabel">
-    # <p>...</p></span> (or edgeLabel). A <span> is phrasing content and
-    # cannot contain a block-level <p> per the XHTML content model, so
-    # epubcheck fails EPUB3 validation (RSC-005) on every rendered diagram.
-    # Unwrap the plain, unnested, attribute-less <p>/</p> mmdc emits — the
-    # visible text and any <br /> line breaks are preserved as-is.
-    try:
-        svg_text = open(out, encoding="utf-8").read()
-        fixed_svg = svg_text.replace("<p>", "").replace("</p>", "")
-        if fixed_svg != svg_text:
-            open(out, "w", encoding="utf-8").write(fixed_svg)
-    except OSError:
-        pass
     return "![](figures/fig-%02d.svg)" % n
 new = pat.sub(repl, text)
 open(dst, "w", encoding="utf-8").write(new)
@@ -397,13 +384,9 @@ fi
   fi
 } > "$LOG"
 
-# Cleanup (temp artifacts only — figures/ and the EPUB are kept). Keep
-# .mermaid_err around when the pre-pass failed so the cause stays inspectable.
+# Cleanup (temp artifacts only — figures/ and the EPUB are kept).
 rm -f "$META_YAML" "${WS}/.pandoc_err" "${WS}/.manuscript.mermaid.md" \
-      "${WS}/.coveralt_err" "${WS}/.coveralt.py"
-if [[ "$MERMAID_NOTE" == rendered* || "$MERMAID_NOTE" == "not present in manuscript" ]]; then
-  rm -f "${WS}/.mermaid_err"
-fi
+      "${WS}/.mermaid_err" "${WS}/.mermaid.json" "${WS}/.coveralt_err" "${WS}/.coveralt.py"
 
 if [[ $PANDOC_EXIT -ne 0 ]]; then
   echo "build failed — see $LOG" >&2
@@ -419,13 +402,6 @@ fi
 
 if [[ $SIZE -lt 50000 ]]; then
   echo "warning: output is suspiciously small (${SIZE} bytes)" >&2
-fi
-
-# Mermaid render check: when the manuscript HAS mermaid blocks but they were
-# NOT rendered, say so on stdout too — stderr alone is easy for the calling
-# agent to miss, and the diagrams would ship as code fences.
-if grep -q '```mermaid' "$MANUSCRIPT" 2>/dev/null && [[ "$MERMAID_NOTE" != rendered* ]]; then
-  echo "WARNING: mermaid diagrams NOT rendered (${MERMAID_NOTE}) — they will appear as raw code fences in the EPUB. Fix mmdc/Chrome (PUPPETEER_EXECUTABLE_PATH) and rebuild."
 fi
 
 echo "built: $OUTPUT ($SIZE bytes)"

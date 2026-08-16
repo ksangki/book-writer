@@ -103,13 +103,13 @@ description: Integrate all finished chapters into a single book-ready manuscript
 
 ### 라이선스
 
-이 책은 [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 라이선스로 배포된다.
+이 책은 **CC BY-NC-SA 4.0** 라이선스로 배포된다 — [Creative Commons 저작자표시-비영리-동일조건변경허락 4.0 국제](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-- **저작자 표시(BY):** 출처를 밝힐 것.
+- **저작자 표시(BY):** 출처를 밝혀야 한다.
 - **비상업적 이용(NC):** 상업적 목적으로 이용할 수 없다.
 - **동일조건 변경허락(SA):** 변경·재배포 시 동일한 라이선스를 적용해야 한다.
 
-매니페스트에 `license` 필드가 다른 값으로 명시되어 있으면 그 값으로 위 문장과 링크를 갈음한다.
+매니페스트에 `license` 필드가 다른 값으로 명시되어 있으면 그 값으로 위 문장과 링크를 갈음한다. 어느 경우든 매니페스트의 `license` **정식 코드 문자열이 지면에 그대로 등장해야 한다** — `epub-build`의 필수 확인 항목이 콜로폰과 매니페스트의 `license` 문자열 일치를 대조한다.
 
 ### 출처
 
@@ -156,13 +156,12 @@ description: Integrate all finished chapters into a single book-ready manuscript
   "version": "1.0.0",
   "license": "CC BY-NC-SA 4.0",
   "genre": "tech-book",
-  "delegation_mode": "production",
-  "harness_version": "1.9.0",
+  "harness_version": "1.8.0",
   "rights": "© {year} {author} — Licensed under {license}"
 }
 ```
 
-`license`, `harness_version`, `rights`는 옵션 필드. 비우면 빌드 스크립트가 하네스 기본값(`CC BY-NC-SA 4.0` + 루트 `VERSION` + 자동 생성 rights)으로 채운다. `genre`는 오케스트레이터가 확정한 장르(`tech-book`/`narrative`/`practical`/`essay`)를 기록한다 — 재실행 시 활성 프로필을 결정적으로 재사용하는 출처다. 누락 시 `tech-book`. `delegation_mode`는 오케스트레이터가 Phase 0에서 확정한 위임 다이얼(`production`/`learning`)을 같은 취급으로 기록한다 — 재실행 시 학습 터치포인트를 결정적으로 재사용하는 출처다. 누락 시 `production` (`docs/learning-loop.md`).
+`license`, `harness_version`, `rights`는 옵션 필드. 비우면 빌드 스크립트가 하네스 기본값(`CC BY-NC-SA 4.0` + 루트 `VERSION` + 자동 생성 rights)으로 채운다. `genre`는 오케스트레이터가 확정한 장르(`tech-book`/`narrative`/`practical`/`essay`)를 기록한다 — 재실행 시 활성 프로필을 결정적으로 재사용하는 출처다. 누락 시 `tech-book`.
 
 `cover_alt`는 표지 이미지의 대체 텍스트로, 빌드 스크립트의 alt-text 주입이 이 값을 출처로 쓴다. 비우면 기본 패턴 `"{title} 표지"`를 적용한다.
 

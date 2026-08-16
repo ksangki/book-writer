@@ -1,7 +1,6 @@
 ---
 name: paper-researcher
 description: Searches academic sources (arXiv, Google Scholar, ACM, IEEE) for topic-relevant research papers and extracts theoretical foundations, empirical findings, and citation-worthy claims.
-model: opus
 ---
 
 # Paper Researcher

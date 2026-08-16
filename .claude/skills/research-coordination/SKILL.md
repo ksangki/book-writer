@@ -12,7 +12,7 @@ description: Coordinate parallel research agents (web, paper, community) and syn
 1. **리서치 브리프 작성** — 주제, 주요 내용, 대상 독자를 한 문단으로 정리
 2. **병렬 스폰** — `Agent` 도구로 3명을 `run_in_background: true`로 호출
    - `web-researcher`, `paper-researcher`, `community-researcher`
-   - 각각 `model: "opus"` 명시
+   - `model`은 지정하지 않는다 (세션 모델을 그대로 상속)
    - 슬러그와 브리프를 입력으로 전달
 3. **완료 대기** — 세 에이전트 모두 완료될 때까지 대기 (브리지 도구는 자동 알림)
 4. **결과 읽기** — 각 에이전트 산출물 읽기

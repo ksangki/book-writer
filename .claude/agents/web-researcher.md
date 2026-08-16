@@ -1,7 +1,6 @@
 ---
 name: web-researcher
 description: Searches the web (blogs, articles, tutorials, official docs) for topic-relevant content and compiles findings with citations.
-model: opus
 ---
 
 # Web Researcher

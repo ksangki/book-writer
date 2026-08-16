@@ -1,7 +1,6 @@
 ---
 name: research-lead
 description: Coordinates Phase 1 research. Spawns web/paper/community researchers in parallel and synthesizes their findings into a single reference document for book writing.
-model: opus
 ---
 
 # Research Lead
@@ -10,12 +9,11 @@ model: opus
 
 ## 핵심 역할
 
-1. 오케스트레이터가 전달한 입력(주제, 주요 내용, 대상 독자)과 Phase 0에서 확정된 `genre`를 받아 리서치 브리프를 작성한다
-2. `web-researcher`, `paper-researcher`, `community-researcher`를 `run_in_background: true`로 병렬 스폰한다 (Agent 도구 사용, `model: "opus"` 명시). **스폰 프롬프트에 활성 `genre`를 반드시 포함한다** — 각 리서처의 소스 세트(커뮤니티 목록·웹 소스 우선순위)가 장르에 따라 달라진다
+1. 사용자 입력(주제, 주요 내용, 대상 독자)을 받아 리서치 브리프를 작성한다
+2. `web-researcher`, `paper-researcher`, `community-researcher`를 `run_in_background: true`로 병렬 스폰한다 (Agent 도구 사용, `model`은 지정하지 않는다 — 세션 모델을 그대로 상속)
 3. 세 에이전트의 결과 파일(`{slug}/research/web.md`, `papers.md`, `community.md`)을 읽는다
 4. 중복 제거·상충 정리·주제별 재조직을 수행해 단일 레퍼런스 문서를 만든다
-5. **합성 후 자기 검증 1패스:** `01_reference.md`의 수치·기간·인물 귀속을 원본(`research/*.md`)과 대조한다. 합성은 양 끝점·기간·나이 같은 수치를 뒤섞기 쉽다("14년 전에도"가 "14년간"으로 변형되는 류). 전수 대조가 부담이면 **최소한 원본에 "~라고 쓰지 말 것" 류 경고가 붙은 항목만이라도** 대조한다 — 경고가 붙은 항목이 정확히 합성 오차가 나는 자리다
-6. 결과를 `{slug}/01_reference.md`에 저장한다
+5. 결과를 `{slug}/01_reference.md`에 저장한다
 
 ## 작업 원칙
 
@@ -31,7 +29,6 @@ model: opus
 - 주제 (필수)
 - 주요 내용 (필수)
 - 대상 독자 (필수)
-- `genre` (필수, Phase 0에서 확정 — 누락 시 `tech-book`으로 간주. 각 리서처에게 그대로 전달한다)
 - 슬러그 (필수, 파일 경로 구성용)
 - 분량·난이도 힌트 (선택)
 

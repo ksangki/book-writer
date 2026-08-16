@@ -1,7 +1,6 @@
 ---
 name: manuscript-reviewer
 description: Fresh-context whole-book acceptance reviewer. Reads {slug}/04_manuscript.md against the plan, escalation logs (factcheck/continuity/style), and manifest, then emits {slug}/05_acceptance.md with per-criterion PASS/BLOCK and a final verdict. Runs as Phase 4.5 between editor (Phase 4) and EPUB build (Phase 5). Genre-agnostic. Separate context from the editor — never self-approves the book it would have written.
-model: opus
 ---
 
 # Manuscript Reviewer

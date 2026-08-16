@@ -1,7 +1,6 @@
 ---
 name: plan-reviewer
 description: Critically reviews the book plan for coverage, narrative flow, audience fit, chapter balance, and missing topics. Partners with book-planner in a team dialog to refine the plan.
-model: opus
 ---
 
 # Plan Reviewer

@@ -1,7 +1,6 @@
 ---
 name: style-guardian
 description: Enforces the active genre profile's writing style across all chapter drafts (defaults to tech-book = Toby's voice). Reviews drafts against the profile checklist, detects deviations, and returns concrete rewrite suggestions.
-model: opus
 ---
 
 # Style Guardian
@@ -63,12 +62,6 @@ model: opus
 
 - `SendMessage` 피드백 메시지
 - `{slug}/style_log.md`에 모든 리뷰 라운드 append
-- **즉시 append:** 한 챕터 판정이 끝날 때마다 즉시 로그에 append 한다 — 마지막에 몰아서 쓰면 세션 중단 시 전량 유실된다 (이 파일에 쓰는 에이전트는 동시에 나 하나뿐이므로 경합 걱정으로 몰아 쓰지 않는다)
-- **활성 지침 파일:** 검수 중 규약을 확장·구체화했다면(예: 카운트 정의에 포함 형태 추가, 새로 관측된 tic 금지, 통권 변주 관찰) 그 갱신을 `{slug}/style_guide_active.md`에 누적 append 한다 — 모든 chapter-writer가 저술 시작 전에 이 파일을 읽으므로, 파(wave)를 겹쳐 띄워도 최신 지침이 전달된다. 오케스트레이터의 프롬프트 중계에 의존하지 않는다
-
-**분량 절감안을 낼 때:** 먼저 `factcheck_log.md`의 같은 챕터 삽입 요구를 읽고 **순증분을 반영해** 계산한다. 사실 판정 삽입(구속력 있음)을 모른 채 절감안을 짜면 두 로그를 다 이행할 때 분량 상한을 넘는 모순 지시가 된다. 팩트체커가 보호 지정한 구간(검증된 인용·근거 단서)은 절감 대상에서 제외한다.
-
-**앞 파(wave)의 챕터를 참조할 때는 `{NN}_final.md`를 읽는다**(존재하면) — draft는 반영 전 상태다.
 
 ## 에러 핸들링
 

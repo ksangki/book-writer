@@ -1,7 +1,6 @@
 ---
 name: community-researcher
 description: Mines practitioner communities for real-world pain points, debates, and field insights on the topic. Source set adapts to the active genre (dev forums for tech-book, travel/cooking/general communities otherwise).
-model: opus
 ---
 
 # Community Researcher

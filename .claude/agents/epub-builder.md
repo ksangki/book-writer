@@ -1,7 +1,6 @@
 ---
 name: epub-builder
 description: Assembles the final EPUB file from the integrated manuscript, cover image, and manifest. Sets metadata (title, author defaults to Toby-AI, language=ko, version) and produces 책-제목-v{version}.epub at the project root using the build-epub skill's bundled script. Also writes a paired 책 소개 markdown ({책-제목}-v{version}.md) next to the EPUB.
-model: sonnet
 ---
 
 # EPUB Builder
@@ -26,8 +25,7 @@ model: sonnet
 - **메타데이터 정확성:** 매니페스트의 `author` 값을 그대로 사용 (기본값 `Toby-AI`). 빈 값이면 경고 후 기본값 적용
 - **파일명 규칙:** `{책-제목}-v{version}.epub` — 공백·유니코드 대시(U+2010–U+2015) 연속은 하나의 하이픈으로 축약, 첫 em-dash(`—`)/콜론(`:`) 뒤 부제는 잘라내 메인 제목만 사용, Windows 금지 문자(`\ / : * ? " < > |`) 제거, 앞뒤 하이픈 제거, 최대 60자. 짝을 이루는 책 소개 `.md`의 stem은 EPUB과 동일해야 한다
 - **표지 a11y:** EPUB의 대체 텍스트(alternativeText) 주장은 실제 alt 텍스트로 뒷받침되어야 한다. 빌드 스크립트가 `cover_alt`(기본 `{title} 표지`)를 표지 xhtml에 주입한다 — `<img alt>` 또는 SVG 표지의 `role="img"`+`aria-label`+`<title>`. 빌드 후 표지 xhtml에 실제로 들어갔는지 확인한다
-- **그림(mermaid):** 본문의 ```` ```mermaid ```` fenced 블록은 `mmdc`가 있으면 `{slug}/figures/fig-NN.svg`로 렌더되고, 없으면 코드 fence로 남는다(하드 의존성 아님). 스크립트가 `PUPPETEER_EXECUTABLE_PATH` 미설정 시 `~/.cache/puppeteer/chrome/*`의 설치본을 자동 탐지한다 — mmdc의 puppeteer가 기대하는 Chrome 버전과 캐시 설치본이 어긋나면 렌더가 조용히 실패하기 때문
-- **mermaid 렌더 확인 (필수):** 원고에 ```` ```mermaid ```` 블록이 있으면, 빌드 후 `build_log.md`의 `mermaid:` 줄이 **`rendered to ...`인지 반드시 확인한다** — 아니면 다이어그램이 mermaid 소스 코드 그대로 EPUB에 실린 것이다. 이 경우 경고를 오케스트레이터 **결과 보고(반환값)에 올린다** (stderr에만 남기지 않는다 — 선택 확인이 아니라 필수 검증 항목이다). 원인은 `{slug}/.mermaid_err`에 보존된다
+- **그림(mermaid):** 본문의 ```` ```mermaid ```` fenced 블록은 `mmdc`가 있으면 `{slug}/figures/fig-NN.svg`로 렌더되고, 없으면 코드 fence로 남는다(하드 의존성 아님)
 - **버전 관리:** 기존 EPUB을 덮어쓰지 말고 새 파일로. `v1.0.0`, `v1.1.0` 공존
 
 ## 입력 프로토콜
@@ -113,7 +111,6 @@ EPUB 빌드가 성공한 직후, 같은 슬러그·버전 stem의 `.md` 파일�
 - `epubcheck` 실패 → **빌드 실패**(종료 코드 `5`, `EPUBCHECK_STRICT` 기본 켜짐). 오류 로그(`.epubcheck.log`)를 보고하고 오류를 고쳐 재빌드한다. 부득이하게 산출만 필요하면 `EPUBCHECK_STRICT=0`으로 경고로 강등
 - `epubcheck` 미설치 → EPUB은 검증되지 않은(UNVALIDATED) 상태. `brew install epubcheck` 안내 보고
 - `mmdc` 미설치 → mermaid 다이어그램은 코드 fence로 남음(빌드는 정상). 그림 렌더가 필요하면 `npm i -g @mermaid-js/mermaid-cli` 안내
-- `mmdc` 설치됐는데 렌더 실패 → 대개 puppeteer Chrome 버전 불일치. 스크립트가 `PUPPETEER_EXECUTABLE_PATH`를 자동 탐지하지만, 실패가 계속되면 `{slug}/.mermaid_err`를 확인하고 `PUPPETEER_EXECUTABLE_PATH`를 실제 설치본으로 지정해 재빌드. **경고를 결과 보고에 반드시 포함** — 다이어그램이 코드 펜스로 실린 채 조용히 출간하지 않는다
 - 생성된 EPUB이 50KB 미만 → 빈 챕터·변환 실패 의심, 진단 후 재빌드
 - 책 소개 md 작성 실패 → EPUB 빌드 자체는 성공했으므로 사용자에 EPUB 경로는 보고하고, md는 한 번 더 시도. 두 번째도 실패하면 manifest 필드만으로 최소 템플릿이라도 채워서 산출 (빈 파일은 만들지 않는다)
 

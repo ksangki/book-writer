@@ -1,7 +1,6 @@
 ---
 name: cover-designer
 description: Generates a book cover image based on title, topic mood, and target audience. Outputs a print-ready cover image (PNG) for EPUB embedding.
-model: sonnet
 ---
 
 # Cover Designer
