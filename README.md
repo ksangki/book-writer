@@ -1,11 +1,11 @@
 # Book Writer — AI 책 저술 자동화 하네스
 
-[![Version](https://img.shields.io/badge/harness-v1.10.2-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Version](https://img.shields.io/badge/harness-v1.11.0-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 주제, 주요 내용, 대상 독자만 주면 리서치부터 EPUB 빌드까지 한 번에 수행하는 **에이전트 하네스**다. v1.3.0부터 **장르별 문체 프로필**을 지원한다 — 기술서(Toby 문체)·소설·실용서(요리/여행)·에세이. 장르는 자동 감지 후 확인하며, 기본값은 `tech-book`이다 (아래 [장르 프로필](#장르-프로필) 참고). 저자명은 기본값 `Toby-AI`에서 원하는 값으로 바꿀 수 있다 (아래 [저자명 변경](#저자명-변경) 참고).
 
 - **Repo:** https://github.com/tobyilee/book-writer
-- **하네스 버전:** `v1.10.2` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
+- **하네스 버전:** `v1.11.0` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
 - **라이선스:** 하네스 코드는 **MIT** ([`LICENSE`](LICENSE)). 산출되는 책 콘텐츠 기본값은 **CC BY-NC-SA 4.0** — `book_manifest.json`의 `license` 필드로 책별 오버라이드 가능
 - **실행 환경:** [Claude Code](https://claude.com/claude-code) + Claude Agent SDK
 - **저자 모델:** 모든 에이전트가 현재 세션의 모델 설정을 그대로 상속한다 (에이전트별 `model` 고정 없음, v1.10.1)
@@ -91,6 +91,7 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 ├── factcheck_log.md         # 사실 검증 로그 (tech-book만, 단일 append-only)
 ├── story_bible.md           # 인물·관계·세계관·타임라인·복선 원장 (narrative만)
 ├── continuity_log.md        # 연속성 검수 로그 (narrative만, 단일 append-only)
+├── pacing_report.md         # 감정 곡선·씬 페이싱 계측 (narrative만, 자문 전용, v1.11.0)
 ├── editor_notes.md          # 편집 메모 (선택)
 ├── style_guide_active.md    # 파(wave) 간 스타일 지침 누적 파일 (저술가 필독)
 ├── fact_rules_active.md     # 파 간 사실 규율 누적 파일 (tech-book, 저술가 필독)
@@ -126,15 +127,16 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 
 ### Phase 4: 챕터 저술 (에이전트 팀 — 핵심)
 
-- `chapter-writer` × N + `style-guardian` + `editor`가 팀으로 구성 (tech-book이면 `fact-checker`, narrative면 `continuity-keeper`도 합류)
+- `chapter-writer` × N + `style-guardian` + `editor`가 팀으로 구성 (tech-book·practical이면 `fact-checker`, narrative면 `continuity-keeper`도 합류)
 - 각 `chapter-writer`는 `{NN}_draft.md` 작성 → `style-guardian`에 리뷰 요청
 - `style-guardian`은 활성 장르 프로필의 체크리스트로 검수
 - (tech-book) style 합의 후 `fact-checker`가 구체 사실 주장·`(사실 확인 필요)` 주석을 레퍼런스 대조로 검증 — 사실 오류는 반드시 반영
-- (narrative) style 합의 후 `continuity-keeper`가 `story_bible.md` 대조로 인물·관계·세계관·타임라인·복선 모순을 검증 — 연속성 오류는 반드시 반영
+- (practical) style 합의 후 `fact-checker`가 **안전·건강·법규 사실 한정** 검증 (식품 안전 온도·보관·알레르겐·여행 법규 — 안전 주장은 기본 Critical, v1.11.0)
+- (narrative) style 합의 후 `continuity-keeper`가 `story_bible.md` 대조로 인물·관계·세계관·타임라인·복선 모순을 검증 — 연속성 오류는 반드시 반영. 통합 시점에 감정 곡선·씬 페이싱 계측 `pacing_report.md`를 산출한다 (자문 전용·비블로킹, v1.11.0)
 - 합의 시 `{NN}_final.md`로 저장
 - `editor`가 완료된 챕터들을 `04_manuscript.md`로 통합 + `book_manifest.json` 생성
 - (tech-book) editor 산출 직후 `fact-checker`가 **front/back matter 한정 검증 패스** 수행 — 참고문헌 확인 등급 라벨·서문·에필로그를 `research/*.md` 원장과 대조 (v1.10.0)
-- 검수 로그는 단일 append-only 파일이 단일 진실 원천이다 — `style_log.md`, (tech-book) `factcheck_log.md`, (narrative) `continuity_log.md`. 풀로 여러 저술가가 동시에 써도 같은 파일에 `## {NN}장` 섹션을 append 한다 (샤딩 안 함). 검수자는 챕터 판정이 끝날 때마다 **즉시 append** 한다 — 몰아 쓰면 중단 시 전량 유실 (v1.10.0)
+- 검수 로그는 단일 append-only 파일이 단일 진실 원천이다 — `style_log.md`, (tech-book·practical) `factcheck_log.md`, (narrative) `continuity_log.md`. 풀로 여러 저술가가 동시에 써도 같은 파일에 `## {NN}장` 섹션을 append 한다 (샤딩 안 함). 검수자는 챕터 판정이 끝날 때마다 **즉시 append** 한다 — 몰아 쓰면 중단 시 전량 유실 (v1.10.0)
 - 검수 중 확장된 규약·실패 패턴은 `style_guide_active.md`·`fact_rules_active.md`에 누적되고, 저술가가 저술 전 읽는다 — 파(wave)를 겹쳐 띄워도 최신 지침이 전달된다 (v1.10.0)
 
 **왜 팀 모드인가?** 여러 챕터를 병렬로 쓸 때 문체가 갈라지는 게 가장 흔한 실패 지점이다. 팀 내 `SendMessage`로 실시간 조율하고, 전담 스타일 가디언이 일관성을 잡는다.
@@ -273,7 +275,7 @@ book-writer/
     │   ├── plan-reviewer.md
     │   ├── chapter-writer.md
     │   ├── style-guardian.md
-    │   ├── fact-checker.md          # tech-book 사실 검증 (v1.4.0+)
+    │   ├── fact-checker.md          # tech-book·practical 사실 검증 (v1.4.0+, practical은 v1.11.0+)
     │   ├── continuity-keeper.md     # narrative 연속성 추적 (v1.7.0+)
     │   ├── editor.md
     │   ├── manuscript-reviewer.md   # 통권 수락 게이트 (Phase 4.5, v1.8.0+)

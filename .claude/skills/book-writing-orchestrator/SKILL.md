@@ -76,7 +76,7 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 
 - `chapter-writer` × N (N = min(챕터 수, 3); **narrative는 1~2** — 연속성 보호) — 챕터별 저술
 - `style-guardian` × 1 — 실시간 스타일 검수
-- `fact-checker` × 1 — **`genre`가 `tech-book`일 때만 합류** (특히 최신 기술 주제). 구체 사실 주장 검증. 다른 장르면 제외
+- `fact-checker` × 1 — **`genre`가 `tech-book` 또는 `practical`일 때 합류**. tech-book은 구체 사실 주장 전반(특히 최신 기술 주제), practical은 **안전·건강·법규 사실 한정**(식품 안전 온도·보관·알레르겐·여행 법규). 다른 장르면 제외
 - `continuity-keeper` × 1 — **`genre`가 `narrative`일 때만 합류**. story_bible로 인물·관계·세계관·타임라인·복선 연속성 검수. 다른 장르면 제외
 - `editor` × 1 — 챕터 간 전환·일관성 관리
 
@@ -89,10 +89,11 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 5. `style-guardian`은 활성 프로필의 체크리스트로 검수하고, 편차가 있으면 구체적 수정 제안을 작성해 `SendMessage`로 응답한다.
 6. **장르별 전문 검수 (style 합의 후):**
    - **tech-book** — `chapter-writer`가 `fact-checker`에게 검증 요청. 구체 사실 주장·`(사실 확인 필요)` 주석을 레퍼런스 대조로 판정·정정.
+   - **practical** — `chapter-writer`가 `fact-checker`에게 검증 요청. **안전·건강·법규 사실 한정**(식품 안전 온도·보관 기간·알레르겐·응급 대처·여행 법규) — 안전 주장은 기본 Critical. 그 밖의 실용 서술은 검증 대상이 아니다.
    - **narrative** — `chapter-writer`가 `continuity-keeper`에게 검증 요청. story_bible 대조로 인물·관계·세계관·타임라인·복선 모순을 판정. keeper는 새 정전을 bible에 갱신.
-   - 두 경우 모두 사실/연속성 오류(❌)는 반드시 반영한다 — style 이견과 달리 저술가 재량으로 덮지 않는다.
+   - 세 경우 모두 사실/연속성 오류(❌)는 반드시 반영한다 — style 이견과 달리 저술가 재량으로 덮지 않는다.
 7. `chapter-writer`가 style + (fact 또는 continuity) 피드백을 반영하고 `{NN}_final.md`로 저장한다 (미해소 `(사실 확인 필요)` 주석이 남으면 안 된다).
-8. 모든 챕터 완료 후 `editor`가 전환부를 점검하고 `{slug}/04_manuscript.md`에 통합 원고를 만든다. (narrative면 `continuity-keeper`에 통합 원고 일괄 대조 + 미회수 복선 점검을 요청한다.)
+8. 모든 챕터 완료 후 `editor`가 전환부를 점검하고 `{slug}/04_manuscript.md`에 통합 원고를 만든다. (narrative면 `continuity-keeper`에 통합 원고 일괄 대조 + 미회수 복선 점검을 요청하고, keeper는 이때 `{slug}/pacing_report.md` — 감정 곡선·씬 단위 페이싱 계측, **자문 전용·비블로킹** — 를 함께 산출해 editor의 통합 판단 참고 자료로 준다.)
 9. 팀을 해체한다.
 
 **챕터 수가 3개를 초과하면** chapter-writer를 챕터 수만큼 만들지 않고, 3명으로 시작해 각자 여러 챕터를 순차 처리한다(풀 방식). 너무 많은 팀원은 조율 오버헤드를 만든다. **단 `narrative` 장르는** 연속성(인물·복선·타임라인)이 챕터 독립성보다 중요하므로 풀 크기를 1~2로 줄이거나 순차 저술을 우선한다 — 병렬 저술은 서사를 갈라놓기 쉽다.
@@ -104,8 +105,9 @@ description: Orchestrate a full book-writing workflow from topic to finished EPU
 - `{slug}/04_manuscript.md` — 통합 원고
 - `{slug}/book_manifest.json` — EPUB 메타데이터 (editor가 작성)
 - `{slug}/style_log.md` — 스타일 검수 로그 (전 장르)
-- `{slug}/factcheck_log.md` — 사실 검증 로그 (**tech-book만**)
+- `{slug}/factcheck_log.md` — 사실 검증 로그 (**tech-book·practical**)
 - `{slug}/continuity_log.md` — 연속성 검수 로그 (**narrative만**)
+- `{slug}/pacing_report.md` — 감정 곡선·씬 단위 페이싱 계측 (**narrative만, 자문 전용·비블로킹** — 통합 시점에 continuity-keeper가 산출)
 
 > 로그는 **단일 append-only 파일**이 단일 진실 원천이다. 풀(pool)로 여러 chapter-writer가 동시에 쓰더라도 같은 파일에 `## {NN}장` 섹션을 append 한다 — `style_log_1-6.md`처럼 샤딩하지 않는다. 샤딩하면 감사 추적이 갈라지고 fact-checker·continuity-keeper의 누적 판정이 흩어진다.
 

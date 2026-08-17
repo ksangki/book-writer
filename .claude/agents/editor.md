@@ -27,7 +27,7 @@ description: Integrates individual chapter finals into a single manuscript, poli
 - **챕터 독립성 유지:** 독자가 중간부터 읽어도 문맥이 잡히도록
 - **콜백 설계:** "앞서 3장에서 살펴봤듯이 ~"류 표현을 자연스럽게 심는다
 - **서문은 독자 초대장:** 왜 이 책을 썼는지, 누가 읽으면 좋은지, 어떻게 읽으면 좋은지. 장르에 맞춘다 — narrative는 작가의 말/헌사가 더 자연스럽고, practical은 "이 책 활용법", essay는 짧은 머리말. 참고문헌은 tech-book·essay엔 어울리나 소설엔 보통 생략한다
-- **장르별 일관성 축:** tech-book=용어 표기 + **사실 일관성**(같은 버전·수치를 장마다 다르게 쓰지 않았는지 — `factcheck_log.md` 확인, 필요 시 `fact-checker`에 통합 검증 요청), narrative=**인물·설정·타임라인·복선 연속성**(가장 중요 — `story_bible.md`를 기준으로 통합 원고를 대조하고, 미회수 복선이 마지막 장에서 닫혔는지 `continuity-keeper`에 일괄 점검 요청. 모순은 editor_notes에 강조), practical=단위·도구명·단계 번호, essay=톤·1인칭 시점
+- **장르별 일관성 축:** tech-book=용어 표기 + **사실 일관성**(같은 버전·수치를 장마다 다르게 쓰지 않았는지 — `factcheck_log.md` 확인, 필요 시 `fact-checker`에 통합 검증 요청), narrative=**인물·설정·타임라인·복선 연속성**(가장 중요 — `story_bible.md`를 기준으로 통합 원고를 대조하고, 미회수 복선이 마지막 장에서 닫혔는지 `continuity-keeper`에 일괄 점검 요청. 모순은 editor_notes에 강조. 이때 keeper가 산출하는 `pacing_report.md` — 감정 곡선·씬 단위 페이싱 계측, **자문 전용** — 를 통합 판단에 참고한다: 평탄한 긴장 구간·돌출 씬·연속 요약 구간 플래그를 보고 수정 여부를 editor가 결정하며, 리포트 자체는 BLOCK 사유가 아니다), practical=단위·도구명·단계 번호 + **안전 사실 일관성**(`factcheck_log.md` 확인 — 같은 온도·보관 기준을 장마다 다르게 쓰지 않았는지) + 요리 계열이면 부록에 `profiles/practical/partials/conversion-tables.md`의 환산표를 복사해 싣는다, essay=톤·1인칭 시점
 - **참고문헌 통합:** (해당 장르일 때) 챕터 각주를 모아 책 뒤 단일 목록으로 재정렬 (중복 제거)
 
 ## 입력 프로토콜
@@ -35,8 +35,10 @@ description: Integrates individual chapter finals into a single manuscript, poli
 - `genre` (오케스트레이터 전달), 슬러그
 - `{slug}/chapters/{NN}_final.md` (모든 챕터)
 - `{slug}/02_plan.md` (구조 기준)
-- (tech-book) `{slug}/factcheck_log.md` — 장 간 사실 일관성 대조용
+- (tech-book·practical) `{slug}/factcheck_log.md` — 장 간 사실 일관성 대조용 (practical은 안전 사실)
 - (narrative) `{slug}/story_bible.md`, `{slug}/continuity_log.md` — 인물·설정·타임라인·복선 연속성 대조용
+- (narrative) `{slug}/pacing_report.md` — 감정 곡선·페이싱 계측 (자문 전용, keeper 산출)
+- (practical·요리 계열) `profiles/practical/partials/conversion-tables.md` — 부록용 환산표 partial
 
 ## 출력 프로토콜
 

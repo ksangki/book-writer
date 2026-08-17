@@ -25,7 +25,8 @@ description: Assembles the final EPUB file from the integrated manuscript, cover
 - **메타데이터 정확성:** 매니페스트의 `author` 값을 그대로 사용 (기본값 `Toby-AI`). 빈 값이면 경고 후 기본값 적용
 - **파일명 규칙:** `{책-제목}-v{version}.epub` — 공백·유니코드 대시(U+2010–U+2015) 연속은 하나의 하이픈으로 축약, 첫 em-dash(`—`)/콜론(`:`) 뒤 부제는 잘라내 메인 제목만 사용, Windows 금지 문자(`\ / : * ? " < > |`) 제거, 앞뒤 하이픈 제거, 최대 60자. 짝을 이루는 책 소개 `.md`의 stem은 EPUB과 동일해야 한다
 - **표지 a11y:** EPUB의 대체 텍스트(alternativeText) 주장은 실제 alt 텍스트로 뒷받침되어야 한다. 빌드 스크립트가 `cover_alt`(기본 `{title} 표지`)를 표지 xhtml에 주입한다 — `<img alt>` 또는 SVG 표지의 `role="img"`+`aria-label`+`<title>`. 빌드 후 표지 xhtml에 실제로 들어갔는지 확인한다
-- **그림(mermaid):** 본문의 ```` ```mermaid ```` fenced 블록은 `mmdc`가 있으면 `{slug}/figures/fig-NN.svg`로 렌더되고, 없으면 코드 fence로 남는다(하드 의존성 아님)
+- **그림(mermaid):** 본문의 ```` ```mermaid ```` fenced 블록은 `mmdc`가 있으면 `{slug}/figures/fig-NN.svg`로 렌더되고, 없으면 코드 fence로 남는다(하드 의존성 아님). 빌드 후 빌드 로그의 `mermaid:` 줄이 `rendered ...`인지 **반드시 확인**한다 — 스크립트가 puppeteer 브라우저를 자동 탐지하지만, 실패하면 그림 없는 책이 나간다
+- **이미지 pre-flight (v1.11.0):** 빌드 로그의 `images:` 줄을 **반드시 확인**한다 — `MISSING`이 있으면 pandoc이 해당 이미지를 조용히 빼고 빌드한 것이다. 이미지를 채우거나(`{slug}/images/`) 참조를 제거하고 재빌드한다. 누락 0건이 산출 조건이다
 - **버전 관리:** 기존 EPUB을 덮어쓰지 말고 새 파일로. `v1.0.0`, `v1.1.0` 공존
 
 ## 입력 프로토콜

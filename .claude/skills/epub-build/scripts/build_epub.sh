@@ -167,6 +167,27 @@ PANDOC_INPUT="$MANUSCRIPT"
 MERMAID_NOTE="not present in manuscript"
 if grep -q '```mermaid' "$MANUSCRIPT" 2>/dev/null; then
   if command -v mmdc >/dev/null 2>&1; then
+    # Puppeteer browser auto-detect: mmdc silently fails (or worse, the build
+    # succeeds with fences left as code) when puppeteer has no browser. If the
+    # caller hasn't set PUPPETEER_EXECUTABLE_PATH, probe common install paths.
+    if [[ -z "${PUPPETEER_EXECUTABLE_PATH:-}" ]]; then
+      for cand in \
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+        "/Applications/Chromium.app/Contents/MacOS/Chromium" \
+        "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" \
+        "$(command -v chromium 2>/dev/null || true)" \
+        "$(command -v chromium-browser 2>/dev/null || true)" \
+        "$(command -v google-chrome 2>/dev/null || true)"; do
+        if [[ -n "$cand" && -x "$cand" ]]; then
+          export PUPPETEER_EXECUTABLE_PATH="$cand"
+          echo "info: mermaid: using browser at ${cand} (PUPPETEER_EXECUTABLE_PATH)" >&2
+          break
+        fi
+      done
+      if [[ -z "${PUPPETEER_EXECUTABLE_PATH:-}" ]]; then
+        echo "warning: mermaid: no Chrome/Chromium found for puppeteer — mmdc may fail; set PUPPETEER_EXECUTABLE_PATH if diagrams stay as code fences" >&2
+      fi
+    fi
     mkdir -p "${WS}/figures"
     RENDERED_INPUT="${WS}/.manuscript.mermaid.md"
     # mermaid's default HTML labels wrap text in <foreignObject><span><p>, which
@@ -217,6 +238,39 @@ PYMERMAID
   else
     MERMAID_NOTE="mmdc not installed — diagrams left as code fences"
     echo "warning: mermaid: mmdc not installed — diagrams left as code fences" >&2
+  fi
+fi
+
+# Image pre-flight (v1.11.0). Every locally-referenced image in the (possibly
+# mermaid-rewritten) input must exist under the resource path, or pandoc drops
+# it with only a stderr note and the EPUB ships with holes. Missing images are
+# reported as a WARNING and recorded in the build log ("images:" line) — the
+# epubcheck gate below is the hard stop for broken manifests.
+IMAGES_NOTE="none referenced"
+IMG_CHECK=$(python3 - "$PANDOC_INPUT" "$WS" <<'PYIMG'
+import os, re, sys
+src, ws = sys.argv[1], sys.argv[2]
+text = open(src, encoding="utf-8").read()
+# Strip fenced code blocks so example markdown inside code isn't counted.
+text = re.sub(r"```.*?```", "", text, flags=re.DOTALL)
+refs = re.findall(r"!\[[^\]]*\]\(([^)\s]+)", text)
+local = [r for r in refs if not r.startswith(("http://", "https://", "data:"))]
+missing = [r for r in local
+           if not os.path.exists(r if os.path.isabs(r) else os.path.join(ws, r))]
+print(f"{len(local)} {len(missing)}")
+for m in missing:
+    print(m)
+PYIMG
+) || IMG_CHECK="0 0"
+IMG_TOTAL=$(echo "$IMG_CHECK" | head -1 | cut -d' ' -f1)
+IMG_MISSING=$(echo "$IMG_CHECK" | head -1 | cut -d' ' -f2)
+if [[ "$IMG_TOTAL" != "0" ]]; then
+  if [[ "$IMG_MISSING" == "0" ]]; then
+    IMAGES_NOTE="${IMG_TOTAL} local reference(s), all present"
+  else
+    IMAGES_NOTE="${IMG_TOTAL} local reference(s), ${IMG_MISSING} MISSING: $(echo "$IMG_CHECK" | tail -n +2 | tr '\n' ' ')"
+    echo "WARNING: images: ${IMG_MISSING} referenced image(s) missing under ${WS}/ — EPUB will ship without them:" >&2
+    echo "$IMG_CHECK" | tail -n +2 >&2
   fi
 fi
 
@@ -360,6 +414,7 @@ fi
   echo "- **epubcheck:** ${CHECK_RESULT}"
   echo "- **epubcheck strict:** ${EPUBCHECK_STRICT}"
   echo "- **mermaid:** ${MERMAID_NOTE}"
+  echo "- **images:** ${IMAGES_NOTE}"
   echo "- **cover alt:** ${COVER_ALT_NOTE}"
   echo ""
   echo "## Metadata"

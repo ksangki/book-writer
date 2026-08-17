@@ -1,6 +1,6 @@
 ---
 name: continuity-check
-description: Maintain a story bible and check narrative chapter drafts for continuity — character facts (appearance, voice, motive), relationships, world rules, timeline, and planted setups (복선). Seeds {slug}/story_bible.md from the plan, flags contradictions, and tracks setup→payoff. Use when keeping a novel consistent across chapters, building a story bible, validating character voice, or tracking 복선. Triggers on "연속성 확인", "스토리 바이블", "복선 추적", "캐릭터 일관성", "continuity check", "story bible".
+description: Maintain a story bible and check narrative chapter drafts for continuity — character facts (appearance, voice, motive), relationships, world rules, timeline, and planted setups (복선). Seeds {slug}/story_bible.md from the plan, flags contradictions, and tracks setup→payoff. Also measures per-chapter tension/emotion and scene-level pacing (advisory {slug}/pacing_report.md). Use when keeping a novel consistent across chapters, building a story bible, validating character voice, tracking 복선, or reviewing pacing/emotion curve. Triggers on "연속성 확인", "스토리 바이블", "복선 추적", "캐릭터 일관성", "continuity check", "story bible", "페이싱 분석", "감정 곡선".
 ---
 
 # Continuity Check
@@ -18,6 +18,7 @@ description: Maintain a story bible and check narrative chapter drafts for conti
 5. **판정** — 라벨별 정리, bible 근거 명기
 6. **갱신** — 합의된 새 정전을 bible에 append (살아 있는 문서). 복선 원장의 심기→회수 상태 갱신
 7. **전달** — `SendMessage`로 `chapter-writer`에게 + `continuity_log.md`에 append
+8. **계측 (v1.11.0, 자문 전용)** — 챕터 검수 마감 시 `continuity_log.md` 해당 섹션에 한 줄 기록: `계측: 긴장도 {1~5} · 지배 감정 {단어} · 씬 {N}개 · 아크 위치 {설정/상승/절정/하강}`. 판정이 아니며 저술 왕복을 만들지 않는다
 
 ## 무엇을 검증하나
 
@@ -101,3 +102,4 @@ description: Maintain a story bible and check narrative chapter drafts for conti
 
 - 전 챕터를 bible로 일괄 대조 — 챕터 간 누적 모순 색출
 - 미회수 복선 목록을 editor에 보고 (마지막 장에서 닫혔는지)
+- **페이싱 리포트 산출 (v1.11.0, 자문 전용·비블로킹)** — 챕터별 계측 누적을 `{slug}/pacing_report.md`로 종합한다: ① 감정 곡선(긴장도 1~5, mermaid `xychart-beta` + 표 — 3막 아크가 곡선에 보이는지), ② 씬 단위 페이싱 표(장별 씬 수·씬당 평균 자수·대사 비중 추정·돌출 씬/연속 요약 구간 플래그), ③ 관찰 노트(플래그만 — 판정 아님). 값은 `{NN}_final.md`를 직접 세어 얻는다 (기억·요약으로 채우지 않는다). 해석·수정 결정은 editor 몫이며, 이 리포트로 BLOCK하지 않는다. 상세 템플릿은 continuity-keeper 에이전트 정의의 "페이싱·감정 곡선 계측" 섹션 참조

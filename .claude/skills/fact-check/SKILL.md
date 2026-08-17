@@ -1,17 +1,19 @@
 ---
 name: fact-check
-description: Verify concrete factual claims in a tech-book chapter draft — numbers, statistics, benchmarks, quotes, version numbers, release years, API signatures, superlatives — against the reference document, and resolve "(사실 확인 필요)" markers. Use when checking a chapter for factual accuracy, validating version/API claims in fast-moving tech content, or resolving fact-check annotations. Triggers on "팩트체크", "사실 확인", "fact check", "출처 검증", "버전 맞는지 확인".
+description: Verify concrete factual claims in a chapter draft — numbers, statistics, benchmarks, quotes, version numbers, release years, API signatures, superlatives (tech-book), and safety/health/legal claims like food-safety temperatures, storage limits, allergens, local regulations (practical) — against the reference document, and resolve "(사실 확인 필요)" markers. Use when checking a chapter for factual accuracy, validating version/API claims in fast-moving tech content, verifying safety facts in practical guides, or resolving fact-check annotations. Triggers on "팩트체크", "사실 확인", "fact check", "출처 검증", "버전 맞는지 확인", "안전 사실 확인".
 ---
 
 # Fact Check
 
-기술서 챕터 초안의 **구체적 사실 주장**을 검증한다. 문체가 아니라 정확성만 본다. 최신 기술 주제일수록 버전·API·릴리스 연도가 빠르게 변하므로 시점 명기와 출처 대조가 핵심이다.
+챕터 초안의 **구체적 사실 주장**을 검증한다. 문체가 아니라 정확성만 본다. 최신 기술 주제일수록 버전·API·릴리스 연도가 빠르게 변하므로 시점 명기와 출처 대조가 핵심이고, 실용서는 틀린 안전 정보가 독자의 실제 피해로 이어지므로 안전 사실 대조가 핵심이다.
 
-> **활성 장르를 먼저 확인하자.** 이 스킬은 기본적으로 `tech-book`에서 작동한다 (`genre`는 오케스트레이터 전달 → `{slug}/book_manifest.json` 순). tech-book이 아니면 오케스트레이터가 팩트체크 단계를 생략한다.
+> **활성 장르를 먼저 확인하자.** 이 스킬은 `tech-book`과 `practical`에서 작동한다 (`genre`는 오케스트레이터 전달 → `{slug}/book_manifest.json` 순). 둘 다 아니면 오케스트레이터가 팩트체크 단계를 생략한다. 장르가 검증 범위를 결정한다 — tech-book은 구체 주장 전반, practical은 **안전·건강·법규 사실 한정**.
 
 ## 무엇을 검증하나 (검증 대상 주장)
 
 구체적이고 검증 가능한 주장만 본다. 일반적 서술·의견·비유는 대상이 아니다.
+
+**tech-book — 구체 주장 전반:**
 
 | 유형 | 예시 |
 |------|------|
@@ -22,11 +24,23 @@ description: Verify concrete factual claims in a tech-book chapter draft — num
 | API·시그니처 | 함수명·플래그·옵션명·기본값 |
 | 단정 | "최초의", "유일한", "가장 빠른" |
 
+**practical — 안전·건강·법규 사실 한정 (v1.11.0):**
+
+| 유형 | 예시 |
+|------|------|
+| 식품 안전 수치 | 조리 심부 온도("닭고기 75℃"), 보관 기간, 해동 규칙 |
+| 알레르겐·독성 | 익혀야 하는 재료, 교차 오염, 알레르기 유발 표시 |
+| 응급·부상 대처 | 화상·베임 등 사고 시 대처 서술 |
+| 여행 법규·안전 | 비자·통관 규정, 현지 법, 안전 수칙 |
+| 안전 단정 | "~해도 안전하다", "괜찮다"류 단정 |
+
+practical의 그 밖의 서술(맛·취향·팁·모호한 분량)은 대상이 아니다 — 모호어·단계 문제는 style-guardian(체크리스트) 소관이다. **practical의 안전 주장은 기본 Critical** — 레퍼런스로 확정 불가 시 웹 2차 에스컬레이션 대상이며, 1차 출처는 공공 보건·식품 안전 기관(식약처·FDA·USDA 등)·정부 여행 안전 공지를 우선한다.
+
 ## 절차
 
-1. **활성 장르 확인** — tech-book이 아니면 중단
+1. **활성 장르 확인** — tech-book·practical 둘 다 아니면 중단. practical이면 검증 범위를 안전·건강·법규 사실로 좁힌다
 2. **원문 읽기** — `{NN}_draft.md` (style 합의 후 버전 우선)
-3. **주장 추출** — 위 6유형에 해당하는 구체 주장을 모은다. `(사실 확인 필요)` 주석 지점을 최우선 목록에 올린다
+3. **주장 추출** — 활성 장르의 유형 표에 해당하는 구체 주장을 모은다. `(사실 확인 필요)` 주석 지점을 최우선 목록에 올린다
 4. **대조** — 각 주장을 `01_reference.md`(+ `research/*.md`)와 맞춘다
 5. **에스컬레이션 (선택)** — 레퍼런스로 판정 불가한 **Critical 주장만** WebSearch/WebFetch로 공식 1차 출처 확인. 사소한 주장에 웹 호출 낭비 금지
 6. **판정 + 정정안** — 라벨별로 정리, 근거 명기

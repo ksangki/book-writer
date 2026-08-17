@@ -54,7 +54,7 @@ pandoc {manuscript} \
 
 ## 스타일시트 (base 타이포그래피 + 구조화 블록, v1.8.0+)
 
-`styles/epub.css`를 스크립트가 자동으로 임베드한다(스크립트 위치 기준 상대 경로). pandoc 3.x의 `--css`는 EPUB 기본 스타일시트를 **대체**하므로, 이 파일은 **기본 타이포그래피(표·코드·인용·헤딩·figure)** 와 **구조화 블록 클래스**(`meta`/`ingredients`/`steps`/`tip`/`warning`/`itinerary`, 태스크 리스트)를 함께 제공한다. 한글 본문 폰트 스택·모노스페이스 코드 폰트·다크 모드(`prefers-color-scheme: dark`) 대비까지 포함한다. 실용서(practical) 챕터는 블록 클래스를 pandoc fenced div(`::: meta` 등)로 작성한다(규약은 `profiles/practical/scaffolds.md`). CSS 파일이 없으면 스크립트는 `--css` 없이 진행한다(이 경우 기본 타이포그래피도 빠지므로 권장하지 않음).
+`styles/epub.css`를 스크립트가 자동으로 임베드한다(스크립트 위치 기준 상대 경로). pandoc 3.x의 `--css`는 EPUB 기본 스타일시트를 **대체**하므로, 이 파일은 **기본 타이포그래피(표·코드·인용·헤딩·figure)** 와 **구조화 블록 클래스**(`meta`/`ingredients`/`steps`/`tip`/`warning`/`itinerary`/`nutrition`/`conversion`, 태스크 리스트)를 함께 제공한다. `nutrition`(영양표)·`conversion`(환산표)은 v1.11.0 추가 — 표준 환산표 partial은 `profiles/practical/partials/conversion-tables.md`에서 복사한다. 한글 본문 폰트 스택·모노스페이스 코드 폰트·다크 모드(`prefers-color-scheme: dark`) 대비까지 포함한다. 실용서(practical) 챕터는 블록 클래스를 pandoc fenced div(`::: meta` 등)로 작성한다(규약은 `profiles/practical/scaffolds.md`). CSS 파일이 없으면 스크립트는 `--css` 없이 진행한다(이 경우 기본 타이포그래피도 빠지므로 권장하지 않음).
 
 ## 식별자(identifier) 발급·보존
 
@@ -63,6 +63,12 @@ EPUB의 `urn:uuid:*` 식별자는 **신간에 1회 발급**되고 이후 재빌�
 ## 그림(figure) — mermaid 사전 처리 (옵션)
 
 구조·관계를 나타내는 그림은 본문에 ```` ```mermaid ```` fenced 블록 + `그림 N. {설명}` 캡션 줄로 작성한다(챕터별 N 번호). 빌드 시 `mmdc`가 설치되어 있으면 pandoc 전에 각 블록을 `{slug}/figures/fig-NN.svg`로 렌더하고 fence를 `![caption](figures/fig-NN.svg)`로 치환한다. `mmdc`가 없으면 fence를 그대로 두고(코드 블록으로 렌더) 경고만 남긴다 — **mmdc는 하드 의존성이 아니다**(옵션 epubcheck와 동일 패턴).
+
+**puppeteer 브라우저 자동 탐지 (v1.11.0):** `mmdc`는 설치돼 있어도 puppeteer용 브라우저가 없으면 조용히 실패하고 그림이 코드 fence로 남는다. 스크립트가 `PUPPETEER_EXECUTABLE_PATH` 미설정 시 Chrome/Chromium/Edge 표준 경로를 자동 탐지해 설정하고, 못 찾으면 stderr에 경고를 남긴다. 빌드 후 반드시 빌드 로그의 `mermaid:` 줄이 `rendered ...`인지 확인한다 — `failed`/`not installed`면 그림 없는 책이 나간 것이다.
+
+## 이미지 pre-flight (v1.11.0)
+
+본문(및 mermaid 치환 결과)이 참조하는 **로컬 이미지**(`![...](images/foo.png)` 등 — http/data URI 제외)가 `--resource-path`(슬러그 디렉터리) 기준으로 실재하는지 pandoc 전에 일괄 검증한다. 누락이 있으면 stderr WARNING + 빌드 로그 `images:` 줄에 누락 목록을 기록한다 — pandoc은 누락 이미지를 조용히 빼고 빌드하므로, 이 줄 확인 없이는 구멍 난 EPUB이 나간다. 이미지 파일은 `{slug}/images/`(사진·지도), `{slug}/figures/`(mermaid 렌더 산출)에 둔다. 소싱 규칙(사용자 제공 우선·생성 대체·라이선스 불명 웹 이미지 금지)은 `profiles/practical/scaffolds.md` 참조.
 
 ## 파일명 규칙
 
@@ -90,6 +96,8 @@ EPUB의 `urn:uuid:*` 식별자는 **신간에 1회 발급**되고 이후 재빌�
 - [ ] 메타 조회: `pandoc -f epub -t plain --template=metadata.tpl` 등
 - [ ] `epubcheck` 통과 — 실패는 빌드 실패(`EPUBCHECK_STRICT` 기본 켜짐 → 종료 코드 `5`). 미설치 시 EPUB은 검증되지 않음(`brew install epubcheck` 권장)
 - [ ] 표지 alt 텍스트가 표지 xhtml에 실제로 들어갔는지 (`<img alt>` 또는 SVG `aria-label`/`<title>`)
+- [ ] 빌드 로그의 `images:` 줄에 `MISSING`이 없는지 — 있으면 이미지를 채우거나 참조를 제거 후 재빌드
+- [ ] (mermaid 사용 시) 빌드 로그의 `mermaid:` 줄이 `rendered to figures/fig-NN.svg via mmdc`인지 — 아니면 그림이 코드 fence로 남은 것
 - [ ] 재빌드 후에도 `identifier`(`urn:uuid:*`)가 직전 빌드와 동일한지
 - [ ] 책 소개 md (`{책-제목}-v{version}.md`)가 EPUB 옆에 존재하고, 차례·저자·버전이 매니페스트와 일치
 - [ ] `unzip -p {output} OEBPS/content.opf | grep -i rights` — `rights` 메타에 라이선스 문구 포함 (`Licensed under {license}` 또는 매니페스트의 명시값)
