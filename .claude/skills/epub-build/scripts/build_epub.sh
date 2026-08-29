@@ -138,7 +138,12 @@ keys = ["title", "author", "lang", "date",
         "identifier", "description", "subject", "rights"]
 print("---")
 for key, value in zip(keys, sys.argv[1:]):
-    print(f"{key}: {json.dumps(value, ensure_ascii=False)}")
+    # An empty field must be left out, not written as "". pandoc emits the
+    # element either way, and an empty dc:identifier or dc:date is an
+    # epubcheck ERROR — the file is not a valid EPUB. Omitted instead, pandoc
+    # supplies its own identifier and skips the rest.
+    if value:
+        print(f"{key}: {json.dumps(value, ensure_ascii=False)}")
 print("---")
 ' "$TITLE" "$AUTHOR" "$LANG" "$PUB_DATE" \
   "$IDENTIFIER" "$DESCRIPTION" "$GENRE" "$RIGHTS" > "$META_YAML"
