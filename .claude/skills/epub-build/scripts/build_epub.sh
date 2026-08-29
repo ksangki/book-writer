@@ -128,19 +128,20 @@ if [[ -f "$OUTPUT" ]]; then
 fi
 
 # Build metadata YAML for pandoc.
+# These values come from the manifest, so they can hold quotes, backslashes or
+# colons — a description quoting someone is enough to break the YAML and fail
+# the whole build. Let Python quote them: a JSON string is a valid YAML scalar.
 META_YAML="${WS}/.meta.yaml"
-cat > "$META_YAML" <<YAML
----
-title: "${TITLE}"
-author: "${AUTHOR}"
-lang: "${LANG}"
-date: "${PUB_DATE}"
-identifier: "${IDENTIFIER}"
-description: "${DESCRIPTION}"
-subject: "${GENRE}"
-rights: "${RIGHTS}"
----
-YAML
+python3 -c '
+import json, sys
+keys = ["title", "author", "lang", "date",
+        "identifier", "description", "subject", "rights"]
+print("---")
+for key, value in zip(keys, sys.argv[1:]):
+    print(f"{key}: {json.dumps(value, ensure_ascii=False)}")
+print("---")
+' "$TITLE" "$AUTHOR" "$LANG" "$PUB_DATE" \
+  "$IDENTIFIER" "$DESCRIPTION" "$GENRE" "$RIGHTS" > "$META_YAML"
 
 # Build cover arg (optional).
 COVER_ARG=()
