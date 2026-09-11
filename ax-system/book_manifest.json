@@ -1,0 +1,16 @@
+{
+  "title": "디지털 워커의 시대, AI 에이전트를 조직의 성과로 만드는 체계",
+  "author": "김상기",
+  "language": "ko",
+  "pub_date": "2026-09-07",
+  "identifier": "urn:uuid:5cef80ff-b2ad-43fd-b003-63c0f827313f",
+  "description": "바텀업 AI 실험이 벽에 부딪힌 조직을 위한 처방편. 위에서 내려와야 하는 것은 과제 목록이 아니라 거두는 체계 — 기준·자원·제도·폐기 규칙이다. 재고 조사의 관문에서 시작해 SOP를 체계의 입장권으로 세우고, 에이전트를 조직에 등록하고, 자율성을 두 축으로 나누고, 성과를 세는 법과 그 숫자가 사람에게 어떻게 들리는지까지 다룬 뒤, 아무도 설계하지 않은 마지막 칸인 폐기로 닫는다. 각 장은 다음 주에 쓸 수 있는 도구를 하나씩 남긴다.",
+  "cover_image": "cover.png",
+  "cover_alt": "디지털 워커의 시대 표지",
+  "version": "1.0.0",
+  "license": "CC BY-NC-SA 4.0",
+  "genre": "tech-book",
+  "delegation_mode": "production",
+  "harness_version": "1.11.0",
+  "rights": "© 2026 김상기 — Licensed under CC BY-NC-SA 4.0"
+}
