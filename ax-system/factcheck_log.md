@@ -2097,3 +2097,10 @@ editor가 "요청서 이후 정밀화(+26자)"로 보고한 문면은 **라운�
 | Google "an application that attempts to achieve a goal by observing the world and acting upon it using the tools that it has at its disposal" | 백서 원문 PDF 미접근 — **독립 2차 문헌 다수로 동일 문면 교차 확인** | ✅ 지면에 확보 경로 명시 (R2-7·14-1 방식) |
 
 저자 자기 관찰 3문단 — 사실 주장 아님(자기 관찰), 고유명·수치 0건, 인칭 규약(1인칭 문단 한정) 준수. 6장 두 계층으로의 전방 참조는 실재 내용과 일치.
+
+## v1.2.0 검증 이력 (2026-09-12, 팀 리드 직접 수행)
+
+- **Hemmer et al. 게재 확인:** arXiv 2404.00029 → *European Journal of Information Systems* (2025) 게재를 웹 검색 교차로 확인. 본문 8장 완충 문구·부록 B #35 서지를 [PR]로 승급.
+- **Harris(자동화 사업 케이스 인용) 게시일:** 재검색으로도 특정 실패 — 본문에 "조회 시점(2026년 9월) 갈음" 표기 추가 (이 책의 한국어 커뮤니티 인용 관례와 동일 처리).
+- 9장 실행 원칙 표의 Shonhe & Min 행: 오류 아님 — 단일 횡단 연구 하중 조정 차원의 강등(본문 완화 서술로 이동), 사실 내용 불변.
+- 8장 통계 세부값 부록 이관: 값 자체는 기검증분 그대로, 위치만 이동. 부록 B Vaccaro 항목에 원값 보존.

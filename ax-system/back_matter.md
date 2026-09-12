@@ -1,6 +1,6 @@
 # 부록 A. 워크시트 모음 — 각 장이 남긴 아홉 개의 도구
 
-각 장에서 만든 도구를 순서대로 모았다. 본문의 맥락 없이도 쓸 수 있게 요약했지만, 각 표가 왜 그 모양인지는 해당 장에 있다. 그리고 **앞 칸을 안 채우고 뒤 칸을 채우면 뒤 칸이 헛돈다** — 이 순서 자체가 아홉 번째 도구다.
+각 장에서 만든 도구를 순서대로 모았다. 본문의 맥락 없이도 쓸 수 있게 요약했지만, 각 표가 왜 그 모양인지는 해당 장에 있다. 그리고 **앞 칸을 안 채우고 뒤 칸을 채우면 뒤 칸이 헛돈다** — 이 순서 자체가, 목록 밖의 열 번째 도구다.
 
 ## A-1. 재고 조사의 관문 다섯 개와 판별 3질문 (2장)
 
@@ -255,83 +255,83 @@
 
 ### 등록·거버넌스·책임
 
-1. Hübner, J. F., Sichman, J. S., & Boissier, O. (2002). A Model for the Structural, Functional, and Deontic Specification of Organizations in Multiagent Systems (MOISE+). *SBIA 2002*, LNAI 2507. Springer. `[PR]` △
-2. Mitchell, M. et al. (2019). Model Cards for Model Reporting. *FAT\* '19*. arXiv:1810.03993. `[PR]` △
-3. Santoni de Sio, F., & Mecacci, G. (2021). Four Responsibility Gaps with Artificial Intelligence. *Philosophy & Technology*, 34(4), 1057–1084. `[PR]` △
-4. Chan, A. et al. (2024). Visibility into AI Agents. *ACM FAccT '24*. arXiv:2401.13138. `[PR]` △
-5. Chan, A. (2024). IDs for AI Systems. arXiv:2406.12137. `[PP]` △
-6. Kolt, N. (2025). Governing AI Agents. *Notre Dame Law Review* (게재 예정). arXiv:2501.07913. `[PP→PR]` △
-7. Chan, A. et al. (2025). Infrastructure for AI Agents. *TMLR*. arXiv:2501.10114. `[PR]` △
-8. Kraprayoon, J. et al. / IAPS (2025). AI Agent Governance: A Field Guide. arXiv:2505.21808. `[보고서]` △
-9. Kaptein, M., Khan, V.-J., & Podstavnychy, A. (2026). Runtime Governance for AI Agents: Policies on Paths. arXiv:2603.16586. `[PP]` △
-10. Nian, Y. et al. (2026). Auditable Agents. arXiv:2604.05485 (v2 2026-08-13). `[PP]` △
-11. Otsuka, T., Toyoda, K., & Leung, A. (2026). AI Identity: Standards, Gaps, and Research Directions for AI Agents. arXiv:2604.23280. `[PP]` △
-12. Atkinson, D. I., & O'Bryan, J. E. (2026). Government AI Use as a Monitoring Primitive. arXiv:2607.04543. ICML 2026 Workshop on Technical AI Governance. `[PP→워크숍]` △
-13. Feng, K., McDonald, N., & Zhang, A. X. (2025). 자율성 등급과 자율성 인증서 (컬럼비아 나이트 제1수정헌법 연구소, 2025-07-28). `[학술]` △
+1\. Hübner, J. F., Sichman, J. S., & Boissier, O. (2002). A Model for the Structural, Functional, and Deontic Specification of Organizations in Multiagent Systems (MOISE+). *SBIA 2002*, LNAI 2507. Springer. `[PR]` △
+2\. Mitchell, M. et al. (2019). Model Cards for Model Reporting. *FAT\* '19*. arXiv:1810.03993. `[PR]` △
+3\. Santoni de Sio, F., & Mecacci, G. (2021). Four Responsibility Gaps with Artificial Intelligence. *Philosophy & Technology*, 34(4), 1057–1084. `[PR]` △
+4\. Chan, A. et al. (2024). Visibility into AI Agents. *ACM FAccT '24*. arXiv:2401.13138. `[PR]` △
+5\. Chan, A. (2024). IDs for AI Systems. arXiv:2406.12137. `[PP]` △
+6\. Kolt, N. (2025). Governing AI Agents. *Notre Dame Law Review* (게재 예정). arXiv:2501.07913. `[PP→PR]` △
+7\. Chan, A. et al. (2025). Infrastructure for AI Agents. *TMLR*. arXiv:2501.10114. `[PR]` △
+8\. Kraprayoon, J. et al. / IAPS (2025). AI Agent Governance: A Field Guide. arXiv:2505.21808. `[보고서]` △
+9\. Kaptein, M., Khan, V.-J., & Podstavnychy, A. (2026). Runtime Governance for AI Agents: Policies on Paths. arXiv:2603.16586. `[PP]` △
+10\. Nian, Y. et al. (2026). Auditable Agents. arXiv:2604.05485 (v2 2026-08-13). `[PP]` △
+11\. Otsuka, T., Toyoda, K., & Leung, A. (2026). AI Identity: Standards, Gaps, and Research Directions for AI Agents. arXiv:2604.23280. `[PP]` △
+12\. Atkinson, D. I., & O'Bryan, J. E. (2026). Government AI Use as a Monitoring Primitive. arXiv:2607.04543. ICML 2026 Workshop on Technical AI Governance. `[PP→워크숍]` △
+13\. Feng, K., McDonald, N., & Zhang, A. X. (2025). 자율성 등급과 자율성 인증서 (컬럼비아 나이트 제1수정헌법 연구소, 2025-07-28). `[학술]` △
 
 ### SOP·절차의 형식화
 
-14. Adler, P. S., & Borys, B. (1996). Two Types of Bureaucracy: Enabling and Coercive. *Administrative Science Quarterly*, 41(1), 61–89. `[PR]` △ — 원문은 OCR 판독본이다. 4대 특성의 개별 정의문은 미확보이므로, 이 책이 이 논문에 귀속시킨 것은 "두 유형이 있다"는 구분까지다. 본문 1장이 인용한 enabling 형식화의 정의문은 아래 14-1의 p.296에서 왔다.
-14-1. Ahrens, T., & Chapman, C. S. (2004). Accounting for Flexibility and Efficiency: A Field Study of Management Control Systems in a Restaurant Chain. *Contemporary Accounting Research*, 21(2), 271–301. `[PR]` △ — 애들러·보리스의 구분을 관리통제 연구로 옮긴 첫 연구다. 본문 1장이 인용한 enabling 사용의 정의문(p.296)의 근접 출처이며, 그 한 줄은 2차 문헌(Mamat 2012, Warwick 리포지토리) 경유로 확보했으며, 원문은 "attempts to mobilize local knowledge and experience in support of central objectives"다. 초록에는 네 설계 원리(repair·internal transparency·global transparency·flexibility)의 이름이 나열되나 개별 정의문은 미확보이므로, 이 책은 설계 특성까지 들어가지 않았다.
-15. Nonaka, I. (1994). A Dynamic Theory of Organizational Knowledge Creation. *Organization Science*, 5(1), 14–37. `[PR]` △
-16. Feldman, M. S., & Pentland, B. T. (2003). Reconceptualizing Organizational Routines as a Source of Flexibility and Change. *Administrative Science Quarterly*, 48(1), 94–118. `[PR]` △
-17. Gourlay, S. (2006). Conceptualizing Knowledge Creation: A Critique of Nonaka's Theory. *Journal of Management Studies*, 43(7), 1415–1436. `[PR]` △
-18. van der Aalst, W. M. P. (2011 / 2016). *Process Mining: Discovery, Conformance and Enhancement of Business Processes*. Springer. `[PR-단행본]` △
-19. Hong, S. et al. (2024). MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework. *ICLR 2024 (Oral)*. arXiv:2308.00352. `[PR]` △
-20. Nandi, S. et al. (2025/2026). SOP-Bench: Complex Industrial SOPs for Evaluating LLM Agents. arXiv:2506.08119 (v2 2026-02-23). `[PP]` △ — 2026년 2월 시점 모델 라인업 기준
-21. Amazon Science (2025). Structuring the Unstructured: A Multi-Agent LLM Framework for Transforming Ambiguous SOPs into Code. *EMNLP 2025 Industry Track*. `[PR]` △ — 종단 정확도 수치는 원문 대조 미완이므로 이 책은 쓰지 않았다
-22. 도요타 생산방식의 표준작업(standardized work)과 개선 사이클 | 린 생산 문헌 | `[문헌]` △
+14\. Adler, P. S., & Borys, B. (1996). Two Types of Bureaucracy: Enabling and Coercive. *Administrative Science Quarterly*, 41(1), 61–89. `[PR]` △ — 원문은 OCR 판독본이다. 4대 특성의 개별 정의문은 미확보이므로, 이 책이 이 논문에 귀속시킨 것은 "두 유형이 있다"는 구분까지다. 본문 1장이 인용한 enabling 형식화의 정의문은 아래 14-1의 p.296에서 왔다.
+14-1\. Ahrens, T., & Chapman, C. S. (2004). Accounting for Flexibility and Efficiency: A Field Study of Management Control Systems in a Restaurant Chain. *Contemporary Accounting Research*, 21(2), 271–301. `[PR]` △ — 애들러·보리스의 구분을 관리통제 연구로 옮긴 첫 연구다. 본문 1장이 인용한 enabling 사용의 정의문(p.296)의 근접 출처이며, 그 한 줄은 2차 문헌(Mamat 2012, Warwick 리포지토리) 경유로 확보했으며, 원문은 "attempts to mobilize local knowledge and experience in support of central objectives"다. 초록에는 네 설계 원리(repair·internal transparency·global transparency·flexibility)의 이름이 나열되나 개별 정의문은 미확보이므로, 이 책은 설계 특성까지 들어가지 않았다.
+15\. Nonaka, I. (1994). A Dynamic Theory of Organizational Knowledge Creation. *Organization Science*, 5(1), 14–37. `[PR]` △
+16\. Feldman, M. S., & Pentland, B. T. (2003). Reconceptualizing Organizational Routines as a Source of Flexibility and Change. *Administrative Science Quarterly*, 48(1), 94–118. `[PR]` △
+17\. Gourlay, S. (2006). Conceptualizing Knowledge Creation: A Critique of Nonaka's Theory. *Journal of Management Studies*, 43(7), 1415–1436. `[PR]` △
+18\. van der Aalst, W. M. P. (2011 / 2016). *Process Mining: Discovery, Conformance and Enhancement of Business Processes*. Springer. `[PR-단행본]` △
+19\. Hong, S. et al. (2024). MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework. *ICLR 2024 (Oral)*. arXiv:2308.00352. `[PR]` △
+20\. Nandi, S. et al. (2025/2026). SOP-Bench: Complex Industrial SOPs for Evaluating LLM Agents. arXiv:2506.08119 (v2 2026-02-23). `[PP]` △ — 2026년 2월 시점 모델 라인업 기준
+21\. Amazon Science (2025). Structuring the Unstructured: A Multi-Agent LLM Framework for Transforming Ambiguous SOPs into Code. *EMNLP 2025 Industry Track*. `[PR]` △ — 종단 정확도 수치는 원문 대조 미완이므로 이 책은 쓰지 않았다
+22\. 도요타 생산방식의 표준작업(standardized work)과 개선 사이클 | 린 생산 문헌 | `[문헌]` △
 
 ### 조직 경제학·생산성 실증
 
-23. Klein, K. J., & Sorra, J. S. (1996). The Challenge of Innovation Implementation. *Academy of Management Review*, 21(4), 1055–1080. `[PR]` △
-24. Brynjolfsson, E., Hitt, L. M., & Yang, S. (2002). Intangible Assets: Computers and Organizational Capital. *Brookings Papers on Economic Activity*, 2002(1). `[PR]` △
-25. Brynjolfsson, E., Rock, D., & Syverson (2017). Artificial Intelligence and the Modern Productivity Paradox. *NBER WP 24001* `[WP]` / (2021) The Productivity J-Curve. *AEJ: Macroeconomics* `[PR]` △
-26. McElheran, K. et al. (2024). AI Adoption in America: Who, What, and Where. *Journal of Economics & Management Strategy*, 33(2), 375–415. `[PR]` △ — 2018년 데이터
-27. Bick, A., Blandin, A., & Deming, D. J. (2024). The Rapid Adoption of Generative AI. *NBER WP 32966*. `[WP]` △ — 자기보고 기반, 정식 게재본 아님
-28. Brynjolfsson, E., Li, D., & Raymond, L. (2025). Generative AI at Work. *Quarterly Journal of Economics*, 140(2), 889–942. `[PR]` △ — GPT-3.5 세대
-29. Dell'Acqua, F. et al. (2025). Navigating the Jagged Technological Frontier. *Organization Science*. HBS WP 24-013. `[PR]` △ — 2023년 GPT-4 세대
-30. Cui, Z. (K.) et al. (2025). The Effects of Generative AI on High-Skilled Work. *Management Science*. `[PR]` △
-31. METR (2025). Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity. arXiv:2507.09089. `[PP]` △ — 표본 16명. 같은 팀의 2026-02 후속과 반드시 병기
-32. Dillon, E. et al. (2025). 대규모 현장 실험(n=7,137) — 이메일 시간 −31%, 회의 시간 변화 없음. *NBER 워킹페이퍼* 33795. `[WP]` △
-33. Demirer, M. et al. (2026). 개발 도구 효과의 산출물 감쇠와 대체탄력성 0.25. *NBER 워킹페이퍼* 35275. `[WP]` △
-34. Vaccaro, M., Almaatouq, A., & Malone, T. (2024). When combinations of humans and AI are useful: A systematic review and meta-analysis. *Nature Human Behaviour*, 8(12). `[PR]` △ — 2020-01~2023-06 게재 논문 대상. 인용 시 기준선 병기·이질성 명시 필수
-35. Hemmer, P. et al. (연도 미확인). 인간-AI 팀의 정보 비대칭 조건. `[PP]` △ — 게재 여부 미확인
-36. Bessen, J. (2015-03). 현금인출기와 창구직, 19세기 역직기 사례. IMF *Finance & Development* 2015년 3월호 기고문. `[문헌]` △ — 창구직원 총수의 절대 수치는 이 기고문에 없다
-37. Goodhart, C. (1975) 원문 / Strathern, M. (1997). *European Review*, 5(3), 305–321. `[PR]` △ — "지표가 목표가 되면"의 정식화는 Strathern이며 경구는 p.308
-38. Manheim, D., & Garrabrant, S. (2018). Categorizing Variants of Goodhart's Law. arXiv:1803.04585. `[PP]` △
-39. Bevan, G., & Hood, C. (2006). 영국 공공 부문 지표 게이밍 — 공식 통계 96% vs 환자 설문 77%, 별점-품질 상관 0. `[PR]` △
-40. Mabe, P. A., & West, S. G. (1982). 자기평가와 실제 수행의 상관 r = .29, 측정 조건이 변동의 64% 설명. `[PR]` △
-41. Podsakoff, P. M. et al. (2012). 동일 설문 응답에서 상관 133~304% 팽창. `[PR]` △ — 133~304%는 2012년판 수치다. 2003년판이 정본이나 이 책이 인용한 값의 판본은 2012년이다
+23\. Klein, K. J., & Sorra, J. S. (1996). The Challenge of Innovation Implementation. *Academy of Management Review*, 21(4), 1055–1080. `[PR]` △
+24\. Brynjolfsson, E., Hitt, L. M., & Yang, S. (2002). Intangible Assets: Computers and Organizational Capital. *Brookings Papers on Economic Activity*, 2002(1). `[PR]` △
+25\. Brynjolfsson, E., Rock, D., & Syverson (2017). Artificial Intelligence and the Modern Productivity Paradox. *NBER WP 24001* `[WP]` / (2021) The Productivity J-Curve. *AEJ: Macroeconomics* `[PR]` △
+26\. McElheran, K. et al. (2024). AI Adoption in America: Who, What, and Where. *Journal of Economics & Management Strategy*, 33(2), 375–415. `[PR]` △ — 2018년 데이터
+27\. Bick, A., Blandin, A., & Deming, D. J. (2024). The Rapid Adoption of Generative AI. *NBER WP 32966*. `[WP]` △ — 자기보고 기반, 정식 게재본 아님
+28\. Brynjolfsson, E., Li, D., & Raymond, L. (2025). Generative AI at Work. *Quarterly Journal of Economics*, 140(2), 889–942. `[PR]` △ — GPT-3.5 세대
+29\. Dell'Acqua, F. et al. (2025). Navigating the Jagged Technological Frontier. *Organization Science*. HBS WP 24-013. `[PR]` △ — 2023년 GPT-4 세대
+30\. Cui, Z. (K.) et al. (2025). The Effects of Generative AI on High-Skilled Work. *Management Science*. `[PR]` △
+31\. METR (2025). Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity. arXiv:2507.09089. `[PP]` △ — 표본 16명. 같은 팀의 2026-02 후속과 반드시 병기
+32\. Dillon, E. et al. (2025). 대규모 현장 실험(n=7,137) — 이메일 시간 −31%, 회의 시간 변화 없음. *NBER 워킹페이퍼* 33795. `[WP]` △
+33\. Demirer, M. et al. (2026). 개발 도구 효과의 산출물 감쇠와 대체탄력성 0.25. *NBER 워킹페이퍼* 35275. `[WP]` △
+34\. Vaccaro, M., Almaatouq, A., & Malone, T. (2024). When combinations of humans and AI are useful: A systematic review and meta-analysis. *Nature Human Behaviour*, 8(12). `[PR]` △ — 2020-01~2023-06 게재 논문 대상. 인용 시 기준선 병기·이질성 명시 필수. 본문 8장이 지면에서 뺀 세부값: 이질성 I² 시너지 97.7%·증강 93.8% / 생성 과업 +0.19는 p=0.180, 95% CI [−0.09, 0.48], k=34로 0과 유의차 없음 / 과업 유형 간 차이 F(1,104)=7.84, p=0.006
+35\. Hemmer, P., Schemmer, M., Kühl, N., Vössing, M., & Satzger, G. (2025). Complementarity in Human-AI Collaboration: Concept, Sources, and Evidence. *European Journal of Information Systems*. `[PR]` △ — arXiv:2404.00029로 공개된 뒤 게재 확인(2026-09-12 검증). 정보 비대칭과 역량 비대칭을 상보성의 두 원천으로 정리
+36\. Bessen, J. (2015-03). 현금인출기와 창구직, 19세기 역직기 사례. IMF *Finance & Development* 2015년 3월호 기고문. `[문헌]` △ — 창구직원 총수의 절대 수치는 이 기고문에 없다
+37\. Goodhart, C. (1975) 원문 / Strathern, M. (1997). *European Review*, 5(3), 305–321. `[PR]` △ — "지표가 목표가 되면"의 정식화는 Strathern이며 경구는 p.308
+38\. Manheim, D., & Garrabrant, S. (2018). Categorizing Variants of Goodhart's Law. arXiv:1803.04585. `[PP]` △
+39\. Bevan, G., & Hood, C. (2006). 영국 공공 부문 지표 게이밍 — 공식 통계 96% vs 환자 설문 77%, 별점-품질 상관 0. `[PR]` △
+40\. Mabe, P. A., & West, S. G. (1982). 자기평가와 실제 수행의 상관 r = .29, 측정 조건이 변동의 64% 설명. `[PR]` △
+41\. Podsakoff, P. M. et al. (2012). 동일 설문 응답에서 상관 133~304% 팽창. `[PR]` △ — 133~304%는 2012년판 수치다. 2003년판이 정본이나 이 책이 인용한 값의 판본은 2012년이다
 
 ### 자율성 등급·감독·자동화 편향
 
-42. Bainbridge, L. (1983). Ironies of Automation. *Automatica*, 19(6). `[PR]` △
-43. Sheridan, T. B., & Verplank, W. L. (1970년대 후반). 10단계 자동화 등급. `[기술보고서]` △ — 재수록본 경유. 발표 연도 귀속이 자료마다 갈린다
-44. Endsley, M. R., & Kaber, D. B. (1999). Level of automation effects on performance. *Ergonomics*. `[PR]` △ — 10단계 × 4기능 배분표
-45. Skitka, L. J., Mosier, K. L., & Burdick, M. (1999). Does automation bias decision-making? *IJHCS*, 51(5), 991–1006. `[PR]` △ — 항공 시뮬레이션
-46. Parasuraman, R., Sheridan, T. B., & Wickens, C. D. (2000). A model for types and levels of human interaction with automation. *IEEE Transactions on Systems, Man, and Cybernetics*. `[PR]` ★(초록) — 이론 정리 논문이며 원저 실증 데이터는 없다
-47. Merat, N. et al. (2014). 제어 안정화까지 35~40초. `[PR]` △
-48. Eriksson, A., & Stanton, N. A. (2017). 인계 시간 1.97~25.75초. `[PR]` △
-49. Endsley, M. R. (2017). *Human Factors*. 자율성-상황인식 딜레마. `[PR]` △
-50. Victor, T. W. et al. (2018). 테스트트랙 106명, 76명 중 21명(28%) 충돌. `[PR]` △ — 자율주행 맥락
-51. Zhang, B. et al. (2019). 129편 메타분석, 평균 2.72초(0.69~19.79초). `[PR]` △
-52. Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). To Trust or to Think — 인지적 강제 기능. *PACM HCI*, 5(CSCW1). `[PR]` △ — 효과 크기 미확보, 방향만 인용
-53. Bansal, G. et al. (2021). Does the Whole Exceed its Parts? *CHI '21*. `[PR]` △ — 그림 수치 인용 금지 대상. 방향성과 본문 z/p값만 사용
-54. Green, B. (2022). The flaws of policies requiring human oversight of government algorithms. *Computer Law & Security Review*, 45. arXiv:2109.05067. `[PR]` △ — 정책 41개 조사
-55. Laux, J. (2023). Institutionalised distrust and human oversight of artificial intelligence. *AI & Society*. `[PR]` △ — 구성적 vs 교정적 개입
-56. Cihon, P., Stein, M., Bansal, G., Manning, S., & Xu, K. (2025). Measuring AI agent autonomy: Towards a scalable approach with code inspection. arXiv:2502.15212. NeurIPS SoLaR Workshop 2024. `[WP]`(워크숍 논문) △ — AutoGen 애플리케이션 10건, 코드 정적 검사. Actions κ = 0.30
-57. Zheng, Dong, Depena, Bhatia, Xiao, & Xu (2026-07-26). Separating Capability from Permission: A Governance Framework for Agentic AI Autonomy Levels. arXiv:2607.23438v1. ExxonMobil 기술 조직. `[PP]` △ — AAL/ACL 2축 프레임. 동료심사 없음. 10페이지 산업 실무 보고, 실증 사례 단일 기업 2건
-58. 미 도로교통안전국 결함조사 (2백만 대, 467건 충돌) / 국가교통안전위원회 개별 사고조사 2건 (2024) | `[정부]` △
+42\. Bainbridge, L. (1983). Ironies of Automation. *Automatica*, 19(6). `[PR]` △
+43\. Sheridan, T. B., & Verplank, W. L. (1970년대 후반). 10단계 자동화 등급. `[기술보고서]` △ — 재수록본 경유. 발표 연도 귀속이 자료마다 갈린다
+44\. Endsley, M. R., & Kaber, D. B. (1999). Level of automation effects on performance. *Ergonomics*. `[PR]` △ — 10단계 × 4기능 배분표
+45\. Skitka, L. J., Mosier, K. L., & Burdick, M. (1999). Does automation bias decision-making? *IJHCS*, 51(5), 991–1006. `[PR]` △ — 항공 시뮬레이션
+46\. Parasuraman, R., Sheridan, T. B., & Wickens, C. D. (2000). A model for types and levels of human interaction with automation. *IEEE Transactions on Systems, Man, and Cybernetics*. `[PR]` ★(초록) — 이론 정리 논문이며 원저 실증 데이터는 없다
+47\. Merat, N. et al. (2014). 제어 안정화까지 35~40초. `[PR]` △
+48\. Eriksson, A., & Stanton, N. A. (2017). 인계 시간 1.97~25.75초. `[PR]` △
+49\. Endsley, M. R. (2017). *Human Factors*. 자율성-상황인식 딜레마. `[PR]` △
+50\. Victor, T. W. et al. (2018). 테스트트랙 106명, 76명 중 21명(28%) 충돌. `[PR]` △ — 자율주행 맥락
+51\. Zhang, B. et al. (2019). 129편 메타분석, 평균 2.72초(0.69~19.79초). `[PR]` △
+52\. Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). To Trust or to Think — 인지적 강제 기능. *PACM HCI*, 5(CSCW1). `[PR]` △ — 효과 크기 미확보, 방향만 인용
+53\. Bansal, G. et al. (2021). Does the Whole Exceed its Parts? *CHI '21*. `[PR]` △ — 그림 수치 인용 금지 대상. 방향성과 본문 z/p값만 사용
+54\. Green, B. (2022). The flaws of policies requiring human oversight of government algorithms. *Computer Law & Security Review*, 45. arXiv:2109.05067. `[PR]` △ — 정책 41개 조사
+55\. Laux, J. (2023). Institutionalised distrust and human oversight of artificial intelligence. *AI & Society*. `[PR]` △ — 구성적 vs 교정적 개입
+56\. Cihon, P., Stein, M., Bansal, G., Manning, S., & Xu, K. (2025). Measuring AI agent autonomy: Towards a scalable approach with code inspection. arXiv:2502.15212. NeurIPS SoLaR Workshop 2024. `[WP]`(워크숍 논문) △ — AutoGen 애플리케이션 10건, 코드 정적 검사. Actions κ = 0.30
+57\. Zheng, Dong, Depena, Bhatia, Xiao, & Xu (2026-07-26). Separating Capability from Permission: A Governance Framework for Agentic AI Autonomy Levels. arXiv:2607.23438v1. ExxonMobil 기술 조직. `[PP]` △ — AAL/ACL 2축 프레임. 동료심사 없음. 10페이지 산업 실무 보고, 실증 사례 단일 기업 2건
+58\. 미 도로교통안전국 결함조사 (2백만 대, 467건 충돌) / 국가교통안전위원회 개별 사고조사 2건 (2024) | `[정부]` △
 
 ### 변화관리·수용·저항
 
-59. Hughes, M. (2011). Do 70 Per Cent of All Organizational Change Initiatives Really Fail? *Journal of Change Management*, 11(4), 451–464. `[PR]` △ — 이 책이 "70%" 수치를 쓰지 않는 근거
-60. Dietvorst, B. J., Simmons, J. P., & Massey, C. (2015). Algorithm Aversion. *JEP: General*, 144(1), 114–126. `[PR]` △
-61. Dietvorst, B. J. et al. (2018). Overcoming Algorithm Aversion. *Management Science*, 64(3), 1155–1170. `[PR]` △ — 아주 작은 수정 권한의 효과
-62. Kellogg, K. C., Valentine, M. A., & Christin, A. (2020). Algorithms at Work: The New Contested Terrain of Control. *Academy of Management Annals*, 14(1), 366–410. `[PR]` ★ — 알고리즘 통제의 여섯 기제
-63. Ravid, D. M. et al. (2023). A meta-analysis of the effects of electronic performance monitoring on work outcomes. *Personnel Psychology*. `[PR]` △ — 사람 모니터링 연구이며 에이전트 로깅 연구가 아니다
-64. Shonhe, L., & Min, Q. (2025). Mitigating AI-induced professional identity threat and fostering adoption in the workplace. *AI & Society*, 40(5), 4079–4092. `[PR]` △ — 동·남부 아프리카 단일 직군 413명, 자기보고 횡단 연구
+59\. Hughes, M. (2011). Do 70 Per Cent of All Organizational Change Initiatives Really Fail? *Journal of Change Management*, 11(4), 451–464. `[PR]` △ — 이 책이 "70%" 수치를 쓰지 않는 근거
+60\. Dietvorst, B. J., Simmons, J. P., & Massey, C. (2015). Algorithm Aversion. *JEP: General*, 144(1), 114–126. `[PR]` △
+61\. Dietvorst, B. J. et al. (2018). Overcoming Algorithm Aversion. *Management Science*, 64(3), 1155–1170. `[PR]` △ — 아주 작은 수정 권한의 효과
+62\. Kellogg, K. C., Valentine, M. A., & Christin, A. (2020). Algorithms at Work: The New Contested Terrain of Control. *Academy of Management Annals*, 14(1), 366–410. `[PR]` ★ — 알고리즘 통제의 여섯 기제
+63\. Ravid, D. M. et al. (2023). A meta-analysis of the effects of electronic performance monitoring on work outcomes. *Personnel Psychology*. `[PR]` △ — 사람 모니터링 연구이며 에이전트 로깅 연구가 아니다
+64\. Shonhe, L., & Min, Q. (2025). Mitigating AI-induced professional identity threat and fostering adoption in the workplace. *AI & Society*, 40(5), 4079–4092. `[PR]` △ — 동·남부 아프리카 단일 직군 413명, 자기보고 횡단 연구
 
 ## B-4. 조사 보고서·산업 자료
 
@@ -340,7 +340,7 @@
 | Gartner — 에이전트 워싱, 수천 벤더 중 약 130개 (2025-06-25) | Gartner 보도자료 | `[조사]` | ✗(403) / 복수 매체 교차 △ |
 | Gartner — 비례적 거버넌스 4단계, 이분법 진단, 2027년 40% 강등·폐기 전망 (2026-05-26) | Gartner 보도자료 | `[조사]` | ✗ / 복수 매체 교차 △ |
 | Agentic AI is scaling faster than guardrails — 24개국 3,235명, 사용 23% vs 성숙한 거버넌스 21% (2026-04-24) | Deloitte Insights | `[조사]` | ★ |
-| The GenAI Divide: State of AI in Business 2025 — 파일럿 5% (2025-07) | MIT 프로젝트 NANDA | `[조사]` | △ — 편의표본(4개 컨퍼런스 참석 시니어 리더), 공식 원문 미확보 |
+| The GenAI Divide: State of AI in Business 2025 — 파일럿 5% (2025-07) | MIT 프로젝트 NANDA | `[조사]` | △ — 편의표본(4개 컨퍼런스 참석 시니어 리더), 공식 원문 미확보 — 유통 사본으로 확인했으며 1장 본문의 완충이 이를 가리킨다 |
 | The State of AI: Global Survey 2026 — 개인 생산성 8/10, EBIT 기여 37% 정체 | McKinsey | `[조사]` | ✗(타임아웃) / 2차 △ |
 | State of AI-assisted Software Development 2025 — "AI는 증폭기다", 버전 관리·관측성·내부 플랫폼 | Google Cloud DORA | `[조사]` | △ |
 | Salesforce 에이전트 성숙도 모델 5단계 (2025-04-10) | Salesforce | `[벤더]` | △ |
