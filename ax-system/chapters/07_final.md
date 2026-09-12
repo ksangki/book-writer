@@ -92,6 +92,17 @@ Anthropic이 자사 제품의 텔레메트리를 공개했다. 2026년 5월 25�
 > "An agent should not operate at an AAL higher than the human organization is prepared to accept."
 > (에이전트는 조직이 받아들일 준비가 된 것보다 높은 허용 자율성으로 운영되어서는 안 된다.)
 
+```mermaid
+flowchart TB
+  C[ACL — 할 수 있는 것, 에이전트의 내재 역량]
+  A[AAL — 해도 되는 것, 조직이 허가한 범위]
+  C --> D{배치 등급 결정}
+  A --> D
+  D -->|둘 중 낮은 쪽을 따른다| P[운영 자율성]
+  C -.역량이 높아도 허가가 자동으로 오르지 않는다.-> A
+```
+그림 1. 두 축의 분리 — 배치는 역량이 아니라 허가가 정한다
+
 허용 자율성 쪽은 사람의 역할로 다섯 칸이 된다.
 
 | AAL | 사람의 역할 | 사람이 하는 일 | 실패했을 때 |
