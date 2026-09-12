@@ -1,8 +1,8 @@
-# Build Log — 디지털 워커의 시대, AI 에이전트를 조직의 성과로 만드는 체계 v1.0.0
+# Build Log — 디지털 워커의 시대, AI 에이전트를 조직의 성과로 만드는 체계 v1.1.0
 
-- **Date:** 2026-09-12T00:32:33Z
-- **Output:** `디지털-워커의-시대,-AI-에이전트를-조직의-성과로-만드는-체계-v1.0.0.epub`
-- **Size:** 382342 bytes
+- **Date:** 2026-09-12T00:47:18Z
+- **Output:** `디지털-워커의-시대,-AI-에이전트를-조직의-성과로-만드는-체계-v1.1.0.epub`
+- **Size:** 382967 bytes
 - **Pandoc exit:** 0
 - **epubcheck:** passed
 - **epubcheck strict:** 1
@@ -14,8 +14,8 @@
 - title: 디지털 워커의 시대, AI 에이전트를 조직의 성과로 만드는 체계
 - author: 김상기
 - language: ko
-- version: 1.0.0
-- pub_date: 2026-09-07
+- version: 1.1.0
+- pub_date: 2026-09-12
 - identifier: urn:uuid:5cef80ff-b2ad-43fd-b003-63c0f827313f
 - license: CC BY-NC-SA 4.0
 - genre: tech-book
