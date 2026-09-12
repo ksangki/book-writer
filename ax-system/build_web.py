@@ -26,10 +26,12 @@ STYLE = """<style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#faf9f6}
 body{max-width:46em;margin:0 auto;padding:0 1.2em 3em;line-height:1.78;font-size:17px;color:#2b2b28;background:#faf9f6;font-family:'Apple SD Gothic Neo','Pretendard','Noto Sans KR',sans-serif}
 h1,h2,h3{color:#23211d}
-h1{margin-top:2.2em;line-height:1.3}
+h1{margin-top:2.2em;line-height:1.3;word-break:keep-all;text-wrap:balance}
 a,a:visited{color:#8a6320;text-decoration:none;border-bottom:1px solid #d9c9a3}
 a:hover{color:#5f4415;border-bottom-color:#8a6320}
-nav#TOC{background:#f3efe6;border:1px solid #e0d8c4;border-radius:10px;padding:1.1em 1.5em;margin:1.6em 0}
+details.toc-fold{background:#f3efe6;border:1px solid #e0d8c4;border-radius:10px;padding:.4em 1.5em;margin:2em 0}
+details.toc-fold>summary{cursor:pointer;font-weight:700;color:#8a6320;padding:.7em 0;list-style-position:inside}
+nav#TOC{background:transparent;border:none;padding:.2em 0;margin:0}
 nav#TOC ul{list-style:none;padding-left:1em;margin:.2em 0}
 nav#TOC a,nav#TOC a:visited{border-bottom:none;line-height:2;color:#8a6320}
 img,svg{max-width:100%;height:auto;display:block;margin:1.2em auto}
@@ -64,6 +66,9 @@ figure.editorial-illustration figcaption{text-align:center;color:#756e61;font-si
 .roadmap-phase h3{font-size:1em;margin:.1em 0 .6em}
 .roadmap-phase ul{font-size:.88em;padding-left:1.25em}
 .roadmap-phase .gate{display:block;border-top:1px solid #d9cfb8;margin-top:.8em;padding-top:.7em;color:#6f5423;font-size:.83em;font-weight:700}
+.registry-core{border-left:5px solid #c9963f;border-right:5px solid #c9963f;position:relative}
+.registry-core::before{content:"전 생애주기 관통 기반";display:block;color:#c9b98f;font-size:.72em;font-weight:700;letter-spacing:.1em;margin-bottom:.35em}
+@media (max-width:700px){.lifecycle-grid,.roadmap,.decision-grid{grid-template-columns:1fr}}
 @media (prefers-color-scheme: dark){
  html{background:#10161f} body{background:#10161f;color:#d8d4c8} h1,h2,h3{color:#ece8dc}
  a,a:visited{color:#e3b45f;border-bottom-color:#6b5426} a:hover{color:#f0cc85;border-bottom-color:#e3b45f}
@@ -184,6 +189,21 @@ html = re.sub(r'(<li><a href="#서문")', toc_new + r'\1', html, count=1)
 # 8) 웹 판본 번호: 표제지·판권의 v1.2.0 → v1.3.0 (index.html 한정)
 html = html.replace("v1.2.0", f"v{WEB_VERSION}")
 html = re.sub(r'(판본:</strong>\s*v1\.3\.0\s*·\s*)2026-09-12', r'\g<1>' + PUB_DATE, html)
+
+# 9) 긴 목차를 접고 핵심 섹션 뒤(서문 앞)로 이동
+m = re.search(r'<nav id="TOC".*?</nav>', html, re.S)
+if m:
+    toc = m.group(0)
+    html = html[:m.start()] + html[m.end():]  # 원위치에서 제거
+    folded = ('<details class="toc-fold">\n'
+              '<summary>목차 펼치기</summary>\n' + toc + '\n</details>\n')
+    # 서문 섹션 바로 앞(운영체계·요약·로드맵 다음)에 삽입
+    html = html.replace('<h2 id="서문">', folded + '<h2 id="서문">', 1)
+
+# 10) 운영체계 도식 접근성: role="img"(내부 단계가 안 읽힘) → role="group"
+html = html.replace(
+    '<div class="lifecycle" role="img" aria-label="AI 에이전트를 발견, 표준화, 등록, 인증, 권한 부여, 운영, 측정, 보상과 재배치, 폐기하는 아홉 단계 운영체계">',
+    '<div class="lifecycle" role="group" aria-label="AI 에이전트 아홉 단계 운영체계와 이를 관통하는 Agent Registry">')
 
 OUT.write_text(html, encoding="utf-8")
 n_ill = html.count('editorial-illustration"><img') + html.count('class="editorial-illustration">\n')

@@ -47,11 +47,11 @@
 | **비공식 우회** — 특정 조건에서 단계를 건너뛴다 | 조건을 명문화하거나 그 단계를 없앤다. 우회 금지는 대개 답이 아니다 |
 | **형식화 불가** — 사람의 판단으로만 되는 단계 | 옮기지 않는다. 사람을 남기고 경계로 표시한다 |
 
-**쓰는 법 세 가지:** 적힌 단계를 먼저 채운다 / 한 절차에 실제 사례 다섯에서 열 건을 본다 / 간극 없는 행은 지운다. 그리고 **이 표는 그 일을 직접 하는 사람이 채운다.** 감사 담당자가 채우면 세 번째 유형이 조용히 비고, 그렇게 비어 버린 표는 원래 문서보다 나쁘다.
+**쓰는 법 세 가지:** 적힌 단계를 먼저 채운다 / 한 절차에 실제 사례 다섯에서 열 건을 본다 / 간극 없는 행은 지운다. 그리고 **이 표는 그 일을 직접 하는 사람이 채운다.** 감사 담당자가 채우면 비공식 우회 유형이 조용히 비고, 그렇게 비어 버린 표는 원래 문서보다 나쁘다.
 
 ## A-3. 에이전트 SOP 작성 규칙 체크리스트 (4장)
 
-여섯 항목 중 넷은 절차를 쓰는 사람의 몫이고, 나머지 둘은 유지하는 사람의 몫이다. 그리고 대개 그 둘이 같은 사람이 아니다 — 5번과 6번이 등록부에 들어가야 하는 이유다.
+여섯 항목 중 넷은 절차를 쓰는 사람의 몫이고, 나머지 둘은 유지하는 사람의 몫이다. 그리고 쓰는 사람과 유지하는 사람은 대개 다른 사람이다 — 5번과 6번이 등록부에 들어가야 하는 이유다.
 
 | # | 점검 항목 | 확인 |
 |---|---|---|
@@ -94,7 +94,7 @@
 | 상시 운영 여부 | 일회성 실험인가, 계속 도는 업무인가 | 계속 도는 것에만 유지 비용이 든다 |
 | **절차 문서 보유 여부** | 이 에이전트가 수행하는 절차가 글로 적혀 있는가 | 기준선이 없으면 평가가 성립하지 않는다 |
 
-**함께 정할 것:** 등록 단위와 과금 단위를 명시적으로 분리한다. 인턴 단계를 둔다면 기한을 못 박는다. 권한은 사람에게서 위임받는 형태가 기본값이고, 에이전트 자체 권한은 고위험·상시 운영에만 남기는 예외다.
+**함께 정할 것:** 등록 단위와 과금 단위를 분명히 갈라 둔다. 인턴 단계를 둔다면 기한을 못 박는다. 권한은 사람에게서 위임받는 형태가 기본값이고, 에이전트 자체 권한은 고위험·상시 운영에만 남기는 예외다.
 
 **운영 비용 항목표:**
 
@@ -107,7 +107,7 @@
 | 라이선스 | 2계층 부여 시점부터 | 등록 단위와 좌석 단위를 일치시키면 커진다 |
 | 등록·심사 자체의 인건비 | 상시 | 제도 운영에 사람이 든다는 사실을 빼먹는다 |
 
-**판정 형태:** 한 에이전트의 연간 유지 비용이 그 에이전트가 절감한 노동의 가치를 넘으면 그것은 폐기 후보다.
+**판정 형태:** 한 에이전트의 연간 유지 비용이 그 에이전트가 절감한 노동의 가치를 넘으면 그 에이전트는 폐기 후보다.
 
 ## A-6. 자율성 등급표 초안 (7장)
 
@@ -121,9 +121,9 @@
 | A4 마음을 얹고 (목표·제약 설정) | | | | | | |
 | A5 마음을 떼고 (정책 설정) | | | | | | |
 
-**채울 때 세 가지:** 등급 판정은 A-1의 판별 3질문이 내놓는 산출로 한다(개인 재량에 두면 판정자마다 갈린다) / **위협 모델 열을 비워 두지 않는다** — 비면 그 행은 이름표일 뿐이다 / **2단계로 시작해도 된다.** 왜 다섯이 필요한지 답하지 못한 채 다섯을 채우는 쪽이 더 나쁘다.
+**채울 때 세 가지:** 등급 판정은 A-1의 판별 3질문이 내놓는 결과로 한다(개인 재량에 두면 판정자마다 갈린다) / **위협 모델 열을 비워 두지 않는다** — 비면 그 행은 이름표일 뿐이다 / **2단계로 시작해도 된다.** 왜 다섯이 필요한지 답하지 못한 채 다섯을 채우는 쪽이 더 나쁘다.
 
-**전제:** 기술 역량과 허용 자율성은 다른 축이다. 두 축이 어긋난 칸은 결함이 아니라 의도된 거버넌스 선택이며, 그 선택을 명시적으로 적는 것이 이 표의 목적이다. 그리고 승인을 등급의 축으로 삼지 않는다 — 승인은 되돌릴 수 없는 소수 행위에만 남기고 나머지는 애초에 닿을 수 없게 만든다.
+**전제:** 기술 역량과 허용 자율성은 다른 축이다. 두 축이 어긋난 칸은 결함이 아니라 의도된 거버넌스 선택이다. 그 선택을 분명히 적어 두는 것이 이 표의 목적이다. 그리고 승인을 등급의 축으로 삼지 않는다 — 승인은 되돌릴 수 없는 소수 행위에만 남기고 나머지는 애초에 닿을 수 없게 만든다.
 
 ## A-7. 환산식과 두 계수 (8장)
 
@@ -173,7 +173,7 @@
 | ③ | 당사자 이익과 연결 | 성과 귀속이 그 자리다. ①②를 건너뛰고 ③으로 시작하면 홍보로 들린다 |
 | ④ | 폐기 규칙의 존재를 함께 고지 | 정리의 대상이 에이전트임을 제도로 보인다. 아직 없으면 "만들고 있고 언제까지 공개한다"까지만 말한다 |
 
-**금지 어휘:** "잡아낸다." 말하는 쪽에서는 탐지 기능을 가리키는 중립적 표현이지만, 듣는 쪽에서는 자기가 잡히는 대상이라는 뜻으로 들린다.
+**금지 어휘:** "잡아낸다." 말하는 쪽에서는 탐지 기능을 가리키는 중립적인 말이다. 하지만 듣는 쪽에서는 자기가 잡히는 대상이라는 뜻으로 들린다.
 
 **실행 원칙:** 사용자에게 아주 작은 수정 권한이라도 준다(단, **수정 가능 구간과 책임 귀속은 별도 필드로 둔다**) / 에이전트의 오류율을 사람의 오류율과 나란히 공개한다 / 롤아웃은 효과가 큰 집단부터 / 문화 슬로건보다 개인 수준의 작업에 투자한다 / 중간관리자를 최우선 대상으로 / 첫 단계는 실무자 교육이 아니라 리더의 자기 규율.
 
@@ -191,7 +191,7 @@
 | ⑥ | 감사 추적 보존 | 불변 로깅. **지우지 않고 남기는 유일한 항목** |
 | ⑦ | 폐기 후 잔여 리스크 모니터링 | 끈 뒤에도 한동안 본다. 기간을 숫자로 정한다 |
 
-**용어 구분:** 취소(활성 세션 종료) ≠ 디프로비저닝(신원과 권한의 영구 제거). 취소만 된 에이전트는 등록과 신뢰 관계를 그대로 보유한다.
+**용어 구분:** 취소(활성 세션 종료) ≠ 디프로비저닝(신원과 권한의 영구 제거). 취소만 된 에이전트는 등록과 신뢰 관계를 그대로 가지고 있다.
 
 **재심사는 사건에 건다 (분기 재심사가 아니다):** 권한 크립 탐지 / 접근 패턴 드리프트 / 새 역량 획득 시 소유자 재확인.
 
@@ -201,12 +201,12 @@
 
 # 부록 B. 참고문헌
 
-본문 저술에 실제로 근거로 쓴 것만 추렸다. 축별로 묶고, 각 항목에 **출처 성격**과 **확인 등급**을 붙였다.
+본문을 쓸 때 실제로 근거로 삼은 것만 추렸다. 축별로 묶고, 각 항목에 **출처 성격**과 **확인 등급**을 붙였다.
 
 **확인 등급:** ★ 원문 직접 열람 / △ 검색 요약·2차 자료 경유 / ✗ 접근 실패
 **문헌 유형:** `[PR]` 동료평가 논문 / `[PP]` 프리프린트 / `[WP]` 워킹페이퍼·워크숍 논문(정식 학회 논문 아님) / `[공식]` 공식 문서·보도자료 / `[규제]` 규제 원문 / `[정부]` 정부 공개 자료 / `[조사]` 컨설팅·업계 조사 / `[벤더]` 벤더 자료 / `[매체]` 언론 보도 / `[커뮤니티]` 커뮤니티 게시물 / `[학술]` 학술 기관·연구소 발간물 / `[보고서]`·`[기술보고서]` 기관 보고서 / `[문헌]` 저자·연도가 특정되지 않은 2차 문헌 / `[PR-단행본]` 동료평가 계열 단행본 / `[PP→PR]`·`[PP→워크숍]` 프리프린트에서 게재·워크숍으로 이행
 
-웹 자료의 접근일은 모두 **2026년 9월 5일**이다. 이 영역은 분기 단위로 바뀌므로, 규제·제품·표준 항목은 인용 시점에 원문을 다시 확인하는 편이 낫다.
+웹 자료의 접근일은 모두 **2026년 9월 5일**이다. 이 분야는 분기 단위로 바뀐다. 규제·제품·표준 항목은 인용하는 시점에 원문을 다시 확인하는 편이 낫다.
 
 ## B-1. 등록·아이덴티티 — 1차 자료와 제품
 
@@ -256,17 +256,17 @@
 ### 등록·거버넌스·책임
 
 1\. Hübner, J. F., Sichman, J. S., & Boissier, O. (2002). A Model for the Structural, Functional, and Deontic Specification of Organizations in Multiagent Systems (MOISE+). *SBIA 2002*, LNAI 2507. Springer. `[PR]` △
-2\. Mitchell, M. et al. (2019). Model Cards for Model Reporting. *FAT\* '19*. arXiv:1810.03993. `[PR]` △
+2\. Mitchell, M. et al. (2019). Model Cards for Model Reporting. *FAT\* '19*. [arXiv:1810.03993](https://arxiv.org/abs/1810.03993). `[PR]` △
 3\. Santoni de Sio, F., & Mecacci, G. (2021). Four Responsibility Gaps with Artificial Intelligence. *Philosophy & Technology*, 34(4), 1057–1084. `[PR]` △
-4\. Chan, A. et al. (2024). Visibility into AI Agents. *ACM FAccT '24*. arXiv:2401.13138. `[PR]` △
-5\. Chan, A. (2024). IDs for AI Systems. arXiv:2406.12137. `[PP]` △
-6\. Kolt, N. (2025). Governing AI Agents. *Notre Dame Law Review* (게재 예정). arXiv:2501.07913. `[PP→PR]` △
-7\. Chan, A. et al. (2025). Infrastructure for AI Agents. *TMLR*. arXiv:2501.10114. `[PR]` △
-8\. Kraprayoon, J. et al. / IAPS (2025). AI Agent Governance: A Field Guide. arXiv:2505.21808. `[보고서]` △
-9\. Kaptein, M., Khan, V.-J., & Podstavnychy, A. (2026). Runtime Governance for AI Agents: Policies on Paths. arXiv:2603.16586. `[PP]` △
-10\. Nian, Y. et al. (2026). Auditable Agents. arXiv:2604.05485 (v2 2026-08-13). `[PP]` △
-11\. Otsuka, T., Toyoda, K., & Leung, A. (2026). AI Identity: Standards, Gaps, and Research Directions for AI Agents. arXiv:2604.23280. `[PP]` △
-12\. Atkinson, D. I., & O'Bryan, J. E. (2026). Government AI Use as a Monitoring Primitive. arXiv:2607.04543. ICML 2026 Workshop on Technical AI Governance. `[PP→워크숍]` △
+4\. Chan, A. et al. (2024). Visibility into AI Agents. *ACM FAccT '24*. [arXiv:2401.13138](https://arxiv.org/abs/2401.13138). `[PR]` △
+5\. Chan, A. (2024). IDs for AI Systems. [arXiv:2406.12137](https://arxiv.org/abs/2406.12137). `[PP]` △
+6\. Kolt, N. (2025). Governing AI Agents. *Notre Dame Law Review* (게재 예정). [arXiv:2501.07913](https://arxiv.org/abs/2501.07913). `[PP→PR]` △
+7\. Chan, A. et al. (2025). Infrastructure for AI Agents. *TMLR*. [arXiv:2501.10114](https://arxiv.org/abs/2501.10114). `[PR]` △
+8\. Kraprayoon, J. et al. / IAPS (2025). AI Agent Governance: A Field Guide. [arXiv:2505.21808](https://arxiv.org/abs/2505.21808). `[보고서]` △
+9\. Kaptein, M., Khan, V.-J., & Podstavnychy, A. (2026). Runtime Governance for AI Agents: Policies on Paths. [arXiv:2603.16586](https://arxiv.org/abs/2603.16586). `[PP]` △
+10\. Nian, Y. et al. (2026). Auditable Agents. [arXiv:2604.05485](https://arxiv.org/abs/2604.05485) (v2 2026-08-13). `[PP]` △
+11\. Otsuka, T., Toyoda, K., & Leung, A. (2026). AI Identity: Standards, Gaps, and Research Directions for AI Agents. [arXiv:2604.23280](https://arxiv.org/abs/2604.23280). `[PP]` △
+12\. Atkinson, D. I., & O'Bryan, J. E. (2026). Government AI Use as a Monitoring Primitive. [arXiv:2607.04543](https://arxiv.org/abs/2607.04543). ICML 2026 Workshop on Technical AI Governance. `[PP→워크숍]` △
 13\. Feng, K., McDonald, N., & Zhang, A. X. (2025). 자율성 등급과 자율성 인증서 (컬럼비아 나이트 제1수정헌법 연구소, 2025-07-28). `[학술]` △
 
 ### SOP·절차의 형식화
@@ -277,8 +277,8 @@
 16\. Feldman, M. S., & Pentland, B. T. (2003). Reconceptualizing Organizational Routines as a Source of Flexibility and Change. *Administrative Science Quarterly*, 48(1), 94–118. `[PR]` △
 17\. Gourlay, S. (2006). Conceptualizing Knowledge Creation: A Critique of Nonaka's Theory. *Journal of Management Studies*, 43(7), 1415–1436. `[PR]` △
 18\. van der Aalst, W. M. P. (2011 / 2016). *Process Mining: Discovery, Conformance and Enhancement of Business Processes*. Springer. `[PR-단행본]` △
-19\. Hong, S. et al. (2024). MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework. *ICLR 2024 (Oral)*. arXiv:2308.00352. `[PR]` △
-20\. Nandi, S. et al. (2025/2026). SOP-Bench: Complex Industrial SOPs for Evaluating LLM Agents. arXiv:2506.08119 (v2 2026-02-23). `[PP]` △ — 2026년 2월 시점 모델 라인업 기준
+19\. Hong, S. et al. (2024). MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework. *ICLR 2024 (Oral)*. [arXiv:2308.00352](https://arxiv.org/abs/2308.00352). `[PR]` △
+20\. Nandi, S. et al. (2025/2026). SOP-Bench: Complex Industrial SOPs for Evaluating LLM Agents. [arXiv:2506.08119](https://arxiv.org/abs/2506.08119) (v2 2026-02-23). `[PP]` △ — 2026년 2월 시점 모델 라인업 기준
 21\. Amazon Science (2025). Structuring the Unstructured: A Multi-Agent LLM Framework for Transforming Ambiguous SOPs into Code. *EMNLP 2025 Industry Track*. `[PR]` △ — 종단 정확도 수치는 원문 대조 미완이므로 이 책은 쓰지 않았다
 22\. 도요타 생산방식의 표준작업(standardized work)과 개선 사이클 | 린 생산 문헌 | `[문헌]` △
 
@@ -292,14 +292,14 @@
 28\. Brynjolfsson, E., Li, D., & Raymond, L. (2025). Generative AI at Work. *Quarterly Journal of Economics*, 140(2), 889–942. `[PR]` △ — GPT-3.5 세대
 29\. Dell'Acqua, F. et al. (2025). Navigating the Jagged Technological Frontier. *Organization Science*. HBS WP 24-013. `[PR]` △ — 2023년 GPT-4 세대
 30\. Cui, Z. (K.) et al. (2025). The Effects of Generative AI on High-Skilled Work. *Management Science*. `[PR]` △
-31\. METR (2025). Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity. arXiv:2507.09089. `[PP]` △ — 표본 16명. 같은 팀의 2026-02 후속과 반드시 병기
+31\. METR (2025). Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity. [arXiv:2507.09089](https://arxiv.org/abs/2507.09089). `[PP]` △ — 표본 16명. 같은 팀의 2026-02 후속과 반드시 병기
 32\. Dillon, E. et al. (2025). 대규모 현장 실험(n=7,137) — 이메일 시간 −31%, 회의 시간 변화 없음. *NBER 워킹페이퍼* 33795. `[WP]` △
 33\. Demirer, M. et al. (2026). 개발 도구 효과의 산출물 감쇠와 대체탄력성 0.25. *NBER 워킹페이퍼* 35275. `[WP]` △
 34\. Vaccaro, M., Almaatouq, A., & Malone, T. (2024). When combinations of humans and AI are useful: A systematic review and meta-analysis. *Nature Human Behaviour*, 8(12). `[PR]` △ — 2020-01~2023-06 게재 논문 대상. 인용 시 기준선 병기·이질성 명시 필수. 본문 8장이 지면에서 뺀 세부값: 이질성 I² 시너지 97.7%·증강 93.8% / 생성 과업 +0.19는 p=0.180, 95% CI [−0.09, 0.48], k=34로 0과 유의차 없음 / 과업 유형 간 차이 F(1,104)=7.84, p=0.006
-35\. Hemmer, P., Schemmer, M., Kühl, N., Vössing, M., & Satzger, G. (2025). Complementarity in Human-AI Collaboration: Concept, Sources, and Evidence. *European Journal of Information Systems*. `[PR]` △ — arXiv:2404.00029로 공개된 뒤 게재 확인(2026-09-12 검증). 정보 비대칭과 역량 비대칭을 상보성의 두 원천으로 정리
+35\. Hemmer, P., Schemmer, M., Kühl, N., Vössing, M., & Satzger, G. (2025). Complementarity in Human-AI Collaboration: Concept, Sources, and Evidence. *European Journal of Information Systems*. `[PR]` △ — [arXiv:2404.00029](https://arxiv.org/abs/2404.00029)로 공개된 뒤 게재 확인(2026-09-12 검증). 정보 비대칭과 역량 비대칭을 상보성의 두 원천으로 정리
 36\. Bessen, J. (2015-03). 현금인출기와 창구직, 19세기 역직기 사례. IMF *Finance & Development* 2015년 3월호 기고문. `[문헌]` △ — 창구직원 총수의 절대 수치는 이 기고문에 없다
 37\. Goodhart, C. (1975) 원문 / Strathern, M. (1997). *European Review*, 5(3), 305–321. `[PR]` △ — "지표가 목표가 되면"의 정식화는 Strathern이며 경구는 p.308
-38\. Manheim, D., & Garrabrant, S. (2018). Categorizing Variants of Goodhart's Law. arXiv:1803.04585. `[PP]` △
+38\. Manheim, D., & Garrabrant, S. (2018). Categorizing Variants of Goodhart's Law. [arXiv:1803.04585](https://arxiv.org/abs/1803.04585). `[PP]` △
 39\. Bevan, G., & Hood, C. (2006). 영국 공공 부문 지표 게이밍 — 공식 통계 96% vs 환자 설문 77%, 별점-품질 상관 0. `[PR]` △
 40\. Mabe, P. A., & West, S. G. (1982). 자기평가와 실제 수행의 상관 r = .29, 측정 조건이 변동의 64% 설명. `[PR]` △
 41\. Podsakoff, P. M. et al. (2012). 동일 설문 응답에서 상관 133~304% 팽창. `[PR]` △ — 133~304%는 2012년판 수치다. 2003년판이 정본이나 이 책이 인용한 값의 판본은 2012년이다
@@ -318,10 +318,10 @@
 51\. Zhang, B. et al. (2019). 129편 메타분석, 평균 2.72초(0.69~19.79초). `[PR]` △
 52\. Buçinca, Z., Malaya, M. B., & Gajos, K. Z. (2021). To Trust or to Think — 인지적 강제 기능. *PACM HCI*, 5(CSCW1). `[PR]` △ — 효과 크기 미확보, 방향만 인용
 53\. Bansal, G. et al. (2021). Does the Whole Exceed its Parts? *CHI '21*. `[PR]` △ — 그림 수치 인용 금지 대상. 방향성과 본문 z/p값만 사용
-54\. Green, B. (2022). The flaws of policies requiring human oversight of government algorithms. *Computer Law & Security Review*, 45. arXiv:2109.05067. `[PR]` △ — 정책 41개 조사
+54\. Green, B. (2022). The flaws of policies requiring human oversight of government algorithms. *Computer Law & Security Review*, 45. [arXiv:2109.05067](https://arxiv.org/abs/2109.05067). `[PR]` △ — 정책 41개 조사
 55\. Laux, J. (2023). Institutionalised distrust and human oversight of artificial intelligence. *AI & Society*. `[PR]` △ — 구성적 vs 교정적 개입
-56\. Cihon, P., Stein, M., Bansal, G., Manning, S., & Xu, K. (2025). Measuring AI agent autonomy: Towards a scalable approach with code inspection. arXiv:2502.15212. NeurIPS SoLaR Workshop 2024. `[WP]`(워크숍 논문) △ — AutoGen 애플리케이션 10건, 코드 정적 검사. Actions κ = 0.30
-57\. Zheng, Dong, Depena, Bhatia, Xiao, & Xu (2026-07-26). Separating Capability from Permission: A Governance Framework for Agentic AI Autonomy Levels. arXiv:2607.23438v1. ExxonMobil 기술 조직. `[PP]` △ — AAL/ACL 2축 프레임. 동료심사 없음. 10페이지 산업 실무 보고, 실증 사례 단일 기업 2건
+56\. Cihon, P., Stein, M., Bansal, G., Manning, S., & Xu, K. (2025). Measuring AI agent autonomy: Towards a scalable approach with code inspection. [arXiv:2502.15212](https://arxiv.org/abs/2502.15212). NeurIPS SoLaR Workshop 2024. `[WP]`(워크숍 논문) △ — AutoGen 애플리케이션 10건, 코드 정적 검사. Actions κ = 0.30
+57\. Zheng, Dong, Depena, Bhatia, Xiao, & Xu (2026-07-26). Separating Capability from Permission: A Governance Framework for Agentic AI Autonomy Levels. [arXiv:2607.23438](https://arxiv.org/abs/2607.23438)v1. ExxonMobil 기술 조직. `[PP]` △ — AAL/ACL 2축 프레임. 동료심사 없음. 10페이지 산업 실무 보고, 실증 사례 단일 기업 2건
 58\. 미 도로교통안전국 결함조사 (2백만 대, 467건 충돌) / 국가교통안전위원회 개별 사고조사 2건 (2024) | `[정부]` △
 
 ### 변화관리·수용·저항
@@ -356,15 +356,15 @@
 
 ## B-5. 커뮤니티 — 인용한 게시물
 
-이 책이 인용한 커뮤니티 발언은 모두 **개인의 공개 발언이며 조사 데이터가 아니다.** 게시일을 개별로 밝혔고, 단일 게시물을 업계 관행으로 승격시키지 않았다. GeekNews 게시물의 상대 표기 시점은 **2026년 9월 5일 조회 기준 추정**이다.
+이 책이 인용한 커뮤니티 발언은 모두 **개인의 공개 발언이며 조사 데이터가 아니다.** 게시일은 항목마다 따로 밝혔고, 단일 게시물을 업계 관행으로 승격시키지 않았다. GeekNews 게시물의 상대 표기 시점은 **2026년 9월 5일 조회 기준 추정**이다.
 
 | 인용 | 출처 | 게시일 | 쓰인 장 |
 |---|---|---|---|
-| "AX 추진팀이 나쁘다기 보다는.. AX팀을 만들어놓고 …도메인 현업자가 주도하고 AX기술자가 서포트하면서…" | GeekNews `snisty`, 토픽 「AX팀을 만드는 순간, 당신의 조직은 AX에 실패한다」 | 토픽 2026-04-09 / 댓글 ≈2026-04 (2026-09-05 조회) | **서문** |
-| "mandates happened and now I'm being forced to use them. Absolutely no guidance from leadership though." | Hacker News `ares623` | 2026-03-06 | 1장 |
-| "Confluence is where documentation goes to die. And then rot." | Hacker News `EdwardDiego` | 2020-07-12 | 3장 |
+| "AX 추진팀이 나쁘다기 보다는.. AX팀을 만들어놓고 …도메인 현업자가 주도하고 AX기술자가 서포트하면서…" | GeekNews [`snisty`](https://news.hada.io/topic?id=28341), 토픽 「AX팀을 만드는 순간, 당신의 조직은 AX에 실패한다」 | 토픽 2026-04-09 / 댓글 ≈2026-04 (2026-09-05 조회) | **서문** |
+| "mandates happened and now I'm being forced to use them. Absolutely no guidance from leadership though." | Hacker News [`ares623`](https://news.ycombinator.com/item?id=47279806) | 2026-03-06 | 1장 |
+| "Confluence is where documentation goes to die. And then rot." | Hacker News [`EdwardDiego`](https://news.ycombinator.com/item?id=23808854) | 2020-07-12 | 3장 |
 | 같은 게시판의 반복 증언 4건 (검색 불가·페이지 미발견·지연·불만) | Hacker News, 서로 다른 사용자 | 2019-03 / 2022-02 / 2023-08 / 2024-02 | 3장 |
-| "When I get an LLM-generated doc or runbook, my first thought is that its very possible that I'm the first person who has ever read this." | Hacker News `backlava12` | 2026-08-11 | 3장 |
+| "When I get an LLM-generated doc or runbook, my first thought is that its very possible that I'm the first person who has ever read this." | Hacker News [`backlava12`](https://news.ycombinator.com/item?id=49258726) | 2026-08-11 | 3장 |
 | AI 원샷 문서 생성 비판 — 검증 패스 복수 필요 | Hacker News, 익명 | 2026-07 | 3·4장 |
 | "Claude Code doesn't validate it - it just silently ignores the skill." | 개발자 커뮤니티, 익명 | 2026-02 | 4장 |
 | 긴 규칙 파일이 "잘해야 불필요하고 자주 실제로 해롭다" / 반대 증언(잘 유지된 규칙 파일이 자동 메모리보다 낫다) | 개발자 커뮤니티, 익명 | 2026-08 말 | 4장 |
@@ -375,14 +375,14 @@
 | 인벤토리 대시보드를 만들었는데 방치를 막지 못했고 대시보드 자체도 방치됐다 | 개발자 커뮤니티, 익명 | 2025-05 | 5장 |
 | "Client-asserted context with no signed execution record is unverifiable. A signed execution record with no intent context is hard to interpret." | MCP SEP-2817 `vaaraio` | 2026-05-29 | 5·9장 |
 | "…invent some kind of digital seats so they can keep taxing the headcount." | 해외 기술 커뮤니티, 익명 | 2026-04 | 6장 |
-| "So every time we fire or lay off the person whose name is on the automation, we need to rotate the keys?" | Hacker News `collabs` | 2026-04-25 | 6장 |
-| "…watching the org chart explode…" (하루 반 만에 역할 20개) | Hacker News `yego` | 2026-03-04 | 6장 |
-| "Pretty pleaser please people don't get your agents registered as direct-reports in the org-chart with HR!" | Hacker News `polotics` | 2026-09-04 | 6장 |
+| "So every time we fire or lay off the person whose name is on the automation, we need to rotate the keys?" | Hacker News [`collabs`](https://news.ycombinator.com/item?id=47898675) | 2026-04-25 | 6장 |
+| "…watching the org chart explode…" (하루 반 만에 역할 20개) | Hacker News [`yego`](https://news.ycombinator.com/item?id=47245374) | 2026-03-04 | 6장 |
+| "Pretty pleaser please people don't get your agents registered as direct-reports in the org-chart with HR!" | Hacker News [`polotics`](https://news.ycombinator.com/item?id=49561918) | 2026-09-04 | 6장 |
 | 사람이 루프에 없는 인가에 확립된 표준이 없다 (자체 방식으로 해결) | 개발자 공개 기록, 익명 | 2026 | 6장 |
 | "사용자에게 승인이나 거부를 묻는 방식은 무엇이든 터지기를 기다리는 재앙이다" / "보안은 환경에 속한다, 하네스가 아니라" | 개발자 커뮤니티, 익명 | 2026-07 | 7장 |
 | 채택된 등급 수가 2로 수렴한다는 관찰 | 개발자 커뮤니티, 익명 | 2026 | 7장 |
 | "'절감 시간' 사업 케이스대로 실현된 자동화 프로그램은… 1만 시간은 직원 2만 명에게서 각각 30분씩이다" | 자동화 업계 실무자 William Harris, LinkedIn Pulse 서명 글 | 게시일 미확인 | 8장 |
-| "aimless tokenmaxing" — 토큰 리더보드 게이밍 | Hacker News `827a` | 2026-05-22 | 8장 |
+| "aimless tokenmaxing" — 토큰 리더보드 게이밍 | Hacker News [`827a`](https://news.ycombinator.com/item?id=48236051) | 2026-05-22 | 8장 |
 | "AI 사용량 자체를 성과 지표로 삼으면 사람들은 필요하지 않은 작업에도 AI를 사용해 숫자를 맞추게 될 수 있음" | GeekNews `brainer` | ≈2026-08-31 | 1·8장 |
 | "At my company people always understate the headcount savings… 'You estimated 40 FTE savings, why don't we pick and chose 40 FTEs to let go'." | 해외 기술 커뮤니티, 익명 | 2025-10 | 9장 |
 | "개발자가 먼저 나서서 미친 생산성을 보여줬기에… 관리자는 더 미친 생산성을 바랄 뿐입니다." | GeekNews, 한국어 게시물 | ≈2026-05 | 9장 |
@@ -398,10 +398,10 @@
 
 ## B-6. 이 책이 의도적으로 쓰지 않은 것
 
-인용 규율상 배제한 항목을 밝혀 둔다. 근거를 밝힌 배제는 그 자체가 근거다.
+인용 규율에 따라 뺀 항목을 밝혀 둔다. 근거를 밝힌 배제는 그 자체가 근거다.
 
-- **거시 경제 수치.** AI의 총요소생산성 효과에 대해 Acemoglu의 10년 누적 0.66%와 Aghion & Bunel의 연 0.68%포인트라는 열 배 격차의 추정이 공존한다. 병기하지 않으면 독자에게 열 배 틀린 그림을 주므로, 조직 층위의 책인 이 책은 쓰지 않는 쪽을 택했다.
+- **거시 경제 수치.** AI의 총요소생산성 효과를 두고 Acemoglu의 10년 누적 0.66%와 Aghion & Bunel의 연 0.68%포인트라는, 열 배나 차이 나는 추정이 나란히 있다. 둘을 함께 적지 않으면 독자에게 열 배 틀린 그림을 준다. 그래서 조직 층위를 다루는 이 책은 쓰지 않는 쪽을 택했다.
 - **"조직 변화의 70%는 실패한다."** 저명한 출처 다섯을 추적한 연구가 유효하고 신뢰할 만한 실증 근거가 없다고 결론지었다(B-3 59번).
 - **출처·표본·연도가 특정되지 않은 수치** — 오프보딩 절차 보유율, 고아 계정 비율, DIY 플랫폼 실패율, RPA 실패율, 감사 오버헤드 감소율, 경영진의 미승인 도구 사용률, 섀도 AI 통계 일반, `AGENTS.md` 채택 저장소 수. 방향만 쓰거나 아예 쓰지 않았다.
-- **그림·표에서만 읽히는 수치.** 설명 가능성과 적정 신뢰를 다룬 연구들에 대해서는 방향성과 본문의 유의성 값만 인용했다.
-- **없는 사례.** 실제 조직이 공개한 에이전트 폐기 절차, 국내 기업의 에이전트 등록 사례, 에이전트에 성과 지표를 부여해 운영한 조직의 공개 사례를 이 책은 찾지 못했다. 검색 기록은 남아 있고, 그 부재를 본문에서 발견으로 다뤘다.
+- **그림·표에서만 읽히는 수치.** 설명 가능성과 적정 신뢰를 다룬 연구에서는 방향성과 본문의 유의성 값만 인용했다.
+- **없는 사례.** 실제 조직이 공개한 에이전트 폐기 절차, 국내 기업의 에이전트 등록 사례, 에이전트에 성과 지표를 부여해 운영한 조직의 공개 사례를 이 책은 찾지 못했다. 검색 기록은 남아 있고, 찾지 못했다는 사실 자체를 본문에서 발견으로 다뤘다.
