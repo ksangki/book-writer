@@ -2083,3 +2083,17 @@ editor가 "요청서 이후 정밀화(+26자)"로 보고한 문면은 **라운�
 - 1장 예외 소멸 유지(+8.60%, 상한까지 **196자** 여유). 라운드 2의 "여유 21자" 인계와 「인용 고지를 부속으로 내리는」 우회 제안은 **폐기 상태 유지**.
 - 사실 검증 이력 종결: 라운드 0~7(본문 10장) → 레퍼런스 정정 라운드 → 최종 일괄 스캔 → 부속 1·2·2-b·2-c·2-d.
 
+
+---
+
+## v1.1.0 추가분 검증 (2026-09-12, 팀 리드 직접 수행 — 저자 지시 개정)
+
+**대상:** 2장 신규 삽입 2건 — ① 저자 자기 관찰 3문단 ② 빅테크 에이전트 정의 3종 표.
+
+| 인용 | 확보 경로 | 판정 |
+|---|---|---|
+| OpenAI "Agents are systems that independently accomplish tasks on your behalf." + "not agents" 문단 + 원문 볼드 | **원문 PDF 직접 판독** (cdn.openai.com, A Practical Guide to Building Agents, p.4) | ✅ VERBATIM 일치, "(강조는 원문)" 표기 |
+| Anthropic "Agents are systems where LLMs dynamically direct..." | **원문 페이지 직접 조회** (anthropic.com/research/building-effective-agents, 2024-12-19) | ✅ VERBATIM 일치, workflows 대비 구분도 원문 구조 그대로 |
+| Google "an application that attempts to achieve a goal by observing the world and acting upon it using the tools that it has at its disposal" | 백서 원문 PDF 미접근 — **독립 2차 문헌 다수로 동일 문면 교차 확인** | ✅ 지면에 확보 경로 명시 (R2-7·14-1 방식) |
+
+저자 자기 관찰 3문단 — 사실 주장 아님(자기 관찰), 고유명·수치 0건, 인칭 규약(1인칭 문단 한정) 준수. 6장 두 계층으로의 전방 참조는 실재 내용과 일치.

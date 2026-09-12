@@ -1,8 +1,8 @@
 # Build Log — 디지털 워커의 시대, AI 에이전트를 조직의 성과로 만드는 체계 v1.1.0
 
-- **Date:** 2026-09-12T00:47:18Z
+- **Date:** 2026-09-12T00:53:33Z
 - **Output:** `디지털-워커의-시대,-AI-에이전트를-조직의-성과로-만드는-체계-v1.1.0.epub`
-- **Size:** 382967 bytes
+- **Size:** 384155 bytes
 - **Pandoc exit:** 0
 - **epubcheck:** passed
 - **epubcheck strict:** 1
