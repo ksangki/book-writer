@@ -9,7 +9,7 @@ import sys, pathlib
 OUT = pathlib.Path(sys.argv[1])
 BOOK = "DevRel Next — 코드 너머의 관계"
 BY = "김상기 · ksangki/devrel-next"
-VER = "v1.1.0"
+VER = "v1.2.0"
 slides = []
 
 MOTIF = ('<svg class="motif" viewBox="0 0 420 60" aria-hidden="true">'
@@ -127,269 +127,198 @@ def bullets(sec, eyebrow, title, items, lead=None, foot=None):
 # ═════════════════════════ OPENING ═════════════════════════
 cover()
 
-cards("OPENING", "ABOUT THIS TALK", "이 발표가 답하려는 질문", [
-    ("\"DevRel은 죽었다\"는 부고가 쌓였다", "2023년부터 3년 넘게 작별 편지가 이어졌다. 한 사람의 이직이 한 직업의 부고처럼 읽혔다."),
-    ("그 사이 'D'와 'R'이 함께 움직였다", "개발자라 스스로 부르지 않는 빌더가 만들고, 에이전트가 문서를 읽고, 통로가 약해졌다."),
-    ("그래서 이 일은 무엇이 되는가", "죽었는지가 아니라, 무엇이 남고 어디로 옮겨 가는지를 공개 자료로 따라간다."),
-])
+table("결론부터", "결론부터", "이 책이 하려는 말은 한 문장이다",
+      ["", "예전", "지금"],
+      [["누구와", "전문 개발자", "빌더(스스로 개발자라 부르지 않는 사람) · 에이전트 · 회사 안의 동료"],
+       ["무엇으로", "튜토리얼 · 검색 · 포럼", "에이전트가 읽는 정확한 문서 · 관계형 커뮤니티 · 만든 증거"],
+       ["잇는 일", "", "번역 · 피드백 · 신뢰 · 먼저 가보기"]],
+      lead="<span class='coral-t big'>DevRel은 죽지 않았다.<br>'개발자 관계'에서 '만드는 사람과의 관계'로 넓어진다.</span>",
+      foot="오늘 발표는 이 표의 세 줄을 차례로 보여 드리는 순서로 갑니다.")
 
-cards("OPENING", "PROMISES", "이 발표가 지키는 세 가지", [
-    ("기준 시점을 적는다", "동향·공고·수치는 2026년 9월 시점. 채용 공고는 2026년 9월 25일에 본 공개 목록이다."),
-    ("수치에는 라벨을 붙인다", "누가 조사했는지, 표본이 얼마인지, 벤더 데이터인지 논문인지를 숫자 옆에 적는다."),
-    ("예측은 예측으로 적는다", "전망에는 [예측] 라벨과 반대 의견, 확인할 관찰 지표를 같은 자리에 둔다."),
-])
-
-quote("OPENING", "WHY ME", "DevRel을 했고, 지금은 AX를 한다",
-      "DevRel은 회사 바깥의 개발자와 관계를 맺는 일이다.<br>AX는 조직 안에 AI를 퍼뜨리는 일이다.<br>"
-      "<span class='coral-t'>하는 일을 동사로 적어보면 두 일의 목록은 꽤 겹친다.</span>",
+quote("결론부터", "왜 이 이야기를", "DevRel을 했고, 지금은 AX를 한다",
+      "DevRel은 회사 바깥의 개발자와 관계를 맺는 일이다. 그들이 부딪힌 벽은 회사 안의 제품 팀에 전한다.<br>지금 내가 하는 AX는 조직 안에 AI를 퍼뜨리는 일이다.<br>"
+      "<span class='coral-t'>두 일을 동사로 적어보면 목록이 꽤 겹친다.</span>",
       "— 서문",
-      "먼저 써보고, 가르치고, 보여주고, 막힌 곳을 모아 되돌려준다. 이 발표는 그 겹침이 우연인지, 직업의 다음 모습인지를 묻는다.")
+      "먼저 써보고, 가르치고, 보여주고, 막힌 곳을 모아 되돌려준다. 그 동사가 향하는 사람이 회사 안의 동료로 바뀌면, 그 일은 무엇이 될까?")
 
-bullets("OPENING", "AGENDA", "오늘 1시간 동안", [
-    "<b>PART 1 부고와 계보</b> — DevRel은 정말 죽었나, 그리고 원래 무슨 일을 했나",
-    "<b>PART 2 D와 R이 바뀌었다</b> — 빌더와 에이전트라는 새 청중, 약해진 통로",
-    "<b>PART 3 직함은 흩어지고 기능은 남는다</b> — 하루치 채용 공고로 읽는 네 가지 기능",
-    "<b>PART 4 회사 안으로, 그리고 그다음</b> — 내부 DevRel로서의 AX, 네 갈래 전망",
-], foot="각 PART 끝에 다음 주에 쓸 수 있는 질문을 하나씩 남깁니다.")
+bullets("결론부터", "순서", "오늘 이야기의 순서", [
+    "<b>1. 정말 죽었나?</b> — 부고의 기록과, DevRel이 원래 하던 일",
+    "<b>2. 누구와, 무엇으로가 바뀌었다</b> — 빌더와 에이전트, 달라진 통로",
+    "<b>3. 직함은 흩어지고 기능은 남는다</b> — 채용 공고 속 네 가지 기능",
+    "<b>4. 회사 안으로</b> — 퍼뜨리는 기술이 동료를 향할 때, 그리고 전망",
+])
 
 # ═════════════════════════ PART 1 ═════════════════════════
-divider("PART 1", "PART 1", "부고와 계보",
-        "죽음을 선고받은 직업의 기록을 먼저 읽고, 이 일이 원래 무엇이었는지로 돌아간다.",
+divider("PART 1", "PART 1", "정말 죽었나?",
+        "결론에 보태는 것 — 잘려 나간 것은 '잇는 일'이 아니라, 숫자로 설명되지 않던 자리와 옛 방식이었다.",
         ["1장. DevRel은 죽었는가", "2장. 경계에 선 사람들"])
 
-quote("PART 1", "THE OBITUARY", "\"Goodbye, forever, probably.\"",
-      "\"AI is killing developer education.\"",
-      "— Salma Alam-Naylor, 2026-07-02 블로그. DevRel을 떠나며 쓴 글의 소제목. 그의 프로필에는 이제 Staff Engineer가 적혀 있다.",
-      "한 사람의 이직 소식이 왜 이렇게 크게 읽혔을까? 글이 개인의 사정에서 멈추지 않았기 때문이다.")
+quote("PART 1", "작별 편지", "\"Goodbye, forever, probably.\"",
+      "\"AI is killing developer education.\"<br><span class='small-q'>AI가 개발자 교육을 죽이고 있다.</span>",
+      "— Salma Alam-Naylor, 2026-07-02 블로그. DevRel을 떠났고, 프로필 직함은 Staff Engineer.",
+      "한 사람의 이직이 한 직업의 부고처럼 읽혔다. 비슷한 글이 2023년부터 이어졌다.")
 
-figure("PART 1", "LETTERS", "2023~2026년, 당사자들이 남긴 글", "1-1",
+figure("PART 1", "3년의 기록", "2023~2026년, 당사자들이 남긴 글", "1-1",
        "그림 1. 2023~2026년 DevRel 당사자들이 남긴 글",
-       "작별만 있는 것은 아니다 — 같은 시기에 \"isn't dead, it's just evolving\"(Sam Julien, 2024-03)도, \"overblown\"(Daniel Bryant, 2024-02)도 나왔다.")
+       "떠난다는 글만 있지 않았다. \"죽지 않았다, 바뀌는 중이다\"라는 반론도 같은 시기에 나왔다.")
 
-stat("PART 1", "NUMBERS", "위기의 숫자는 단위부터 읽는다", [
-    ("14.6%", "그해 해고를 겪은 <b>응답자 본인</b> — State of DevRel 2024, 유효 응답 310명, 자기선택"),
-    ("18.1%", "해고로 인원이 줄어든 <b>프로그램</b> — 같은 조사"),
-    ("26.1%", "해고를 겪은 <b>팀</b> — Common Room 2023, 응답 136명, 벤더 설문"),
-    ("약 6%", "Google <b>전체 직원</b> 감원(2023-01) — 보도, DevRel 단독 수치 아님"),
-], foot="같은 \"위기\"를 가리키는 숫자들이 서로 다른 것을 셌다. 사람인지, 프로그램인지, 팀인지, 회사 전체인지부터.")
+stat("PART 1", "숫자 읽기", "위기의 숫자는 무엇을 셌는지부터 본다", [
+    ("14.6%", "그해 해고를 겪은 <b>응답자 본인</b><br>State of DevRel 2024, 310명 설문"),
+    ("26.1%", "해고를 겪은 <b>팀</b><br>Common Room 2023, 136명 벤더 설문"),
+    ("약 6%", "Google <b>회사 전체</b> 감원(2023-01)<br>DevRel만의 숫자가 아니다"),
+], foot="같은 '위기'를 말해도 사람·팀·회사 전체를 따로 셌다. 숫자를 옮길 때 무엇을 셌는지를 함께 적어야 한다.")
 
-table("PART 1", "FOUR STORIES", "죽음을 설명하는 네 가지 이야기",
-      ["이야기", "대표 목소리(시점)", "핵심 문장"],
-      [["거품 교정론", "swyx (2024-07)", "\"ZIRP DevRel is dead ... the 'Jobs To Be Done' of DevRel are timeless needs\""],
-       ["자기 실패론", "Keith Casey (2024-07-17)", "\"Developer Relations is dying because devrel failed their organizations.\""],
-       ["재구조화론", "Lee Briggs (2024-12-10)", "\"Professionals who adapt—aligning their work with sales, customer success, or product teams—will continue to thrive.\""],
-       ["부활론", "swyx (2025-10)", "\"reports of DevRel's death have been greatly exaggerated\""]],
-      foot="표 3. 네 이야기는 마지막 10장에서 네 갈래 전망으로 다시 돌아옵니다.")
-
-figure("PART 1", "MEASUREMENT", "측정할 수 없는 일의 운명", "1-2",
+figure("PART 1", "왜 잘렸나", "성과를 숫자로 보여 주기 어려웠다", "1-2",
        "그림 2. 당사자들이 말한 측정 압박의 경로",
-       "State of DevRel 2024(n=310, 실무자 설문)가 꼽은 가장 큰 과제: <b>데이터와 지표로 영향을 증명하는 일, 60.7%</b>.")
+       "DevRel 실무자가 꼽은 가장 큰 어려움: <b>데이터로 영향을 증명하는 일(60.7%)</b> — State of DevRel 2024, 310명 실무자 설문.")
 
-cards("PART 1", "ORIGIN", "1984년, 매킨토시를 위한 설득", [
-    ("에반젤리스트", "서드파티 개발자를 플랫폼으로 데려오는 일. 가치 창출의 중심이 기업 밖으로 옮겨간다는 플랫폼 경제학에 뿌리가 닿는다."),
-    ("애드보킷", "설득 위에 피드백이라는 방향이 더해졌다. 교체가 아니라 누적이다."),
-    ("경계에 서다", "이때부터 이 일은 회사와 개발자 사이의 경계에 선다 — 양쪽의 말을 번역한다."),
-])
-
-figure("PART 1", "BOUNDARY ROLE", "경계 역할 — 번역하고 중개하는 사람", "2-1",
+figure("PART 1", "원래 하던 일", "DevRel은 회사와 개발자 사이에서 양쪽 말을 옮기는 자리였다", "2-1",
        "그림 3. 경계 역할로서의 DevRel — 모든 선이 양방향이다",
-       "Tushman(1977)의 경계 역할: 바깥의 정보를 들여오고, 안에서 통하는 말로 번역하고, 필요한 곳에 퍼뜨린다.")
+       "1984년 매킨토시의 '에반젤리스트'로 시작해, 설득 위에 '피드백 전달'이 더해졌다.")
 
-table("PART 1", "IN THEIR WORDS", "당사자들이 자기 일을 설명한 말",
-      ["이름", "날짜·플랫폼", "원문"],
-      [["Catalin Pit", "2023-10-31, 블로그", "\"represents the company to the community and the community to the company\""],
-       ["Xe Iaso", "2023-10-24, 블로그", "\"you are the bridge between the company and the community of developers …\""],
-       ["Ashley Willis", "2025-04-25, 블로그", "\"translate between worlds\""],
-       ["Una Kravets", "2024-03-08, X", "\"a liaison for user needs, architect of the solution, test user to provide feedback, and only then a GTM strategist\""]],
-      foot="표 5. 직함과 회사는 달라도 같은 자리를 가리킨다 — 양쪽을 잇는 사람.")
+quote("PART 1", "당사자의 말", "DevRel 스스로는 이 일을 이렇게 설명한다",
+      "\"represents the company to the community<br>and the community to the company\"<br>"
+      "<span class='small-q'>회사를 커뮤니티에, 커뮤니티를 회사에 대변한다.</span>",
+      "— Catalin Pit, 2023-10-31 블로그",
+      "\"다리(bridge)\"(Xe Iaso), \"서로 다른 세계 사이를 번역한다\"(Ashley Willis) — 직함과 회사는 달라도 같은 자리를 가리킨다.")
 
-figure("PART 1", "LINEAGE", "측정의 계보 — AAARRRP에서 Orbit까지", "2-2",
-       "그림 4. DevRel 측정 틀의 계보 — 2012년 DX 정의부터 2024년 Orbit의 인수까지",
-       "틀은 계속 나왔지만 난제는 남았다. 경계 역할의 가치는 <b>다른 부서의 숫자</b>로 나타나기 때문이다.")
-
-quote("PART 1", "FRAME", "이 책이 DevRel을 읽는 틀",
-      "DevRel = <span class='coral-t'>D</span>(누구에게) × <span class='coral-t'>R</span>(무엇으로)<br>두 변수로 이루어진 경계 역할",
+quote("PART 1", "PART 1 정리", "그래서 이 책은 DevRel을 두 질문으로 읽는다",
+      "<span class='coral-t'>누구와</span> 관계를 맺는가?<br><span class='coral-t'>무엇으로</span> 관계를 맺는가?",
       None,
-      "PART 2는 이 두 변수가 동시에 움직였다는 이야기입니다. <b>다음 주 질문:</b> 우리 DevRel의 D와 R을 한 문장씩 적으면 무엇인가?")
+      "이 두 질문의 답이 동시에 바뀌었다는 것이 PART 2의 이야기다.")
 
 # ═════════════════════════ PART 2 ═════════════════════════
-divider("PART 2", "PART 2", "D와 R이 바뀌었다",
-        "청중(D)은 빌더와 에이전트로 넓어졌고, 관계의 수단(R)은 통로째 다시 배선되고 있다.",
+divider("PART 2", "PART 2", "누구와, 무엇으로가 바뀌었다",
+        "결론에 보태는 것 — 청중은 빌더와 에이전트로 넓어졌고, 관계를 잇는 통로도 바뀌었다.",
         ["3장. 'D'가 넓어졌다", "4장. 새 독자, 에이전트", "5장. 'R'의 수단이 바뀌었다"])
 
-figure("PART 2", "NOT NEW", "새 이야기가 아니다", "3-1",
-       "그림 5. 최종 사용자 프로그래밍에서 바이브 코딩까지 — 다섯 시점",
-       "2011년 서베이도 이미 \"대부분의 프로그램은 전문 개발자가 쓰지 않는다\"고 적었다. 바이브 코딩은 그 흐름의 새 물결이고, 달라진 것은 규모와 산출물이다.")
+figure("PART 2", "빌더", "개발자라 부르지 않는 사람도 만든다", "3-2",
+       "그림 6. DevRel이 마주한 청중의 띠",
+       "비개발자가 만드는 일은 새 이야기가 아니다(2011년 연구도 \"대부분의 프로그램은 전문 개발자가 쓰지 않는다\"고 했다). 달라진 것은 규모와 결과물이다.")
 
-figure("PART 2", "AUDIENCE", "DevRel이 마주한 청중의 띠", "3-2",
-       "그림 6. 자연어로 첫 앱을 띄운 사람부터 AI를 의심하며 쓰는 전문 개발자까지",
-       "빌더 도구의 공개 수치는 대부분 회사 자체 발표다 — <b>독립 기관이 검증한 수치는 표 6에 없다.</b>")
+stat("PART 2", "전문 개발자", "전문 개발자도 AI를 쓰지만, 믿지는 않는다", [
+    ("84%", "AI 도구를 쓰거나 쓸 계획"),
+    ("46%", "정확도를 믿지 못한다(믿는다 33%)"),
+    ("66%", "가장 큰 불만: \"거의 맞지만 딱 맞지는 않는 답\""),
+], foot="Stack Overflow 개발자 설문 2025, 약 49,000명, 자기선택 표본. DevRel의 청중은 '처음 만드는 사람'부터 'AI를 의심하는 전문가'까지 한 줄로 이어진다.")
 
-stat("PART 2", "PROFESSIONALS", "전문 개발자는 AI를 어떻게 느끼나", [
-    ("84%", "AI 도구를 쓰고 있거나 쓸 계획"),
-    ("46% vs 33%", "정확도를 믿지 못한다 vs 믿는다"),
-    ("66%", "가장 큰 불만: <b>\"almost right, but not quite\"</b>"),
-], foot="Stack Overflow Developer Survey 2025, 약 49,000명, 개발자 한정 자기선택 표본.")
+quote("PART 2", "에이전트", "Supabase를 고른 것은 누구였나",
+      "\"without ever talking to us\"<br><span class='small-q'>우리와 한 번도 이야기하지 않고</span>",
+      "— Thor Schaeff, DevRelCon New York 2025-07",
+      "AI 빌더 서비스들이 Supabase를 골랐다. LLM에게 \"데이터를 어디에 저장하면 되지?\"라고 물으면 Supabase라고 답했기 때문이라고 그는 전했다. <b>에이전트가 새 독자다.</b>")
 
-quote("PART 2", "NEW READER", "Supabase를 고른 것은 누구였나",
-      "\"without ever talking to us\"<br>\"Hey, actually now machines are writing the code.\"",
-      "— Thor Schaeff, DevRelCon New York 2025-07, \"DX for Humans and Machines\"",
-      "AI 빌더 서비스들이 Supabase를 DevRel과 한 번도 대화하지 않고 통합했다. LLM에게 무엇을 쓰면 되느냐고 물으면 Supabase라고 답했기 때문이다.")
+figure("PART 2", "15개월", "에이전트를 위한 표준이 빠르게 생겼다", "4-1",
+       "그림 7. 에이전트를 위한 표준·제품 타임라인(2024-09~2025-12)",
+       "llms.txt, MCP, 'Agent Experience(에이전트도 사용자다)'라는 말까지 15개월 사이에 나왔다.")
 
-figure("PART 2", "15 MONTHS", "에이전트를 위한 표준이 생긴 15개월", "4-1",
-       "그림 7. 에이전트를 위한 표준·제품 타임라인(2024-09~2025-12)")
-
-figure("PART 2", "AGENT EXPERIENCE", "에이전트도 사용자다", "4-2",
-       "그림 8. 사용자 경험의 계보 — Biilmann의 UX·DX·AX에 Lawson의 정의와 가장 가까운 학술 개념을 더해",
-       "에이전트를 위해 걷어낸 마찰은 사람에게도 이롭다.")
-
-cards("PART 2", "READ VENDOR DATA", "\"에이전트가 66%\" — 이 숫자를 어떻게 읽나", [
-    ("무엇을 셌나", "\"Agents now account for 66% of measured web-traffic.\" — Mintlify 2026 midyear report, 자사 호스팅 문서 사이트 집계"),
-    ("단위가 다르다", "에이전트는 <b>요청</b> 수(2억 1,300만), 사람은 <b>페이지 로드</b> 수(1억 500만). 같은 자로 잰 비율이 아니다."),
-    ("방향으로 읽는다", "연초 15.2%에서 반년 사이 네 배 넘게. 벤더 자사 데이터이니 자기 로그로 확인하자."),
+cards("PART 2", "숫자 읽기", "\"측정된 웹 트래픽의 66%가 에이전트\" — 이렇게 읽는다", [
+    ("누가 셌나", "문서 호스팅 회사 Mintlify가 자기 고객 사이트를 셌다(벤더 자체 집계)."),
+    ("단위가 다르다", "에이전트는 '요청' 수, 사람은 '페이지 로드' 수. 같은 자로 잰 비율이 아니다."),
+    ("방향으로 본다", "반년 사이 네 배 넘게 늘었다는 방향만 믿고, 자기 로그로 확인하자."),
 ])
 
-quote("PART 2", "COUNTERPOINT", "반론 — llms.txt는 아무도 읽지 않는다?",
-      "\"FWIW no AI system currently uses llms.txt.\"",
-      "— John Mueller(Google), 2025, 언론 인용 · \"/llms.txt is not requested by anything\"(HermanMartinus, Hacker News, 2026-06)",
-      "연구가 가리키는 원칙은 형식이 아니라 내용이다 — <b>모델이 모르는 것(비표준 규칙, 최신 API)을 간결하게</b>. 점검 항목은 부록 B.")
+quote("PART 2", "국내에서도", "국내 DevRel 매니저도 같은 변화를 적었다",
+      "\"이제는 개발자뿐만 아니라 AI가 나와 회사의 글을<br>검색하고 읽는 시대가 되었고…\"",
+      "— josephyang(스스로를 SK플래닛 DevRel Manager라고 소개), 데보션 2025-10-20 기술 블로그 개선 실험",
+      "사람의 조회수가 높지 않은 글도 AEO/AIO 전략에 맞춰 발행하면 AI가 잘 찾는 사례가 있다고 적었다(필자 한 사람의 관찰). 개발자와 함께 <b>AI도 회사의 글을 읽는 독자</b>가 됐다는 말이다.")
 
-figure("PART 2", "TAILWIND", "문서가 입구였던 퍼널", "5-1",
+figure("PART 2", "통로", "문서가 입구였던 회사에 생긴 일", "5-1",
        "그림 9. Tailwind의 퍼널에 코딩 에이전트가 끼어든 자리",
-       "반론: \"The real signal is conversions.\"(zdragnar, HN) — 전환율을 보지 않고는 원인을 단정할 수 없다. 에이전트 경로는 이 책의 해석이다.")
+       "Tailwind는 문서 트래픽이 약 40% 줄었다(창업자 증언). 에이전트가 대신 코드를 써 주면 사람은 문서에 오지 않는다 — 이것은 이 책의 해석이다.")
 
-table("PART 2", "CHANNELS", "관계의 통로별로 본 변화와 그 근거",
-      ["통로", "변화", "근거의 성격"],
-      [["문서 사이트", "Tailwind 문서 트래픽 2023년 초 대비 약 40% 감소", "창업자 1차 증언, 방법 미공개"],
-       ["공개 Q&A", "출시 6개월 활동 약 25% 상대 감소 / 일일 웹 트래픽 약 12% 감소", "동료 검토 논문 2편"],
-       ["Reddit", "감소 증거 없음 / 정보성 요청 3.4% 초과 감소 배제", "동료 검토 논문 / 프리프린트"],
-       ["검색", "\"SEO is basically dead\"", "실무자 블로그"],
-       ["에이전트", "\"Another channel is agents\"", "r/devrel 댓글"]],
-      foot="표 9 발췌. 줄어든 것은 모르는 사람에게 정답을 묻는 정보 교환형 공간, 측정된 범위에서 버틴 것은 관계형 커뮤니티.")
-
-figure("PART 2", "TWO FUNNELS", "두 개의 퍼널, 세 개의 표면", "5-2",
+figure("PART 2", "두 퍼널", "사람에게는 신뢰, 에이전트에게는 정확성", "5-2",
        "그림 10. 개발자·검색 크롤러·LLM — 세 유통 표면과 두 퍼널",
-       "human funnel은 <b>신뢰</b>를, machine funnel은 <b>정확성</b>을 요구한다.")
+       "공개 Q&A는 줄었지만, 관계로 묶인 커뮤니티는 측정된 범위에서 버텼다.")
 
-quote("PART 2", "TRUST", "슬롭과 치어리딩 — 신뢰를 잃는 가장 빠른 길",
-      "\"every devrel position includes AI cheerleading at this point\"",
-      "— Bluesky, 2025-09 · \"push back on demands to use AI for all the things, especially in DevRel\"(Jen Looper, 2025-12)",
-      "경계 역할의 신뢰는 \"회사의 말을 그대로 옮기지 않는다\"는 데서 나온다. 응원단이 되는 순간 그 근거가 사라진다. "
-      "<b>다음 주 질문:</b> 우리 문서를 가장 많이 읽는 것은 사람인가, 에이전트인가 — 로그로 확인했나?")
+cards("PART 2", "PART 2 정리", "그래서 무엇으로 이어야 하나", [
+    ("에이전트가 읽는 문서", "모델이 모르는 것(최신 API, 비표준 규칙)을 짧고 정확하게."),
+    ("관계형 커뮤니티", "정답만 주고받는 곳보다 서로 아는 사람들의 공간이 버틴다."),
+    ("만든 증거", "조회수 대신 배포하고, 호출하고, PR을 보낸 흔적을 센다."),
+], foot="반대로 신뢰를 잃는 가장 빠른 길은 AI 응원단이 되는 것이다 — \"모든 DevRel 자리에 AI 응원이 딸려 온다\"는 자조가 나온다.")
 
 # ═════════════════════════ PART 3 ═════════════════════════
 divider("PART 3", "PART 3", "직함은 흩어지고 기능은 남는다",
-        "2026년 9월 25일, 같은 날 열어본 채용 페이지들에서 이 직업의 다음 모습을 읽는다.",
+        "결론에 보태는 것 — 그날의 공고에서, 잇는 일은 DevRel 공고와 FDE 공고의 문장에 함께 적혀 있었다.",
         ["6장. 공고를 읽다", "7장. 직업에서 역량으로"])
 
-table("PART 3", "ONE DAY SNAPSHOT", "같은 날 열어본 채용 페이지들",
-      ["회사(전체 공고, 약)", "DevRel·DX 제목", "FDE·Applied AI·솔루션"],
-      [["Anthropic (약 630)", "Developer Relations 1", "Applied AI 제목 38(서울 포함), FDE 계열 7"],
-       ["OpenAI (약 830)", "DX Engineer, Cyber 1 (\"Developer Advocate\" 0)", "\"Forward Deployed\" 제목 22"],
-       ["Vercel (87)", "DevRel Engineer 1", "FDE 1, Solutions Architect 다수"],
-       ["Supabase (55)", "Developer Relations Engineer 3", "—"],
-       ["Cursor (125)", "0", "FDE 계열 7~9"],
-       ["ElevenLabs (약 220)", "DX Engineer 1", "FDE 계열 16"]],
-      foot="표 10 발췌 — Greenhouse·Ashby 공개 API, 제목 키워드 기준. <b>하루치 스냅샷이며 추세 지표가 아니다.</b>")
+table("PART 3", "채용 공고", "2026년 9월 25일, 같은 날 열어 본 채용 페이지",
+      ["회사", "'DevRel' 이름의 공고", "현장 배치형(FDE)·솔루션 공고"],
+      [["Anthropic", "1", "Applied AI 38 · FDE 계열 7"],
+       ["OpenAI", "0 (DX Engineer 1)", "Forward Deployed 22"],
+       ["Supabase", "3", "—"],
+       ["ElevenLabs", "0 (DX Engineer 1)", "FDE 계열 16"]],
+      foot="표 10 발췌 · 하루치 공개 목록이며 추세가 아니다. 'DevRel'이라는 이름보다 고객 곁으로 가는 직함이 훨씬 많다.")
 
-figure("PART 3", "WHERE THEY WENT", "사람들은 어디로 갔나", "6-1",
+figure("PART 3", "어디로 갔나", "DevRel을 떠난 사람들이 간 곳", "6-1",
        "그림 11. DevRel이라는 이름을 떠난 공개 기록들 — 다섯 방향")
 
-figure("PART 3", "FDE?", "FDE는 DevRel을 대체하는가", "6-2",
-       "그림 12. 한 번에 닿는 사람의 수로 놓아본 직함들 — 2026년 9월 25일 공고 문구 기준",
-       "반론: 가운데가 눌린다 — \"Developer marketing aimed at engineers who read docs and deliberate\"(Daily Context). 하루치 공고로는 확인할 수 없다.")
+cards("PART 3", "네 가지 기능", "공고마다 되풀이되는 네 가지 일", [
+    ("번역", "회사의 말을 개발자의 말로, 개발자의 말을 회사의 말로 옮긴다."),
+    ("피드백", "막힌 곳을 모아 제품 팀에 되돌려 준다."),
+    ("신뢰", "가르치고 쌓은 결과물이 믿음이 된다."),
+    ("먼저 가보기", "먼저 써 보고 알아낸다. 나머지 셋의 재료가 된다."),
+], cols=4, foot="직함은 DevRel, FDE, DX Engineer, 교육 담당, 사내 AX로 흩어져도 이 네 가지는 공고 문구에 계속 나온다.")
 
-cards("PART 3", "FOUR FUNCTIONS", "흩어진 직함 속의 네 가지 기능", [
-    ("번역", "회사의 말을 개발자의 말로, 개발자의 말을 회사의 말로."),
-    ("피드백 루프", "막힌 곳을 모아 제품으로 되돌려준다. 가장 또렷한 곳은 FDE 공고였다."),
-    ("신뢰", "쌓인 결과물이 신뢰가 된다. 가르치기가 여기에 속한다."),
-    ("먼저 가보기", "먼저 써보고 알아낸다. 나머지 셋의 재료를 만든다."),
-], cols=4, foot="공고들에 되풀이되는 동사 — 번역하기·되돌려주기·가르치기·먼저 써보기(표 12).")
+table("PART 3", "커리어", "네 가지 기능을 가진 사람이 가는 곳",
+      ["가는 곳", "가장 많이 쓰는 기능"],
+      [["FDE·솔루션 엔지니어", "번역, 피드백"],
+       ["제품 엔지니어", "먼저 가보기"],
+       ["교육 담당", "신뢰, 번역"],
+       ["사내 AX", "네 가지 모두 — 청중이 회사 안 동료"]],
+      lead="DevRel 실무자의 61%가 \"정해진 커리어 경로가 없다\"고 답했다(State of DevRel 2024). 대신 기능으로 보면 갈 길이 여럿이다.")
 
-figure("PART 3", "INTERLOCK", "네 기능이 맞물리는 순서", "7-1",
-       "그림 13. 네 가지 기능이 맞물리는 순서")
-
-table("PART 3", "CAREER", "커리어 경로가 없다는 것의 양면",
-      ["목적지", "가장 많이 쓰는 기능", "함께 알아둘 점"],
-      [["FDE·솔루션 엔지니어", "번역, 피드백 루프", "영업 목표와 계약 일정이 일의 리듬을 정함"],
-       ["제품 엔지니어·Staff Engineer·MTS", "먼저 가보기", "청중 앞에 서는 일이 크게 줄어듦"],
-       ["교육 직무", "신뢰, 번역", "모델이 바뀔 때마다 교재도 바뀜"],
-       ["사내 AX", "네 기능 모두", "청중이 회사 안의 동료"]],
-      lead="응답자의 61%가 \"no defined career path\" — State of DevRel 2024, 유효 응답 310명. 경로가 없다는 건 불안이지만, 기능 단위로 보면 건너갈 길이 여럿이다.",
-      foot="표 13.")
-
-figure("PART 3", "FOR LEADERS", "리더가 볼 것 — 어떤 기능에 사람을 둘 것인가", "7-2",
-       "그림 14. 리더가 차례로 답할 세 질문",
-       "<b>다음 주 질문:</b> 지난 석 달, 내 시간은 네 기능 중 어디에 가장 많이 들어갔나? (부록 A 워크시트)")
+figure("PART 3", "리더에게", "리더는 세 가지를 차례로 정한다", "7-2",
+       "그림 14. 리더가 차례로 답할 세 질문")
 
 # ═════════════════════════ PART 4 ═════════════════════════
-divider("PART 4", "PART 4", "회사 안으로, 그리고 그다음",
-        "퍼뜨리는 기술이 회사 안으로 향할 때 — 그리고 이 직업의 네 갈래 전망.",
+divider("PART 4", "PART 4", "회사 안으로, 그리고 다음",
+        "결론에 보태는 것 — 만드는 사람은 회사 안에도 있다. 다만 효과는 아직 증명 전이다.",
         ["8장. 퍼뜨리는 기술", "9장. AX를 DevRel처럼 운영하기", "10장. DevRel 다음"])
 
-quote("PART 4", "PLOT TWIST", "DevRel이 전사 AI 확산을 맡다",
-      "\"... Well, plot twist: we're not dead.<br>We're standing on the biggest stage of our careers.\"",
-      "— Angie Jones(Block), 2025-10-20 블로그 「How DevRel Is Leading AI Adoption」",
-      "\"Going first. Figuring stuff out. Guiding others. That's literally what we do in DevRel.\" — 낯선 기술 앞에서도 원래 하던 방식을 그대로 썼다.")
+quote("PART 4", "반전", "DevRel이 회사 전체의 AI 확산을 맡았다",
+      "\"plot twist: we're not dead.<br>We're standing on the biggest stage of our careers.\"<br>"
+      "<span class='small-q'>반전: 우리는 죽지 않았다. 커리어에서 가장 큰 무대에 서 있다.</span>",
+      "— Angie Jones(Block), 2025-10-20 블로그",
+      "Block의 DevRel 팀은 낯선 AI 에이전트 앞에서도 늘 하던 대로 했다. \"먼저 가 보고, 알아내고, 다른 사람을 안내한다.\"")
 
-figure("PART 4", "MAPPING", "DevRel의 활동이 사내 확산 장치로 옮겨간 자리", "8-1",
-       "그림 15. Block·카카오·Anthropic 공개 기록에 기댄 대응이며, 효과는 아직 검증되지 않았다")
+figure("PART 4", "옮겨 간 자리", "바깥에서 하던 일이 회사 안의 장치가 됐다", "8-1",
+       "그림 15. DevRel의 활동이 사내 AI 확산의 장치로 옮겨간 자리",
+       "밋업은 사내 세션으로, 행사는 팀 방문으로, 커뮤니티 사례 모으기는 사내 사례 공유로.")
 
-figure("PART 4", "DIFFUSION", "왜 옮겨 쓸 수 있는가 — 확산 이론", "8-2",
-       "그림 16. 먼저 가보기·함께 배우기·보여주기·되돌려주기 — 청중이 동료로 옮겨갈 때",
-       "Rogers의 관찰 가능성·시험 가능성은 DevRel의 데모·핸즈온과 같은 자리를 가리킨다.")
+quote("PART 4", "저자의 기록", "무엇으로 잴 것인가 — 저자가 공개로 남긴 기록",
+      "\"AI 시대에 \"잘했다\"를 토큰 사용량 같은 입력 지표로 재면 방향이 틀어집니다.\"<br>"
+      "<span class='coral-t'>\"진짜 신호는 검증된 결과입니다.\"</span>",
+      "— 저자가 2026-06-30 데보션에 공개로 남긴, AX를 코드로 구현한 6개월의 기록",
+      "사용량이 아니라 결과를 센다 — PART 2에서 본 '만든 증거'와 같은 방향이다. 다만 한 사람의 기록이지 효과의 증거는 아니다.")
 
-table("PART 4", "TWO AXs", "같은 약어 AX의 두 뜻",
-      ["항목", "Agent Experience", "AI Transformation"],
-      [["뜻", "에이전트가 제품·플랫폼의 사용자로서 겪는 경험 전체", "조직에 AI를 들여 일하는 방식을 바꾸는 일"],
-       ["사용자로 보는 대상", "에이전트", "조직의 동료"],
-       ["둘이 겹치는 일", "사내 문서·도구를 에이전트가 쓸 수 있게 다듬기", "동료가 에이전트를 쓰도록 돕기"]],
-      foot="표 14. 같은 두 글자가 따로 생겨난 <b>우연의 일치</b>다 — 운명처럼 읽을 이유는 없다.")
+cards("PART 4", "솔직하게", "아직 증명되지 않은 것", [
+    ("사례가 적다", "공개 사례는 Block·카카오·SK플래닛의 기록과 Anthropic 공고 한 건, 대부분 당사자의 기록이다."),
+    ("효과 연구가 없다", "사내 AI 챔피언의 효과를 숫자로 보인 연구는 이 책의 조사 범위에서 찾지 못했다."),
+    ("그래서", "이 주장은 가능성이다. 이론과 사례로 뒷받침할 뿐, 입증된 결론은 아니다."),
+])
 
-cards("PART 4", "NOT YET PROVEN", "아직 증명되지 않은 것", [
-    ("사례가 적다", "공개 사례는 세 건(Block·카카오·Anthropic 공고), 대부분 당사자의 기록이다."),
-    ("인과 실증이 없다", "AI 챔피언 프로그램의 효과를 정량화한 동료 검토 연구는 2026년 9월 시점 이 책의 조사 범위에서 찾지 못했다."),
-    ("그래서 이 주장은", "이론과 공개 사례의 조합이다. 인과를 입증한 결론이 아니다."),
-], foot="8장은 이 한계 고지로 끝납니다. 주장의 강도를 근거의 강도에 맞췄습니다.")
-
-figure("PART 4", "THREE DIALS", "사내 AI 확산 설계의 세 다이얼", "9-1",
+figure("PART 4", "설계", "사내 AI 확산은 세 다이얼로 설계한다", "9-1",
        "그림 17. 강도·측정·공유 장치",
-       "커뮤니티형 확산이 의무화보다 효과적이라는 비교 연구는 <b>없다</b>. 그래서 눈금에 좋고 나쁨을 표시하지 않았다.")
+       "커뮤니티형이 의무화보다 낫다는 비교 연구는 없다. 그래서 눈금에 좋고 나쁨을 표시하지 않았다.")
 
-figure("PART 4", "LEADERBOARD", "리더보드가 만든 냉소", "9-2",
-       "그림 18. 강도를 올리고 사용량을 세면 생기는 일 — 감시와 연기로 가는 경로",
-       "Shopify 메모(2025-04-07): \"Reflexive AI usage is now a baseline expectation at Shopify\" — 의무화와 공유 장치를 한 문서에 담았다.")
+figure("PART 4", "함정", "사용량을 세면 사람들은 사용량을 연기한다", "9-2",
+       "그림 18. 강도를 올리고 사용량을 세면 생기는 일",
+       "그래서 셀 것은 사용량이 아니라 <b>만든 증거</b>와 그 덕분에 달라진 것이다.")
 
-table("PART 4", "WHAT TO COUNT", "무엇을 셀 것인가 — 사례 수집 네 줄 양식",
-      ["칸", "묻는 것", "이어지는 곳"],
-      [["1", "무엇을 만들었나", "'만든 증거'의 목록"],
-       ["2", "누가 쓰고 있나", "확산이 닿은 범위"],
-       ["3", "그 덕분에 무엇이 달라졌나", "\"무엇이 달라졌는가\"라는 측정 질문"],
-       ["4", "어디서 AI가 틀렸나", "프런티어의 경계 지도"]],
-      lead="사용량이 아니라 <b>만든 증거</b> — 배포하고, API 호출에 성공하고, 포크하고, PR을 보낸 흔적.",
-      foot="표 17. 한 양식으로 측정과 교육을 함께 한다(부록 C).")
-
-figure("PART 4", "OUTLOOK", "DevRel 다음 — 네 갈래 전망", "10-1",
-       "그림 19. 1장의 네 이야기와 새 출발점 하나에서 이어지는 네 전망")
-
-table("PART 4", "WATCH LIST", "무엇을 보면 알 수 있나",
-      ["전망 [예측]", "반대 의견", "관찰 지표"],
-      [["해체론", "Anthropic·Vercel·Supabase의 DevRel 제목 공고", "인접 직무 공고 속 기능 동사의 빈도"],
-       ["확장론", "메이커 운동 상한론, 에이전트 투자 수익 사례 부재", "빌더·에이전트를 청중으로 적은 공고와 프로그램"],
-       ["교정론", "Orbit 사례", "'만든 증거'를 성과 기준으로 적는 공고·발표"],
-       ["내향론", "의무화 냉소, 인과 증거 부재", "첫 실증 연구, Block·카카오 밖의 공개 사례"]],
-      foot="표 18. 예측은 자주 빗나간다 — 그래서 맞았는지 확인할 지표를 함께 적었습니다.")
+figure("PART 4", "전망", "네 갈래 전망은 하나의 결론으로 모인다", "10-1",
+       "그림 19. 1장의 네 이야기와 새 출발점 하나에서 이어지는 네 전망",
+       "흩어지고(해체), 넓어지고(확장), 거품이 빠지고(교정), 안으로 향한다(내향) — 넷은 결론의 세 축에 자리를 잡는다. 확장·내향은 '누구와', 교정은 '무엇으로', 해체는 '잇는 일'의 질문이다.")
 
 # ═════════════════════════ CLOSING ═════════════════════════
-quote("CLOSING", "REMEMBER", "기억할 세 문장",
-      "① DevRel은 <span class='coral-t'>D(누구에게)와 R(무엇으로)</span>로 이루어진 경계 역할이다 — 두 변수가 함께 움직였다.<br><br>"
-      "② 직함은 흩어져도 <span class='coral-t'>번역·피드백 루프·신뢰·먼저 가보기</span>는 공고마다 되풀이된다.<br><br>"
-      "③ 셀 것은 사용량이 아니라 <span class='coral-t'>만든 증거</span>와 그로 인해 달라진 것이다.")
+quote("CLOSING", "결론", "다시, 한 문장",
+      "DevRel은 죽지 않았다.<br><span class='coral-t'>'개발자 관계'에서 '만드는 사람과의 관계'로 넓어진다.</span>",
+      None,
+      "누구와: 빌더·에이전트·회사 안 동료 · 무엇으로: 에이전트가 읽는 문서·관계형 커뮤니티·만든 증거 · 잇는 일: 번역·피드백·신뢰·먼저 가보기")
 
-cards("CLOSING", "ONE THING", "책을 덮으며 해볼 한 가지", [
-    ("한 문장으로 적는다", "이번 주에 한 일 하나를 — 누구를 향했고 무엇으로 닿았는지 드러나게."),
-    ("다른 부서에 보여준다", "동료 한 사람에게 자기 말로 다시 설명해달라고 부탁한다."),
-    ("간격을 좁힌다", "돌아온 설명과 내 문장의 차이 — 그 간격을 좁히는 것이 이 일이다."),
+cards("CLOSING", "내일 해 볼 것", "책을 덮으며 해 볼 한 가지", [
+    ("한 문장으로 쓴다", "이번 주에 한 일 하나를 — 누구를 향했고, 무엇으로 닿았는지 보이게."),
+    ("다른 부서에 보여 준다", "동료 한 사람에게 자기 말로 다시 설명해 달라고 부탁한다."),
+    ("차이를 좁힌다", "돌아온 설명과 내 문장의 차이 — 그 간격을 좁히는 것이 이 일이다."),
 ])
 
 cover(first=False)
@@ -418,7 +347,7 @@ body{background:var(--bg);color:var(--text);font-family:'Pretendard','Apple SD G
  padding:var(--pad);position:relative;border-bottom:1px solid var(--line)}
 .eyebrow{font-size:.78rem;letter-spacing:.18em;font-weight:700;text-transform:uppercase;margin-bottom:.9rem}
 .eyebrow.coral{color:var(--coral)} .eyebrow.cream{color:var(--muted)}
-.coral-t{color:var(--coral)}
+.coral-t{color:var(--coral)} .big{font-size:clamp(1.3rem,2.8vw,2rem);font-weight:800;line-height:1.5;color:var(--coral)} .small-q{display:block;font-size:.62em;font-weight:500;color:var(--muted);margin-top:.4rem}
 .content-title{font-size:clamp(1.5rem,3.3vw,2.4rem);font-weight:800;line-height:1.3;text-wrap:balance}
 .bar{height:3px;width:64px;background:var(--coral);margin:1rem 0 1.3rem;border-radius:2px}
 .lead{color:var(--muted);font-size:clamp(.95rem,1.7vw,1.12rem);line-height:1.7;margin-bottom:1.1rem;max-width:62rem}

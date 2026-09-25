@@ -65,7 +65,6 @@
 - Karpathy, Andrej. "vibe coding" 게시물. X, 2025-02-02. <https://x.com/karpathy/status/1886192184808149383> · 1주년 회고 <https://x.com/karpathy/status/2019137879310836075> [1차]
 - Kawasaki, Guy. 에반젤리즘 회고 글. <https://guykawasaki.com/the-art-of-evangelism/> · Wikipedia "Guy Kawasaki" <https://en.wikipedia.org/wiki/Guy_Kawasaki> [블로그·백과사전]
 - Kravets, Una. Chrome DevRel 팀의 운영 방식에 관한 게시물. X, 2024-03-08. <https://twitter.com/Una/status/1766160029369962545> [1인칭 의견]
-- kt cloud 기술블로그. "DevRel 톺아보기." 2024-11-04. <https://tech.ktcloud.com/entry/DevRel-톺아보기> [블로그]
 - Leggetter, Phil. "Defining Developer Relations." 2016-02-03. <https://www.leggetter.co.uk/2016/02/03/defining-developer-relations.html> · AAARRRP <https://www.leggetter.co.uk/aaarrrp/> [블로그]
 - Lewko, Caroline & Parton, James. *Developer Relations: How to Build and Grow a Successful Developer Program*. Apress, 2021. <https://www.devrel.agency/book> [단행본]
 - Mueller, John (Search Engine Journal 보도). "Google Says LLMs.txt Is Purely Speculative For Now." <https://www.searchenginejournal.com/google-says-llms-txt-is-purely-speculative-for-now/577576/> [언론 인용]
@@ -201,7 +200,23 @@
 - jwclare95. 데브렐 바이브코딩 개발자 온라인 행사 기획 후기. velog, 2025-08-01. <https://velog.io/@jwclare95/데브렐-바이브코딩-개발자-온라인-행사-기획-후기> [커뮤니티 의견]
 - jwclare95. OKKY 개발자 일자리 심층 토론회 참석 후기. velog, 2025-06-01. <https://velog.io/@jwclare95/OKKY-개발자-일자리-심층-토론회-참석-후기> [커뮤니티 의견, 참관기]
 
+**DEVOCEAN (국내 개발자 커뮤니티 블로그)**
+
+- felixshin(Felix, 본문 자기소개 "웹 프론트엔드 개발자"). 「바이브코딩 라이브 웹 개발 경험 및 프론트엔드 개발자가 갖춰야 할 3가지 역량」. DEVOCEAN, 2025-07-07. <https://devocean.sk.com/blog/techBoardDetail.do?ID=167590> [커뮤니티 의견]
+- josephyang(본문 자기소개 "SK플래닛 DevRel 매니저"). 「GitHub Copilot 업무 활용기(AI-assisted Coding과 개발 생산성 향상 #2)」. DEVOCEAN, 2024-09-20. <https://devocean.sk.com/blog/techBoardDetail.do?ID=166794> [커뮤니티 의견, 필자 1인칭 공개 기록]
+- josephyang(본문 자기소개 "SK플래닛 DevRel Manager"). 「Tech Topic 기술 블로그 개선 실험 #1 - 콘텐트, 성능, SEO 및 AEO 관점에서」. DEVOCEAN, 2025-10-20. <https://devocean.sk.com/blog/techBoardDetail.do?ID=167964> [커뮤니티 의견, 필자 1인칭 공개 기록]
+- shwogjs201(본문 자기소개 노재헌). 「생성형 AI, 일하는 방식에 어떻게 내재화될까?」. DEVOCEAN, 2025-10-01. <https://devocean.sk.com/blog/techBoardDetail.do?ID=167931> [커뮤니티 의견]
+- Todd. 「비개발자가 AI 기술과 만나는 방법 : Vibe-coding 도구」. DEVOCEAN, 2025-10-02. <https://devocean.sk.com/blog/techBoardDetail.do?ID=167940> [커뮤니티 의견]
+- 인절미. 「요즘에는 AI로 코딩을 이렇게 한다고? (Dev Ground 2025 세미나 후기)」. DEVOCEAN, 2025-10-15. <https://devocean.sk.com/blog/techBoardDetail.do?ID=167950> [커뮤니티 의견, 세미나 후기]
+
 **X**
 
 - DevRel KR. X 계정(개별 게시물이 아닌 계정 소개로 인용). <https://twitter.com/devrelkr> [커뮤니티, 계정 소개 원문 미대조]
 - Lemkin, Jason (SaaStr). "@Replit goes rogue during a code freeze and shutdown and deletes our entire database" 게시물. X, 2025-07-18. <https://x.com/jasonlk/status/1946069562723897802> [커뮤니티 의견]
+
+### 저자 본인 공개 기록 (저자 승인 예외)
+
+저자(필자 표기 '꼬마집사')가 공개로 남긴 글 두 편이다. 본문에서는 "저자가 공개로 남긴 기록"으로 밝혀 쓴다. 원제는 그대로 적었다.
+
+- 꼬마집사(저자). 「DevRel 커뮤니티 6번째 모임을 참여하며 (Feat. SKT 사옥)」. DEVOCEAN, 2023-04-03. <https://devocean.sk.com/blog/techBoardDetail.do?ID=164693> [저자 본인 공개 기록]
+- 꼬마집사(저자). 「말하지 않고 만들었다 — AX를 코드로 구현한 6개월의 기록」. DEVOCEAN, 2026-06-30. <https://devocean.sk.com/blog/techBoardDetail.do?ID=168336> [저자 본인 공개 기록]

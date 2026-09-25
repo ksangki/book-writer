@@ -6,7 +6,7 @@ BOOK = pathlib.Path('/Users/1112022/source/github/book-writer/devrel-next')
 SCR = pathlib.Path(__file__).parent
 IDENT = 'urn:uuid:2e3ab927-3a44-4ede-b169-e0253729973c'
 TITLE, SUB = 'DevRel Next', '코드 너머의 관계'
-VER, DATE, AUTHOR = '1.1.0', '2026-09-25', '김상기'
+VER, DATE, AUTHOR = '1.2.0', '2026-09-25', '김상기'
 HV = (BOOK.parent / 'VERSION').read_text().strip().lstrip('v')
 
 # 편집 수정: (장, 원문, 교체문, 전부교체 여부)
@@ -19,10 +19,6 @@ EDITS = [
     (7, 'Rizèl Scarlett는', 'Rizèl Scarlett은', True),
     (7, 'Dewan Ahmed는 2026년 8월 11일에 갱신한 글에서 이렇게 답했다.',
         '5장에서 본 Dewan Ahmed는 2026년 8월 11일에 갱신한 같은 글에서 이렇게 답했다.', False),
-    (10, '벤처캐피털 a16z의 Joe Schmidt는 2025년 6월 4일 에세이에서 복잡한 AI 애플리케이션 회사들이 구현 서비스를 앞세우는 "services-led growth"로 가고 있다고 봤다. 그 자리는 전문 서비스 인력이 맡는 경우가 많은데, 그 인력이 "sometimes rebranded as a forward deployed engineer or an implementation/solutions specialist"라는 것이다. 이 글은 투자사의 에세이이니 그 관점의 이해관계를 함께 읽어두자.',
-        '6장에서 본 a16z의 Joe Schmidt는 구현 서비스를 앞세우는 성장 방식을 "services-led growth"라고 부르며, 그 일을 맡는 인력이 FDE 같은 새 이름을 얻는다고 봤다. 투자사의 에세이라는 점은 여기서도 함께 읽어두자.', False),
-    (10, '2026년 2월 26일 Hacker News의 "Will vibe coding end like the maker movement?" 토론에서 roxolotl은 메이커 운동이 느려진 까닭을 사람들의 관심이 그만큼 크지 않았다는 데서 찾으며, 참여자가 두 배로 늘어도 "a small fraction of people"에 머물 것이라고 했다.',
-        '3장에서 본 메이커 운동 비유가 여기서 다시 돌아온다. 그 토론(Hacker News, 2026-02-26)에서 roxolotl은 참여자가 두 배로 늘어도 소수에 머물 것이라고 봤다.', False),
 ]
 EDITS += [
     (2, '개발자 입장에서는 꽤 찜찜한 관계다.', '개발자 입장에서는 꽤 답답한 관계다.', False),
@@ -40,9 +36,25 @@ EDITS += [
     (9, 'AX를 하는 사람으로서 이 두 댓글은 이 장에서 가장 아프게 읽힌다.', '이 장에서 가장 아프게 읽히는 것은 이 두 댓글이다.', False),
 ]
 # (v1.1.0 5장 deVilla 콜백 편집은 writer-b 5장 정정본에 흡수되어 제거)
-# v1.1.0: 전권 연번 전환 때 남은 장별 옛 참조(하이픈 없는 번호)
+# (v1.1.0 6장 '표 1' 편집은 v1.2.0 6장 final에 흡수되어 제거)
+# v1.2.0: D/R 표기를 thesis.md에 맞춰 '누구와(D)'로 통일(2장 writer-b 변경에 맞춤)
 EDITS += [
-    (6, '표 1의 22건', '표 6-1의 22건', False),
+    (3, '누구에게(D), 그리고 무엇으로(R).', '누구와(D), 그리고 무엇으로(R).', False),
+]
+# v1.2.0: 10장 풀어쓰기로 원문 재인용이 다시 들어옴 — 인용 거처(6장 a16z, 3장 roxolotl) 원칙대로 콜백으로
+EDITS += [
+    (10, '벤처캐피털 a16z의 Joe Schmidt는 2025년 6월 4일 에세이에서 한 흐름을 짚었다. 복잡한 AI 애플리케이션 회사들이 구현 서비스를 앞세우는 \'서비스 주도 성장(services-led growth)\'으로 간다는 것이다. 그 자리는 전문 서비스 인력이 맡는 경우가 많다. 그는 그 인력이 "sometimes rebranded as a forward deployed engineer or an implementation/solutions specialist"라고 썼다. 때로는 FDE나 구현·솔루션 전문가로 이름을 바꿔 단다는 뜻이다. 이 글은 투자사의 에세이이니 그 관점의 이해관계를 함께 읽어두자.',
+        '6장에서 본 a16z의 Joe Schmidt는 구현 서비스를 앞세우는 \'서비스 주도 성장(services-led growth)\'을 짚었다. 그 일을 맡는 인력이 때로 FDE 같은 새 이름을 얻는다고도 봤다. 투자사의 에세이라는 점은 여기서도 함께 읽어두자.', False),
+    (10, '2026년 2월 26일 Hacker News의 "Will vibe coding end like the maker movement?" 토론이 있다. 바이브 코딩도 메이커 운동처럼 끝날까라는 물음이다. 여기서 roxolotl은 메이커 운동이 느려진 까닭을 사람들의 관심이 그만큼 크지 않았다는 데서 찾았다. 그리고 참여자가 두 배로 늘어도 소수에 머물 것이라고 했다("a small fraction of people").',
+        '3장에서 본 메이커 운동 비유가 여기서 다시 돌아온다. 그 토론(Hacker News, 2026-02-26)에서 roxolotl은 참여자가 두 배로 늘어도 소수에 머물 것이라고 봤다.', False),
+]
+# v1.2.0 데보션: 첫 소개는 2장(저자 공개 기록 문단) — 9장 콜백의 장 번호 정정
+EDITS += [
+    (9, '3장에서 본 개발자 커뮤니티 데보션', '2장에서 본 개발자 커뮤니티 데보션', False),
+]
+# v1.2.0 R7(acceptance-v120 권고): 개념어 첫 등장 풀이 — 퍼널은 2-5 소절 상한 여유가 없어 용어집으로만
+EDITS += [
+    (5, '다음 세대 모델이 배울 코퍼스를 만드는 작업이다.', '다음 세대 모델이 배울 코퍼스(모델이 학습하는 글 묶음)를 만드는 작업이다.', False),
 ]
 HN_CH = {3, 4, 5}  # "HN" → "Hacker News" 표기 통일
 
@@ -108,7 +120,7 @@ title_page = f"""# {TITLE}
 **저자:** {AUTHOR}
 **식별자:** {IDENT}
 
-이 판본은 저자 검토 전의 1차 초고다. 사례와 수치는 2026년 9월 시점의 공개 자료를 기준으로 했다.
+이 판본은 저자 피드백(결론 세우기·쉽게 풀어쓰기·공개 자료 보강)을 반영한 개정판이다. 사례와 수치는 2026년 9월 시점의 공개 자료를 기준으로 했다.
 
 ### 라이선스
 
