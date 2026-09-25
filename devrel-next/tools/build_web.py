@@ -45,7 +45,7 @@ h = re.sub(r'<p><img src="([^"]+)" />\s*(그림 \d+\.[^<]*)</p>',
 h = re.sub(r'<style>.*?</style>', '', h, flags=re.S).replace('</head>', CSS + '\n</head>', 1)
 hero = ('<div class="cover-hero"><img src="cover.png" alt="「DevRel Next — 코드 너머의 관계」 표지" />'
         f'<div class="dl"><a href="epub/{epub.name}">EPUB 내려받기</a><a href="BOOK.md">책 소개</a>'
-        '<a href="https://github.com/ksangki/devrel-next">GitHub</a></div></div>')
+        '<a href="presentation/">발표자료</a><a href="https://github.com/ksangki/devrel-next">GitHub</a></div></div>')
 h = re.sub(r'(<body[^>]*>)', r'\1\n' + hero, h, count=1)
 h = re.sub(r'<table', '<div class="tbl"><table', h)
 h = h.replace('</table>', '</table></div>')
