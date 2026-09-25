@@ -5,8 +5,8 @@ import re, pathlib
 BOOK = pathlib.Path('/Users/1112022/source/github/book-writer/devrel-next')
 SCR = pathlib.Path(__file__).parent
 IDENT = 'urn:uuid:2e3ab927-3a44-4ede-b169-e0253729973c'
-TITLE, SUB = '코드 너머의 관계', 'AI 시대, DevRel은 누구와 무엇을 잇는가'
-VER, DATE, AUTHOR = '1.0.0', '2026-09-25', '김상기'
+TITLE, SUB = 'DevRel Next', '코드 너머의 관계'
+VER, DATE, AUTHOR = '1.0.1', '2026-09-25', '김상기'
 HV = (BOOK.parent / 'VERSION').read_text().strip().lstrip('v')
 
 # 편집 수정: (장, 원문, 교체문, 전부교체 여부)
