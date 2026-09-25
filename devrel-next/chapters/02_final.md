@@ -24,6 +24,8 @@ DevRel을 흔히 '개발자 마케팅'이라고 부른다. 틀린 말은 아니�
 
 이름이 바뀐 이유는 무엇이었을까? 업계에서 흔히 설명되는 논리는 이렇다. 에반젤리즘은 회사의 메시지를 개발자에게 전하는 일방향의 일로 설명된다. 애드보킷은 거기에 반대 방향을 더한다. 회사를 대변해 개발자에게 말하는 동시에, 개발자를 대변해 제품팀에 목소리를 전한다. 'Advocate'라는 단어가 원래 '옹호자', '대변인'이라는 뜻이라는 점을 떠올리면 이해하기 쉽다. 누구를 옹호하느냐는 질문에 이 직함은 "양쪽 모두"라고 답한다.
 
+이 일을 직접 한 사람들의 정의도 같은 논리를 따른다. 2년 동안 Developer Advocate로 일했다고 스스로 밝힌 Catalin Pit은 2023년 10월 31일 블로그 글에서 이렇게 적었다. "A DA represents the company to the community and the community to the company." Ashley Willis는 2025년 4월 25일 블로그 글에서 조금 더 풀어 썼다. "we represent the voice of the developer inside the organization, and we represent the product to the developer community outside of it." 2023년과 2025년의 당사자 문장이 앞에서 본 업계의 설명과 같은 구조를 하고 있는 셈이다.
+
 여기서 흔히 빠지기 쉬운 오해가 하나 있다. 애드보킷이 에반젤리스트를 몰아내고 그 자리를 차지했다고 생각하기 쉽다. 하지만 시간축 위에 놓고 보면 모습이 다르다. 1984년에 설득이 있었고, 그 위에 2010년대를 지나며 피드백이라는 방향이 한 겹 더해졌다. 애드보킷도 발표하고 데모하고 설득한다. 거기에 되돌아가는 길, 즉 개발자의 목소리를 회사 안으로 들여오는 일이 공식적으로 더해진 것이다.
 
 이 변화는 이 일을 하는 사람이 서는 자리를 옮긴다. 관계를 맺는 수단이 두 방향으로 늘어났기 때문이다. 회사 쪽에서 바깥을 향해 서 있던 사람이 이제 회사와 바깥 사이, 그 경계 위에 서게 된다. 이 경계라는 자리가 뒤에서 DevRel을 설명하는 핵심 개념이 된다.
@@ -39,6 +41,8 @@ DevRel을 흔히 '개발자 마케팅'이라고 부른다. 틀린 말은 아니�
 | DevRel은 플랫폼 중심 조직(keystone)이 서드파티 개발자의 임계 질량을 끌어들이고 참여시키기 위한 생태계 거버넌스 기능. 모델 DevGo 제안 | Fontão et al., *Journal of Software: Evolution and Process* 35(5), 2023(온라인 2021-10) | 동료 검토 논문 |
 | "The Developer Relations (DevRel) is a strategy to attract, engage and mature developers in contributing to a platform." | Massanori et al., SBES 2020 | 동료 검토 학회 단편 논문 |
 | "PR(Public Relations)이 일반인에게 기업을 알리는 활동이라면, DR(Developer Relations)은 개발자에게 기업을 알리는 활동" | kt cloud 기술블로그, 2024-11-04 | 블로그, 국내 통념의 한 예 |
+
+표 2-1. 회사·연구자·블로그가 내놓은 DevRel의 정의
 
 표를 천천히 읽어보면 흥미로운 점이 보인다. 이 일이 향하는 대상에 대해서는 다섯 정의가 놀랄 만큼 같은 답을 한다. 서드파티 개발자, 플랫폼에 기여하는 개발자, 개발자.
 
@@ -56,22 +60,26 @@ DevRel을 흔히 '개발자 마케팅'이라고 부른다. 틀린 말은 아니�
 
 DevRel이 회사와 외부 개발자 사이에 선다는 것은 조직 이론에서 오래된 질문과 맞닿아 있다. 조직 안과 밖의 정보를 잇는 사람의 역할이다. Michael Tushman은 1977년 *Administrative Science Quarterly*에 실린 논문 「Special Boundary Roles in the Innovation Process」에서 혁신 과정의 **경계 역할(boundary role)**을 다뤘다. 여기서는 개념의 뼈대만 빌려오자. 경계 역할을 맡은 사람은 조직 바깥의 정보를 안으로 들여오고, 그 정보를 조직 안에서 통하는 말로 번역하고, 필요한 곳에 퍼뜨린다. DevRel에 적용하면 여기에 반대 방향의 흐름이 하나 더 붙는다. 조직 안의 사정을 바깥이 알아들을 수 있는 말로 옮기는 일이다.
 
-이 설명을 DevRel에 겹쳐보면 거의 그대로 들어맞는다. 앞 절 표의 Google 미션이 쓴 "interface"라는 단어가 바로 이 자리를 가리킨다.
+이 설명을 DevRel에 겹쳐보면 거의 그대로 들어맞는다. 앞 절 표의 Google 미션이 쓴 "interface"라는 단어가 바로 이 자리를 가리킨다. 소프트웨어 개발자에서 DevRel로 경력을 옮겼다고 스스로 적은 Xe Iaso는 2023년 10월 24일 블로그 글에서 같은 자리를 다리에 빗댔다. "At its heart, when you are DevRel, you are the bridge between the company and the community of developers …"
 
-```mermaid
-flowchart LR
-  D["외부 개발자<br/>(서드파티·커뮤니티)"] <-->|"질문·불만·사용 사례"| R["DevRel<br/>(경계 역할)"]
-  R <-->|"피드백 번역·요구사항"| P["제품·엔지니어링"]
-  R <-->|"메시지·캠페인"| M["마케팅"]
-  R <-->|"기술 검증·도입 지원"| S["영업"]
-```
-그림 1. 경계 역할로서의 DevRel — 외부 개발자와 제품·엔지니어링·마케팅·영업을 잇는 자리
+![그림 2-1. 경계 역할로서의 DevRel — 외부 개발자와 제품·엔지니어링·마케팅·영업을 잇는 자리](figures/fig-2-1.svg)
 
-그림에서 DevRel에 연결된 선이 모두 양방향이라는 점에 주목하자. 제품팀이 새 API를 내놓으면 DevRel은 그것을 개발자가 쓸 수 있는 문서와 예제, 데모로 번역한다. 반대로 개발자 커뮤니티에서 "이 API는 인증 흐름이 너무 번거롭다"는 불만이 쌓이면, DevRel은 그 불만을 제품팀이 우선순위를 매길 수 있는 요구사항의 언어로 번역한다. 마케팅과 영업을 향한 선에서도 기술에 대한 설명과 시장의 사정이 함께 오간다.
+그림 2-1에서 DevRel에 연결된 선이 모두 양방향이라는 점에 주목하자. 제품팀이 새 API를 내놓으면 DevRel은 그것을 개발자가 쓸 수 있는 문서와 예제, 데모로 번역한다. 반대로 개발자 커뮤니티에서 "이 API는 인증 흐름이 너무 번거롭다"는 불만이 쌓이면, DevRel은 그 불만을 제품팀이 우선순위를 매길 수 있는 요구사항의 언어로 번역한다. 마케팅과 영업을 향한 선에서도 기술에 대한 설명과 시장의 사정이 함께 오간다.
 
-번역이라는 말을 조금 더 곱씹어보자. 번역은 한쪽의 맥락을 이해하고 다른 쪽의 맥락에 맞게 다시 짜는 일이다. 개발자의 짜증 섞인 이슈 댓글을 그대로 제품 회의에 가져가면 아무도 움직이지 않는다. 그 댓글 뒤에 있는 사용 사례와 규모, 경쟁 제품과의 차이를 함께 전해야 우선순위가 된다. 그래서 경계 역할을 맡은 사람에게는 양쪽 언어를 모두 하는 능력이 필요하다. 이 자리에 기술 배경이 요구되는 이유도 여기서 짐작할 수 있다.
+번역이라는 말을 조금 더 곱씹어보자. 앞에서 본 Ashley Willis도 같은 글에서 이 일을 번역으로 설명했다. "We gather feedback, surface pain points, advocate for improvements, and translate between worlds." 번역은 한쪽의 맥락을 이해하고 다른 쪽의 맥락에 맞게 다시 짜는 일이다. 개발자의 짜증 섞인 이슈 댓글을 그대로 제품 회의에 가져가면 아무도 움직이지 않는다. 그 댓글 뒤에 있는 사용 사례와 규모, 경쟁 제품과의 차이를 함께 전해야 우선순위가 된다. 그래서 경계 역할을 맡은 사람에게는 양쪽 언어를 모두 하는 능력이 필요하다. 이 자리에 기술 배경이 요구되는 이유도 여기서 짐작할 수 있다.
 
-그런데 경계 위의 자리에는 개념에서 곧바로 따라 나오는 곤란함이 있다. 어느 한쪽에 완전히 속하지 않는다는 점이다. 그래서 양쪽 모두에게서 '정말 우리 편인가'라는 의심을 받기 쉽다. 조직도에서도 마찬가지다. 이 일이 마케팅 밑에 있어야 하는지, 엔지니어링 밑에 있어야 하는지, 제품 조직 안에 있어야 하는지는 회사마다 답이 다르다. 소속이 흔들리면 성과를 누가, 어떤 잣대로 평가하느냐도 흔들린다.
+그런데 경계 위의 자리에는 개념에서 곧바로 따라 나오는 곤란함이 있다. 어느 한쪽에 완전히 속하지 않는다는 점이다. 그래서 양쪽 모두에게서 '정말 우리 편인가'라는 의심을 받기 쉽다. 조직도에서도 마찬가지다. 이 일이 마케팅 밑에 있어야 하는지, 엔지니어링 밑에 있어야 하는지, 제품 조직 안에 있어야 하는지는 회사마다 답이 다르다. Chrome DevRel 팀을 두고 2024년 3월 8일 X에 글을 쓴 Una Kravets는 이상적인 배치를 역할의 순서로 설명했다. "Ideally, DevRel should work closely with Eng and Product as a liaison for user needs, architect of the solution, test user to provide feedback, and only then a GTM strategist." 사용자의 필요를 전하는 연락책, 해법의 설계자, 피드백을 주는 시험 사용자를 거친 다음에야 시장 전략가가 온다. 이 순서대로라면 DevRel은 제품 조직 가까이에 서게 된다. 소속이 흔들리면 성과를 누가, 어떤 잣대로 평가하느냐도 흔들린다.
+
+이 절과 앞 절에서 읽은 당사자들의 문장을 한자리에 모아두자.
+
+| 이름 | 날짜·플랫폼 | 이 일을 설명한 말(원문) |
+|---|---|---|
+| Catalin Pit | 2023-10-31, 블로그 | "represents the company to the community and the community to the company" |
+| Xe Iaso | 2023-10-24, 블로그 | "you are the bridge between the company and the community of developers …" |
+| Ashley Willis | 2025-04-25, 블로그 | "translate between worlds" |
+| Una Kravets | 2024-03-08, X | "a liaison for user needs, architect of the solution, test user to provide feedback, and only then a GTM strategist" |
+
+표 2-2. DevRel 당사자들이 자기 일을 설명한 말
 
 이 문제는 곧바로 다음 질문으로 이어진다. 경계에서 만들어진 가치는 어디에 기록될까? 번역이 잘되면 제품팀의 기능이 좋아지고, 영업팀의 계약이 늘고, 마케팅의 메시지가 개발자에게 먹힌다. 성과는 대부분 다른 부서의 숫자로 기록된다. 기억해두자. 이 구조가 DevRel 측정 논쟁의 뿌리다.
 
@@ -90,6 +98,12 @@ flowchart LR
 개발자의 경험 자체를 개념으로 다룬 흐름도 있다. Fagerholm과 Münch는 2012년 ICSSP 학회 논문에서 개발자 경험(DX)을 "a means for capturing how developers think and feel about their activities within their working environments"라고 정의했다. 이 개념이 처음 제안될 때부터 생태계에 자발적으로 참여하는 외부 개발자가 고려 대상에 들어 있었다는 점을 짚어두자.
 
 이후 Noda·Storey·Forsgren·Greiler가 2023년 ACM Queue에 기고한 DevEx는 피드백 루프·인지 부하·몰입이라는 세 차원을, Forsgren 등이 2021년 같은 잡지에 발표한 SPACE는 생산성을 단일 지표로 잴 수 없다는 원칙을 내세웠다. 둘 다 실무자 대상 잡지 기고로, 동료 검토 논문과는 성격이 다르다는 점도 덧붙여 둔다. 오픈소스 쪽에서는 Linux Foundation의 CHAOSS 작업 그룹을 분석한 Goggins 등의 2021년 연구가, 측정하기 쉬운 활동량 뒤에 있는 진짜 질문을 이렇게 적었다. "How healthy and sustainable is this project in the context of its competitors or dependent projects?"
+
+이 일을 하는 사람들의 말도 기록으로 남았다. 앞에서 본 Una Kravets는 같은 글에서 자기 팀의 방식을 이렇게 설명했다. "metrics are focused around ecosystem impact and not vanity metrics like video views." 괄호 속 한마디도 덧붙였다. "(Which yes, can be quite hard to quantify 😂)" 이 팀의 기준은 생태계에 미친 영향이고, 그 영향은 수치로 옮기기 어렵다는 고백이 함께 붙어 있다.
+
+Catalin Pit은 같은 글에서 개인 지표와 경력 경로가 없는 회사가 많다고 쓰며 이렇게 덧붙였다. "You don't know how to measure your performance." Xe Iaso는 자기 성과를 두고 "you can start to observe (but not count) the results of the work."라고 적었다. CHAOSS가 던진 건강에 관한 질문과 이 당사자들의 고백은 같은 곳을 가리킨다.
+
+![그림 2-2. DevRel 측정 틀의 계보 — 2012년 DX 정의부터 2024년 Orbit의 인수까지](figures/fig-2-2.svg)
 
 이 계보를 한 줄로 이어보면 흐름이 하나 보인다. 틀은 점점 정교해졌고, 모두 같은 난제를 붙잡고 있었다. 경계에서 만든 가치를 어떻게 경계 너머의 숫자와 연결할 것인가. 그 난제는 아직 풀리지 않았다.
 

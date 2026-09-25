@@ -384,3 +384,192 @@
 - ✅ 공저 이력 문구 — 확정 문구 "데브챗 커뮤니티 출신 7인 공저 『코드 너머, 회사보다 오래 남을 개발자』(한빛미디어, 2025)"가 글자 그대로 유지됨. 뒤 서술만 "공저자 가운데 한 사람"→"저자 가운데 한 사람"으로 바뀌었고 사실 내용은 같다(7인 공저의 한 명)
 - ✅ 판권 — 제목 "DevRel Next — 코드 너머의 관계"·판본 v1.0.1·발행일 2026-09-25·식별자 urn:uuid:2e3ab927-… 가 book_manifest.json(title "DevRel Next", subtitle "코드 너머의 관계", version "1.0.1")과 일치. 표제면 판본도 v1.0.1
 - ✅ 잔존 검사 — 옛 부제 "AI 시대, DevRel은 누구와 무엇을 잇는가"·"v1.0.0" 원고 내 0건
+
+## v1.1.0
+
+### 참고문헌 커뮤니티 절 재구성 (2026-09-25, tools/editor/biblio.md — fact-checker 단독 수정, 수정 전 사본은 스크래치패드 보관)
+- 기준: 04_manuscript.md 본문에서 실제로 인용된 게시물·토론만. research/community.md 표를 파싱해 인용 문자열·작성자 핸들로 원고와 대조한 뒤, "한 사용자"로만 인용된 댓글은 요지 문구로 개별 확인.
+- 형식: `- 작성자. "제목 또는 설명." 플랫폼, 날짜. <URL> [커뮤니티 의견]`, HN·Reddit·GeekNews는 스레드 단위 + 본문 인용 댓글 작성자 병기.
+- HN 메타데이터: research/hn_threads.txt 12개 + 공식 API 추가 조회 6개(47167931 itunpredictable 2026-02-26 "Will vibe coding end like the maker movement?" / 45166388·47146362·48270456·48124504·48869038은 댓글 ID로 확인, 상위 스레드 제목을 API로 조회해 표기).
+- 제외(본문 미인용 확인): HN 45571058(swyx "DevRel Is -Unbelievably- Back" 토론 — 글 자체는 블로그 절에 있음), 41439983(Llms.txt 2024), 48095550(Software engineering may no longer be a lifetime career).
+- 결과(현 원고 기준): 커뮤니티 항목 40개(Bluesky 11·Hacker News 18·Reddit 3·GeekNews/velog 6·X 2), 링크 없는 항목 0개. Salma Bluesky 인사는 기존대로 블로그 절 Salma 항목에 둠.
+- 새 15건(research/community_devrel_voices.md) 중 본문에 들어간 글은 개정 장 판정 후 추가한다.
+
+### 재조회 중 발견한 본문 오류 (04장, 라운드 1에서 놓친 항목)
+**❌ 정정 필요 (1, 경미)**
+- 04_final.md(원고 L626) "2026년 9월 18일, ... ax-check가 Hacker News에 소개되자 xena라는 사용자가 이런 댓글을 남겼다" — HN API: 스레드 49744416 게시 2026-09-17 18:08 UTC, Algolia: xena 댓글 2026-09-18 19:03 UTC. 소개된 날은 9월 17일, 댓글은 이튿날이다. → "ax-check가 Hacker News에 소개된 스레드에, 2026년 9월 18일 xena라는 사용자가 이런 댓글을 남겼다." (10장 "2026년 9월 18일 ax-check를 소개한 Hacker News 스레드에서"는 댓글 날짜 귀속이라 맞음)
+
+### 04장 ax-check 날짜 반영 확인 (2026-09-25, 04_final.md 디스크 wc -m 13688 — 통보값 13,691과 다름)
+- ✅ L125 "ax-check가 Hacker News에 소개된 스레드에, 2026년 9월 18일 xena라는 사용자가" — 반영 확인. 이 판에는 v1.1.0 새 목소리 삽입이 진행 중이라 나머지 변경분은 별도 요청 시 판정.
+
+### ax-check 날짜 패턴 전수 점검 (2026-09-25, team-lead 요청)
+- 검색 범위: 04_manuscript.md, chapters/10_final.md, tools/editor/front.md·back.md·biblio.md — "9월 18일"·"09-18"·"9월 17일"·"ax-check"·"xena"
+- **10장 ❌ (경미, 모호성):** 10_final.md L39(원고 L1311) "2026년 9월 18일 ax-check를 소개한 Hacker News 스레드에서 한 사용자는 ..." — cyanydeez 댓글은 2026-09-18 18:54 UTC(Algolia)로 날짜는 맞지만, 문장 구조상 날짜가 "소개한"(스레드 게시, 실제 09-17)에 붙어 읽힌다. → "ax-check를 소개한 Hacker News 스레드에서 한 사용자는 2026년 9월 18일, 에이전트라는 새 중개자에 투자해 ..."
+- 10장 L45 aspleenic "2026년 9월 18일" — Reddit 댓글 날짜(C-2-5), 스레드 게시일과 무관 ✅
+- **원고 L626(4장):** 04_final.md는 이미 수정됐으나 04_manuscript.md는 재조립 전 옛 문장("2026년 9월 18일, ... 소개되자")이 남아 있다 → editor 재조립 시 반영 확인 필요
+- 서문·에필로그(back.md L7)·부록 B(back.md L127): xena를 "4장 끝에서 본 xena의 댓글"로만 지칭, 날짜 표기 없음 ✅
+- biblio.md L163: "2026-09-17(인용 댓글은 2026-09-18)" ✅
+
+### 01·04장 v1.1.0 개정분 (2026-09-25, 01_final.md wc -m 11994 / 04_final.md 13689, *_final_v1.0.1.md 대비 diff 11곳만)
+**❌ 정정 필요 (2, 경미 — 따옴표 안 문장 절단)**
+- 01 1-4 Joey deVilla(2026-07-06) 인용 ""DevRel ROI" means something specific now that it didn't mean in the zero-interest 2010s" — 원문 문장은 "... in the zero-interest 2010s or the Great Resignation era of a couple of years ago."로 이어진다. 문장 중간에서 끊고 줄임표가 없다. → 끝에 " …"를 붙이거나 뒤 절까지 인용.
+- 01 1-5 Marcos Placona 인용 "... Companies will hire fewer people who can actually prove ROI" — 원문은 "... prove ROI and pay them 2x what they paid for teams that couldn't measure impact."로 이어진다. → " …" 표시, 또는 뒤 절까지 인용(뒤 절이 "salaries will rise"의 근거라 포함을 권장).
+
+**⚠️ · 🕒:** 없음
+
+**✅ 확인됨 (원문 직접 대조)**
+- Joey deVilla, Global Nerdy 2024-02-05: "I was laid off ... Okta, along with around 400 others (a 7% reduction in the company's size)." 일치 / 해고 대비 추가 작업 풀이("In anticipation of possible upcoming layoffs, I'd been doing a little extra work") 일치
+- Liz Acosta, dev.to datePublished 2024-10-30: 인용 일치, "다음 자리 없이"(= "without anything else lined up") 일치, 프로필 Developer Advocate
+- Justin Poehnelt, X 2026-06-23 18:06 UTC(fxtwitter): 인용 일치 / 직함: justin.poehnelt.com/about "Senior Developer Relations Engineer at Google on the Google Workspace and Google Maps Platform teams"(전직) 일치 / "Two months ago" = 사이트 "Google fired me in April 2026"과 일치 / 사유 "I think the cause was ..." → "본인의 추정·Google 입장 미확인" 표기 적절
+- "이 편지들 대부분에서" — Poehnelt 사례(도구 제작 이유의 해고)를 포괄하려는 한정어로 적절
+- Daniel Bryant, Substack 2024-02-09: "I think this is overblown."·"a lack of clarity between DevRel efforts and business impact."(원문 문장 끝 일치)·overhiring 인정·"product advocates"/"community building" 분기 일치 / Ambassador Labs(~6년) 퇴사·dev/ops 도구 스타트업 자문 — 2024-01-16 회고글 일치
+- Alexander Reelsen, spinscale.de 2023-11-28: "After almost four years of developer advocacy as my main job"·"cost center" 인용 전문 일치
+- Sam Julien, X 2024-03-07 22:25 UTC: 첫 트윗 "#DevRel isn't dead, it's just evolving." 일치 / 후속 트윗 "lay off devrel because there's no attributable ROI" phase·"it's really hard to measure when the role is so poorly defined" — codetv.dev 임베드 원문 일치
+- Joey deVilla 2026-07-06 DevRelCon NYC 2026 초록·"2024년 Okta 해고"(2024 글과 동일인) — 원문 일치(인용 절단만 ❌)
+- Marcos Placona LinkedIn: datePublished 2026-01-05(활동 ID 디코딩 2026-01-05 21:01 UTC와 일치 → "2026년 1월 초" 적절)·헤드라인 "Former DevRel leader at Twilio & Circle"·[예측] 라벨 일치(인용 절단만 ❌)
+- Danielle Washington, dev.to datePublished 2026-07-28·첫 발표·인용 전문 일치
+- 04 L125 ax-check 날짜 — 앞서 확인
+- 삭제 5곳(Salma "cry for help"·DRF 미션·swyx 부연·HN 문단 끝·"네 가지 이야기와 겹쳐 읽어도") — 삭제만, 새 사실 주장 없음 확인
+
+### 참고문헌 추가 — 1·4장 새 목소리 9건 (2026-09-25, biblio.md "블로그·의견·언론" 절, 알파벳순 삽입)
+- Acosta 2024-10-30 / Bryant 2024-02-09(+경력 회고 2024-01-16) / deVilla 2024-02-05 / deVilla 2026-07-06 / Julien 2024-03-07(+codetv 임베드) / Placona 2026-01-05 / Poehnelt 2026-06-23(+about 직함 출처) / Reelsen 2023-11-28 / Washington 2026-07-28
+- 제목은 각 페이지 <title>로 확인해 원제로 적었다. Placona는 URL("15-devrel-predictions")과 페이지 요약("14 predictions")이 달라 원제를 지어내지 않고 설명으로 적음. Julien·Poehnelt는 X 게시물이라 첫 문장/설명으로 적음.
+- 전 항목 링크 있음. 2장(writer-b) 새 목소리는 판정 후 추가 예정.
+
+### 01·04·10장 v1.1.0 반영 확인 (2026-09-25)
+- ✅ 01_final.md(디스크 wc -m 12076) L88 deVilla 인용 끝 "…in the zero-interest 2010s …" 절단 표시 / L100 Placona 뒤 절까지 인용("… and pay them 2x what they paid for teams that couldn't measure impact.") / style Nice "물론 r/devrel의 이 절충안도" — 지시어 명확화, 사실 변경 없음
+- ✅ 04_final.md(13689) — 앞서 판정한 판 그대로
+- ✅ 10_final.md(11358) L39 "ax-check를 소개한 Hacker News 스레드에서 한 사용자는 2026년 9월 18일, ..." — v1.0.1 대비 이 문장 외 변경 없음(diff 확인)
+- **01·04·10장 v1.1.0 사실 검증 통과.** 미해소 없음.
+
+### 02장 v1.1.0 개정분 (2026-09-25, 02_final.md wc -m 12920, 02_final_v1.0.1.md 대비 추가 5곳)
+**❌ 정정 필요 (1, 경미 — 따옴표 안 문장 절단)**
+- 2-4 Xe Iaso 인용 "At its heart, when you are DevRel, you are the bridge between the company and the community of developers" — 원문 문장은 "... community of developers that may or may not use the company's products."로 이어진다. 끝에 " …"를 붙이거나 뒤 절까지 인용.
+
+**⚠️ · 🕒:** 없음
+
+**✅ 확인됨 (원문 직접 대조, 따옴표 안 문자열 일치)**
+- Catalin Pit, catalins.tech datePublished 2023-10-31: "In the last 2 years, I worked ... as a Developer Advocate (DA)."(= "2년 동안 Developer Advocate") / "A DA represents the company to the community and the community to the company." / "You don't know how to measure your performance." / 앞 요지 "most companies don't have clear expectations, personal metrics, and a progression track" 일치
+- Ashley Willis, ashley.dev datePublished 2025-04-25: "we represent the voice of the developer inside the organization, and we represent the product to the developer community outside of it." / "We gather feedback, surface pain points, advocate for improvements, and translate between worlds." 일치, 직함 생략 준수
+- Xe Iaso, xeiaso.net 2023-10-24: 경력 전환 본인 서술("pivot my career from being a software developer towards ... Developer Relations") / "you can start to observe (but not count) the results of the work." 일치 (첫 인용 절단만 ❌)
+- Una Kravets, X 2024-03-08 17:52 UTC(fxtwitter): "Chrome DevRel (not true of all Google DevRel)"·"We're" → "Chrome DevRel 팀을 두고"·"자기 팀의 방식" 적절, 직함 미기재 준수 / "Ideally, DevRel should work closely with Eng and Product as a liaison for user needs, architect of the solution, test user to provide feedback, and only then a GTM strategist." / "metrics are focused around ecosystem impact and not vanity metrics like video views." / "(Which yes, can be quite hard to quantify 😂)" 전부 한 글자까지 일치
+- 기존 문장 수정 없음(diff상 기존 문장은 추가 인용을 끼워 넣은 줄뿐, 원래 문구 보존 확인)
+
+### 참고문헌 추가 — 2장 새 목소리 4건 (biblio.md "블로그·의견·언론")
+- Iaso, Xe 2023-10-24 / Kravets, Una X 2024-03-08 / Pit, Catalin 2023-10-31 / Willis, Ashley 2025-04-25 — 제목은 페이지 <title>로 확인
+
+### 02장 v1.1.0 반영 확인 (2026-09-25, 02_final.md wc -m 12922)
+- ✅ 2-4 Xe Iaso 인용 끝 "… the community of developers …" 절단 표시
+- **02장 v1.1.0 사실 검증 통과.** 미해소 없음.
+
+### v1.1.0 새 목소리·참고문헌 종합
+- 본문 새 목소리: 1장 8건·2장 4건·4장 1건 — 전부 원문 직접 대조 통과(❌ 3건 모두 따옴표 안 절단, 반영 확인). 4·10장 ax-check 날짜 귀속 ❌ 2건 반영 확인.
+- biblio.md: 커뮤니티 절 40항목(링크 없음 0) / 블로그·의견 절에 새 출처 13건 추가(1·4장 9 + 2장 4, 링크 없음 0). 원문 주소 없는 언론 보도 묶음 1줄(사유 명기)은 기존대로 유지.
+
+### v1.1.0 표·그림 사양 — writer-c (3·6·9장, 2026-09-25)
+**❌ 0 · ⚠️ 0 · 🕒 0 — 통과**
+- 표 3-2(03_final L117~123): 다섯 연구의 대상·문헌 유형·결과가 같은 절 본문(Sarkar & Drosos PPIG 2025 / Chou 영상 20개·FSE 2026 승인 / Thorgeirsson 대학생 100명·CHI 2026 / Feldman & Anderson 67명·CHIWORK '24 / Virk & Liu VL/HCC 2025)과 일치, 새 수치 없음
+- 표 9-1(09_final L25~31): Shopify(성과·동료평가 설문, 인력 요청 조건, "share what you learned", 두 채널)·Coinbase(TechCrunch 2025-08 보도, 해고)·Zapier(2026-03-31, 모든 채용, "what they've actually built") 칸 전부 본문과 일치. 본문에 없는 칸 "이 장에서 다루지 않음" 처리 적절
+- 표 9-2: 사실 주장 없음(본문 네 줄 양식과 일치)
+- 그림 3-1: 2005 Scaffidi(N36 수치·2012 전망)·2011 Ko·2025-02-02 Karpathy·2025-11-06 Collins·2026-01 HN mjburgess(2026-01-19) — 날짜·수치 본문·원장과 일치
+- 그림 3-2: 띠의 네 점과 양 끝 도구 목록(빌더 도구 표 3-1 / Claude Code·Cursor·Copilot)이 본문과 일치, 수치 없음
+- 그림 6-1: 다섯 갈래와 인물 배정(cameron.stream MTS·Salma Staff Engineer / Briggs SE / Robinson Cursor 교육 / Fly.io 공고 / Dona Sarkar AI Power Users)이 6장 L78 분류와 일치, 대표성 고지 포함
+- 그림 6-2: 한 축 위 세 점이 6장 스펙트럼 서술과 일치. FDE 끝에 Applied AI를 함께 둔 것은 6-6 "고객 곁으로 가는 이름(Applied AI, FDE)" 서술로 뒷받침됨
+- 그림 9-1: 세 다이얼 눈금이 9장 L15(권유~성과평가)·Coinbase(해고, 강도 끝)·Zapier(채용)·9-6(만든 결과·달라진 것)·공유 장치와 일치
+- 그림 9-2: 경로 a→e와 점선 x가 9장 L39·L41 서술과 일치
+
+### 참고문헌 전부 링크화 — 언론 보도·단행본·공고 (2026-09-25, team-lead 요청)
+- "원문 주소 없는 언론 보도" 묶음 줄 삭제 → 항목별 11개로 분리(블로그·의견·언론 절, 알파벳순): 9to5Google(2023-01-20) · Business Insider(2026-01-08, 원제 "Tailwind Cuts 3 of Its 4 Engineers, Cites 'Brutal Impact' of AI") · CNBC Twilio 2건(2023-02-13·2023-12-04) · CFR Amodei 대담 X + Yahoo Finance · Dealroom Cursor(2026-06-09) · FT(2025-11-02) · Andrew Ng(Yahoo Tech·AOL/BI) · TechCrunch Coinbase(2025-08-22)·Replit(2025-09-10)·Twilio(2022-09-14) · The Register(2026-02-27)
+- 새로 찾은 1차 출처: Claude Code run-rate $2.5B+ — Anthropic Series G 발표(2026-02-12) 원문 "Claude Code's run-rate revenue has grown to over $2.5 billion; this figure has more than doubled since the beginning of 2026." / "The number of weekly active Claude Code users has also doubled since January 1." → 1차·공식 절에 추가. Reuters 보도 대신 1차로 인용 가능(N12 라벨 [언론] → [1차] 승격 가능)
+- 새로 찾은 원문: 우아한형제들 공고 — 비즈니스피플 게재본, "Posted 2022-11-21", 현재 마감. "[2차 게재본, 현재 상태 미확인]" → 주소·게시일 확정, "현재 조직 상태 미확인"만 유지
+- 단행본: Rogers 5판 ISBN 978-0-7432-2209-9(Open Library) / Wenger 1998 doi:10.1017/CBO9780511803932 / Wenger·McDermott·Snyder 2002 ISBN 978-1-57851-330-7 / Wenger-Trayner 2015 소개문 URL
+- 제목 확인: 9to5Google·TechCrunch 2건·BI·Dealroom은 페이지 <title>로 원제 표기. CNBC는 봇 차단으로 제목 미확인 → 제목 대신 설명으로 표기(주소는 검색 결과·HTTP 200 확인)
+- **링크 없는 항목: 0 / 전체 173.** 링크는 있으나 본문을 직접 읽지 못한 항목: FT(페이월·403, 제목·주소는 HN 제출 기록으로 확인) 1건, Andrew Ng(원 LinkedIn 게시물 주소 미확인, 2차 보도 링크) 1건
+
+### 링크 작업 중 발견한 본문 문제
+**07장 ❌ (경미, 2건 — 원문 게재본 확인으로 드러남)**
+- L67 "하는 일은 "대내외 개발자들과의 관계를 바탕으로 우아한형제들의 기술 조직을 알리는" 활동" — 원문은 "대내외 개발자들과의 관계(Relations)를 바탕으로 우아한형제들의 기술 조직을 알리는"이다. 따옴표 안에서 "(Relations)"가 빠졌다. → 원문대로 복원.
+- L67 "2022년 무렵으로 추정되는" — 게재본에 "Posted 2022-11-21"이 있다. → "2022년 11월 채용 플랫폼(비즈니스피플)에 게재된". "2차 게재본으로만 확인했고, 지금 이 조직이 어떤 형태인지는 알 수 없다"는 유지.
+**03장 🕒 (갱신 권고)**
+- "2026년 2월에는 25억 달러 이상이라는 Reuters 보도가 이어졌다(언론 보도, Anthropic 원문 문장은 미대조)" — Anthropic 원문을 찾았다(2026-02-12 Series G 발표). "미대조" 고지는 이제 사실과 다르다. → "2026년 2월 12일 Anthropic은 Claude Code의 연환산 매출이 25억 달러를 넘었다고 밝혔다(1차 발표)."
+
+### v1.1.0 표·그림 사양 — writer-a (1·4·7·10장, 2026-09-25)
+**표 5개: ❌ 0 · ⚠️ 0 — 통과**
+- 표 1-1: 6명 날짜·플랫폼·떠난 방식이 본문·원문과 일치(Neal 직무 폐지 / deVilla Okta Senior Developer Advocate / Acosta dev.to 프로필·번아웃 / Camden 구조조정 해고 / Poehnelt 전 직함 본인 사이트·사유 본인 추정 / Salma 스스로 이탈·현 프로필 Staff Engineer), 날짜순 맞음
+- 표 1-2: 14.6%·18.1%·22.1%(State of DevRel 2024, 유효 310, 자기선택)·26.1%(Common Room 2023, 136명, 팀 단위)·Google 약 6%(보도, DevRel 단독 아님) 단위·출처 일치
+- 표 1-3: 기존 표 + 캡션 "(2024~2025)" 맞음
+- 표 4-1: 연구 여섯 편 문헌 유형·대상·수치가 4-6 본문과 일치(Robillard 83명·유효 80명·78%)
+- 표 7-2: 7-5 서술 요약과 일치 / 표 10-1: 10-2~10-5 출발점·반대 의견·관찰 지표와 일치
+**그림 사양 7점:** 4-2 캡션만 ⚠️(아래 렌더 검증과 같은 건). 나머지(1-1·1-2·4-1·7-1·7-2·10-1) 통과
+
+## 그림 렌더 검증 (2026-09-25, figures/fig-*.svg 13점 — tools/figures.py 렌더본, <text> 추출 대조)
+**❌ 0 · ⚠️ 2 · 🕒 0**
+- ⚠️ fig-4-2 제목 "Biilmann이 그린 사용자 경험의 계보" — Biilmann이 그린 것은 UX(1993 Norman)→DX(2011 Jeremiah Lee)→AX(2025)까지다. 그림에 함께 들어간 "DX와 UX의 결합(Lawson)"과 "ACI(2024, SWE-agent 논문)"는 Biilmann의 계보가 아니다(4장 본문도 Lawson·SWE-agent를 별개 출처로 서술). 제목이 전체를 Biilmann에게 귀속한다. → figures.py L171·L174 및 04_final L45 캡션: "사용자 경험의 계보 — Biilmann의 UX·DX·AX에 Lawson의 정의와 가장 가까운 학술 개념을 더해"
+- ⚠️ fig-6-2 공통 띠 "세 자리 모두 되돌려준다 — 제품·엔지니어링 팀으로 피드백" — 표 6-2 되돌려주기 행은 Anthropic DevRel·Anthropic FDE 두 공고만 싣는다. Vercel(본문 "make sure they get fixed before launch")은 본문에 근거가 있지만 DX Engineer 쪽 피드백 문구는 6장 본문에 없다(공고 원문 "inform product priorities"는 있으나 본문 미인용). 그림이 본문에 없는 주장을 더한다. → figures.py L226: "되돌려주기 — 제품·엔지니어링 팀으로 피드백(표 6-2)"
+- ✅ fig-1-1: 16개 날짜·인물·요지가 1장 본문·표 1-1과 일치. **분류(작별/진단·예측/반론) 16건 모두 본문 서술과 부합**: 작별 = Neal·Reelsen(DevRel을 떠나며)·deVilla 2024·Acosta·Camden·Poehnelt·Salma / 진단·예측 = swyx 2024-07·Casey·Briggs·Placona([예측])·deVilla 2026(ROI 의미 변화)·r/devrel 절충 / 반론 = Bryant("overblown")·Julien("isn't dead")·swyx 2025-10(부활론). Bryant는 본문이 진단(과잉 채용·비즈니스 영향 불명확)도 함께 싣지만 요지 라벨이 "overblown"이라 반론 분류와 일치. Camden 2026-05-27 "해고"(Webflow 구조조정 해고 — 원문 "laid off as part of the restructuring") ✓, Neal 2023-07-25 ✓
+- ✅ fig-1-2: 네 단계·화살표 근거 인물(Julien 2024·DRF 2024-09 / Casey 2024·Reddington 13명 중 2명 / Reelsen 2023)과 하단 고지 "인과를 입증한 자료는 아니다"가 1장 L115 결론과 일치
+- ✅ fig-3-1(다섯 시점·N36)·fig-3-2(띠·도구 목록)·fig-4-1(8개 날짜, 4장 본문 일치)·fig-6-1(다섯 갈래·대표성 고지)·fig-7-2(세 질문·예시 배치·예시 증거)·fig-9-1(세 다이얼·고지)·fig-9-2(경로·"biggest AI champion"·점선)·fig-10-1(출발점 다섯·전망 넷·흡수 라벨)
+- ✅ fig-7-1 하단 "먼저 가보기가 나머지 셋을 떠받친다" — 7장 L45의 저자 판단 문장("이 네 번째 기능이 나머지 셋을 떠받친다는 생각이 든다")과 L133 핵심 박스("먼저 가보기가 나머지 셋의 재료를 만든다")와 일치
+- 참고(요청 범위 밖, 간이 대조): fig-2-1·2-2·5-1·5-2·8-1·8-2도 라벨을 훑었다 — 2-2 날짜(2012·2016·2019-11·2019-12·2021·2021·2021·2023·2024-04-11)·5-1 Wathan 인용과 "이 책의 해석" 고지·8-1 "효과를 비교한 연구는 없다" 고지 모두 본문과 맞음. 옛 fig-01~05.svg(v1.0 mermaid)는 별도 파일로 남아 있음 — 사용 여부는 team-lead 판단
+
+### 그림 렌더 검증 — 추가 6점(writer-b 사양: fig-2-1·2-2·5-1·5-2·8-1·8-2, 2026-09-25)
+**❌ 1(경미) · ⚠️ 0**
+- ❌ fig-5-1 하단 인용 'Wathan: "The docs are the only way people find out about our commercial products"'(figures.py L411) — 문자열 자체는 원문과 일치하지만 원문 문장은 ", and without customers we can't afford to maintain the framework."로 이어진다. 문장 중간 절단 표시 없음(fact_rules 11). → 'Wathan: "The docs are the only way people find out about our commercial products …"'
+- ✅ fig-5-1 하단 고지 "에이전트 경로는 이 책의 해석 — Wathan은 원인을 AI의 영향으로만 말했다" — 05_final 5-1절 L15(저자 해석 귀속)와 일치, 퍼널 네 단계·우회 경로·점선("방문 기록이 남지 않음") 사양과 일치, 수치 미기재
+- ✅ fig-2-1: 다섯 노드·네 선 라벨이 사양·본문과 일치, 네 선 모두 양방향 화살표(marker-start·end 각 4)
+- ✅ fig-2-2: 9개 연도·인물(2012 Fagerholm & Münch / 2016 Leggetter DevRelCon London / 2019-11 Orbit "Communities aren't funnels"·Love × Reach / 2019-12 Thengvall DRL / 2021 Lewko & Parton / 2021 SPACE Forsgren 외 잡지 기고 / 2021 CHAOSS Goggins 외 / 2023 DevEx Noda 외 잡지 기고 / 2024-04-11 Orbit·Postman 인수 발표)이 2장 2-5절·원장(N44)과 일치
+- ✅ fig-5-2: 세 표면·두 퍼널·"양쪽 퍼널로 보낸다"(5장 L83)
+- ✅ fig-8-1: 대응 5행과 출처 표기(Block ×3 — 8장 L21 / Anthropic 공고 문구 — 8-3 "a demo that raises awareness and one that creates champions" / 카카오 — 8-2 "사례를 공유하는 장") 일치, 대응선만(화살표 없음) 사양 준수, 하단 "공개 사례 세 건과 이론에 기댄 대응 — 효과를 비교한 연구는 없다(8장 6절)" = 8-6의 Block·카카오·Anthropic 공고 세 건과 일치
+- ✅ fig-8-2: 네 동사 순환(화살표 4)·주석 세 줄·"(Rogers)" 일치
+
+### 07·03장 링크 작업 후속 반영 확인 (2026-09-25)
+- ✅ 07_final.md(12442) L67 "관계(Relations)를 바탕으로 …" 원문 복원·"2022년 11월 채용 플랫폼(비즈니스피플)에 게재된"
+- ✅ 03_final.md(14096) L85 "2026년 2월 12일 Anthropic은 Claude Code의 연환산 매출이 25억 달러를 넘었다고 밝혔다(1차 발표)." — Series G 원문과 일치, "Reuters"·"미대조" 잔존 0건
+- **07·03장 통과.** 미해소 없음.
+
+### 그림 재렌더·캡션 반영 확인 (2026-09-25)
+- ✅ fig-4-2: 제목 "사용자 경험의 계보" + 부제 "Biilmann의 UX·DX·AX에 Lawson의 정의와 가장 가까운 학술 개념을 더해", SVG <title> 전체 문구 / 04_final.md L45·figure_specs.md 캡션 동일 문구
+- ✅ fig-6-2: 띠 "되돌려주기 — 제품·엔지니어링 팀으로 피드백" — "(표 6-2)" 제외는 연번 치환 문제로 수용(사실 문제는 "세 자리 모두" 삭제로 해소)
+- ✅ fig-5-1: Wathan 인용 끝 "…" 절단 표시
+- ✅ 옛 문구("Biilmann이 그린"·"세 자리 모두") 잔존 0건(figures/*.svg·figures.py·04_final·figure_specs), 옛 fig-01~05.svg 삭제 확인
+- ✅ 07_final L67 우아한형제들 정정 2건 재확인
+- **그림 19점·v1.1.0 표·캡션 사실 검증 통과.** 미해소 없음.
+
+### v1.1.0 표·그림 — writer-b (2·5·8장, 2026-09-25; 02_final 13388 / 05_final 13355 / 08_final 13593)
+**❌ 0 · ⚠️ 0 · 🕒 0 — 통과**
+- 표 2-1: 캡션만 추가("회사·연구자·블로그가 내놓은 DevRel의 정의") — 기존 표 구성(Google·Twilio·Fontão·Massanori·kt cloud)과 맞음
+- 표 2-2: 원문 조각 4개가 원문과 일치(Pit "represents the company to the community and the community to the company" / Xe Iaso "… community of developers …" 절단 표시 / Willis "translate between worlds" / Kravets "a liaison for user needs, … and only then a GTM strategist"), 날짜·플랫폼(2023-10-31 블로그·2023-10-24 블로그·2025-04-25 블로그·2024-03-08 X) 일치
+- 2-5 도입 축약 "이 일을 하는 사람들의 말도 기록으로 남았다." — 사실 주장 없음
+- 표 5-1: 일곱 통로의 변화·근거 성격이 5장 본문과 일치(Tailwind 약 40%·창업자 1차 증언·방법 미공개 / N21 약 25%·N22 약 12% 동료 검토 2편 / Reddit 감소 증거 없음·3.4% 논문·프리프린트 / Angie Jones 실무자 블로그 / bloppe HN 댓글 / uncertainschrodinger r/devrel 댓글 / Rizèl 실무자 블로그)
+- 표 8-1: 두 AX의 뜻·다룬 곳(4장 Biilmann 2025-01-28 / 8장 저자)·겹치는 일이 8-5와 일치
+- 표 8-2: Block(Angie Jones 2025-10-20, 인원은 작성자 서술)·카카오(2025-09-19·2025-10-30, 응답 수 미공개)·Anthropic(2026-09-21 갱신, 2026-09-25 확인)이 8장 본문·fact_rules와 일치
+- 그림 줄: 5-1·5-2·2-1·2-2·8-1·8-2 삽입과 "그림 N-M처럼" 지시어 변경 — 렌더 검증(앞 섹션)과 동일 그림, 캡션이 사양과 일치
+
+## v1.1.0 재조립본 검증 (2026-09-25, 04_manuscript.md sha256 f064ad351144…)
+- ✅ ax-check 날짜: 4장(원고 L698) "ax-check가 Hacker News에 소개된 스레드에, 2026년 9월 18일 xena라는 사용자가" / 10장(원고 L1440) "ax-check를 소개한 Hacker News 스레드에서 한 사용자는 2026년 9월 18일," — 옛 문장 잔존 0건
+- ✅ 6장(원고 L905 부근) "표 10의 22건" — 원고 표 10 = 2026-09-25 공개 채용 목록 스냅샷(원래 표 6-1), 연번 치환 맞음
+- ✅ 5장 editor 수정 "1장에서 본 Joey deVilla" — 동일인 확인: 참관기 표기 "🪗 Joey de Villa", LinkedIn "Joey de Villa – Developer Advocate @ NetFoundry", 본인 블로그 2026-07-06 "I'm speaking at DevRelCon NYC 2026"·"my own developer relations work at NetFoundry". 표기 통일 자체는 문제없음
+
+**❌ 정정 필요 (1 — 원 참관기 대조로 새로 드러난 인용 오귀속, 라운드 1에서 놓친 항목)**
+- 05_final L115(원고 L824) "2026년 7월 DevRelCon NYC의 한 세션 제목이 좋은 출발점이 된다. 참관기에 따르면 Joey de Villa와 Sean Keegan은 이렇게 물었다. "What changed because this DevRel work existed?"" — 참관기 원문(Ogundare, LinkedIn 2026-07-25 "Activity is not the same as impact" 절): Joey de Villa의 세션과 Sean Keegan의 세션은 **별개**이고, 질문은 **참관기 작성자가 두 세션을 정리한 뒤 던진 것**이다("The more strategic question is: What changed because this DevRel work existed?"). 세션 제목도 아니고, 두 발표자가 한 질문도 아니다. 원장 C-5-1("Joey de Villa·Sean Keegan 'What changed…'")과 community.md L140 요약이 원문을 합쳐 적은 데서 전파됐다.
+  → 5장 교체안: "그렇다면 무엇을 세야 할까? 2026년 7월 DevRelCon NYC 참관기가 좋은 출발점이 된다. 참관기에 따르면 1장에서 본 Joey deVilla의 세션은 DevRel의 일이 채택·매출·유지 같은 결과에 어떻게 기여하는지 설명하라는 압박을 다뤘고, Sean Keegan의 세션은 교육 지표를 예로 들어 소비 지표 옆에 만든 흔적을 함께 보자고 했다. 참관기를 쓴 Ayodeji Ogundare는 두 세션을 정리한 뒤 이렇게 물었다. "What changed because this DevRel work existed?"" + 끝 문장 "참관기 요약에서 나온 문장이니 …" → "참관기 작성자의 정리이니 발표 원문의 맥락은 따로 확인해두자."
+- 콜백 2곳(같은 오귀속의 전파, 🕒 표현 갱신): 09_final L119(원고 L1363)·10_final L49(원고 L1450) "5장에서 본 DevRelCon NYC 2026의 질문" → "5장에서 본 DevRelCon NYC 2026 참관기의 질문"
+- 에필로그(back.md L13)·표 9-2 "무엇이 달라졌는가" — 귀속 없음, 수정 불필요
+
+### DevRelCon 오귀속 정정 반영 확인 (2026-09-25)
+- ✅ 05_final.md(13490) L115: 두 세션 분리 서술(deVilla — 결과 기여 설명 압박 / Keegan — 교육 지표 예시, 소비 지표 옆 만든 흔적) + 질문을 참관기 작성자 Ayodeji Ogundare에게 귀속 + 끝 문장 "참관기 작성자의 정리이니 …" — 참관기 원문과 일치, "한 세션 제목"·"Keegan은 이렇게 물었다" 잔존 0
+- ✅ 09_final.md(13169) L119 "5장에서 본 DevRelCon NYC 2026 참관기의 질문"
+- ⏳ 10_final.md(11589) L49 — 아직 "DevRelCon NYC 2026의 질문"(writer-a 반영 대기)
+
+- ✅ 10_final.md(11593) L49 "5장에서 본 DevRelCon NYC 2026 참관기의 질문" — 전 장 옛 표현 잔존 0건. **DevRelCon 오귀속 정정 3장 모두 통과.** 재조립본 재grep 대기
+
+### 01장 L113 지시어 수정 확인 (2026-09-25, 01_final.md)
+- ✅ "2년 뒤 Joey deVilla의 후속 기록도 있다. 2024년 Okta에서 해고됐던 그는 …" — 주어 명시만, 날짜·인용·사실 변경 없음
+
+### 재조립본 재grep (2026-09-25, 04_manuscript.md sha256 f5abf4ea4212…)
+- ✅ 5장 L824: 두 세션 분리·Ogundare 귀속 / 9장 L1363·10장 L1450: "DevRelCon NYC 2026 참관기의 질문" / 옛 표현("DevRelCon NYC 2026의 질문"·"한 세션 제목"·"Keegan은 이렇게 물었다") 0건
+- ✅ ax-check L698·L1440 새 표현 유지, 옛 문장 0건
+- ⚠️(사실 문제 아님, 동기화) 1장 L113 writer-a 지시어 수정("2년 뒤 Joey deVilla의 후속 기록도 있다")이 이 재조립본에 없다 — 원고는 옛 문장 "2년 뒤 같은 사람에게서 후속 기록이 나왔다". 사실 내용은 같으므로 판정에는 영향 없음, 다음 재조립 때 반영 필요
+
+### 재조립본 동기화 확인 (2026-09-25, 04_manuscript.md sha256 b7c2c388c3f8…)
+- ✅ L236 "2년 뒤 Joey deVilla의 후속 기록도 있다" 반영, 옛 문장 0건. DevRelCon·ax-check 정정 유지. **v1.1.0 통합 원고 사실 검증 미해소 0.**

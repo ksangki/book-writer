@@ -14,16 +14,21 @@ CSS = """<style>
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17121f;--text:#ece6f0;--muted:#a99cb6;--line:#342a40;--accent:#ff8a6b;--panel:#211a2c;--code:#241c30}}
 :root[data-theme="dark"]{--bg:#17121f;--text:#ece6f0;--muted:#a99cb6;--line:#342a40;--accent:#ff8a6b;--panel:#211a2c;--code:#241c30}
 html{-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);margin:0 auto;max-width:760px;padding:24px 16px 80px;
+body{background:var(--bg);color:var(--text);margin:0 auto;max-width:820px;padding:24px 16px 80px;
  font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-size:17px;line-height:1.85;word-break:keep-all;overflow-wrap:anywhere}
 h1,h2,h3{line-height:1.35;text-wrap:balance}
 h1{font-size:1.9rem;margin-top:3.2rem;border-bottom:2px solid var(--accent);padding-bottom:.4rem}
 h2{font-size:1.35rem;margin-top:2.4rem} h3{font-size:1.1rem}
 a{color:var(--accent)} blockquote{margin:1.2rem 0;padding:.6rem 1rem;border-left:4px solid var(--accent);background:var(--panel);color:var(--text)}
-table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%;font-size:.92rem;margin:1.2rem 0}
-th,td{border:1px solid var(--line);padding:.45rem .65rem;vertical-align:top} th{background:var(--panel)}
-img,svg{max-width:100%;height:auto} figure{margin:1.6rem 0;text-align:center}
-figure img{background:#fff;border-radius:8px;padding:8px} figcaption{color:var(--muted);font-size:.9rem}
+.tbl{overflow-x:auto;margin:1.6rem 0 .4rem;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.9rem;line-height:1.6}
+th,td{border-bottom:1px solid var(--line);padding:.55rem .75rem;vertical-align:top;text-align:left}
+th{background:var(--panel);font-weight:700;white-space:nowrap} tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--panel) 45%,transparent)}
+tbody tr:last-child td{border-bottom:0}
+p.tcap{color:var(--muted);font-size:.88rem;text-align:center;margin:.3rem 0 1.8rem} p.tcap b,figcaption b{color:var(--accent)}
+img,svg{max-width:100%;height:auto} figure{margin:2rem 0;text-align:center}
+figure img{display:block;margin:0 auto;border-radius:10px;border:1px solid var(--line);background:#fbf7f2}
+figcaption{color:var(--muted);font-size:.88rem;margin-top:.6rem}
 code{background:var(--code);padding:.1em .3em;border-radius:4px} pre{background:var(--code);padding:1rem;overflow-x:auto}
 hr{border:0;border-top:1px solid var(--line);margin:2.4rem 0}
 .cover-hero{text-align:center;margin:8px 0 32px} .cover-hero img{max-width:320px;width:70%;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.25)}
@@ -42,6 +47,10 @@ hero = ('<div class="cover-hero"><img src="cover.png" alt="「DevRel Next — �
         f'<div class="dl"><a href="epub/{epub.name}">EPUB 내려받기</a><a href="BOOK.md">책 소개</a>'
         '<a href="https://github.com/ksangki/devrel-next">GitHub</a></div></div>')
 h = re.sub(r'(<body[^>]*>)', r'\1\n' + hero, h, count=1)
+h = re.sub(r'<table', '<div class="tbl"><table', h)
+h = h.replace('</table>', '</table></div>')
+h = re.sub(r'<p>(표 \d+\.)', r'<p class="tcap"><b>\1</b>', h)
+h = re.sub(r'<figcaption([^>]*)>(?:<p>)?(그림 \d+\.)', r'<figcaption\1><b>\2</b>', h)
 (out / 'index.html').write_text(h, encoding='utf-8')
 for png in (out / 'media').rglob('*.png'): png.unlink()  # 표지 사본 — 웹은 루트 cover.png 사용
 print('web build 완료:', out / 'index.html', '· media', len(list((out / 'media').rglob('*'))) if (out/'media').exists() else 0)

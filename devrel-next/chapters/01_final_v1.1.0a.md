@@ -1,0 +1,108 @@
+# 1장. DevRel은 죽었는가 — 2023~2026년 부고의 기록
+
+"Goodbye, forever, probably."
+
+2026년 7월 2일, Salma Alam-Naylor가 자기 블로그에 올린 글의 제목이다. 영어권 개발자 커뮤니티에서 whitep4nth3r라는 이름으로 활동해온 그는 이 글에서 DevRel을 떠난다고 밝혔다. 그의 프로필에는 이제 Staff Engineer라는 직함이 적혀 있다. 다음 날 Bluesky에는 짧은 인사가 붙었다. "I'm leaving DevRel, and I wrote a little bit about why." 글 한가운데에는 이런 소제목이 서 있다. "AI is killing developer education."
+
+한 사람의 이직 소식이 왜 이렇게 크게 읽혔을까? 글이 개인의 사정에서 멈추지 않았기 때문이다. Salma는 자기가 해온 일, 곧 개발자에게 기술을 가르치고 커뮤니티 안에서 제품을 알리는 일이 지난 10년 동안 작동하던 방식으로는 더 이상 작동하지 않는다고 썼다. 그리고 이렇게 덧붙였다. "If DevRel is to survive, I think it will need to look entirely different from how it functioned during the last ten years." 살아남으려면 완전히 달라져야 한다는 말은, 지금 모습 그대로라면 살아남기 어렵다는 말이기도 하다.
+
+이런 작별 글은 2023년부터 꾸준히 쌓였다. "DevRel은 죽었다"는 말이 정확히 무엇을 가리키는지 알려면, 그 부고들부터 차례로 읽어보자.
+
+## 작별 편지들
+
+Salma의 글은 떠나는 이유를 몇 겹으로 적는다. 첫째는 오래된 상처다. 그는 2023년에도 한 번 일자리를 잃었다. "I was made redundant in 2023 from a DevRel role at a company that was moving away from a community-centred approach to an enterprise-based strategy at the time." 회사가 커뮤니티 중심에서 엔터프라이즈 중심으로 전략을 틀자 그 자리가 사라졌다는 것이다. 둘째는 정당화의 피로다. "I have — all too often — overworked myself in a desperate attempt to justify my existence, demonstrate my value and impact, and keep my job." 존재를 증명하려고 스스로를 갈아 넣었다는 고백이다. 셋째가 앞서 본 소제목, AI가 개발자 교육을 죽이고 있다는 진단이다. 사람들이 예전처럼 정보를 찾지 않고, 인터넷과 그 커뮤니티가 조각났다는 것이다. 그는 이렇게도 썼다. "The forums are dead, the new Discord is quiet."
+
+이 글을 DevRel을 해본 사람으로서 읽으면, 두 번째 이유가 먼저 걸린다. 가치를 증명하느라 지친다는 고백은 뒤에서 볼 2024년의 글들에도 거의 같은 모양으로 나오기 때문이다. 그렇다면 AI는 원인이었을까, 아니면 오래된 균열을 벌린 마지막 힘이었을까? 이 질문은 잠시 들고 가자.
+
+Salma의 글은 Hacker News에서도 토론으로 번졌다(2026-07-03). 반응은 갈렸다. 한 사용자는 가치는 무언가를 만들고 문제를 푸는 데 있었지, "vague connection, curated vulnerability, or coordinating other coordinators"에 있지 않았다고 썼다. 바로 아래에는 반대 댓글이 달렸다. 그 일은 늘 거기서 조용히 일어나고 있었고, 당신이 몰랐을 뿐이라는 것이다.
+
+Salma만의 이야기가 아니다. 시계를 3년 앞으로 돌려보자. 2023년 7월 25일, David Neal은 Bluesky에 이렇게 썼다. "My role has been eliminated." 그리고 창의적인 콘텐츠를 만드는 사람이 필요한 DevRel 팀을 아는지 물었다.
+
+2026년 5월 27일에는 Raymond Camden이 비슷한 글을 올렸다. Webflow의 구조조정으로 해고됐다는 소식이었다. 그가 다음 자리로 꼽은 목록이 흥미롭다. 개발자 관계, 개발자 마케팅, 세일즈 엔지니어링. 그리고 한 문장을 붙였다. "If you need someone who can speak Developer, hit me up." 자기가 가진 기술을 '개발자의 언어를 할 줄 안다'는 능력으로 소개한 셈이다.
+
+그 사이에도 편지는 이어졌다. 2024년 2월 5일, Joey deVilla는 자기 블로그 Global Nerdy에 이렇게 썼다. "I was laid off from my position as Senior Developer Advocate at Okta, along with around 400 others (a 7% reduction in the company's size)." 해고를 예상하고 일을 조금 더 얹어두고 있었다는 대목은 Salma의 두 번째 이유와 같은 모양이다.
+
+같은 해 10월 30일, dev.to에서 자신을 Developer Advocate로 소개하는 Liz Acosta는 다음 자리 없이 일을 그만둔 이유를 이렇게 적었다. "It was a choice between burnout and another job search."
+
+2026년의 편지에는 에이전트가 등장한다. 본인 사이트에 따르면 Google의 Senior Developer Relations Engineer였던 Justin Poehnelt는 2026년 6월 23일 X에 썼다. "Two months ago I was fired by Google for creating the Google Workspace CLI." 그가 밝힌 해고 사유는 본인의 추정이고 Google 쪽 입장은 확인되지 않았다. 한 사람의 사건이니 흐름으로 넓혀 읽지는 말자.
+
+이 편지들을 나란히 놓으면 찜찜한 공통점이 보인다. 모두 해고나 이탈을 말하는데, 누구도 개발자와 관계를 맺는 일이 필요 없어졌다고 쓰지 않았다. 이 편지들 대부분에서 사라진 것은 자리였고, 그 자리를 떠받치던 예산과 전략이었다. 편지들은 누가 무엇을 잃었는지를 분명히 적는다. 무엇이 죽었는지를 말하려면 숫자와 설명을 더 모아야 한다.
+
+## 숫자로 본 위기 — 어떤 숫자를 믿을 수 있나
+
+개인의 편지는 체감을 전해주지만 규모를 알려주지는 않는다. 그래서 사람들은 숫자를 찾는다. 곤란한 점은 DevRel 위기를 말하는 숫자들이 출처와 단위가 떨어져 나간 채 옮겨지기 쉽다는 것이다. 숫자 몇 개를 함께 읽는 연습을 해보자.
+
+가장 자주 인용되는 자료는 DevRel.Agency가 운영하는 State of Developer Relations 보고서다. 2024년판(11번째, 2024-09-10 발표)은 33개국에서 유효 응답 310명을 받았다. 이 숫자의 성격부터 짚어두자. 응답하고 싶은 사람이 응답한 자기선택 표본이라, 무작위 표본에서 얻은 비율처럼 읽으면 곤란하다. 이 보고서에 따르면 그해 개인적으로 해고를 경험한 응답자는 14.6%였다. 프로그램 단위로 보면 인원을 늘린 곳이 27%, 해고로 인원이 줄어든 곳이 18.1%, 재편을 겪은 곳이 22.1%였다. 중위 기본급은 15만 달러로, 2023년 17만 5천 달러에서 내려왔다.
+
+이 숫자들이 그리는 풍경을 차례로 보자. 인원을 늘린 곳이 줄인 곳보다 많았다. 그와 함께 다섯 곳 중 한 곳 이상이 재편을 겪었고, 몸값이 내려갔다. 이 설문이 보여주는 위기는 재편과 보상 하락의 모양으로 왔다.
+
+그런데 인터넷에서는 "DevRel의 26%가 해고됐다"는 문장을 만나기 쉽다. 이 숫자는 어디서 왔을까? 커뮤니티 분석 벤더 Common Room의 2023년 보상·문화 보고서(2023-08-31, 응답 136명)다. 원문은 "73.9% of respondents reported that their teams did not experience layoffs in the past 12 months"라고 쓴다. 100에서 73.9를 빼면 26.1%가 된다. 그런데 이것은 **자기 팀이** 해고를 겪었다고 답한 비율이다. 팀에서 누군가 한 명이 나가도 여기에 들어간다. 이것을 개인 해고율처럼 옮기는 순간 숫자는 개인 기준 14.6%의 두 배 가까이로 부풀려진다. 난감한 일이다. 같은 보고서가 전하는 번아웃 경험 67.1%도 벤더가 주관한 소표본 설문이라는 라벨과 함께 읽어야 한다.
+
+당신이 경영진 보고서에 "DevRel 업계의 위기"를 한 줄로 요약해 넣어야 한다고 해보자. 14.6%와 26.1% 중 무엇을 고르겠는가? 더 극적인 숫자에 손이 가기 쉽다. 하지만 두 숫자는 서로 다른 질문에 대한 답이다. 14.6%는 응답자 본인이 해고됐는지를, 26.1%는 응답자의 팀에서 누군가 해고됐는지를 물은 결과다. 질문을 적지 않고 숫자만 옮기면, 보고서를 읽는 사람은 전혀 다른 그림을 보게 된다.
+
+기업 전체 감원도 구분해야 한다. Google은 2023년 1월 전체 직원의 약 6%, 1만 2천 명가량을 줄였고, 당시 보도에 실린 해고 당사자들의 증언 속에 개발자 관계 직무가 포함돼 있었다. Twilio는 2022년 9월 11%, 2023년 2월 약 17%, 2023년 12월 약 5%를 감원했다. 2장에서 볼 DevRel 정의에 미션이 인용될 만큼 개발자를 앞세워온 회사라 상징성이 컸다. 하지만 이것은 회사 전체의 감원 수치다. 그 안에서 DevRel이 몇 명이었는지는 이 숫자들이 알려주지 않는다. 특정 회사의 DevRel 팀이 통째로 사라졌다는 주장도 있지만, 이 책의 조사에서 1차 자료로 확인된 사례는 없었다.
+
+하나 더 알아둘 것이 있다. 2026년 9월 시점에 State of Developer Relations의 2025년판은 찾을 수 없었다. 가장 최근의 체계적 설문이 2024년에 멈춰 있다는 뜻이다. 그러니 2025~2026년의 변화는 설문보다 1인칭 기록과 공개 자료로 읽을 수밖에 없다. 기억해두자. 숫자를 읽을 때는 조사한 주체, 표본의 크기와 성격, 그리고 그 숫자의 단위가 개인인지 팀인지 회사인지를 먼저 확인하는 편이 낫다.
+
+## 죽음을 설명하는 네 가지 이야기
+
+숫자를 구분해 읽고 나면 다음 질문이 남는다. 왜 이런 일이 벌어졌는가? 2024년부터 2025년 사이, 영어권 DevRel 실무자들은 이 질문에 서로 다른 답을 내놓았다. 크게 네 가지 이야기로 정리할 수 있다.
+
+| 이야기 | 대표 목소리(시점) | 핵심 문장 |
+|---|---|---|
+| 거품 교정론 | swyx, "DevRel's Death as Zero Interest Rate Phenomenon"(2024-07) | "ZIRP DevRel is dead ... the 'Jobs To Be Done' of DevRel are timeless needs" |
+| 자기 실패론 | Keith Casey, "Developer Relations: A Painful Reckoning"(2024-07-17) | "Developer Relations is dying because devrel failed their organizations." |
+| 재구조화론 | Lee Briggs, "The Death of Developer Relations"(2024-12-10) | "Professionals who adapt—aligning their work with sales, customer success, or product teams—will continue to thrive." |
+| 부활론 | swyx, "DevRel Is -Unbelievably- Back"(2025-10) | "reports of DevRel's death have been greatly exaggerated" |
+
+첫째, **거품 교정론**이다. swyx(Shawn Wang)는 DevRel의 쇠퇴를 제로 금리(ZIRP) 시기의 과잉 채용이 교정되는 현상으로 봤다. 돈이 싸던 시절 성장만 좇던 회사들이 DevRel을 너무 많이, 너무 느슨하게 뽑았고, 금리가 오르자 그 거품이 꺼졌다는 것이다. 이 이야기의 핵심은 뒷부분에 있다. 개발자를 끌어오고 돕는 '해야 할 일' 자체는 시대를 타지 않는다는 주장이다.
+
+둘째, **자기 실패론**이다. Keith Casey는 DevRel이 죽어가는 이유를 DevRel 자신에게서 찾았다. 자기 조직에 가치를 증명하는 데 실패했다는 것이다. 2022년 연준의 금리 인상과 그에 따른 기업가치 하락이 방아쇠였다는 점은 인정하지만, 방아쇠가 당겨졌을 때 가장 먼저 쓰러진 이유는 스스로 기여를 보여주지 못했기 때문이라고 봤다. 그의 처방은 구조를 바꾸자는 쪽이었다. 아픈 이야기다. 그리고 뒤에서 보듯, 측정을 둘러싼 이 진단은 다른 목소리들과도 겹친다.
+
+셋째, **재구조화론**이다. Lee Briggs는 DevRel이 지금 모양을 바꾸는 중이라고 봤다. 그의 진단은 이렇게 시작한다. "But the money printer stopped." 금리가 오르고 투자가 마르자 모든 팀이 심사대에 올랐고, 매출에 직접 기여하지 않는 기능이 위태로워졌다. 영업은 계약을 따고, 마케팅은 잠재 고객을 모으고, 엔지니어링은 기능을 내보내는데, 그 사이에 선 DevRel은 "neither fish nor fowl", 곧 조금씩 다 하지만 무엇도 소유하지 않는 자리로 보이기 쉽다는 것이다. 그래서 그는 영업, 고객 성공, 제품 팀에 자기 일을 맞춰 정렬하는 사람이 살아남을 것이라고 전망했다. 이 이야기에는 설득력을 더하는 사정이 하나 있다. 글을 쓸 당시 Briggs 자신이 Tailscale의 Sales Engineer였다. DevRel에서 세일즈 엔지니어링으로 옮겨 간 사람이 쓴 글이라, 주장과 궤적이 겹친다.
+
+넷째, **부활론**이다. 흥미롭게도 첫 번째 이야기를 쓴 swyx가 1년여 뒤 반대 방향의 글을 냈다. DevRel의 죽음에 대한 소문이 크게 과장됐다는 것이다. 그는 AI 도구 회사들의 DevRel 채용 수요를 근거로 들며, 개발자가 제품을 아래에서부터 스스로 골라 쓰게 만드는 일에 대한 욕구가 자기 경력에서 본 어느 때보다 강하다고 썼다. 다만 검색량이 몇 배로 뛰었다는 대목에는 본인도 과장일 수 있다는 단서를 달았다. 같은 사람이 1년 사이에 '죽음'과 '귀환'을 모두 선언했다는 사실 자체가 이 시기의 혼란을 보여준다.
+
+이 이야기들은 한 사람 안에서 겹치기도 한다. 2024년 2월 9일, Ambassador Labs를 떠나 개발자 도구 회사들에 DevRel 자문을 하던 Daniel Bryant는 Substack에 DevRel의 죽음이라는 말을 두고 "I think this is overblown."이라고 썼다. 그는 과잉 채용이 있었다고 인정하면서, 가장 흔한 근본 원인은 따로 짚었다. "a lack of clarity between DevRel efforts and business impact." 그리고 이 직무가 제품 옹호와 커뮤니티 구축이라는 두 역할로 갈라질 수 있다고 내다봤다. 세 이야기가 한 글에 함께 들어 있다.
+
+네 이야기를 나란히 놓고 보자. 이들은 서로를 배제하지 않는다. 거품이 꺼진 것도 사실일 수 있고, 가치 증명에 실패한 것도, 모양이 바뀌는 것도, 새 수요가 생긴 것도 동시에 사실일 수 있다. 각각은 같은 현상의 다른 면을 비춘다. 그래서 이 책은 넷 중 하나를 골라 판정하지 않는다. 대신 이 네 이야기의 이름을 기억해두자. 책의 마지막 장에서 이들을 다시 꺼내, 각각이 어떤 미래로 이어지는지, 무엇을 관찰하면 어느 쪽에 무게를 둘 수 있는지 따져볼 것이다.
+
+## 측정할 수 없는 일의 운명
+
+네 이야기 가운데 둘은 같은 지점을 가리킨다. 자기 실패론과 재구조화론 모두 결국 '측정'을 말한다. 이 문제를 조금 더 깊이 들어가보자.
+
+측정의 문제를 비용의 언어로 적은 사람도 있다. 거의 4년 동안 developer advocacy를 본업으로 해왔다는 Alexander Reelsen은 2023년 11월 28일 DevRel을 떠나며 자기 블로그에 이렇게 썼다. "developer relations will always be seen as a cost center and thus one of the first functions that will be reduced or eliminated in case of cuts."
+
+Keith Casey는 같은 글에서 이렇게 썼다. "If Marketing can't measure your contribution, you don't fit into their budget." DevRel이 마케팅 조직 안에 있다면, 마케팅이 셀 수 없는 기여는 예산표에 자리가 없다는 말이다. 그가 제시한 모범 답안은 단순하다. "I did X and that changed key metric Y in this way." 내가 X를 했고, 그것이 핵심 지표 Y를 이렇게 바꿨다고 말할 수 있어야 한다는 것이다. 말은 쉽다. 그런데 커뮤니티에서 한 발표가 여섯 달 뒤 어느 회사의 도입 결정에 얼마나 기여했는지, 누가 그 선을 그을 수 있을까?
+
+Briggs도 같은 결론에 닿았다. 그가 제안한 대안 직무들, 이를테면 커뮤니티를 맡는 솔루션 엔지니어나 커뮤니티 고객 성공 담당자에는 공통점이 하나 있었다. 그의 표현으로는 "Measurability"다. 그리고 이렇게 못 박았다. "The days of vague metrics like "community engagement" are over."
+
+측정 문제가 곧 정의 문제라는 지적도 있었다. 2024년 3월 7일, Sam Julien은 X 스레드에서 지금이 "lay off devrel because there's no attributable ROI" 국면처럼 보인다고 썼다. 원인으로는 역할의 정의를 꼽았다. "it's really hard to measure when the role is so poorly defined." 이 스레드는 "#DevRel isn't dead, it's just evolving."이라는 문장으로 시작한다.
+
+Salma의 글은 이 문제의 반대편을 보여준다. 그는 커뮤니티 안에서의 개발자 교육이 긴 게임이라고 썼다. 올바른 청중이 제품을 받아들이기까지 시간과 인내와 실험이 필요한데, 리더십은 단기간에 측정 가능한 성공을 원한다는 것이다. 그러다 보니 측정하기 쉬운 것에 매달리게 된다. 자극적인 글로 Hacker News 첫 화면에 오르거나, 가벼운 짧은 영상으로 조회수를 모으는 식이다. Salma는 그것을 성공으로 보고할 수는 있지만 "most likely the 'wrong' success"라고 불렀다. 셀 수 있는 것을 세다 보면 엉뚱한 것을 키우게 된다.
+
+이것이 몇 사람의 하소연일 뿐일까? Chris Reddington이 2026년 3월 11일 공개한 연구는 조금 다른 각도를 준다. Warwick Business School MBA 논문을 바탕으로 DevRel 리더 13명을 인터뷰했는데, 자기 전술 활동과 조직의 전략 성과 사이의 연결을 분명히 보여준 사람은 2명(약 15%)이었다. 13명짜리 질적 인터뷰이니 이 비율을 업계 전체로 넓혀 읽을 수는 없다. 실무자 설문도 같은 쪽을 가리킨다. State of DevRel 2024(n=310, 실무자 설문)에서 응답자가 꼽은 가장 큰 과제는 데이터와 지표로 영향을 증명하는 일(60.7%)이었다. Reddington이 지적한 것, 곧 DevRel의 가치에 관한 논쟁이 오랫동안 증거보다 의견과 일화로 채워져 왔다는 관찰은 앞의 목소리들과 정확히 겹친다.
+
+업계도 이 문제를 알고 있었다. Linux Foundation은 2024년 9월 16일 Developer Relations Foundation(DRF)을 만들겠다고 발표했고, 2025년 8월 25일 암스테르담의 Open Source Summit Europe에서 공식 결성했다. 2024년 9월 결성 의향을 밝히며 내건 배경이 눈길을 끈다. "a lack of role clarity and difficulty in measuring impact." 역할이 무엇인지 분명하지 않고, 영향을 측정하기 어렵다는 것이다. 한 직업이 자기 정의와 측정법을 공식 기구에 맡겨야 할 만큼 흔들리고 있었다는 방증으로 읽을 수 있다.
+
+2년 뒤 같은 사람에게서 후속 기록이 나왔다. 2024년 Okta에서 해고됐던 Joey deVilla는 2026년 7월 6일 블로그에 올린 DevRelCon NYC 2026 발표 초록에 이렇게 썼다. ""DevRel ROI" means something specific now that it didn't mean in the zero-interest 2010s …". 그 뜻이 무엇으로 옮겨가고 있는지는 뒤에서 채용 공고를 읽으며 보자.
+
+여기서 한 가지 의문이 생긴다. 측정하기 어려운 일은 모두 사라져야 할까? 신뢰, 평판, 커뮤니티의 분위기처럼 원래 숫자로 옮기기 어려운 것들은 어디에 자리를 잡아야 하는지, 이 질문은 이 책 곳곳에서 다시 돌아온다. 지금은 한 가지만 짚어두자. 이 목소리들이 공통으로 가리키는 것은, 2023~2024년의 감원기에 먼저 흔들린 자리가 기여를 숫자로 설명하지 못한 자리였다는 진단이다.
+
+## 무엇이 잘려나갔나
+
+그렇다면 무엇이 잘려나갔을까? 2026년 9월 14일, Reddit의 r/devrel에 한 사용자(Daria-Dovzhikova)가 남긴 댓글이 이 장의 질문을 한 줄로 요약한다.
+
+> "the role isn't dying. the headcount version is. a launch, a comparison page, a listening system: those are programs with a before and after. "advocate" was a salary with no number on it. that's what got cut."
+
+익명 커뮤니티의 한 사람 발언이니 무게를 과하게 둘 수는 없다. 하지만 이 문장은 앞에서 본 조각들을 절묘하게 꿰어준다. 이 사용자의 기준은 '전후가 있느냐'다. 제품 출시, 비교 페이지, 사용자의 목소리를 듣는 체계처럼 시작 전과 후를 견줄 수 있는 일인지를 묻는다. 그 물음에 답하지 못한 자리가 먼저 잘렸다는 것이다. Casey의 측정 압박, Salma의 정당화 피로, Reddington의 13명 중 2명이 한 방향을 가리킨다.
+
+같은 논리를 앞날로 늘인 목소리도 있다. 자신을 "Former DevRel leader at Twilio & Circle"이라고 소개하는 Marcos Placona는 2026년 1월 초 LinkedIn의 2026년 예측 목록에 이렇게 적었다. "DevRel headcount will shrink but salaries will rise. Companies will hire fewer people who can actually prove ROI and pay them 2x what they paid for teams that couldn't measure impact." 이것은 [예측]이고, 2026년 9월 시점에 맞았는지 판정할 자료는 없다.
+
+물론 r/devrel의 이 절충안도 답의 전부는 아니다. 남은 역할이 앞으로도 같은 모양일지는 이 댓글이 다루는 범위 밖이다. Salma가 "AI is killing developer education"이라고 쓴 부분, 곧 사람들이 정보를 찾는 방식 자체가 바뀌었다는 진단은 측정 문제만으로 설명되지 않는다. 그는 사람들이 배우고 정보를 찾는 방식이 달라지면서, 예전에 잘 통하던 전통적인 방법으로는 자기 콘텐츠를 읽어줄 청중을 찾기 어려워졌다고 썼다. 콘텐츠가 사람에게 닿던 길 자체가 흔들리고 있었다는 뜻이다. 튜토리얼을 읽던 개발자가 이제 코딩 에이전트에게 묻는다면, DevRel이 공들여 만든 콘텐츠의 독자도 달라진다. 가르치려던 대상이 스스로를 개발자라고 부르지 않는 사람이라면, '개발자 관계'라는 이름부터 다시 따져봐야 한다.
+
+이 변화들이 던지는 질문은 두 가지로 정리된다. 첫째는 **대상**, 곧 DevRel이 향하던 'D'가 여전히 같은 사람들인지다. 둘째는 **수단**, 곧 관계를 맺던 'R'의 통로인 튜토리얼과 컨퍼런스와 포럼과 커뮤니티가 여전히 같은 길로 작동하는지다. 부고들이 남긴 것은 무언가 바뀌었다는 불안이었다.
+
+두 질문에 답하려면 떠나는 사람들의 편지에서 한 걸음 물러나, 이 일이 처음 태어난 자리부터 거슬러 올라가야 한다.
+
+그렇다면 죽었다는 것은 정확히 무엇이었나?

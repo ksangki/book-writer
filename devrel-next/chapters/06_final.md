@@ -23,7 +23,7 @@
 | ElevenLabs (약 220) | Developer Experience Engineer 1 | FDE 계열 16 | — |
 | Stripe (약 690) | 0 | "Forward Deployed" 제목 5 | — |
 
-표 1. 2026년 9월 25일 공개 채용 목록 스냅샷 (Greenhouse·Ashby 공개 API 조회, 제목 키워드 기준 — 추세 지표 아님. Hugging Face·Google DeepMind·Mintlify는 조회 실패)
+표 6-1. 2026년 9월 25일 공개 채용 목록 스냅샷 (Greenhouse·Ashby 공개 API 조회, 제목 키워드 기준 — 추세 지표 아님. Hugging Face·Google DeepMind·Mintlify는 조회 실패)
 
 표를 읽기 전에 두 가지를 짚자. 첫째, 이 열 곳을 모두 'AI 회사'라고 부르면 곤란하다. Anthropic과 OpenAI는 모델을 만드는 연구소이고, Cursor·Replit·Lovable은 AI 코딩·빌더 도구를 만든다. Vercel·Supabase·Cloudflare·Stripe는 오래전부터 개발자를 고객으로 삼아온 플랫폼 회사다. 한 표에 모았다고 한 업종이 되는 것은 아니다.
 
@@ -77,6 +77,8 @@ cameron.stream은 2025년 7월 Letta에 "founding devrel engineer"로 합류했�
 
 이 기록들을 어떻게 읽어야 할까? 저마다 사정이 다른 이직 소식이지만, 모아 놓으면 몇 갈래의 방향이 보인다. 기술 직무로 흡수되는 방향(Member of Technical Staff, Staff Engineer), 고객과 매출 쪽으로 가는 방향(Sales Engineer), 가르치는 일로 초점을 좁히는 방향(Cursor의 AI 교육), 이야기를 쓰는 일로 옮기는 방향(Fly.io), 청중을 새로 정의하는 방향(AI Power Users). 다만 이것은 스스로 공개한 사람들의 기록이다. 조용히 떠났거나 그대로 남은 사람은 이 목록에 없다. 대표성을 주장할 수 있는 표본이 아니라는 점을 잊지 말자.
 
+![그림 6-1. DevRel이라는 이름을 떠난 공개 기록들 — 다섯 방향](figures/fig-6-1.svg)
+
 남은 것은 가장 많이 보이던 이름, FDE와 DevRel의 관계다.
 
 ## FDE는 DevRel을 대체하는가
@@ -99,11 +101,13 @@ cameron.stream은 2025년 7월 Letta에 "founding devrel engineer"로 합류했�
 | 가르치기 | "a link to something you made that taught developers something" (Vercel 지원 조건) | 해당 문구를 찾지 못했다 |
 | 누구에게 | "from individual hobbyists to enterprise engineering teams" (Anthropic DevRel) | "our most strategic customers" |
 
-표 2. 기능별 공고 문구 대조 — 2026년 9월 25일 조회한 공고 원문
+표 6-2. 기능별 공고 문구 대조 — 2026년 9월 25일 조회한 공고 원문
 
 표를 따라 읽어보자. 되돌려주기 행에서 두 공고의 동사는 거의 같다. 이 FDE 공고의 문장은 DevRel을 했던 사람에게 낯설지 않다. 만들어 보여주기 행도 닮았다. 다만 결과물이 향하는 곳이 한쪽은 복제해서 돌려볼 불특정 다수의 개발자이고, 다른 쪽은 계약한 고객의 실제 업무다. 가르치기 행은 비어 있다. 적어도 이 FDE 공고에서 가르치는 일은 명시된 업무가 아니었다.
 
 그래서 이 둘을 '대체'로 부르기는 어렵다. 같은 기능이 다른 규모로 배치된 것에 가깝다. 한 번에 닿는 사람의 수를 가로축으로 놓아보자. 고객 한 곳 안으로 깊이 들어가는 자리가 한쪽 끝에 있고, 공개 문서와 데모로 수많은 개발자와 에이전트에게 닿는 자리가 먼 쪽에 있다. FDE는 앞쪽에, 전통적인 DevRel은 뒤쪽에 놓인다. Vercel의 DevRel Engineer처럼 제품 팀 안에서 출시 전에 먼저 부딪히는 자리는 그 사이 어딘가다. 무엇이 어디에 놓이는지는 회사가 어떤 고객에게 무엇을 파는지에 따라 달라진다.
+
+![그림 6-2. 한 번에 닿는 사람의 수로 놓아본 직함들 — 2026년 9월 25일 공고 문구 기준](figures/fig-6-2.svg)
 
 > **반론:** 보완이라는 그림이 맞더라도 안심할 일은 아니다. Daily Context 취재기의 요점은 가운데가 눌린다는 것이다. 글은 가장 위험한 쪽을 "Developer marketing aimed at engineers who read docs and deliberate"라고 짚었다. 문서를 읽고 따져보는 엔지니어를 겨냥한 개발자 마케팅이다. 양 끝이 살아남아도, 그 사이에서 일하던 자리가 줄어들 수 있다. 하루치 공고로는 이 경고가 맞는지 확인할 수 없다.
 

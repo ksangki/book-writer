@@ -6,7 +6,7 @@ BOOK = pathlib.Path('/Users/1112022/source/github/book-writer/devrel-next')
 SCR = pathlib.Path(__file__).parent
 IDENT = 'urn:uuid:2e3ab927-3a44-4ede-b169-e0253729973c'
 TITLE, SUB = 'DevRel Next', '코드 너머의 관계'
-VER, DATE, AUTHOR = '1.0.1', '2026-09-25', '김상기'
+VER, DATE, AUTHOR = '1.1.0', '2026-09-25', '김상기'
 HV = (BOOK.parent / 'VERSION').read_text().strip().lstrip('v')
 
 # 편집 수정: (장, 원문, 교체문, 전부교체 여부)
@@ -38,6 +38,11 @@ EDITS += [
     (8, 'DevRel을 해본 사람으로서 "Going first. Figuring stuff out. Guiding others."라는 세 마디를 읽으면, 이 문장은 내게 직무 설명서의 첫 줄처럼 읽힌다.', '"Going first. Figuring stuff out. Guiding others."라는 세 마디는 DevRel 직무 설명서의 첫 줄처럼 읽힌다.', False),
     (8, 'AX를 하는 사람으로서, 나는 이 약어의 우연을 논거로 쓰지 않으려 한다.', '나는 이 약어의 우연을 논거로 쓰지 않으려 한다.', False),
     (9, 'AX를 하는 사람으로서 이 두 댓글은 이 장에서 가장 아프게 읽힌다.', '이 장에서 가장 아프게 읽히는 것은 이 두 댓글이다.', False),
+]
+# (v1.1.0 5장 deVilla 콜백 편집은 writer-b 5장 정정본에 흡수되어 제거)
+# v1.1.0: 전권 연번 전환 때 남은 장별 옛 참조(하이픈 없는 번호)
+EDITS += [
+    (6, '표 1의 22건', '표 6-1의 22건', False),
 ]
 HN_CH = {3, 4, 5}  # "HN" → "Hacker News" 표기 통일
 
@@ -129,5 +134,47 @@ for n in range(1, 11):
 out += [epilogue, ''] + [a + '\n' for a in appendices] + [biblio, '']
 text = '\n'.join(out)
 text = re.sub(r'\n{3,}', '\n\n', text)
+# 그림·표 전권 연번 (v1.1.0): 장별 '그림 {장}-{k}'·'표 {장}-{k}' → 등장 순서대로 '그림 N'·'표 M'.
+# 번호는 캡션 등장 순서로 배정한다(이미지 alt '![그림 3-1. …]' 또는 줄 머리 '그림 3-1.'·'표 3-1.').
+# 본문 참조('그림 3-1에서 보듯')도 같은 매핑으로 치환한다. 캡션 없는 참조나 치환 뒤 잔존이 있으면 멈춘다.
+FIG_REF = re.compile(r'(?<![가-힣A-Za-z])(그림|표) (\d+)-(\d+)(?!\d)(으로|로|을|를|은|는|과|와|이(?![가-힣])|가(?![가-힣]))?')
+# 숫자 끝 발음: 0영·1일·3삼·6육·7칠·8팔은 받침 있음, 1·7·8은 ㄹ받침('로')
+def _particle(num, p):
+    if not p:
+        return ''
+    d = str(num)[-1]
+    bat, rieul = d in '013678', d in '178'
+    pairs = {'을': ('을', '를'), '를': ('을', '를'), '은': ('은', '는'), '는': ('은', '는'),
+             '과': ('과', '와'), '와': ('과', '와'), '이': ('이', '가'), '가': ('이', '가')}
+    if p in ('으로', '로'):
+        return '로' if (rieul or not bat) else '으로'
+    a, b = pairs[p]
+    return a if bat else b
+CAPTION = re.compile(r'(?m)^(?:!\[)?(그림|표) (\d+)-(\d+)\.')
+old_style = re.findall(r'(?m)^(?:!\[)?(?:그림|표) \d+\.', text)
+assert not old_style, ('장별 구 형식 캡션 잔존(그림 N. / 표 N.) — 새 형식 {장}-{k}로 바꿔야 연번이 겹치지 않는다', old_style[:5])
+bare = re.findall(r'(?<![가-힣A-Za-z])(?:그림|표) \d+(?![-\d])', text)
+assert not bare, ('연번 전 하이픈 없는 그림·표 참조 잔존 — 장별 옛 번호일 수 있다', bare[:5])
+fig_map, counters = {}, {'그림': 0, '표': 0}
+for m in CAPTION.finditer(text):
+    key = (m.group(1), int(m.group(2)), int(m.group(3)))
+    assert key not in fig_map, ('캡션 중복', key)
+    counters[key[0]] += 1
+    fig_map[key] = counters[key[0]]
+refs = {(m.group(1), int(m.group(2)), int(m.group(3))) for m in FIG_REF.finditer(text)}
+missing = sorted(refs - set(fig_map))
+assert not missing, ('캡션 없는 참조', missing)
+def _renum(m):
+    n = fig_map[(m.group(1), int(m.group(2)), int(m.group(3)))]
+    return f'{m.group(1)} {n}{_particle(n, m.group(4))}'
+text = FIG_REF.sub(_renum, text)
+assert not FIG_REF.search(text), '연번 치환 뒤 {장}-{k} 잔존'
+map_lines = ['| 원래 번호 | 전권 번호 |', '|---|---|'] + [
+    f'| {k[0]} {k[1]}-{k[2]} | {k[0]} {v} |' for k, v in sorted(fig_map.items(), key=lambda kv: (kv[0][0] != '그림', kv[1]))]
+(SCR / 'figure_map.md').write_text('\n'.join(map_lines) + '\n', encoding='utf-8')
+print('figures', counters['그림'], 'tables', counters['표'])
+imgs = re.findall(r'!\[[^\]]*\]\(([^)]+)\)', text)
+missing_img = [i for i in imgs if not (BOOK / i).exists()]
+assert not missing_img, ('그림 파일 없음', missing_img)
 (BOOK / '04_manuscript.md').write_text(text, encoding='utf-8')
 print('written', len(text))

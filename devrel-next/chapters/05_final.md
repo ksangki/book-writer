@@ -14,6 +14,8 @@ Wathan의 설명을 조금 더 들어보자. 같은 날 그는 이렇게 썼다.
 
 역설은 Wathan 자신의 문장 안에 있다. 그는 스스로 "more popular than ever"라고 했다. 그런 프레임워크의 문서 트래픽이 40% 줄었다. Wathan은 그 원인을 "the brutal impact AI has had on our business"라고 불렀다. 그 영향이 어떤 경로로 왔는지는 이렇게 읽어볼 수 있다. 개발자가 문서를 열기 전에 코딩 에이전트가 이미 Tailwind 클래스를 써준다. 문서를 읽는 주체가 사람에서 모델로 옮겨가면 방문 기록은 남지 않는다. 문제는 Tailwind의 사업 모델이 바로 그 방문 위에 서 있었다는 점이다. 문서가 유료 제품을 알리는 유일한 입구였기 때문이다.
 
+![그림 5-1. 문서가 유료 제품의 입구였던 Tailwind의 퍼널에 코딩 에이전트가 끼어든 자리](figures/fig-5-1.svg)
+
 전날 그가 PR에 남긴 댓글은 이 사정을 더 날카롭게 보여준다. "making it easier for LLMs to read our docs just means less traffic to our docs which means less people learning about our paid products and the business being even less sustainable." 에이전트가 읽기 좋은 문서를 만들수록 입구는 더 좁아진다. 문서 담당자라면 참으로 난감한 처지다.
 
 4장에서 본 Supabase는 말 한 번 나눈 적 없는 빌더들에게 에이전트를 통해 채택되었다. Tailwind는 같은 흐름의 반대편 끝에 선 사례다. 두 이야기는 한 현상의 양면으로 읽을 수 있다. 채택과 수익이 서로 따로 움직이기 시작한 것, 이른바 채택과 수익의 탈동조화다. HN 토론의 한 사용자는 Claude 같은 모델이 Tailwind를 설치하지도 않은 프로젝트에 Tailwind 클래스를 넣으려 한 적이 여러 번 있다며 "LLMs has a bias toward tailwind css"라고 썼다. 그러고는 이것이 "a business model issue rather than tailwind becoming irrelevant"라고 덧붙였다. 개인의 체감이지만, 모델이 좋아하는 것과 회사가 돈을 버는 것 사이에 연결 고리가 끊겼다는 진단으로는 정확하다.
@@ -50,6 +52,20 @@ Block의 Angie Jones도 2025년 10월 글에서 비슷한 이야기를 했다. "
 
 형식 쪽에서도 변화가 있다. Rizèl Scarlett은 2025년 9월 글에서 Block에서 오픈소스 DevRel을 이끌던 시절 연 바이브 코딩 대회 이야기를 했다. 처음에는 에이전트가 틀린 결과를 내도 지켜보는 재미가 있었다. 그런데 "once models improved, it felt like an outdated trick to watch agents generate a tool." 모델이 좋아지자 에이전트가 도구를 만들어내는 장면은 금세 낡은 묘기가 되어버렸다. AI 데모 콘텐츠에는 유통기한이 있다. 그것도 모델의 발전 속도만큼 짧은 유통기한이다.
 
+지금까지 살펴본 통로들을 한 표로 정리해두자.
+
+| 통로 | 이 장이 본 변화 | 근거의 성격 |
+|---|---|---|
+| 문서 사이트 | Tailwind 문서 트래픽 2023년 초 대비 약 40% 감소 | 회사 창업자의 1차 증언, 방법 미공개 |
+| 공개 Q&A (Stack Overflow) | 출시 6개월 활동 약 25% 상대 감소 / 일일 웹 트래픽 약 12% 감소 | 동료 검토 논문 2편 |
+| 관계형 커뮤니티 (Reddit) | 감소 증거 없음 / 정보성 요청 3.4% 초과 감소 배제 | 동료 검토 논문 / 프리프린트 |
+| 검색 | "SEO is basically dead", 챗봇이 새 구성원을 데려옴 | 실무자 블로그 |
+| 비색인 채널 (Discord·Slack) | 새 도구의 지식이 검색되지 않는 방으로 흩어짐 | Hacker News 댓글 |
+| 에이전트 | "Another channel is agents" | r/devrel 댓글 |
+| AI 데모 콘텐츠 | 모델이 좋아지자 금세 낡은 묘기가 됨 | 실무자 블로그 |
+
+표 5-1. 관계의 통로별로 본 변화와 그 근거
+
 이 진단들을 모으면 한 문장이 된다. 콘텐츠가 도착하던 통로가 바뀌었다.
 
 ## 두 개의 퍼널, 세 개의 표면
@@ -62,19 +78,9 @@ Dewan Ahmed는 2026년 8월 갱신한 글에서 DevRel의 퍼널을 둘로 나�
 
 Joe Karlsson은 2026년 4월 글에서 이 구도를 셋으로 늘렸다. "In 2026 there are three distribution surfaces to own, not one: human developers, search crawlers, and LLMs. Each breaks differently." 사람 개발자, 검색 크롤러, 그리고 LLM. 세 표면은 각기 다른 방식으로 고장 난다. 그는 여기서 한 걸음 더 나간다. "your README, your examples directory, your API reference, and your SDK docs are your LLM marketing. Not your blog posts. Not your conference talks." LLM이라는 표면에서는 README와 예제 디렉터리, API 레퍼런스가 곧 마케팅이라는 것이다.
 
-```mermaid
-flowchart LR
-  C["DevRel 콘텐츠·자산"] --> H["사람 개발자"]
-  C --> S["검색 크롤러"]
-  C --> L["LLM·코딩 에이전트"]
-  H --> HF["human funnel<br/>영상·워크숍·서사 → 신뢰"]
-  S --> HF
-  S --> MF["machine funnel<br/>문서·레퍼런스·MCP → 정확성"]
-  L --> MF
-```
-그림 1. 개발자·검색 크롤러·LLM — 세 유통 표면과 두 퍼널
+![그림 5-2. 개발자·검색 크롤러·LLM — 세 유통 표면과 두 퍼널](figures/fig-5-2.svg)
 
-그림처럼 세 표면을 두 퍼널에 이어보면 설계의 기준이 조금 선명해진다. 독자의 질문이 "이 함수의 인자가 무엇인가"처럼 정확성을 요구한다면, 그 답은 machine funnel에 두는 편이 낫다. 에이전트가 가져가기 좋은 레퍼런스와 예제로, 버전과 날짜를 분명히 해서. 독자의 질문이 "이 도구를 우리 팀에 들여도 될까"처럼 신뢰를 요구한다면, 그 답은 사람이 만든 이야기와 라이브 시연, 실패담이 담긴 자리에 두는 편이 낫다. 검색 크롤러는 그 사이에서 양쪽 모두로 사람을 보낸다.
+그림 5-2처럼 세 표면을 두 퍼널에 이어보면 설계의 기준이 조금 선명해진다. 독자의 질문이 "이 함수의 인자가 무엇인가"처럼 정확성을 요구한다면, 그 답은 machine funnel에 두는 편이 낫다. 에이전트가 가져가기 좋은 레퍼런스와 예제로, 버전과 날짜를 분명히 해서. 독자의 질문이 "이 도구를 우리 팀에 들여도 될까"처럼 신뢰를 요구한다면, 그 답은 사람이 만든 이야기와 라이브 시연, 실패담이 담긴 자리에 두는 편이 낫다. 검색 크롤러는 그 사이에서 양쪽 모두로 사람을 보낸다.
 
 조금 더 구체적으로 생각해보자. 당신이 SDK의 새 메이저 버전 릴리스를 맡았다고 해보자. 예전이라면 긴 블로그 글 한 편에 변경 사항과 개발 배경, 마이그레이션 방법을 모두 담았을 것이다. 두 퍼널로 나눠 보면 할 일이 달라진다. machine funnel 쪽에는 버전 번호가 붙은 체인지로그, 옛 코드와 새 코드를 나란히 둔 마이그레이션 예제, 폐기된 API를 명시한 레퍼런스가 간다. 에이전트가 이 조각들을 가져가 옛 버전 코드를 새 버전으로 옮길 수 있게. human funnel 쪽에는 왜 이 버전을 만들었는지, 어떤 선택을 버렸는지, 팀이 어디서 헤맸는지를 담은 이야기와 라이브 세션이 간다. 도구를 팀에 들일지 고민하는 사람이 판단할 수 있게. 한 편에 섞여 있던 것을 제자리에 나눠 놓는 일이다.
 
@@ -106,7 +112,7 @@ Watanabe 등의 동료 검토 전 논문(프리프린트)은 Claude Code로 만�
 
 기여자가 늘어나는 곳에는 늘 허영 지표의 유혹이 따른다. Guo 등의 프리프린트는 MCP 서버 마켓플레이스 여섯 곳을 수집해 분석하면서 제목에 가까운 질문을 던졌다. "Are MCP marketplaces truly growing, or merely inflated by placeholders and abandoned prototypes?" 등록된 항목의 수가 늘어나는 것만으로는 생태계가 건강하다고 말할 수 없다는 경고다. 2장에서 본 CHAOSS와 SPACE가 오래전부터 한 말, 활동량은 건강을 말해주지 않는다는 말과 같은 이야기다.
 
-그렇다면 무엇을 세야 할까? 2026년 7월 DevRelCon NYC의 한 세션 제목이 좋은 출발점이 된다. 참관기에 따르면 Joey de Villa와 Sean Keegan은 이렇게 물었다. "What changed because this DevRel work existed?" 이 DevRel 활동이 있었기 때문에 무엇이 달라졌는가. 누군가 실제로 배포하고, API 호출에 성공하고, 포크하고, PR을 보낸 흔적이 그 답이 된다. 이 책은 이것을 '만든 증거'라고 부르려 한다. 참관기 요약에서 나온 문장이니 발표 원문의 맥락은 따로 확인해두자.
+그렇다면 무엇을 세야 할까? 2026년 7월 DevRelCon NYC 참관기가 좋은 출발점이 된다. 참관기에 따르면 1장에서 본 Joey deVilla의 세션은 DevRel의 일이 채택·매출·유지 같은 결과에 어떻게 기여하는지 설명하라는 압박을 다뤘고, Sean Keegan의 세션은 교육 지표를 예로 들어 소비 지표 옆에 만든 흔적을 함께 보자고 했다. 참관기를 쓴 Ayodeji Ogundare는 두 세션을 정리한 뒤 이렇게 물었다. "What changed because this DevRel work existed?" 이 DevRel 활동이 있었기 때문에 무엇이 달라졌는가. 누군가 실제로 배포하고, API 호출에 성공하고, 포크하고, PR을 보낸 흔적이 그 답이 된다. 이 책은 이것을 '만든 증거'라고 부르려 한다. 참관기 작성자의 정리이니 발표 원문의 맥락은 따로 확인해두자.
 
 국내에서도 비슷한 문장이 나왔다. 2026년 3월 GeekNews Weekly #350은 이렇게 썼다. "과거에는 Developer Evangelist가 컨퍼런스와 블로그, 샘플 코드를 통해 생태계를 키웠다면, 지금은 그 역할이 제품 안으로 더 깊이 들어와 핵심 레이어로 이동했습니다." 편집자 이름은 밝혀져 있지 않다. 국내 커뮤니티 활동에서도 두 장면이 눈에 띈다. 2025년 8월 velog에 올라온 한 후기는, 스스로를 DevRel을 꿈꾸는 비개발 마케터라고 소개한 필자가 처음 맡은 일이 "비개발자를 위한 바이브코딩 온라인 세미나" 기획이었다고 전한다. 커뮤니티 이름은 글에 나오지 않는다. 그보다 앞선 2025년 6월에는 OKKY가 "AI시대 IT업계 일자리 위기 끝장토론회"를 열었다. 참관기에 따르면 패널들은 채용 감소를 두고 AI 때문에 사람을 안 뽑는 것과 AI로 대체되었기 때문에 안 뽑는 것을 구분했다. 두 장면이 추세를 말해주지는 않는다. 다만 국내 개발자 커뮤니티의 대화 주제가 어디를 향하는지는 엿볼 수 있다.
 

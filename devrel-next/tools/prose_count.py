@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""소절(##)별 순수 산문 자수 — 코드·mermaid 블록, 표(|), 인용 블록(>), 헤딩, 그림 캡션 제외.
+"""소절(##)별 순수 산문 자수 — 코드·mermaid 블록, 표(|), 인용 블록(>), 헤딩, 이미지 줄(![), 그림·표 캡션 제외.
 사용: python3 devrel-next/tools/prose_count.py devrel-next/chapters/03_final.md [...]
 소절당 상한 3,000자를 넘으면 OVER로 표시한다 (02_plan.md 분량 규약)."""
 import re
@@ -19,7 +19,7 @@ for path in sys.argv[1:]:
             order.append(sec)
             counts[sec] = 0
             continue
-        if sec is None or line.startswith(("|", ">", "#")) or re.match(r"^그림 \d+\.", line):
+        if sec is None or line.startswith(("|", ">", "#", "![")) or re.match(r"^(?:그림|표) \d+(?:-\d+)?\.", line):
             continue
         counts[sec] += len(line)
     print(path)

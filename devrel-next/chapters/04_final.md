@@ -16,23 +16,13 @@ Schaeff는 지금 자기 팀에 정한 목표를 "developer experience for machi
 
 2026년 4월 20일, Joe Karlsson은 같은 현상을 한 문장으로 정리했다. 검색창 앞의 개발자는 도구를 적극적으로 찾는 중이다. 하지만 AI 코딩 도구 안에서는 사정이 다르다. "In an AI coding assistant, the AI is solving a problem directly. It's not shopping. You have to already be there." AI는 곧장 문제를 풀러 가고, 그 순간 쓸 수 있는 것은 이미 알고 있는 도구뿐이다. 그러니 그 순간이 오기 전에 이미 거기 있어야 한다.
 
-이 문장이 DevRel에게 난감한 이유는 분명하다. DevRel의 오래된 기술은 대부분 '쇼핑하는 개발자'를 겨냥했다. 비교 글, 시작 가이드, 컨퍼런스 부스, 데모가 모두 고르는 사람의 눈앞에 제품을 놓는 일이었다. 그런데 고르는 순간이 사람의 눈앞에서 사라지면, 그 기술들은 어디에 쓰여야 할까? 이 질문을 쥐고, 에이전트라는 독자가 어떻게 등장했는지부터 따라가보자.
+이 문장이 DevRel에게 난감한 이유는 분명하다. DevRel의 오래된 기술은 대부분 '쇼핑하는 개발자'를 겨냥했다. 비교 글, 시작 가이드, 컨퍼런스 부스, 데모가 모두 고르는 사람의 눈앞에 제품을 놓는 일이었다. 2026년 7월 DevRelCon에서 처음 발표한 Danielle Washington도 dev.to 회고(2026-07-28)에서 같은 과제를 적었다. "As developers begin using AI tools to discover products, evaluate options, and solve problems, our existing approaches to content and discoverability may need to change." 그렇다면 고르는 순간이 사람의 눈앞에서 사라지면, 그 기술들은 어디에 쓰여야 할까? 이 질문을 쥐고, 에이전트라는 독자가 어떻게 등장했는지부터 따라가보자.
 
 ## 에이전트를 위한 표준이 생긴 15개월
 
 에이전트를 위한 문서와 인터페이스는 생각보다 짧은 시간에 한꺼번에 등장했다. 2024년 9월 3일부터 2025년 12월 9일까지, 15개월 남짓의 일이다.
 
-```mermaid
-timeline
-    title 에이전트를 위한 표준·제품 타임라인
-    2024-09 : llms.txt 제안 (Jeremy Howard)
-    2024-11 : MCP 발표 (Anthropic)
-    2025-01 : Agent Experience 명명 (Mathias Biilmann)
-    2025-04 : GitHub 공식 MCP 서버 퍼블릭 프리뷰 : Cloudflare 원격 MCP 서버
-    2025-08 : Vercel MCP 퍼블릭 베타 : 카카오 PlayMCP 베타
-    2025-12 : Agentic AI Foundation 결성 (Linux Foundation)
-```
-그림 1. 에이전트를 위한 표준·제품 타임라인(2024-09~2025-12)
+![그림 4-1. 에이전트를 위한 표준·제품 타임라인(2024-09~2025-12)](figures/fig-4-1.svg)
 
 출발점은 2024년 9월 3일 Answer.AI의 Jeremy Howard가 낸 llms.txt 제안이다. 제안서는 스스로를 이렇게 소개한다. "A proposal to standardise on using an `/llms.txt` file to provide information to help agents use a website." 웹사이트 루트에 마크다운 파일 하나를 두고, 에이전트가 사이트를 쓰는 데 필요한 정보와 링크를 모아두자는 생각이다. 어디까지나 제안이라는 점을 기억해두자. 이 파일이 실제로 얼마나 읽히는지는 이 장 마지막에서 따로 따진다.
 
@@ -51,6 +41,8 @@ timeline
 Biilmann이 2025년 1월 28일 개인 블로그에 쓴 글의 정의부터 보자. Agent Experience(AX)는 "the holistic experience AI agents will have as the user of a product or platform", 곧 AI 에이전트가 제품이나 플랫폼의 사용자로서 겪는 경험 전체다.
 
 그는 이 말을 계보 위에 놓았다. 1993년 인지심리학자이자 디자이너인 Don Norman이 사용자 경험(UX)이라는 말을 만들었고, 2011년 Jeremiah Lee가 개발자 경험(DX)이라는 말을 만들었다. 이제 에이전트가 우리 제품과 자율적으로 상호작용하는 시대에 들어서니, 제품 경험을 에이전트를 위해 따로 설계하기 시작해야 한다는 것이다. 그는 모든 소프트웨어 회사가 제품의 AX를 의식적으로 설계하지 않으면 대체될 위험이 있다고까지 썼다.
+
+![그림 4-2. 사용자 경험의 계보 — Biilmann의 UX·DX·AX에 Lawson의 정의와 가장 가까운 학술 개념을 더해](figures/fig-4-2.svg)
 
 Biilmann은 반년쯤 뒤 X에 올린 글에서 실제 사례를 하나 들었다. Bolt가 사용자가 로그인하기도 전에 Netlify 사이트를 먼저 배포해두는 방식, 이른바 "Deploy first, claim later"다. 배포를 가입 앞에 두어, 에이전트가 먼저 일을 끝낼 수 있게 순서를 바꾼 셈이다. 에이전트가 사용자라면 온보딩도 에이전트의 순서에 맞춰 다시 짜야 한다.
 
@@ -110,6 +102,17 @@ https://docs.stripe.com/.well-known/skills/index.json  # 에이전트용 스킬 
 
 이 모든 것이 완전히 새로운 이야기는 아니다. 2009년 Robillard가 Microsoft 개발자를 설문한 연구(IEEE Software, 동료 검토 논문, 응답자 83명·유효 80명)에서 API를 배우는 방법으로 문서를 읽는다고 답한 사람은 78%였다. 사람도 오래전부터 문서를 가장 먼저 읽었다. 이제 그 문서를 에이전트도 함께 읽는다.
 
+| 연구 | 문헌 유형 | 대상 | 발견 |
+|---|---|---|---|
+| Hsieh 등(2023) | 프리프린트 | 도구 문서와 시범 예제 비교 | 문서만 준 조건이 예제를 준 조건과 비슷하거나 나음 |
+| Hasan 등(2026) | 프리프린트 | MCP 서버 103개, 도구 856개 | 도구 설명의 97.1%에 스멜, 보강 시 성공률 중앙값 +5.85%p·실행 단계 +67.46% |
+| Gloaguen 등(2026) | 프리프린트 | 저장소 컨텍스트 파일 | 성공률 일반적 개선 없음, 추론 비용 평균 20%+ 증가, 비표준 관행 명시에 유용 |
+| Chatlatanagulchai 등(2025) | 프리프린트 | 컨텍스트 파일 2,303개 | 보안 요구 명시 14.8% |
+| Hasan 등(2026-04 개정판) | 프리프린트 | 오픈소스 MCP 서버 1,899개 | 일반 취약점 7.2%, 도구 오염 5.5% |
+| Robillard(2009) | 동료 검토 논문 | Microsoft 개발자 83명(유효 80명) | API 학습 방법으로 문서 78% |
+
+표 4-1. 에이전트용 문서에 관한 연구 여섯 편
+
 ## 반론 — llms.txt는 아무도 읽지 않는다?
 
 여기까지 읽으면 에이전트용 문서를 서둘러 만들어야 할 것 같다. 잠시 멈추고 반대편 목소리를 들어보자. 이 논쟁은 생각보다 뜨겁다.
@@ -122,7 +125,7 @@ MCP 쪽에서도 반박이 나왔다. 같은 2026년 3월 토론에서 한 사�
 
 이 논쟁은 어떻게 정리하면 좋을까? 두 맥락을 나눠서 보는 편이 낫다. 하나는 검색 가시성 신호로서의 llms.txt다. 크롤러가 이 파일을 읽고 검색이나 답변 노출을 바꾸느냐는 질문이라면, 지금까지의 증언은 회의적이다. 다른 하나는 코딩 에이전트가 개발자 문서를 직접 가져가는 맥락이다. 개발자가 에이전트에게 특정 라이브러리 문서를 읽혀 작업하는 경우라면, 마크다운 제공과 정확한 레퍼런스와 비표준 규칙의 명시가 효과를 낼 여지가 크다. 앞 절의 연구가 가리킨 것도 이쪽이다. 어느 경우든 "llms.txt가 표준이 됐다"고 말하기는 이르다. 2026년 9월 시점에 이 파일은 여전히 제안이고, 관련 관행은 빠르게 바뀌고 있으니 공식 문서를 함께 확인해두자.
 
-그리고 이 장을 닫기 전에 들어둘 목소리가 하나 더 있다. 2026년 9월 18일, 에이전트가 제품을 쓸 수 있는지 점검해주는 도구 ax-check가 Hacker News에 소개되자 xena라는 사용자가 이런 댓글을 남겼다. "As someone that works for a company that gets a 100% score on ax-check, all the effort I've put into making it accessible for agents has not 10xed the growth numbers like I was told it would." 같은 계정이 2024년 7월에는 막 DevRel에 들어왔다며 불안을 털어놓았던 사람이다. 2년 사이 그는 에이전트를 위한 일을 했고, 점수는 만점을 받았고, 약속받은 성장은 오지 않았다.
+그리고 이 장을 닫기 전에 들어둘 목소리가 하나 더 있다. 에이전트가 제품을 쓸 수 있는지 점검해주는 도구 ax-check가 Hacker News에 소개된 스레드에, 2026년 9월 18일 xena라는 사용자가 이런 댓글을 남겼다. "As someone that works for a company that gets a 100% score on ax-check, all the effort I've put into making it accessible for agents has not 10xed the growth numbers like I was told it would." 같은 계정이 2024년 7월에는 막 DevRel에 들어왔다며 불안을 털어놓았던 사람이다. 2년 사이 그는 에이전트를 위한 일을 했고, 점수는 만점을 받았고, 약속받은 성장은 오지 않았다.
 
 한 사람의 댓글로 AX 전체를 판정할 수는 없다. 하지만 이 문장은 이 장의 모든 내용 위에 물음표를 하나 얹는다. 에이전트가 문서를 읽는다는 것과, 그 독해가 제품의 성장으로 이어진다는 것 사이에는 아직 아무도 다리를 놓지 못했다. 그 다리가 어디에 놓여야 하는지는, 관계의 통로 전체를 다시 봐야 보인다.
 
