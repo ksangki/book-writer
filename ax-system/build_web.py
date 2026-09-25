@@ -6,8 +6,8 @@ EPUB(v1.2.0)과 분리된 웹 판본(v1.3.0): 삽화 6점·운영체계 도식·
 """
 import sys, re, subprocess, pathlib
 
-WEB_VERSION = "1.3.0"
-PUB_DATE = "2026-09-12"
+WEB_VERSION = "1.4.0"
+PUB_DATE = "2026-09-25"
 HERE = pathlib.Path(__file__).resolve().parent
 OUT = pathlib.Path(sys.argv[1])
 
