@@ -77,7 +77,7 @@ A-1에서 가장 굵은 행을 고르자. 그리고 그 기능을 가장 많이 
 | 번역·피드백 루프 | FDE, 솔루션 엔지니어 | Anthropic FDE("contribute insights back ...", 배운 것을 제품 팀에 되돌린다), Anthropic Developer Relations("translating developer feedback ...", 개발자 피드백을 옮긴다) |
 | 먼저 가보기 | 제품 엔지니어, Staff Engineer, MTS | Vercel DevRel Engineer("hit the rough edges first", 거친 곳에 먼저 부딪힌다) |
 | 신뢰·번역 | 교육 직무 | Vercel 지원 조건("something you made that taught developers something", 개발자에게 무언가를 가르친 결과물) |
-| 네 기능 모두 | 사내 AX | 8장의 Block·카카오 공개 사례 |
+| 네 기능 모두 | 사내 AX | 8장의 Block·카카오·ING·GitHub 등 공개 사례 |
 
 찾았다면 이력서의 한 줄을 기능의 동사로 다시 써보자. 형식은 이렇다.
 

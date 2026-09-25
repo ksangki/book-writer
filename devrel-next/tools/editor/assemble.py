@@ -2,11 +2,11 @@
 """devrel-next 통합 원고 조립 — 챕터 final + 편집 수정(전환·콜백·표기) + 앞뒤 부속."""
 import re, pathlib
 
-BOOK = pathlib.Path('/Users/1112022/source/github/book-writer/devrel-next')
+BOOK = pathlib.Path(__file__).resolve().parents[2]
 SCR = pathlib.Path(__file__).parent
 IDENT = 'urn:uuid:2e3ab927-3a44-4ede-b169-e0253729973c'
 TITLE, SUB = 'DevRel Next', '코드 너머의 관계'
-VER, DATE, AUTHOR = '1.2.0', '2026-09-25', '김상기'
+VER, DATE, AUTHOR = '1.3.0', '2026-09-25', '김상기'
 HV = (BOOK.parent / 'VERSION').read_text().strip().lstrip('v')
 
 # 편집 수정: (장, 원문, 교체문, 전부교체 여부)
@@ -120,7 +120,7 @@ title_page = f"""# {TITLE}
 **저자:** {AUTHOR}
 **식별자:** {IDENT}
 
-이 판본은 저자 피드백(결론 세우기·쉽게 풀어쓰기·공개 자료 보강)을 반영한 개정판이다. 사례와 수치는 2026년 9월 시점의 공개 자료를 기준으로 했다.
+이 판본은 저자 피드백(결론 세우기·쉽게 풀어쓰기·공개 자료 보강, 10장 '밝은 쪽' 전망 추가)을 반영한 개정판이다. 사례와 수치는 2026년 9월 시점의 공개 자료를 기준으로 했다.
 
 ### 라이선스
 
