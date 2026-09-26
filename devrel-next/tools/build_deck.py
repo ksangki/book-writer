@@ -9,7 +9,7 @@ import sys, pathlib
 OUT = pathlib.Path(sys.argv[1])
 BOOK = "DevRel Next — 코드 너머의 관계"
 BY = "김상기 · ksangki/devrel-next"
-VER = "v1.3.0"
+VER = "v1.3.4"
 slides = []
 
 MOTIF = ('<svg class="motif" viewBox="0 0 420 60" aria-hidden="true">'
@@ -30,7 +30,8 @@ def cover(first=True):
     {MOTIF}
     <p class="cover-quote">"DevRel을 했고, 지금은 AX를 한다."</p>
     <p class="cover-by">— 하는 일을 동사로 적어보면, 두 일의 목록은 꽤 겹친다</p>
-    <div class="cover-meta"><span>김상기 · 1시간 발표</span><span class="mono dim">ksangki/devrel-next · {VER}</span></div>"""
+    <div class="cover-meta"><span>김상기 · 1시간 발표</span><span class="mono dim">ksangki/devrel-next · {VER}</span></div>
+    </div><figure class="cover-art"><img src="../figures/src_bridge_art.jpg" alt="회사와 만드는 사람들을 잇는 다리 — 다리 위에서 번역·피드백·신뢰·먼저 가보기를 하는 사람들, 건너편에 늘어선 빌더·에이전트·동료" /></figure>"""
     else:
         inner = f"""
     <div class="eyebrow coral">감사합니다</div>
@@ -42,7 +43,7 @@ def cover(first=True):
     slides.append(("cover", "OPENING" if first else "CLOSING",
                    '<div class="corner tl"></div><div class="corner tr"></div>'
                    '<div class="corner bl"></div><div class="corner br"></div>'
-                   f'<div class="cover-wrap">{inner}</div>'))
+                   + (f'<div class="cover-wrap has-art"><div>{inner}</div>' if first else f'<div class="cover-wrap"><div>{inner}</div></div>')))
 
 
 def divider(sec, eyebrow, title, sub, chapters):
@@ -436,7 +437,8 @@ body{background:var(--bg);color:var(--text);font-family:'Pretendard','Apple SD G
 .foot-note{color:var(--muted);font-size:clamp(.86rem,1.5vw,1rem);line-height:1.7;margin-top:1.2rem;max-width:66rem}
 .foot-note b,.lead b,.after b,.stat-l b{color:var(--cream)}
 .cover{background:radial-gradient(1200px 600px at 50% 0%,#2a1d38 0%,#17121f 70%)}
-.cover-wrap{max-width:62rem}
+.cover-wrap{max-width:62rem}.cover-wrap.has-art{max-width:none;width:100%;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:3rem;align-items:center}
+.cover-wrap.has-art>*{min-width:0}.cover-art{margin:0}.cover-art img{display:block;width:100%;height:auto;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
 .cover-title{font-size:clamp(3rem,8vw,5.6rem);font-weight:800;line-height:1.05;letter-spacing:-.01em}
 .cover-title.end{font-size:clamp(2.4rem,6vw,4.2rem)}
 .cover-sub{color:var(--cream);font-size:clamp(1.05rem,2.1vw,1.5rem);margin-top:.8rem;line-height:1.45}
@@ -486,7 +488,7 @@ div.split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:
 .page-section{position:absolute;top:1.5rem;left:1.8rem;color:var(--dim);font-size:.8rem;letter-spacing:.08em}
 .page-footer{position:absolute;bottom:1.2rem;left:1.8rem;right:1.8rem;display:flex;justify-content:space-between;gap:1rem;color:#5a4d68;font-size:.75rem}
 .cover .page-num{top:3.5rem;right:3.6rem}.cover .page-section{top:3.5rem;left:3.6rem}.cover .page-footer{bottom:3.2rem;left:3.6rem;right:3.6rem}
-@media(max-width:900px){.grid-3,.grid-4{grid-template-columns:1fr}.div-wrap,div.split{grid-template-columns:1fr}.deck-fig img,.deck-fig.tall img{max-height:none;width:100%}
+@media(max-width:900px){.cover-wrap.has-art{grid-template-columns:minmax(0,1fr);gap:1.6rem}.cover-sub{overflow-wrap:anywhere}.grid-3,.grid-4{grid-template-columns:1fr}.div-wrap,div.split{grid-template-columns:1fr}.deck-fig img,.deck-fig.tall img{max-height:none;width:100%}
  .page-footer{display:none}.slide{min-height:auto;padding:2.4rem 1.1rem 3rem}.deck-table{display:block;overflow-x:auto}}
 @media print{body{height:auto;overflow:visible;background:#fff;color:#111}
  .slide{page-break-after:always;min-height:auto;border:none;background:#fff!important;color:#111}
