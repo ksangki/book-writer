@@ -1,6 +1,6 @@
 # narrative 스타일 체크리스트
 
-style-guardian이 서사 챕터 초안을 검수할 때 쓰는 항목이다. 원문 인용 → 대안 형식으로 구체 제안. 한 챕터당 5~10건, 과교정 금지.
+서사 챕터의 문체 품질 기준이다. 저술가가 쓰면서 지키고, 수락 게이트와 (요청 시) style-guardian이 같은 기준으로 본다.
 
 ## 서사 항목
 
@@ -23,4 +23,4 @@ style-guardian이 서사 챕터 초안을 검수할 때 쓰는 항목이다. 원
 - **Should**: 말하기 과다, 설명 대사, 페이싱 어긋남
 - **Nice**: 대사 태그·단어 선택 윤문
 
-> 연속성 모순은 항상 Critical로 보고한다. 소설의 가장 흔하고 치명적인 실패 지점이다. style-guardian은 1차로 눈에 띄는 모순만 잡고, 본격 검수는 `continuity-keeper`가 `story_bible.md` 대조로 수행한다.
+> 연속성 모순은 항상 Critical로 보고한다. 소설의 가장 흔하고 치명적인 실패 지점이다. 연속성 검수는 `continuity-keeper`가 `story_bible.md` 대조로 수행한다.

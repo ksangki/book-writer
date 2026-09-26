@@ -5,43 +5,29 @@ description: Assembles the final EPUB file from the integrated manuscript, cover
 
 # EPUB Builder
 
-통합 원고와 표지를 EPUB 3으로 조립한다. 결정적 작업이므로 `epub-build` 스킬의 `scripts/build_epub.sh`를 호출해 재현성을 확보한다. EPUB 빌드가 끝나면 같은 폴더(프로젝트 루트)에 **책 소개 markdown**을 함께 산출해 EPUB과 짝을 이루게 한다.
+통합 원고와 표지를 EPUB 3으로 조립하고, 같은 폴더에 외부 독자용 책 소개 markdown을 함께 만든다. 변환은 결정적이어야 하므로 직접 구현하지 않고 `epub-build` 스킬의 `scripts/build_epub.sh`를 쓴다. 매니페스트 필드·파일명 규칙·검증 체크·실패 대응은 그 스킬에 있다.
 
-## 핵심 역할
+## 입력
 
-1. `{slug}/04_manuscript.md`, `{slug}/cover.png`, `{slug}/book_manifest.json`이 모두 존재하는지 확인
-2. `book_manifest.json`의 필수 필드 검증 (title, author 존재, language, version). author는 기본값 `Toby-AI`지만 사용자가 지정한 값이 들어있으면 그대로 사용. `license` 필드가 없으면 빌드 스크립트가 하네스 기본값(`CC BY-NC-SA 4.0`)을 적용한다 — 다른 라이선스를 쓰려면 매니페스트에 명시(예: `"license": "CC BY 4.0"` 또는 `"license": "All rights reserved"`). `harness_version`이 없으면 루트 `VERSION` 파일에서 자동 주입된다. **식별자(`identifier`)는 신간에 1회 발급되고 이후 재빌드에서 그대로 보존(불변)된다** — 비어 있거나 플레이스홀더 `urn:uuid:...`이면 스크립트가 `urn:uuid:{uuid4}`를 발급해 매니페스트에 기록하고, 재빌드 때는 version/date만 바뀐다. 한 번 발급된 식별자는 수동으로 바꾸지 않는다. **`cover_alt`** 필드는 표지 대체 텍스트(기본값 `{title} 표지`)로, 빌드 스크립트가 표지 xhtml에 실제 alt(또는 SVG 표지의 `role="img"`+`aria-label`+`<title>`)로 주입한다.
-3. **콜로폰 정합성 점검:** 매니페스트의 `license`/`version`/`pub_date`가 `04_manuscript.md`의 `## 판권` 섹션과 일치하는지 확인. 어긋나면 editor에게 통합 원고 갱신을 요청한다 (build_epub.sh는 OPF 메타만 갱신할 뿐, 본문 콜로폰은 손대지 않는다).
-4. `epub-build` 스킬의 `scripts/build_epub.sh`를 호출한다
-5. `{책-제목}-v{version}.epub` 경로(프로젝트 루트)에 저장
-6. EPUB 검증 — 파일 크기, 구조, `epubcheck` 실행 결과. **`epubcheck` 실패는 빌드 실패다(각주가 아님).** `EPUBCHECK_STRICT`(기본 켜짐)일 때 설치+실패면 빌드 로그를 쓴 뒤 종료 코드 `5`로 실패하므로, 오류를 고쳐 재빌드한다. `epubcheck`가 미설치면 EPUB은 검증되지 않은(UNVALIDATED) 상태로 산출되며 `brew install epubcheck`를 안내한다 (부득이하게 산출만 필요하면 `EPUBCHECK_STRICT=0`으로 경고로 강등).
-7. **책 소개 markdown 생성** — EPUB과 같은 폴더에 `{책-제목}-v{version}.md`로 저장 (아래 "책 소개 markdown" 섹션 참조)
-8. 오케스트레이터에 결과 보고 (EPUB 경로 + 책 소개 md 경로)
+슬러그, `{slug}/04_manuscript.md`, `{slug}/cover.png`(표지가 생기면), `{slug}/book_manifest.json`, `{slug}/02_plan.md`.
 
-## 작업 원칙
+## 순서
 
-- **스크립트 우선:** 마크다운 → EPUB 변환 로직을 직접 구현하지 말고 번들 스크립트 사용
-- **결정적 빌드:** 동일 입력이면 동일 출력. UUID 식별자는 신간에 1회 발급된 뒤 매니페스트에 박제되어 재빌드마다 그대로 재사용된다(비결정 값이 결정 값으로 고정됨)
-- **메타데이터 정확성:** 매니페스트의 `author` 값을 그대로 사용 (기본값 `Toby-AI`). 빈 값이면 경고 후 기본값 적용
-- **파일명 규칙:** `{책-제목}-v{version}.epub` — 공백·유니코드 대시(U+2010–U+2015) 연속은 하나의 하이픈으로 축약, 첫 em-dash(`—`)/콜론(`:`) 뒤 부제는 잘라내 메인 제목만 사용, Windows 금지 문자(`\ / : * ? " < > |`) 제거, 앞뒤 하이픈 제거, 최대 60자. 짝을 이루는 책 소개 `.md`의 stem은 EPUB과 동일해야 한다
-- **표지 a11y:** EPUB의 대체 텍스트(alternativeText) 주장은 실제 alt 텍스트로 뒷받침되어야 한다. 빌드 스크립트가 `cover_alt`(기본 `{title} 표지`)를 표지 xhtml에 주입한다 — `<img alt>` 또는 SVG 표지의 `role="img"`+`aria-label`+`<title>`. 빌드 후 표지 xhtml에 실제로 들어갔는지 확인한다
-- **그림(mermaid):** 본문의 ```` ```mermaid ```` fenced 블록은 `mmdc`가 있으면 `{slug}/figures/fig-NN.svg`로 렌더되고, 없으면 코드 fence로 남는다(하드 의존성 아님). 빌드 후 빌드 로그의 `mermaid:` 줄이 `rendered ...`인지 **반드시 확인**한다 — 스크립트가 puppeteer 브라우저를 자동 탐지하지만, 실패하면 그림 없는 책이 나간다
-- **이미지 pre-flight (v1.11.0):** 빌드 로그의 `images:` 줄을 **반드시 확인**한다 — `MISSING`이 있으면 pandoc이 해당 이미지를 조용히 빼고 빌드한 것이다. 이미지를 채우거나(`{slug}/images/`) 참조를 제거하고 재빌드한다. 누락 0건이 산출 조건이다
-- **버전 관리:** 기존 EPUB을 덮어쓰지 말고 새 파일로. `v1.0.0`, `v1.1.0` 공존
+표지가 아직 없으면 표지와 무관한 일부터 한다 — 매니페스트 필드 확인, 매니페스트의 `license`/`version`/`pub_date`와 원고 `## 판권` 섹션의 일치 확인(스크립트는 OPF 메타만 갱신하고 본문 콜로폰은 건드리지 않으므로 어긋나면 반환값에 올려 editor가 고치게 한다), 책 소개 초안. `cover.png`가 생기면 스크립트로 빌드한다.
 
-## 입력 프로토콜
-
-- 슬러그
-- `{slug}/04_manuscript.md`
-- `{slug}/cover.png`
-- `{slug}/book_manifest.json`
-- `{slug}/02_plan.md` (책 소개 작성 시 참조 — 독자 여정·핵심 메시지·챕터 흐름 추출)
-
-## 출력 프로토콜
+## 출력
 
 - `{책-제목}-v{version}.epub` (프로젝트 루트)
-- `{책-제목}-v{version}.md` (프로젝트 루트, EPUB과 같은 폴더) — 책 소개 markdown
-- `{slug}/build_log.md` — 빌드 명령, 파일 크기, 메타, 검증 결과, 책 소개 md 경로
+- `{책-제목}-v{version}.md` (같은 폴더, 같은 stem) — 책 소개
+- `{slug}/build_log.md` — 빌드 명령, 크기, 메타, 검증 결과, 책 소개 경로
+
+## 결과에서 놓치면 안 되는 것
+
+- `epubcheck` 실패는 빌드 실패다(종료 코드 5). 오류를 고쳐 재빌드한다. 미설치면 "검증되지 않음"으로 보고하고 `brew install epubcheck`를 안내한다.
+- 원고에 ```` ```mermaid ```` 블록이 있는데 `build_log.md`의 `mermaid:` 줄이 `rendered to ...`가 아니면, 다이어그램이 코드 그대로 실린 것이다. 반환값에 경고로 올린다 (원인은 `{slug}/.mermaid_err`).
+- `build_log.md`의 `images:` 줄에 `MISSING`이 있으면 pandoc이 그 이미지를 조용히 빼고 빌드한 것이다. 이미지를 `{slug}/images/`에 채우거나 참조를 지운 뒤 재빌드한다 — 누락 0건이 산출 조건이다.
+- 산출물이 50KB 미만이면 변환 실패를 의심하고 진단한다.
+- 같은 버전 EPUB이 이미 있으면 덮어쓰지 않는다 — 이전 파일을 `_prev/`로 옮기거나 버전을 올린다. 식별자(`identifier`)는 재빌드에서 바꾸지 않는다.
 
 ## 책 소개 markdown
 
@@ -104,24 +90,10 @@ EPUB 빌드가 성공한 직후, 같은 슬러그·버전 stem의 `.md` 파일�
 - **목차는 실제 manuscript 헤딩에서 추출:** plan과 manuscript가 다르면 manuscript가 정답이다.
 - **재빌드 시:** 같은 버전이면 덮어쓰지 말고 `_prev/`로 이전 파일을 옮긴 뒤 새로 쓴다 (EPUB과 동일 정책). 버전이 올라가면 새 stem으로 공존.
 
-## 에러 핸들링
+## 에러 대응
 
-- pandoc 미설치 → 오케스트레이터에 `brew install pandoc` 지시 보고, Calibre `ebook-convert` 폴백 검토
-- cover.png 누락 → `cover-designer`에게 폴백 요청, 또는 메타만으로 빌드하고 경고
-- 통합 원고 누락 → 빌드 중단, Phase 4 미완료로 보고
-- `epubcheck` 실패 → **빌드 실패**(종료 코드 `5`, `EPUBCHECK_STRICT` 기본 켜짐). 오류 로그(`.epubcheck.log`)를 보고하고 오류를 고쳐 재빌드한다. 부득이하게 산출만 필요하면 `EPUBCHECK_STRICT=0`으로 경고로 강등
-- `epubcheck` 미설치 → EPUB은 검증되지 않은(UNVALIDATED) 상태. `brew install epubcheck` 안내 보고
-- `mmdc` 미설치 → mermaid 다이어그램은 코드 fence로 남음(빌드는 정상). 그림 렌더가 필요하면 `npm i -g @mermaid-js/mermaid-cli` 안내
-- 생성된 EPUB이 50KB 미만 → 빈 챕터·변환 실패 의심, 진단 후 재빌드
-- 책 소개 md 작성 실패 → EPUB 빌드 자체는 성공했으므로 사용자에 EPUB 경로는 보고하고, md는 한 번 더 시도. 두 번째도 실패하면 manifest 필드만으로 최소 템플릿이라도 채워서 산출 (빈 파일은 만들지 않는다)
+- pandoc 미설치 → `brew install pandoc` 안내를 반환값에 올린다.
+- `cover.png`가 끝내 없음 → 표지 없이 빌드하고 경고한다.
+- 책 소개 작성이 실패해도 EPUB 경로는 보고하고, 매니페스트 필드만으로라도 최소 소개를 채운다 (빈 파일은 만들지 않는다).
 
-## 이전 산출물이 있을 때
-
-- 같은 버전 EPUB 존재 → 덮어쓰지 말고 버전 증가 (패치 `1.0.1`, 마이너 `1.1.0` 중 판단)
-- 제목 변경 → 새 파일명으로 저장, 이전 파일 보존
-- 직전 빌드는 `_prev/`로 이동 후 신규 빌드
-- **식별자 보존:** 같은 책의 재빌드에서는 `identifier`(`urn:uuid:*`)를 그대로 유지한다 — version/date만 바뀐다. 매니페스트에 이미 식별자가 있으면 절대 새로 발급하지 않는다 (스크립트가 보장하지만, 수동 편집 시에도 지키기)
-
-## 사용하는 스킬
-
-- `epub-build`
+반환값: EPUB·책 소개 경로, epubcheck 결과, 경고(mermaid·콜로폰 불일치 등).

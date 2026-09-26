@@ -1,14 +1,14 @@
 # Book Writer — AI 책 저술 자동화 하네스
 
-[![Version](https://img.shields.io/badge/harness-v1.11.0-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Version](https://img.shields.io/badge/harness-v2.0.0-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 주제, 주요 내용, 대상 독자만 주면 리서치부터 EPUB 빌드까지 한 번에 수행하는 **에이전트 하네스**다. v1.3.0부터 **장르별 문체 프로필**을 지원한다 — 기술서(Toby 문체)·소설·실용서(요리/여행)·에세이. 장르는 자동 감지 후 확인하며, 기본값은 `tech-book`이다 (아래 [장르 프로필](#장르-프로필) 참고). 저자명은 기본값 `Toby-AI`에서 원하는 값으로 바꿀 수 있다 (아래 [저자명 변경](#저자명-변경) 참고).
 
 - **Repo:** https://github.com/tobyilee/book-writer
-- **하네스 버전:** `v1.11.0` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
+- **하네스 버전:** `v2.0.0` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
 - **라이선스:** 하네스 코드는 **MIT** ([`LICENSE`](LICENSE)). 산출되는 책 콘텐츠 기본값은 **CC BY-NC-SA 4.0** — `book_manifest.json`의 `license` 필드로 책별 오버라이드 가능
 - **실행 환경:** [Claude Code](https://claude.com/claude-code) + Claude Agent SDK
-- **저자 모델:** 모든 에이전트가 현재 세션의 모델 설정을 그대로 상속한다 (에이전트별 `model` 고정 없음, v1.10.1)
+- **저자 모델:** 모든 에이전트가 현재 세션의 모델 설정을 그대로 상속한다 (에이전트별 `model` 고정 없음)
 
 > **버전 두 개를 헷갈리지 말자.** 위 *하네스 버전*(단일 출처 [`VERSION`](VERSION) 기준, 이 도구 자체)과 산출 파일명에 들어가는 `{책-제목}-v{version}.epub`의 `version`(*책 매니페스트의 책 버전*, 각 책의 판본)은 독립적으로 진화한다. 책 콜로폰(`## 판권`)은 두 버전을 모두 노출한다.
 
@@ -18,10 +18,11 @@
 
 1. **리서치** — 웹·논문·커뮤니티를 병렬로 뒤져 레퍼런스 문서 작성
 2. **저술 계획** — 제목 후보, 책 특성, 챕터 목록과 내러티브 아크 설계
-3. **계획 리뷰** — 저자와 리뷰어 에이전트가 2회 왕복 토론 후 계획 확정
-4. **챕터 저술** — 에이전트 팀이 활성 장르 문체로 초안 작성, 스타일 가디언이 실시간 감수 (tech-book은 팩트체커가 사실 검증, narrative는 연속성 키퍼가 story_bible로 연속성 검수 동반)
-5. **편집** — 챕터 통합, 전환부 다듬기, 서문·에필로그·참고문헌 작성
-6. **표지 + EPUB 빌드 + 책 소개** — 표지 이미지 생성, pandoc으로 EPUB 3 조립, 짝을 이루는 책 소개 markdown 작성
+3. **계획 승인** — 설계 근거와 함께 계획을 보여주고 사용자 승인 (원하면 리뷰어 에이전트의 비판적 검토 1회)
+4. **챕터 저술** — 저술가 최대 4명이 연속 챕터 묶음을 병렬로 저술하고, 묶음이 끝나는 대로 tech-book은 팩트체커(구체 주장 전반), practical은 팩트체커(안전·건강·법규 사실), narrative는 연속성 키퍼가 한 번 검수해 바로 정정
+5. **편집** — 챕터 통합, 전환부·용어·통권 변주 다듬기, 서문·에필로그·참고문헌 작성
+6. **수락 게이트** — 새 컨텍스트의 리뷰어가 책 전체를 한 번 판정 (미해소 마커·사실 오류가 남으면 빌드하지 않음)
+7. **표지 + EPUB 빌드 + 책 소개** — 표지 이미지 생성, pandoc으로 EPUB 3 조립, 짝을 이루는 책 소개 markdown 작성
 
 산출물은 프로젝트 루트에 두 파일이 짝으로 저장된다.
 
@@ -68,7 +69,7 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 이 주제로 책 써줘.
 ```
 
-오케스트레이터가 Phase 0부터 Phase 5까지 순차적으로 진행하며, 각 Phase에서 필요한 에이전트를 자동으로 호출한다. 중간에 계획 리뷰가 끝나면 사용자 승인을 요청하는 지점이 있다.
+오케스트레이터가 Phase 0부터 Phase 5까지 순차적으로 진행하며, 각 Phase에서 필요한 에이전트를 자동으로 호출한다. 중간에 계획이 나오면 사용자 승인을 요청하는 지점이 있다.
 
 ### 기대 산출물
 
@@ -79,23 +80,21 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 │   ├── papers.md
 │   └── community.md
 ├── 01_reference.md          # 리서치 종합
-├── 02_plan.md               # 저술 계획 (리뷰 반영된 최종본)
-├── 03_review_log.md         # 리뷰 기록
+├── 02_plan.md               # 저술 계획 (승인된 최종본)
+├── 03_review_log.md         # 계획 리뷰 기록 (plan-reviewer를 요청했을 때만)
 ├── chapters/
 │   ├── 01_draft.md / 01_final.md
 │   ├── 02_draft.md / 02_final.md
 │   └── ...
 ├── 04_manuscript.md         # 통합 원고
 ├── 05_acceptance.md         # 통권 수락 검수 판정 (Phase 4.5, manuscript-reviewer)
-├── style_log.md             # 스타일 검수 로그 (단일 append-only, 샤딩 안 함)
-├── factcheck_log.md         # 사실 검증 로그 (tech-book만, 단일 append-only)
+├── style_log.md             # 스타일 검수 로그 (style-guardian을 요청했을 때만)
+├── factcheck_log.md         # 사실 검증 로그 (tech-book·practical, 단일 append-only)
 ├── story_bible.md           # 인물·관계·세계관·타임라인·복선 원장 (narrative만)
-├── continuity_log.md        # 연속성 검수 로그 (narrative만, 단일 append-only)
-├── pacing_report.md         # 감정 곡선·씬 페이싱 계측 (narrative만, 자문 전용, v1.11.0)
-├── editor_notes.md          # 편집 메모 (선택)
-├── style_guide_active.md    # 파(wave) 간 스타일 지침 누적 파일 (저술가 필독)
-├── fact_rules_active.md     # 파 간 사실 규율 누적 파일 (tech-book, 저술가 필독)
-├── length_report.md         # 분량 준수 리포트
+├── continuity_log.md        # 연속성 검수 로그 + 장별 페이싱 계측 (narrative만)
+├── pacing_report.md         # 감정 곡선·씬 페이싱 리포트 (narrative만, 자문 전용)
+├── editor_notes.md          # 편집 메모 + 통권 변주 표
+├── length_report.md         # 분량 리포트 (length_report.py 실측)
 ├── book_manifest.json       # EPUB 메타데이터
 ├── cover.png                # 표지 이미지
 ├── cover_prompt.md          # 표지 프롬프트 기록
@@ -109,43 +108,36 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 
 ### Phase 1: 리서치 (팬아웃)
 
-- `research-lead`가 `web-researcher`, `paper-researcher`, `community-researcher`를 **병렬로** 스폰
-- 각 리서처는 독립 소스에서 자료 수집 → `research/*.md`에 저장
-- `research-lead`가 결과를 종합해 `01_reference.md` 작성
+- 오케스트레이터가 장르에 맞는 리서처를 **병렬로** 띄운다 — tech-book은 `web-researcher`·`paper-researcher`·`community-researcher`, 그 밖의 장르는 웹·커뮤니티 (학술 근거가 중요하면 논문 추가)
+- 각 리서처는 독립 소스에서 자료를 모아 `research/*.md`에 저장 (보존 — fact-checker의 대조 원장)
+- `research-lead`가 결과를 합성해 `01_reference.md` 작성
 
 ### Phase 2: 저술 계획
 
-- `book-planner`가 레퍼런스를 읽고 `02_plan.md` 작성
-- 독자 여정(진입 상태 → 출구 상태)부터 역산해 챕터 배치
+- `book-planner`가 레퍼런스를 읽고 `02_plan.md` 작성 — 독자 여정에서 역산한 챕터 배치, 설계 근거(기각한 대안 2개 이상), 용어 표기, 챕터별 오프닝·클로징·스캐폴드 배정
+- narrative면 `story_bible.md`도 함께 시드
 
-### Phase 3: 계획 리뷰 (생성-검증 팀)
+### Phase 3: 계획 승인
 
-- `book-planner`와 `plan-reviewer`가 팀으로 구성됨
-- 리뷰어가 5축(커버리지, 흐름, 독자 적합도, 균형, 중복)으로 비판
-- 최대 2회 왕복 후 합의된 `02_plan.md` 확정
-- 사용자 승인 요청
+- 오케스트레이터가 계획과 설계 근거를 보여주고 사용자 승인을 받는다 (학습 루프의 선판단 초대 포함)
+- 비판적 검토를 원하면 `plan-reviewer`가 5축(커버리지, 흐름, 독자 적합도, 균형, 중복)으로 한 번 리뷰 → planner 반영
 
-### Phase 4: 챕터 저술 (에이전트 팀 — 핵심)
+### Phase 4: 챕터 저술 (병렬 묶음 + 묶음별 검수)
 
-- `chapter-writer` × N + `style-guardian` + `editor`가 팀으로 구성 (tech-book·practical이면 `fact-checker`, narrative면 `continuity-keeper`도 합류)
-- 각 `chapter-writer`는 `{NN}_draft.md` 작성 → `style-guardian`에 리뷰 요청
-- `style-guardian`은 활성 장르 프로필의 체크리스트로 검수
-- (tech-book) style 합의 후 `fact-checker`가 구체 사실 주장·`(사실 확인 필요)` 주석을 레퍼런스 대조로 검증 — 사실 오류는 반드시 반영
-- (practical) style 합의 후 `fact-checker`가 **안전·건강·법규 사실 한정** 검증 (식품 안전 온도·보관·알레르겐·여행 법규 — 안전 주장은 기본 Critical, v1.11.0)
-- (narrative) style 합의 후 `continuity-keeper`가 `story_bible.md` 대조로 인물·관계·세계관·타임라인·복선 모순을 검증 — 연속성 오류는 반드시 반영. 통합 시점에 감정 곡선·씬 페이싱 계측 `pacing_report.md`를 산출한다 (자문 전용·비블로킹, v1.11.0)
-- 합의 시 `{NN}_final.md`로 저장
-- `editor`가 완료된 챕터들을 `04_manuscript.md`로 통합 + `book_manifest.json` 생성
-- (tech-book) editor 산출 직후 `fact-checker`가 **front/back matter 한정 검증 패스** 수행 — 참고문헌 확인 등급 라벨·서문·에필로그를 `research/*.md` 원장과 대조 (v1.10.0)
-- 검수 로그는 단일 append-only 파일이 단일 진실 원천이다 — `style_log.md`, (tech-book·practical) `factcheck_log.md`, (narrative) `continuity_log.md`. 풀로 여러 저술가가 동시에 써도 같은 파일에 `## {NN}장` 섹션을 append 한다 (샤딩 안 함). 검수자는 챕터 판정이 끝날 때마다 **즉시 append** 한다 — 몰아 쓰면 중단 시 전량 유실 (v1.10.0)
-- 검수 중 확장된 규약·실패 패턴은 `style_guide_active.md`·`fact_rules_active.md`에 누적되고, 저술가가 저술 전 읽는다 — 파(wave)를 겹쳐 띄워도 최신 지침이 전달된다 (v1.10.0)
+- 챕터를 연속 묶음(2~4장)으로 나눠 `chapter-writer` 최대 4명이 병렬 저술 (narrative는 1~2명이 순서대로). 저술가는 활성 프로필의 `style-checklist.md`를 품질 기준으로 삼아 쓰고, 계획의 배정·용어 표기를 따른다
+- 묶음이 끝나는 즉시 검수: (tech-book) `fact-checker`가 사실 주장을 `research/*.md` 원장과 대조해 정정·약화·삭제를 직접 반영 / (practical) `fact-checker`가 안전·건강·법규 사실(식품 안전 온도·보관·알레르겐·여행 법규)만 같은 방식으로 / (narrative) `continuity-keeper`가 `story_bible.md`와 대조해 모순을 고치고 bible 갱신, 장별 페이싱 계측 후 마지막에 `pacing_report.md`(자문 전용). 결과가 `{NN}_final.md`
+- 검수자가 스스로 고칠 수 없는 항목만 `미해소`로 남겨 사용자에게 묻는다
+- `editor`가 `04_manuscript.md`로 통합 — 묶음 경계 전환, 용어 통일, 통권 변주(반복되는 오프닝·클로징·말버릇) 교정, 서문·에필로그·참고문헌(원장 그대로)·콜로폰, `book_manifest.json`, `length_report.md`
+- 로그는 역할별 단일 파일(`factcheck_log.md`·`continuity_log.md`)에 장마다 즉시 append
+- (practical 요리 계열) editor가 `profiles/practical/partials/conversion-tables.md`의 환산표를 부록에 싣는다
 
-**왜 팀 모드인가?** 여러 챕터를 병렬로 쓸 때 문체가 갈라지는 게 가장 흔한 실패 지점이다. 팀 내 `SendMessage`로 실시간 조율하고, 전담 스타일 가디언이 일관성을 잡는다.
+**왜 이 구조인가?** 현행 Opus 모델은 명확한 기준을 주면 스스로 점검하며 쓴다. 그래서 검수 왕복을 겹겹이 쌓는 대신, 저술가 자신이 알기 어려운 두 가지 — 자기가 쓴 사실의 오류, 다른 장과의 충돌 — 만 독립 검수로 잡고, 책 전체에서만 보이는 문제는 editor와 수락 게이트가 한 번씩 본다.
 
 ### Phase 4.5: 통권 수락 검수 (신선 컨텍스트 게이트)
 
-- `manuscript-reviewer`가 `manuscript-acceptance` 스킬로 **editor와 분리된 새 눈**으로 통권을 게이트한다 (같은 컨텍스트에서 자기 승인하지 않음)
-- `04_manuscript.md`를 `02_plan.md` + 에스컬레이션 로그와 대조해 계획 커버리지·통권 일관성·미해소 에스컬레이션·금지 마커(`(사실 확인 필요)`·`[리서치 공백]`·`[미완성]`) 잔존 여부를 점검
-- 판정을 `05_acceptance.md`에 기록 — **ACCEPT**면 Phase 5로, **BLOCK**이면 Phase 4로 1회 되돌리고 그래도 BLOCK이면 사용자에 하드 스톱
+- `manuscript-reviewer`가 `manuscript-acceptance` 스킬로 **editor와 분리된 새 컨텍스트**에서 통권을 판정한다 (원고를 만든 쪽이 스스로 승인하지 않음)
+- 챕터 완비·분량, 금지 마커(`(사실 확인 필요)`·`[리서치 공백]`·`[미완성]`), 사실 미결과 참고문헌 원장 대조, 용어·voice·변주, 상호 참조, 약속 이행, 부속 자료, (narrative) 연속성
+- 판정을 `05_acceptance.md`에 기록 — **ACCEPT**면 Phase 5로, **BLOCK**이면 담당자에게 조치를 한 번 보내고 재판정, 그래도 BLOCK이면 사용자 판단
 
 ### Phase 5: 표지 + EPUB 빌드 + 책 소개 (부분 병렬)
 
@@ -173,18 +165,18 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 ```
 계획을 좀 더 입문자 친화적으로 다시 세워줘.
 ```
-→ Phase 3부터 재실행. 기존 `02_plan.md`는 `02_plan_v1.md`로 백업.
+→ Phase 2~3 재실행. 기존 `02_plan.md`는 `02_plan_v1.md`로 백업.
 
 재실행 시 책 버전은 **minor 증가** (`v1.0.0` → `v1.1.0`) 또는 사용자가 명시적으로 지정. 이때 바뀌는 건 **책 매니페스트 버전**이지 하네스 버전이 아니다. EPUB 식별자(`urn:uuid:*`)는 처음 1회만 민팅되고 재빌드에도 그대로 보존된다 — 버전·발행일만 갱신된다.
 
 요청 유형별 정확한 재실행 범위(리서치 보강→Phase 1, 구성·차례 변경→Phase 2~3, 특정 챕터 수정→Phase 4, 표지→Phase 5 cover, 메타·라이선스→Phase 5 epub)는 오케스트레이터의 **재실행 매트릭스**(`book-writing-orchestrator/SKILL.md`)를 따른다. 장르는 `book_manifest.json`의 `genre`를 재사용한다(사용자가 변경을 명시하지 않는 한).
 
-## 운영자 학습 루프 (v1.9.0+)
+## 운영자 학습 루프
 
 하네스는 에이전트 파이프라인만 설계하지 않는다 — **운영자(사람)의 판단력이 완전 위임으로 마모되지 않도록** 세 겹의 학습 루프를 함께 설계한다 (정전 스펙: [`docs/learning-loop.md`](docs/learning-loop.md)).
 
 1. **흐름 안:** 계획 공개 직전 "어떤 챕터 흐름을 기대하시나요?" 한 줄 초대(선판단 후공개) + 계획에 "설계 근거"(기각한 대안 포함) 동봉 + 완료 보고의 설명 가능성 자문
-2. **흐름 밖:** 완료 보고에 로그 기반 **직접 검수 표적** 제안 — factcheck/style/acceptance 로그가 지목한 취약 지점을 15~30분 크기로
+2. **흐름 밖:** 완료 보고에 로그 기반 **직접 검수 표적** 제안 — factcheck/continuity/acceptance 로그가 지목한 취약 지점을 15~30분 크기로
 3. **메타:** 위임 다이얼 — 프롬프트에 `모드: 학습`을 넣으면 `learning` 모드로 전환되어 첫 챕터 직접 읽기 권유·검수 표적 3개 등 학습 터치포인트가 늘어난다. 기본은 `production`(현행 동작 그대로)
 
 모든 터치포인트는 **자문 전용·비블로킹**이다 — 응답하지 않아도 파이프라인은 멈추지 않는다.
@@ -202,7 +194,7 @@ v1.3.0부터 문체·구조·검수 기준은 장르별 프로필로 관리된�
 | `practical` | 요리·여행·DIY 실용서 | 명료한 안내자 — 따라 하면 되는 단계와 안전 |
 | `essay` | 에세이·사색 | 사색하는 1인칭 — 일화에서 통찰로 |
 
-- 각 프로필: `voice.md`(문체)·`scaffolds.md`(구조)·`style-checklist.md`(검수)
+- 각 프로필: `voice.md`(문체)·`scaffolds.md`(구조)·`style-checklist.md`(문체 품질 기준 — 저술가와 수락 게이트가 공유)
 - 장르 선택: 오케스트레이터가 Phase 0에서 주제·대상으로 **자동 감지 후 확인**. 프롬프트에 `장르: {값}`을 넣으면 바로 지정된다. 신호가 약하면 `tech-book` 기본
 - 선택 규칙·자동 감지 표는 [`profiles/_registry.md`](profiles/_registry.md)
 - 확정 장르는 `book_manifest.json`의 `genre` 필드에 기록되어 재실행 시 결정적으로 재사용된다
@@ -266,16 +258,16 @@ book-writer/
 │   └── learning-loop.md             # 운영자 학습 루프 정전 스펙 (v1.9.0+)
 ├── .gitignore                       # .omc 등 툴 로컬 파일 제외 (책 산출물은 버전 관리 대상)
 └── .claude/
-    ├── agents/                      # 14개 에이전트 정의
-    │   ├── research-lead.md
+    ├── agents/                      # 14개 에이전트 정의 (역할 카드 — 절차는 스킬이 단일 출처)
+    │   ├── research-lead.md         # 리서치 합성
     │   ├── web-researcher.md
     │   ├── paper-researcher.md
     │   ├── community-researcher.md
     │   ├── book-planner.md
-    │   ├── plan-reviewer.md
+    │   ├── plan-reviewer.md         # 요청 시 계획 비판 1회
     │   ├── chapter-writer.md
-    │   ├── style-guardian.md
-    │   ├── fact-checker.md          # tech-book·practical 사실 검증 (v1.4.0+, practical은 v1.11.0+)
+    │   ├── style-guardian.md        # 요청 시 문체 점검
+    │   ├── fact-checker.md          # tech-book 사실 검증 + practical 안전 사실 검증
     │   ├── continuity-keeper.md     # narrative 연속성 추적 (v1.7.0+)
     │   ├── editor.md
     │   ├── manuscript-reviewer.md   # 통권 수락 게이트 (Phase 4.5, v1.8.0+)
@@ -297,6 +289,7 @@ book-writer/
         ├── fact-check/              # tech-book 사실 검증 (v1.4.0+)
         ├── continuity-check/        # narrative 연속성 검수 (v1.7.0+)
         ├── book-editing/
+        │   └── scripts/length_report.py  # 장별 산문 분량 실측
         ├── manuscript-acceptance/   # 통권 수락 게이트 (Phase 4.5, v1.8.0+)
         ├── cover-design/
         └── epub-build/
@@ -311,11 +304,11 @@ book-writer/
 | 방식 | 용도 |
 |------|------|
 | 파일 기반 (`{slug}/`) | Phase 간 산출물 전달, 감사 추적 |
-| 메시지 기반 (`SendMessage`) | Phase 3·4 팀 내부 실시간 조율 |
-| 태스크 기반 (`TaskCreate`) | Phase 4 챕터 작업 분배·진행 추적 |
-| 반환값 기반 | Phase 1·2·5 서브 에이전트 결과 수집 |
+| 반환값 기반 | 각 에이전트가 산출물 경로·미해소 항목·사용자 판단 필요 사항을 짧게 보고 |
 
-파일명 컨벤션: Phase 주요 산출물은 `{NN}_{artifact}.md` (NN = Phase 번호). 챕터는 `chapters/{NN}_draft.md`·`{NN}_final.md` (NN = 챕터 번호). 로그·매니페스트·표지·리포트 등 부산물은 역할별 고정 파일명(`style_log.md`·`factcheck_log.md`·`continuity_log.md`·`book_manifest.json`·`length_report.md` 등)을 쓰며 샤딩하지 않는다.
+팀 도구(`TeamCreate`·`SendMessage`)는 쓰지 않는다. 에이전트 간 조율은 모두 파일로 한다.
+
+파일명 컨벤션: Phase 주요 산출물은 `{NN}_{artifact}.md` (NN = Phase 번호). 챕터는 `chapters/{NN}_draft.md`·`{NN}_final.md` (NN = 챕터 번호). 로그·매니페스트·표지·리포트 등 부산물은 역할별 고정 파일명(`factcheck_log.md`·`continuity_log.md`·`book_manifest.json`·`length_report.md` 등)을 쓰며 샤딩하지 않는다.
 
 ## 트러블슈팅
 
@@ -331,7 +324,7 @@ brew install pandoc
 EPUB은 생성되지만 표준 위반 사항이 있다. `{slug}/.epubcheck.log`를 읽고 문제 구절을 수정한다. 대부분 `<script>` 태그나 금지된 네임스페이스 같은 마크다운 소스 문제다.
 
 ### 챕터 초안이 Toby 문체와 달라 보임
-`style-guardian`이 몇 번 왕복했는지 `{slug}/style_log.md`에서 확인. 3회 왕복에도 합의가 안 되면 저술가 결정이 채택된다. 이 경우 `toby-book-writing-style.md`나 `references/toby-style-guide.md`의 규칙이 너무 모호할 수 있으니 구체적 예시를 보강하자.
+`05_acceptance.md`의 (d) 판정을 먼저 본다. 해당 장을 지정해 "N장 문체 점검해줘"라고 하면 `style-guardian`이 한 번 다듬는다. 여러 책에서 같은 이탈이 반복되면 `profiles/tech-book/voice.md`·`style-checklist.md`의 해당 규칙이 모호한 것이니 구체적 예시를 보강하자.
 
 ### 표지 이미지 생성 실패
 1. 이미지 생성 MCP/API가 연결되어 있지 않으면 ImageMagick 폴백 사용 → 단순 타이포그래피 표지가 생성됨

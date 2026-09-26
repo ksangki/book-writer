@@ -10,10 +10,7 @@ description: Search the general web (blogs, articles, official docs, tutorials) 
 ## 절차
 
 1. **검색 키워드 설계** — 주제에서 3~5개 키워드 조합 생성 (한국어 + 영어)
-2. **검색 실행** — 우선순위:
-   - Firecrawl 스킬 (가능 시) — 전문 추출·인덱싱에 강함
-   - WebSearch 도구 → 상위 결과 링크 수집
-   - WebFetch 도구 → 각 페이지 본문 가져오기
+2. **검색 실행** — WebSearch로 후보 링크를 모으고 WebFetch로 본문을 가져온다 (환경에 전문 추출 도구가 있으면 써도 된다)
 3. **소스 평가** — 신뢰성 등급 매기기
    - 최상: 공식 문서·릴리스 노트·체인지로그, RFC/스펙, GitHub 릴리스, 기술 저널, 회사 엔지니어링 블로그(우아한형제들·카카오·토스·네이버 D2·LINE·Netflix·Cloudflare 등), 확인된 저자 블로그
    - 중: 커뮤니티 블로그, 포털 기술 아티클, 컨퍼런스 발표 트랜스크립트, 기술 뉴스레터(긱뉴스 등)
@@ -55,4 +52,4 @@ description: Search the general web (blogs, articles, official docs, tutorials) 
 
 - 검색 결과 빈약 → 키워드 변형 (동의어, 영문 번역, 약어 ↔ 풀네임) 후 재시도
 - 특정 페이지 접근 실패 → 해당 자료 제외, 로그에 기록
-- Firecrawl·WebSearch 모두 실패 → 캐시된 아카이브(archive.org) 활용 시도
+- WebSearch·WebFetch 모두 실패 → 캐시된 아카이브(archive.org) 활용 시도

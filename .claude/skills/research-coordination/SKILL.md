@@ -5,51 +5,10 @@ description: Coordinate parallel research agents (web, paper, community) and syn
 
 # Research Coordination
 
-세 명의 리서처를 병렬 스폰하고 결과를 종합해 하나의 레퍼런스 문서를 만드는 조율 스킬이다.
+여러 소스의 리서치를 병렬로 모아 하나의 레퍼런스 문서로 합성한다. 책 저술 중이면 오케스트레이터 Phase 1이 이 흐름을 그대로 따른다.
 
-## 절차
+1. 주제·주요 내용·대상 독자·`genre`·슬러그로 한 문단짜리 브리프를 만든다.
+2. 장르에 맞는 리서처를 한 메시지에서 병렬로 띄운다 — `tech-book`은 `web-researcher`·`paper-researcher`·`community-researcher`, 그 밖의 장르는 `web-researcher`·`community-researcher` (학술 근거가 중요한 주제면 `paper-researcher` 추가). 각자 `{slug}/research/{web,papers,community}.md`에 쓴다.
+3. 모두 끝나면 `research-lead`를 불러 `{slug}/01_reference.md`로 합성한다. 합성 원칙과 출력 구조는 `research-lead` 에이전트 정의에 있다.
 
-1. **리서치 브리프 작성** — 주제, 주요 내용, 대상 독자를 한 문단으로 정리
-2. **병렬 스폰** — `Agent` 도구로 3명을 `run_in_background: true`로 호출
-   - `web-researcher`, `paper-researcher`, `community-researcher`
-   - `model`은 지정하지 않는다 (세션 모델을 그대로 상속)
-   - 슬러그와 브리프를 입력으로 전달
-3. **완료 대기** — 세 에이전트 모두 완료될 때까지 대기 (브리지 도구는 자동 알림)
-4. **결과 읽기** — 각 에이전트 산출물 읽기
-   - `{slug}/research/web.md`
-   - `{slug}/research/papers.md`
-   - `{slug}/research/community.md`
-5. **종합** — 아래 통합 원칙에 따라 `01_reference.md` 작성
-
-## 통합 원칙
-
-- **주제별 재조직:** 소스별로 섞지 말고, "개념", "관점", "사례" 등 주제별로 묶는다
-- **중복 제거:** 여러 소스에서 같은 주장이 나오면 대표 소스 하나만 인용
-- **상충 병기:** 관점이 다른 자료는 "관점 A / 관점 B"로 나란히 제시
-- **출처 보존:** 어떤 주장이 어느 소스에서 왔는지 반드시 표기 (웹 / 논문 / 커뮤니티)
-- **커버리지 공백 명시:** 수집하지 못한 영역은 "리서치 한계" 섹션에 솔직히 기재
-- **신선도 원장:** 소스별 발행일·버전 시점("{버전}/{연도} 기준")·검색 시점을 `01_reference.md`의 "## 신선도 원장" 섹션으로 끌어올린다 — 개별 소스 파일이 정리돼도 fact-checker가 대조할 그라운딩이 레퍼런스 안에 남는다
-- **리서치 산출물 보존:** `research/web.md`·`papers.md`·`community.md`는 합성 후에도 **삭제하지 않는다** (fact-checker의 1차 대조 근거). `01_reference.md`와 함께 보존 산출물이다
-
-## 출력 구조
-
-보존 산출물: `01_reference.md` + `research/web.md`·`papers.md`·`community.md` (합성 후에도 모두 보존).
-
-```markdown
-# {주제} 레퍼런스
-
-## 1. 개념과 정의
-## 2. 핵심 관점들
-## 3. 대표 사례
-## 4. 논쟁점·상충 관점
-## 5. 실무 적용 팁
-## 6. 참고문헌 (URL·DOI 포함)
-## 7. 리서치 한계
-## 신선도 원장 (소스별 발행일·버전 시점)
-```
-
-## 품질 기준
-
-- 항목당 최소 3개 이상 소스 참조 (가능한 경우)
-- 모든 수치·인용은 원문 출처 표시
-- 참고문헌은 저자·연도·제목·URL/DOI 형식 통일
+리서처 하나가 실패하면 한 번 다시 띄우고, 또 실패하면 그 소스 없이 합성하며 "리서치 한계"에 적는다.

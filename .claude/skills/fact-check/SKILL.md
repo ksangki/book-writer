@@ -1,17 +1,15 @@
 ---
 name: fact-check
-description: Verify concrete factual claims in a chapter draft — numbers, statistics, benchmarks, quotes, version numbers, release years, API signatures, superlatives (tech-book), and safety/health/legal claims like food-safety temperatures, storage limits, allergens, local regulations (practical) — against the reference document, and resolve "(사실 확인 필요)" markers. Use when checking a chapter for factual accuracy, validating version/API claims in fast-moving tech content, verifying safety facts in practical guides, or resolving fact-check annotations. Triggers on "팩트체크", "사실 확인", "fact check", "출처 검증", "버전 맞는지 확인", "안전 사실 확인".
+description: Verify concrete factual claims in a chapter draft — numbers, statistics, benchmarks, quotes, version numbers, release years, API signatures, superlatives, citations (tech-book), and safety/health/legal claims like food-safety temperatures, storage limits, allergens, local regulations (practical) — against the reference document, resolve "(사실 확인 필요)" markers, and apply the corrections. Use when checking a chapter for factual accuracy, validating version/API claims in fast-moving tech content, verifying safety facts in practical guides, or resolving fact-check annotations. Triggers on "팩트체크", "사실 확인", "fact check", "출처 검증", "버전 맞는지 확인", "안전 사실 확인".
 ---
 
 # Fact Check
 
-챕터 초안의 **구체적 사실 주장**을 검증한다. 문체가 아니라 정확성만 본다. 최신 기술 주제일수록 버전·API·릴리스 연도가 빠르게 변하므로 시점 명기와 출처 대조가 핵심이고, 실용서는 틀린 안전 정보가 독자의 실제 피해로 이어지므로 안전 사실 대조가 핵심이다.
+원고의 구체적 사실 주장을 검증하고 정정한다. 문체가 아니라 정확성만 본다. 범위는 장르가 정한다 — `tech-book`은 구체 주장 전반(빠르게 변하는 기술일수록 시점 명기와 출처 대조가 핵심), `practical`은 안전·건강·법규 사실만(틀리면 독자가 다친다). 다른 장르에서는 이 단계가 없다.
 
-> **활성 장르를 먼저 확인하자.** 이 스킬은 `tech-book`과 `practical`에서 작동한다 (`genre`는 오케스트레이터 전달 → `{slug}/book_manifest.json` 순). 둘 다 아니면 오케스트레이터가 팩트체크 단계를 생략한다. 장르가 검증 범위를 결정한다 — tech-book은 구체 주장 전반, practical은 **안전·건강·법규 사실 한정**.
+## 검증 대상
 
-## 무엇을 검증하나 (검증 대상 주장)
-
-구체적이고 검증 가능한 주장만 본다. 일반적 서술·의견·비유는 대상이 아니다.
+구체적이고 확인 가능한 주장만 본다. 의견·비유·일반 서술은 대상이 아니다.
 
 **tech-book — 구체 주장 전반:**
 
@@ -23,8 +21,9 @@ description: Verify concrete factual claims in a chapter draft — numbers, stat
 | 릴리스 연도·시점 | "2023년에 도입된", "최신 버전에서는" |
 | API·시그니처 | 함수명·플래그·옵션명·기본값 |
 | 단정 | "최초의", "유일한", "가장 빠른" |
+| 참고문헌 식별자·등급 | DOI·arXiv ID·URL, 항목별 확인 등급 라벨 |
 
-**practical — 안전·건강·법규 사실 한정 (v1.11.0):**
+**practical — 안전·건강·법규 사실만:**
 
 | 유형 | 예시 |
 |------|------|
@@ -34,76 +33,42 @@ description: Verify concrete factual claims in a chapter draft — numbers, stat
 | 여행 법규·안전 | 비자·통관 규정, 현지 법, 안전 수칙 |
 | 안전 단정 | "~해도 안전하다", "괜찮다"류 단정 |
 
-practical의 그 밖의 서술(맛·취향·팁·모호한 분량)은 대상이 아니다 — 모호어·단계 문제는 style-guardian(체크리스트) 소관이다. **practical의 안전 주장은 기본 Critical** — 레퍼런스로 확정 불가 시 웹 2차 에스컬레이션 대상이며, 1차 출처는 공공 보건·식품 안전 기관(식약처·FDA·USDA 등)·정부 여행 안전 공지를 우선한다.
+맛·취향·팁·모호한 분량은 대상이 아니다. 안전 경고가 있는지·어디 있는지는 문체 체크리스트 소관이고, 여기서는 그 값이 맞는지를 본다. 안전 주장은 레퍼런스로 확정되지 않으면 모두 웹으로 확인하며, 공공 보건·식품 안전 기관(식약처·FDA·USDA 등)과 정부 여행 안전 공지를 1차 출처로 삼는다.
 
-## 절차
+`(사실 확인 필요)` 주석이 달린 지점을 먼저 본다.
 
-1. **활성 장르 확인** — tech-book·practical 둘 다 아니면 중단. practical이면 검증 범위를 안전·건강·법규 사실로 좁힌다
-2. **원문 읽기** — `{NN}_draft.md` (style 합의 후 버전 우선)
-3. **주장 추출** — 활성 장르의 유형 표에 해당하는 구체 주장을 모은다. `(사실 확인 필요)` 주석 지점을 최우선 목록에 올린다
-4. **대조** — 각 주장을 `01_reference.md`(+ `research/*.md`)와 맞춘다
-5. **에스컬레이션 (선택)** — 레퍼런스로 판정 불가한 **Critical 주장만** WebSearch/WebFetch로 공식 1차 출처 확인. 사소한 주장에 웹 호출 낭비 금지
-6. **판정 + 정정안** — 라벨별로 정리, 근거 명기
-7. **전달** — `SendMessage`로 `chapter-writer`에게 + `factcheck_log.md`에 append
+## 판정과 처리
 
-## 판정 라벨
+| 라벨 | 의미 | 원고에 반영할 것 |
+|------|------|-----------------|
+| ✅ 확인됨 | 레퍼런스와 일치 | 그대로 둔다 |
+| ❌ 정정 | 레퍼런스와 불일치 | 맞는 값·표현으로 고친다 |
+| ⚠️ 출처 없음 | 근거를 찾지 못함 | 약화("더 빠르다")하거나 삭제한다 |
+| 🕒 신선도 | 시점 미명기·곧 바뀔 내용 | "{버전}/{연도} 기준" 또는 휘발성 문구를 붙인다 |
 
-- ✅ **확인됨** — 근거 일치, 통과 (출처 한 줄 기록)
-- ❌ **정정 필요** — 불일치/오류, 올바른 값 제시 (Critical)
-- ⚠️ **출처 없음** — 근거 부재, 보강 또는 주장 약화 (Critical)
-- 🕒 **신선도 경고** — 시점 미명기/휘발성, "{버전}/{연도} 기준" 또는 경고 추가
+대조 순서: `01_reference.md`와 `research/*.md`로 먼저 판정한다. 거기서 판정할 수 없는 핵심 주장, 그리고 의심스러운 식별자(형식이 이상하거나 빌드 날짜보다 미래 YYMM인 arXiv ID, 열리지 않는 DOI·URL, 출처가 한 곳뿐이고 확인되지 않는 인용)는 WebSearch·WebFetch로 공식 문서·1차 출처를 확인한다. 확인되지 않은 의심 식별자는 ✅가 될 수 없다 — 원고에서 빼거나 출처 없는 일반 서술로 바꾼다.
 
-`(사실 확인 필요)` 주석은 반드시 넷 중 하나로 해소한다. final에 미해소 주석이 남으면 안 된다.
+정정은 원고의 voice를 유지하는 최소 수정으로 한다. 약화·삭제로도 처리할 수 없는 경우(그 주장이 장의 논지를 떠받치고 있어서 빼면 장이 무너지는 경우)만 `미해소`로 남기고 보고한다.
 
-## 의심 식별자 = 구속력 있는 검증 (절대 패시브 메모로 격하 금지)
+## 로그 (`{slug}/factcheck_log.md`)
 
-팩트체커가 **스스로** 어떤 식별자를 "형식상 이례적"이라고 의심했다면(잘못된 형식 또는 미래 날짜의 arXiv ID, 해석되지 않는 DOI/URL, "너무 깨끗한"·검증 불가한 인용 등), 그 의심은 **구속력 있는 웹 검증으로 에스컬레이션**해야 한다 (비용 통제 규칙이 이미 Critical→웹 2차를 허용한다). 절대 editor에게 넘기는 수동적 메모로 격하해서는 안 된다.
-
-- **단일 소스 = 통과 규칙을 의심 식별자에 적용하지 않는다.** 한 곳에만 나오는 인용이라도, 의심스럽고 검증되지 않았다면 통과(✅)가 될 수 없다.
-- 검증 불가·의심 식별자는 ❌ 또는 🕒로 판정한다 (**HARD BLOCK**) — 절대 ✅가 아니다.
-- **자동 ❌ 규칙:** 빌드 시점 기준 **미래의 YYMM**을 가진 arXiv ID는 자동 ❌. (arXiv ID `YYMM.NNNNN`의 YYMM이 빌드 날짜보다 미래면 존재할 수 없는 식별자다 — 날조 신호.)
-
-이렇게 판정된 ❌ 항목은 **BLOCKING**이다. 원고가 최종 확정되기 전에 반드시 해소해야 한다 — **정정·출처 확보·삭제** 셋 중 하나. 저술가 재량으로 그대로 둘 수 없다.
-
-## 리뷰 메시지 포맷
+로그는 단일 파일이다. 장마다 판정이 끝나는 즉시 섹션을 append한다 — 중단돼도 끝낸 판정이 남는다.
 
 ```markdown
-## 팩트체크: {NN}장 라운드 {N}
+## {NN}장 (라운드 {N})
 
-### ❌ 정정 필요
-- [원문] "..." → [정정] "..."
-  **근거:** {레퍼런스 섹션 또는 URL}
-
-### ⚠️ 출처 없음
-- [원문] "..." → 근거 없음. {보강/약화 제안}
-
-### 🕒 신선도 경고
-- [원문] "..." → "{버전} 기준"으로 명기
-
-### ✅ 확인됨
-- "..." — {근거}
-
-총평: {한 줄}
+### ❌ 정정
+- "React 18에서 도입된 Server Actions" → "React 19에서 안정화된 Server Actions" — 근거: research/web.md 자료 4 (공식 릴리스 노트)
+### ⚠️ 약화·삭제
+- "이 방식이 3배 빠르다" → "더 빠르다" — 레퍼런스에 근거 없음
+### 🕒 신선도
+- "최신 버전에서는" → "PostgreSQL 16 기준으로는"
+### ✅ 확인 (요약)
+- 수치 4건, 버전 3건 — research/web.md·papers.md와 일치
+### 미해소
+- (없음)
 ```
 
-## 로그 파일 규약 (단일 파일)
+## 통합 원고 재확인 (수락 게이트가 되돌렸을 때)
 
-pool 분할로 챕터를 나눠 처리해도 로그는 단일 파일(`factcheck_log.md`)에 챕터별 마크다운 섹션 `## {NN}장`으로 append한다 — 절대 `factcheck_log_1-6` 같은 샤드 파일을 만들지 않는다.
-
-## 작업 원칙
-
-- **사실만:** 문체·구성 건드리지 않는다
-- **구체적 정정:** 올바른 값/표현을 제시 ("틀렸다"로 끝내지 않음)
-- **근거 필수:** 모든 판정에 출처 한 줄
-- **추측 금지:** 확인 못 한 건 "확인 불가". 그럴듯한 값 지어내기 금지
-- **과잉 차단 주의:** 정당한 일반 서술까지 출처 요구하지 않는다
-
-## 재검증 / 미합의
-
-- 라운드 2+: 이전 정정 반영 여부 확인 후 새 항목만 지적
-- 3회 왕복 미합의 → 사실 오류는 저술가 재량으로 덮지 않는다. `factcheck_log.md`에 "미해소(위험)"로 명시하고 오케스트레이터·editor에 에스컬레이션
-
-## 통합 원고 검증 (editor 요청 시)
-
-- 챕터 간 사실 충돌(같은 수치/버전을 장마다 다르게 서술)이 있는지 교차 점검
-- 콜로폰·책 소개에 들어가는 사실(버전·연도)도 본문과 일치하는지 확인
+`05_acceptance.md`가 지목한 항목만 본다 — 대개 장 간 사실 충돌(같은 수치·버전을 장마다 다르게 씀)이나 참고문헌 항목의 등급 라벨·식별자가 `research/*.md` 원장과 어긋난 경우다. 수정은 `04_manuscript.md`와 해당 `{NN}_final.md`에 함께 반영하고, 로그에 `## 통합 원고` 섹션으로 남긴다.

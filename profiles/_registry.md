@@ -19,7 +19,7 @@
 |------|------|----------|
 | `voice.md` | 문체·어조·표현 사전·금지 표현 | chapter-writer, chapter-writing 스킬 |
 | `scaffolds.md` | 챕터/섹션 유형별 구조 템플릿 | chapter-writer, book-planner |
-| `style-checklist.md` | 검수 체크리스트 (편차 항목) | style-guardian, style-review 스킬 |
+| `style-checklist.md` | 문체 품질 기준 (편차 항목) | chapter-writer(저술 기준), manuscript-reviewer(수락 게이트), style-guardian(요청 시) |
 
 ## 자동 감지 규칙 (Phase 0)
 
