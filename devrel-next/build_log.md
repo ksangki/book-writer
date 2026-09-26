@@ -1,8 +1,8 @@
-# Build Log — DevRel Next v1.3.1
+# Build Log — DevRel Next v1.3.2
 
-- **Date:** 2026-09-26T13:33:42Z
-- **Output:** `DevRel-Next-v1.3.1.epub`
-- **Size:** 696152 bytes
+- **Date:** 2026-09-26T13:46:14Z
+- **Output:** `DevRel-Next-v1.3.2.epub`
+- **Size:** 696096 bytes
 - **Pandoc exit:** 0
 - **epubcheck:** passed
 - **epubcheck strict:** 1
@@ -14,7 +14,7 @@
 - title: DevRel Next
 - author: 김상기
 - language: ko
-- version: 1.3.1
+- version: 1.3.2
 - pub_date: 2026-09-25
 - identifier: urn:uuid:2e3ab927-3a44-4ede-b169-e0253729973c
 - license: CC BY-NC-SA 4.0

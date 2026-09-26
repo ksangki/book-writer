@@ -6,7 +6,7 @@ BOOK = pathlib.Path(__file__).resolve().parents[2]
 SCR = pathlib.Path(__file__).parent
 IDENT = 'urn:uuid:2e3ab927-3a44-4ede-b169-e0253729973c'
 TITLE, SUB = 'DevRel Next', '코드 너머의 관계'
-VER, DATE, AUTHOR = '1.3.1', '2026-09-26', '김상기'
+VER, DATE, AUTHOR = '1.3.2', '2026-09-26', '김상기'
 HV = (BOOK.parent / 'VERSION').read_text().strip().lstrip('v')
 
 # 편집 수정: (장, 원문, 교체문, 전부교체 여부)
