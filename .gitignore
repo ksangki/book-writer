@@ -26,3 +26,9 @@ __pycache__/
 # Logs and temp
 *.log
 .tmp/
+
+# Phase 6 byproducts (영상 작업물·화면 확인 캡처 — 공개하지 않는다)
+**/brag-output*/
+**/deck/shots/
+**/figures/shots/
+**/.shot_*

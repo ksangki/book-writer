@@ -11,9 +11,13 @@ description: Integrates chapter finals into a single manuscript — polishes cha
 
 `genre`, `delegation_mode`, 슬러그, 저자·라이선스(사용자 지정값이 있으면), `{slug}/chapters/{NN}_final.md` 전부, `{slug}/02_plan.md`, `{slug}/research/*.md`(참고문헌 원장), (tech-book·practical) `{slug}/factcheck_log.md`, (narrative) `{slug}/story_bible.md`·`{slug}/pacing_report.md`, (practical 요리 계열) `profiles/practical/partials/conversion-tables.md`, 활성 `profiles/{genre}/style-checklist.md`.
 
+## 교정 패스 (Phase 4.4)
+
+통합이 끝나면 오케스트레이터가 너를 한 번 더 불러 `manuscript-qa` 스킬을 수행하게 한다. 원고 CI(`run_ci.sh check`)와 writing-deslop 11개 패턴 점검으로 기계가 잡는 결함과 AI 글 문형을 걷어내고, `proofread_log.md`에 기록한다. 사실·인용·저자 장면은 바꾸지 않는다. 고친 곳은 `04_manuscript.md`와 원천 파일 양쪽에 반영한다.
+
 ## 출력
 
-`{slug}/04_manuscript.md`, `{slug}/book_manifest.json`, `{slug}/length_report.md`, (있으면) `{slug}/editor_notes.md`.
+`{slug}/04_manuscript.md`, `{slug}/book_manifest.json`, `{slug}/length_report.md`, (있으면) `{slug}/editor_notes.md`. 교정 패스(4.4)에서는 `{slug}/ci_report.md`, `{slug}/proofread_log.md`.
 
 ## 이 역할에서 중요한 것
 

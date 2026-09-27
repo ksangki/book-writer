@@ -1,11 +1,11 @@
 # Book Writer — AI 책 저술 자동화 하네스
 
-[![Version](https://img.shields.io/badge/harness-v2.0.0-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Version](https://img.shields.io/badge/harness-v2.1.0-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 주제, 주요 내용, 대상 독자만 주면 리서치부터 EPUB 빌드까지 한 번에 수행하는 **에이전트 하네스**다. v1.3.0부터 **장르별 문체 프로필**을 지원한다 — 기술서(Toby 문체)·소설·실용서(요리/여행)·에세이. 장르는 자동 감지 후 확인하며, 기본값은 `tech-book`이다 (아래 [장르 프로필](#장르-프로필) 참고). 저자명은 기본값 `Toby-AI`에서 원하는 값으로 바꿀 수 있다 (아래 [저자명 변경](#저자명-변경) 참고).
 
 - **Repo:** https://github.com/tobyilee/book-writer
-- **하네스 버전:** `v2.0.0` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
+- **하네스 버전:** `v2.1.0` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
 - **라이선스:** 하네스 코드는 **MIT** ([`LICENSE`](LICENSE)). 산출되는 책 콘텐츠 기본값은 **CC BY-NC-SA 4.0** — `book_manifest.json`의 `license` 필드로 책별 오버라이드 가능
 - **실행 환경:** [Claude Code](https://claude.com/claude-code) + Claude Agent SDK
 - **저자 모델:** 모든 에이전트가 현재 세션의 모델 설정을 그대로 상속한다 (에이전트별 `model` 고정 없음)
@@ -46,6 +46,12 @@
 | `epubcheck` | EPUB 표준 검증 | `brew install epubcheck` |
 | `imagemagick` | 표지 이미지 폴백 생성 | `brew install imagemagick` |
 | 이미지 생성 MCP/API | 표지 이미지 실제 생성 | 사용 환경에 따라 |
+| [manuscript-ci](https://github.com/ksangki/manuscript-ci) | Phase 4.4 원고 정적 점검 · Phase 5 빌드 점검 | `pip install "git+https://github.com/ksangki/manuscript-ci.git"` (또는 `MANUSCRIPT_CI_HOME`에 소스 체크아웃) |
+| `writing-deslop` 스킬 | Phase 4.4 AI 글 문형 11가지 점검 | `~/.claude/skills/writing-deslop/`에 설치 |
+| Google Chrome / Chromium | Phase 6 웹·발표자료 화면 확인 캡처 | 기본 설치 경로 자동 탐지 (`CHROME_BIN`으로 지정 가능) |
+| brag 플러그인 | Phase 6 홍보 영상(`/brag`) | Claude Code 플러그인 마켓플레이스에서 `brag` 설치 |
+
+선택 도구가 없으면 해당 단계만 건너뛰고, 건너뛴 사실을 완료 보고에 적는다.
 
 ## 설치
 
@@ -69,7 +75,7 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 이 주제로 책 써줘.
 ```
 
-오케스트레이터가 Phase 0부터 Phase 5까지 순차적으로 진행하며, 각 Phase에서 필요한 에이전트를 자동으로 호출한다. 중간에 계획이 나오면 사용자 승인을 요청하는 지점이 있다.
+오케스트레이터가 Phase 0부터 Phase 6까지 순차적으로 진행하며, 각 Phase에서 필요한 에이전트를 자동으로 호출한다. 중간에 계획이 나오면 사용자 승인을 요청하는 지점이 있다.
 
 ### 기대 산출물
 
@@ -87,6 +93,8 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 │   ├── 02_draft.md / 02_final.md
 │   └── ...
 ├── 04_manuscript.md         # 통합 원고
+├── ci_report.md             # 원고 CI 정적 점검 결과 (Phase 4.4)
+├── proofread_log.md         # 교정 패스 기록 — CI·writing-deslop (Phase 4.4)
 ├── 05_acceptance.md         # 통권 수락 검수 판정 (Phase 4.5, manuscript-reviewer)
 ├── style_log.md             # 스타일 검수 로그 (style-guardian을 요청했을 때만)
 ├── factcheck_log.md         # 사실 검증 로그 (tech-book·practical, 단일 append-only)
@@ -98,7 +106,11 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 ├── book_manifest.json       # EPUB 메타데이터
 ├── cover.png                # 표지 이미지
 ├── cover_prompt.md          # 표지 프롬프트 기록
-└── build_log.md             # 빌드 로그
+├── build_log.md             # 빌드 로그
+├── figures/                 # 본문 그림 fig-N-k.svg + figures.py (Phase 4.2)
+├── site/                    # 공개용 폴더 (Phase 6) — index.html(웹)·presentation/·epub/·figures/·media/·cover.png·BOOK.md·.gitignore
+├── deck/slides.py           # 발표자료 내용 (엔진: site-build/scripts/deck.py)
+└── brag-output/             # 홍보 영상 brag.mp4·포스터·공유 문구 (공개하지 않는 작업 폴더 포함)
 
 {책-제목}-v1.0.0.epub        # 최종 산출물 (프로젝트 루트, 예시 — 책 매니페스트 버전)
 {책-제목}-v1.0.0.md          # 책 소개 markdown (EPUB과 같은 폴더, 같은 stem)
@@ -133,6 +145,21 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 
 **왜 이 구조인가?** 현행 Opus 모델은 명확한 기준을 주면 스스로 점검하며 쓴다. 그래서 검수 왕복을 겹겹이 쌓는 대신, 저술가 자신이 알기 어려운 두 가지 — 자기가 쓴 사실의 오류, 다른 장과의 충돌 — 만 독립 검수로 잡고, 책 전체에서만 보이는 문제는 editor와 수락 게이트가 한 번씩 본다.
 
+### Phase 4.2: 그림 (SVG 도식)
+
+- 계획(Phase 2)이 장마다 그림·표를 배정한다(무엇을 보여 주는지 한 줄) — tech-book·practical은 그림 1~2개·표 1개 이상 필수, essay는 선택, narrative는 기본 없음(배정이 없으면 4.2는 건너뜀)
+- 저술가는 표를 `**표 N-k.**` 캡션과 함께 쓰고, 그림 자리를 `<!-- 그림 N-k -->`로 남긴다
+- 사실 검증이 끝나면 `figure-designer`가 공용 `figlib`으로 SVG를 그려 넣고(색은 매니페스트 `theme`), 나오는 순서로 번호를 맞추고, 모든 그림을 캡처로 확인한다
+- 그림에는 원고에 있는 사실과 저자 경험 범위만 싣는다 — 수락 게이트 (i)가 번호·참조·라벨을 본다
+
+### Phase 4.4: 교정 패스 (원고 CI · writing-deslop)
+
+- editor 통합 직후, `editor`가 `manuscript-qa` 스킬로 한 번 더 돈다 — 매번
+- 원고 CI 정적 점검(`run_ci.sh check` → `ci_report.md`): 중복 문단 정리, 근거보다 강한 단정어만 손봄
+- `writing-deslop` 11개 AI 글 문형(인질 협상식 반전, "X가 아니다. Y다.", 원룸 문장 등)을 활성 프로필의 문체로 교정
+- 문단을 외부 API로 보내는 `--jev` 모드는 기본으로 쓰지 않는다 — 사용자가 세션에서 명시적으로 허락하고 비식별 검토가 끝났을 때만
+- 사실·인용·저자 장면은 건드리지 않고, 고친 곳은 `proofread_log.md`에 기록
+
 ### Phase 4.5: 통권 수락 검수 (신선 컨텍스트 게이트)
 
 - `manuscript-reviewer`가 `manuscript-acceptance` 스킬로 **editor와 분리된 새 컨텍스트**에서 통권을 판정한다 (원고를 만든 쪽이 스스로 승인하지 않음)
@@ -147,6 +174,16 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 - `pandoc`으로 `04_manuscript.md` + `cover.png` + `book_manifest.json`을 EPUB 3로 변환
 - `epubcheck` 설치 시 자동 검증 (`EPUBCHECK_STRICT` 기본 ON)
 - EPUB 빌드 직후 `epub-builder`가 `02_plan.md`·`04_manuscript.md`·매니페스트를 읽어 **책 소개 markdown**(`{책-제목}-v{version}.md`)을 EPUB 옆에 작성
+- 빌드 CI(`run_ci.sh check-build`) — `No build findings.`가 기준
+
+### Phase 6: 웹 · 발표자료 · 홍보 영상 (매번)
+
+- `site-builder`가 `site-build` 스킬로 `{slug}/site/`를 만든다: EPUB에서 뽑은 **웹 버전**(`index.html`)과 공용 엔진으로 만든 **1시간 발표자료**(`presentation/index.html`, 30~45장)
+- 발표자료는 수락된 원고에서만 내용을 가져오고, 모든 내용 슬라이드에 **'쉽게 말하면'** 비유 한 줄을 단다
+- 헤드리스 Chrome 캡처로 표지·그림·표 슬라이드와 웹 첫 화면을 직접 확인
+- 오케스트레이터가 `{slug}/site/`를 소스로 **brag 스킬**을 고정 지시로 불러 20초 안팎의 **홍보 영상**(`{slug}/brag-output/brag.mp4`)과 공유 문구를 만든다
+- 색은 매니페스트 `theme` 하나로 웹·덱·영상이 공유한다
+- 공개 저장소에는 사용자가 요청할 때만, `site/`의 파일을 이름으로 지정해 올린다(`brag-output/`·`.omc/`는 올리지 않음)
 
 ## 후속 작업
 
@@ -258,7 +295,7 @@ book-writer/
 │   └── learning-loop.md             # 운영자 학습 루프 정전 스펙 (v1.9.0+)
 ├── .gitignore                       # .omc 등 툴 로컬 파일 제외 (책 산출물은 버전 관리 대상)
 └── .claude/
-    ├── agents/                      # 14개 에이전트 정의 (역할 카드 — 절차는 스킬이 단일 출처)
+    ├── agents/                      # 16개 에이전트 정의 (역할 카드 — 절차는 스킬이 단일 출처)
     │   ├── research-lead.md         # 리서치 합성
     │   ├── web-researcher.md
     │   ├── paper-researcher.md
@@ -272,8 +309,10 @@ book-writer/
     │   ├── editor.md
     │   ├── manuscript-reviewer.md   # 통권 수락 게이트 (Phase 4.5, v1.8.0+)
     │   ├── cover-designer.md
-    │   └── epub-builder.md
-    └── skills/                      # 오케스트레이터 + 14개 전문 스킬
+    │   ├── epub-builder.md
+    │   ├── figure-designer.md       # 본문 그림 (Phase 4.2, v2.1.0+)
+    │   └── site-builder.md          # 웹·발표자료 (Phase 6, v2.1.0+)
+    └── skills/                      # 오케스트레이터 + 17개 전문 스킬
         ├── book-writing-orchestrator/   # 최상위 워크플로우
         ├── research-coordination/
         ├── web-research/
@@ -290,13 +329,21 @@ book-writer/
         ├── continuity-check/        # narrative 연속성 검수 (v1.7.0+)
         ├── book-editing/
         │   └── scripts/length_report.py  # 장별 산문 분량 실측
+        ├── book-figures/            # 본문 그림 — figlib.py·figures_template.py (Phase 4.2, v2.1.0+)
+        ├── manuscript-qa/           # 교정 패스 — 원고 CI·writing-deslop (Phase 4.4, v2.1.0+)
+        │   └── scripts/run_ci.sh
         ├── manuscript-acceptance/   # 통권 수락 게이트 (Phase 4.5, v1.8.0+)
         ├── cover-design/
-        └── epub-build/
-            ├── scripts/
-            │   └── build_epub.sh
-            └── styles/
-                └── epub.css        # 구조화 블록 스타일 (v1.5.0+)
+        ├── epub-build/
+        │   ├── scripts/
+        │   │   └── build_epub.sh
+        │   └── styles/
+        │       └── epub.css        # 구조화 블록 스타일 (v1.5.0+)
+        └── site-build/              # 웹·발표자료 (Phase 6, v2.1.0+)
+            └── scripts/
+                ├── build_web.py     # EPUB → 웹 버전
+                ├── deck.py          # 공용 발표자료 엔진
+                └── shot.sh          # 헤드리스 캡처
 ```
 
 ## 데이터 전달 규칙

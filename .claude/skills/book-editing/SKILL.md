@@ -13,6 +13,7 @@ description: Integrate all finished chapters into a single book-ready manuscript
 2. 1장부터 순서대로 읽으며 전환부를 다듬는다 — 끝-시작 연결이 갑작스럽지 않은지, 여러 장이 같은 이음말로 끝나지 않는지.
 3. 용어를 `02_plan.md`의 "용어 표기"에 맞춰 통일하고, 뒤 장이 앞 개념을 쓸 때 "앞서 3장에서 살펴봤듯이 ~" 같은 콜백을 자연스럽게 넣는다. 콜백의 장 번호는 실제 그 내용이 있는 장이어야 한다.
 4. 통권 변주를 점검하고 고친다 (아래).
+4-1. 그림·표를 점검한다. 캡션은 `그림 N-k.`·`표 N-k.` 형식이고, 장 안에서 나오는 순서대로 번호가 이어져야 한다. 부록은 `표 A-1.`처럼 쓴다. `figures/fig-N-k.svg` 참조가 모두 실재해야 하고, 본문이 "그림 N-k"를 부르는 곳의 번호가 실제 그림과 맞아야 한다. 남은 `<!-- 그림 … -->` 자리 표시는 0개여야 한다.
 5. 부속 자료(서문·목차·에필로그·참고문헌·콜로폰)를 장르에 맞게 쓴다. practical 요리 계열이면 `profiles/practical/partials/conversion-tables.md`의 환산표를 부록에 복사한다.
 6. `04_manuscript.md`로 합본하고, `book_manifest.json`을 쓰고, 분량 리포트를 만든다.
 

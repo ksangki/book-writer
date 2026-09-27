@@ -9,6 +9,8 @@ description: Whole-book acceptance gate run by a fresh-context reviewer before E
 
 없는 로그가 대상인 기준(예: essay의 사실 로그)은 N/A PASS로 두고 이유를 한 줄 적는다.
 
+교정 패스(Phase 4.4)의 `proofread_log.md`·`ci_report.md`가 있으면 함께 읽는다. 교정 패스가 사실이나 저자 장면을 바꾼 흔적이 있는지, 보류로 남긴 항목이 판정에 영향을 주는지 본다. 교정 패스를 건너뛰었다면 그 이유가 로그에 있는지 확인한다.
+
 ## 수락 기준
 
 | ID | 기준 | 확인 방법 | BLOCK 시 담당 |
@@ -20,6 +22,7 @@ description: Whole-book acceptance gate run by a fresh-context reviewer before E
 | (e) | 상호 참조 무결성 | "앞서 N장에서 ~" 류 콜백이 실제로 그 장의 내용을 가리키는지 | `editor` |
 | (f) | 약속 이행 | 매니페스트 `description`과 계획의 독자 여정이 약속한 범위를 원고가 다루는지 | `editor`, 본질적 미달이면 사용자 |
 | (g) | 부속 자료 완비 | 서문·목차·콜로폰(`## 판권`)·에필로그·(tech-book/essay) 참고문헌 | `editor` |
+| (i) | 그림·표 무결성 | 계획에 그림·표 배정이 없으면 N/A PASS. 있으면: `figures/fig-*.svg` 참조가 모두 실재하는지, 그림·표 번호가 장 안에서 나오는 순서대로 이어지는지, 계획에 배정된 그림·표가 들어갔는지, 그림 라벨이 원고가 말한 사실·저자 경험의 범위를 넘지 않는지, 남은 `<!-- 그림 … -->` 자리 표시가 없는지 | `figure-designer` 또는 `editor` |
 | (h) | 연속성 (narrative) | `continuity_log.md`의 `미해소`, `story_bible.md` 복선 원장의 미회수 항목 | `chapter-writer` / 의도 확인은 사용자 |
 
 ## 절차
