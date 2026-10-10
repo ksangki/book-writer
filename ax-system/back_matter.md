@@ -261,7 +261,7 @@ SOP는 표준 작업 절차, 곧 누가 무엇을 어떤 순서로 하는지 적
 **확인 등급:** ★ 원문 직접 열람 / △ 검색 요약·2차 자료 경유 / ✗ 접근 실패
 **문헌 유형:** `[PR]` 동료평가 논문 / `[PP]` 프리프린트 / `[WP]` 워킹페이퍼·워크숍 논문(정식 학회 논문 아님) / `[공식]` 공식 문서·보도자료 / `[규제]` 규제 원문 / `[정부]` 정부 공개 자료 / `[조사]` 컨설팅·업계 조사 / `[벤더]` 벤더 자료 / `[매체]` 언론 보도 / `[커뮤니티]` 커뮤니티 게시물 / `[학술]` 학술 기관·연구소 발간물 / `[보고서]`·`[기술보고서]` 기관 보고서 / `[문헌]` 저자·연도가 특정되지 않은 2차 문헌 / `[PR-단행본]` 동료평가 계열 단행본 / `[PP→PR]`·`[PP→워크숍]` 프리프린트에서 게재·워크숍으로 이행
 
-웹 자료의 접근일은 모두 **2026년 9월 5일**이다. 이 분야는 분기 단위로 바뀐다. 규제·제품·표준 항목은 인용하는 시점에 원문을 다시 확인하는 편이 낫다.
+웹 자료의 접근일은 모두 **2026년 9월 5일**이다. 다만 v1.5.0에서 더한 항목(표에 *v1.5.0* 표시)의 접근일은 **2026년 10월 10일**이다. 이 분야는 분기 단위로 바뀐다. 규제·제품·표준 항목은 인용하는 시점에 원문을 다시 확인하는 편이 낫다.
 
 ## B-1. 등록·아이덴티티 — 1차 자료와 제품
 
@@ -288,6 +288,10 @@ SOP는 표준 작업 절차, 곧 누가 무엇을 어떤 순서로 하는지 적
 | MCP SEP-2817 — 감사 로그 이중 구조 제안 (2026-05, 제안 단계) | GitHub | `[커뮤니티]` | △ |
 | Atuin Desktop — 실행 가능한 런북 (2025-04) | atuin.sh | `[공식]` | △ |
 | Celonis AgentC (2024-10-23) / Agent Mining (2026-05) | celonis.com | `[공식]` | △ |
+| Register and manage A2A agents — Gemini Enterprise Agent Gallery (갱신 2026-10-09, 프리뷰) *v1.5.0* | [docs.cloud.google.com](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent) | `[공식]` | ★ |
+| Agent Store in Microsoft Copilot — 조직 카탈로그 제출·검토·게시 (2026-04-17, 갱신 2026-08-18) *v1.5.0* | [learn.microsoft.com](https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-agent-store) | `[공식]` | ★ |
+| SAP LeanIX announces launch of AI agent hub — agent discovery inbox (2025-11-04) *v1.5.0* | [leanix.net](https://www.leanix.net/en/blog/sap-leanix-announces-launch-of-ai-agent-hub-and-key-industry-partnerships) | `[벤더]` | ★ |
+| SAP AI Agent Hub 참조 아키텍처 — 자동 발견·팩트시트·수명주기 (갱신 2026-10-01) *v1.5.0* | [architecture.learning.sap.com](https://architecture.learning.sap.com/docs/ref-arch/jkg4j2) | `[벤더]` | ★ |
 
 ## B-2. 제도·규제
 
@@ -394,6 +398,10 @@ SOP는 표준 작업 절차, 곧 누가 무엇을 어떤 순서로 하는지 적
 |---|---|---|---|
 | Gartner — 에이전트 워싱, 수천 벤더 중 약 130개 (2025-06-25) | Gartner 보도자료 | `[조사]` | ✗(403) / 복수 매체 교차 △ |
 | Gartner — 비례적 거버넌스 4단계, 이분법 진단, 2027년 40% 강등·폐기 전망 (2026-05-26) | Gartner 보도자료 | `[조사]` | ✗ / 복수 매체 교차 △ |
+| Gartner — 에이전트 난립 관리 6단계, 2028년 포천 500 평균 15만 개 전망 (2026-04-28) *v1.5.0* | [Gartner 보도자료](https://www.gartner.com/en/newsroom/press-releases/2026-04-28-gartner-identifies-six-steps-to-manage-artificial-intelligence-agent-sprawl) | `[조사]` | ✗(403) / 복수 매체 교차 △ |
+| Managing AI agent sprawl across business units — "discover before you build" (2026-07-17) *v1.5.0* | [AWS for Industries Blog](https://aws.amazon.com/blogs/industries/managing-ai-agent-sprawl-across-business-units/) | `[벤더]` | ★ |
+| Cost versus value: Managing agentic AI system performance — Pay-i CEO 대담 (2026-07-08) *v1.5.0* | [McKinsey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/cost-versus-value-managing-agentic-ai-system-performance) | `[조사]` | ✗(타임아웃) / 2차 △ |
+| Atea builds an enterprise AI agent ecosystem — Agent Hotel (2026-07-28) *v1.5.0* | [Microsoft 고객 사례](https://adoption.microsoft.com/en-us/agent-transformation-stories/atea/) | `[벤더]` | ★ |
 | Agentic AI is scaling faster than guardrails — 24개국 3,235명, 사용 23% vs 성숙한 거버넌스 21% (2026-04-24) | Deloitte Insights | `[조사]` | ★ |
 | The GenAI Divide: State of AI in Business 2025 — 파일럿 5% (2025-07) | MIT 프로젝트 NANDA | `[조사]` | △ — 편의표본(4개 컨퍼런스 참석 시니어 리더), 공식 원문 미확보 — 유통 사본으로 확인했으며 1장 본문의 완충이 이를 가리킨다 |
 | The State of AI: Global Survey 2026 — 개인 생산성 8/10, EBIT 기여 37% 정체 | McKinsey | `[조사]` | ✗(타임아웃) / 2차 △ |
