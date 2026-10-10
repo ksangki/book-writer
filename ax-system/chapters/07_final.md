@@ -301,6 +301,8 @@ actions:
 
 *실행량: 입력 40,640토큰(캐시 읽기 24,026 포함), 출력 10,278토큰, 약 0.29달러.*
 
+직접 돌려 보기: `python run.py a3` — 준비와 읽는 법은 부록 C.
+
 코드와 등록부: [github.com/ksangki/ax-system — examples/digital-workers](https://github.com/ksangki/ax-system/tree/main/examples/digital-workers) (`agents/a3_incident_triage.py`, `registry.yaml`)
 :::
 

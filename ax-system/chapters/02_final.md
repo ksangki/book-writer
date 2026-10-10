@@ -276,6 +276,8 @@
 
 *실행량: 입력 17,110토큰(캐시 읽기 5,616 포함), 출력 9,119토큰, 약 0.24달러. 토큰은 모델이 읽고 쓰는 글자 조각 단위이고, 캐시 읽기는 앞서 읽은 내용을 다시 꺼내 쓴 몫이다.*
 
+직접 돌려 보기: `python run.py a1` — 준비와 읽는 법은 부록 C.
+
 코드와 등록부: [github.com/ksangki/ax-system — examples/digital-workers](https://github.com/ksangki/ax-system/tree/main/examples/digital-workers) (`agents/a1_project_gates.py`, `registry.yaml`, `data/projects.csv`)
 :::
 

@@ -185,6 +185,8 @@ actions:
 
 *실행량: 입력 43,588토큰(캐시 읽기 33,009 포함), 출력 5,722토큰, 약 0.17달러.*
 
+직접 돌려 보기: `python run.py a5` — 준비와 읽는 법은 부록 C.
+
 코드와 등록부: [github.com/ksangki/ax-system — examples/digital-workers](https://github.com/ksangki/ax-system/tree/main/examples/digital-workers) (`agents/a5_retirement.py`, `registry.yaml`)
 :::
 

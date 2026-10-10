@@ -224,6 +224,8 @@ AI로 문서를 대량 생성하려는 유혹이 여기 겹친다. 3장에서 �
 
 *실행량: 입력 20,498토큰(캐시 읽기 9,609 포함), 출력 9,018토큰, 약 0.24달러. 여기서 토큰은 모델이 읽고 쓰는 글자 조각 단위로, 앞에서 본 접근 증표로서의 토큰과는 다른 말이다. 캐시 읽기는 앞서 읽은 내용을 다시 꺼내 쓴 몫이다.*
 
+직접 돌려 보기: `python run.py a2` — 준비와 읽는 법은 부록 C.
+
 코드와 등록부: [github.com/ksangki/ax-system — examples/digital-workers](https://github.com/ksangki/ax-system/tree/main/examples/digital-workers) (`agents/a2_sop_converter.py`, `registry.yaml`, `data/manual_incident_triage.md`)
 :::
 
