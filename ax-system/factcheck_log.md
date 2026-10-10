@@ -2304,3 +2304,47 @@ editor가 "요청서 이후 정밀화(+26자)"로 보고한 문면은 **라운�
 ### `Retired` 번역어 통일 확인 (요청: ax-editor, 2026-09-25)
 - 5장 102행 "개발 단계 값에 퇴역(Retired)이 있고" ✅ · 5장 179행 "퇴역 상태" ✅ · 10장 51행 "`Retired`(퇴역)" ✅ — 원어 값 문자열 불변, 번역어만 통일. 전권 grep 결과 `Retired` 값에 "은퇴"가 붙은 곳 0(04_manuscript.md 반영분 포함).
 - 10장 91행 Saviynt **"은퇴(Retirement)"** 유지 ✅ — 벤더 6단계 수명주기의 **단계명**(Retirement)이고, 미국 인벤토리 `development_stage`의 **필드 값**(`Retired`)과는 다른 대상이다. 원어가 병기돼 있어 혼동 여지가 없다. 10장 117행 "`Retired` 단계"도 원어 표기라 문제없다.
+
+## v1.5.0 개정분 — 2026-10-10
+
+**대상:** `diff chapters/{02,04,05,08,10}_final_v1.4.0.md ↔ {NN}_final.md` 신규 단락 + `back_matter_v1.4.0.md ↔ back_matter.md` 부록 B 신규 8항목. 기준: `research/survey_2026-10_discover-manage-value.md`, `fact_rules_active.md`, `01_reference.md §10`. 웹 2차 재대조 2026-10-10 수행.
+
+### 2장 — Gartner 2026-04-28 (원문 403)
+- ✅ 2026-04-28 보도자료 "Gartner Identifies Six Steps to Manage AI Agent Sprawl" — MarketScreener 전재본(보도자료 원문 그대로 재게재) 대조: "by 2028, an average global Fortune 500 enterprise will have over 150,000 agents in use, up from less than 15 in 2025". 본문 "세계 포천 500… 평균 15만 개 넘는… 2025년 15개가 채 안 됐다" 일치. tech.co·itvoice·digitalterminal 등 복수 매체 일치.
+- ✅ 2단계 "Build centralized agent inventory — AI TRiSM 도구로 sanctioned tools·shadow AI 양쪽 에이전트 discover and categorize" ↔ 본문 "승인된 도구로 만든 것과 회사가 모르는 사이에 만들어진 것을 함께 찾아 분류" 일치.
+- ✅ 3단계 "Define agent identity, permissions and life cycle model … review, and retire redundant agents" ↔ 본문 "세 번째 단계에는 쓸모가 겹치는 에이전트를 검토해 없애라는 말이 들어 있다" 일치("들어 있다"로 단계 일부임을 정확히 표현).
+- ✅ "산출 방식은 공개되지 않았다" — 전재본에 방법론 서술 없음.
+- 성격 라벨 "컨설팅 기관의 전망치" ✅.
+
+### 4장 — Google Gemini Enterprise A2A
+- ✅ 원문(docs.cloud.google.com, 최종 갱신 2026-10-09) 직접 열람: Preview/Pre-GA, 에이전트 카드 JSON 필드 `name`·`description`·`url`·`skills`(+protocolVersion·capabilities 등) ↔ 본문 "이름, 설명, 접속 주소, 할 수 있는 일" 일치. "remain hosted and maintained on their original platform" ↔ "원래 돌던 곳에서 계속 돈다" 일치. 다른 빌더·플랫폼 에이전트 등록 ✅. Agent Gallery는 research 노트(2026-10-10 원문 대조) 기준 ✅.
+- ✅ 시점 표기 "2026년 10월 기준 프리뷰" 규칙 충족.
+
+### 5장 — Microsoft Agent Store / SAP AI Agent Hub
+- ✅ MS 원문 직접 열람(ms.date 2026-04-17, updated_at 2026-08-18): 메이커 제출 → 관리 센터 Agents > All agents > Requests → capabilities·data access·maker information 검토 → Publish/Reject. "The agent isn't visible to users until an Admin approves" · "Built by your org" · "If the request is rejected, Copilot Studio notifies the maker so they can make changes and resubmit" 모두 일치. "2026년 8월 갱신" ✅.
+- ❌ (경미, 정정 필요) "등록하지 않으면 남에게 보여 줄 수 없으니" — 같은 원문 Note: "agents can also be built and shared using Agent Builder within Microsoft Copilot". 개인·팀 공유는 관리자 검토 없이 별도 경로로 가능. 과장 → 조직 카탈로그 한정으로 정정.
+- ✅ SAP: LeanIX 블로그 2025-11-04("agent discovery inbox" 명시), 참조 아키텍처 갱신 2026-10-01(Per Bernhardt). 자동 발견 대상: Microsoft Azure·Google Cloud·AWS·ServiceNow·Databricks, MCP 서버(Integration Suite/MCP Builder), LLM(SAP AI Core 경유). 팩트시트: 소유·기술·비즈니스 역량·거버넌스(승인) 상태·수명주기 단계·사용 현황 ↔ 본문 일치. "벤더 자료다" 라벨 ✅.
+- 🕒 "자동 발견은 연결된 플랫폼 안에서만 작동한다" — 참조 아키텍처에 로컬 개발자 에이전트(Claude Code) 발견이 프리뷰로 들어 있음. 문장 자체는 틀리지 않으나 곧 바뀔 경계. 시점 단서 추가 권장(비블로킹).
+
+### 8장 — McKinsey 대담 (원문 타임아웃)
+- 원문 직접 열람 재시도 3회(WebFetch 타임아웃, curl HTTP/2·1.1 모두 연결 실패). **원문 미확인 유지.**
+- ✅ 서지: ProQuest·RALI·검색 색인 — "Cost versus value: Managing agentic AI system performance", McKinsey Quarterly/QuantumBlack, **2026-07-08**, Lari Hämäläinen(시니어 파트너) × David Tepper(Pay-i CEO·공동창업자). Pay-i = 생성형 AI 시스템의 경제성 측정·최적화 소프트웨어 회사 ↔ "에이전트 비용 측정 도구를 만드는 회사" 일치.
+- ✅(2차) 공식 "P(success) > T(verify)/T(do)" — 검색 색인 요약이 Tepper 대담 출처로 공식과 원문 예시(2시간 일 / 6분 검증 → 약 5%)까지 제시, Victorino LLC 분석글이 같은 공식을 "July analysis"로 인용. 독립 2차 2건 + research 노트 일치. 원문 미열람이므로 부록 등급 △ 유지.
+- ✅(2차) "tokens are not value, tokens are the bill" — MarketScale 기사가 Tepper 발언으로 귀속. uprovd(2026-07-20)는 "tokens are the invoice, not the payoff"로 의역 보도. 본문 "같은 대담에는 … 말이 나온다" 범위 내 일치.
+- 경미(비블로킹): 대담 발언인데 "이렇게 적었다" — "이렇게 정리했다/말했다" 권장.
+- ✅ 산술: T(v)/T(d)=15/30=0.5 → P>0.5 "절반 넘게" 정확. T(v)=T(d)이면 우변 1, P≤1이라 엄격 부등호 불충족 → "아무리 높아도 넘지 못한다" 정확.
+- ⚠️ (논리 정합, 비블로킹) "자율성 계수가 하는 일이 바로 이 검증 몫을 빼는 것이다" — 8장 206행 정의상 자율성 계수는 "사람 개입 없이 끝난 비율"을 곱하는 보정이지 검증 시간 T(verify)를 차감하는 장치가 아니다. 방향은 같으나 "바로 … 빼는 것"은 등치 과장 → 완화 문안 제안.
+- 사용 금지 수치(60%·93%) 미사용 확인 ✅.
+
+### 10장 — AWS / Atea
+- ✅ AWS for Industries Blog 원문 직접 열람: 2026-07-17, "Centralized agent registry with semantic search: discover before you build", 기존 검증 기능 재사용, 진단 "duplicated capabilities, conflicting actions on shared systems, credential proliferation" + 사업부 간 가시성 부재 ↔ 본문 일치. 88% 수치 미사용 ✅. "(벤더 블로그.)" ✅.
+- ✅ Atea 고객 사례 원문 직접 열람(2026-07-28): 북유럽 IT 서비스(7개국 8,000+명), Agent Hotel 사내 포털, 국가·역할·보안 그룹 기준 개인화, 프롬프트 라이브러리·사례 공유, 소규모 팀 자유 공유 / 민감·업무 핵심 에이전트는 검토 후 전사 배포, 1만+ 에이전트 생성 ↔ 본문 일치. "마이크로소프트가 펴낸 고객 사례, 수치는 회사 측 발표" 라벨 ✅.
+
+### 부록 B 신규 8항목
+- 날짜·URL·유형 라벨 8건 모두 원문/2차 대조 일치. Google·MS·SAP 2건·AWS·Atea ★ 정당(오늘 직접 열람). Gartner `✗(403) / 복수 매체 교차 △` 정당(전재본 대조는 등급표상 2차 경유 = △). McKinsey `✗(타임아웃) / 2차 △` 정당. **등급 수정 불요.**
+- 접근일 문구(v1.5.0 항목 2026-10-10) ✅.
+
+**v1.5.0 집계:** ✅ 다수 · ❌ 1(5장 MS 공유 범위, 경미·정정 필요) · ⚠️ 1(8장 자율성 계수 등치, 비블로킹) · 🕒 1(5장 SAP 로컬 발견 프리뷰, 비블로킹) · 미해소 0 · 의심 식별자 0. McKinsey 2건은 원문 미열람이나 독립 2차 교차로 ✅(2차) — 삭제·약화 불요.
+
+### v1.5.0 반영 확인 — 2026-10-10 (editor)
+- 지적 전 항목 반영 후 재조립. 04_manuscript.md sha256 294e3c520791.

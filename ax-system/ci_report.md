@@ -1,23 +1,155 @@
-# Manuscript CI 결과 — 「거두는 체계」 v1.0.0
-
-- 실행: 2026-09-11, manuscript-ci (로컬 src, PYTHONPATH 실행)
-- 대상: `거두는-체계-v1.0.0.epub` (check-build) / `04_manuscript.md` (check)
-
-## check-build (빌드 산출물 게이트) — ✅ PASS
+# 원고 CI 정적 점검 — 2026-10-10
 
 ```
-No build findings.
+[duplicate-within-file] 04_manuscript.md: | | 묻는 것 | 아니라면 | |---|---|---| | **전제** | 조직의 업무인가 (팀 목표에 연결되는가) | 대상 아님 | | **①** | 실제로 행동하는가 (쓰기·발송·처리) | 가볍게 등록만 | | **②** | 스스로 도는가 (사람은 예외 상황에만 개입) | 보통 등
+[duplicate-within-file] 04_manuscript.md: | # | 점검 항목 | 확인 | |---|---|---| | 1 | 각 단계의 **산출물 기준**을 못 박았는가 (무엇이 나와야 하고, 어떤 조건을 갖춰야 하는가) | ☐ | | 2 | 추상적 정의 대신 **짧은 명령형**으로 썼는가 | ☐ | | 3 | 한 덩어리 대신 **점진적 공
+[duplicate-within-file] 04_manuscript.md: | # | 항목 | 이 칸이 답하는 질문 | |---|---|---| | 1 | 디지털 신원 | 이것을 무엇으로 부르고 무엇으로 식별하는가 | | 2 | 권한 범위 | 어디까지 접근할 수 있는가 | | 3 | 데이터 민감도 | 무엇을 다루는가 | | 4 | 행위 범위 | 무엇을 할 수 
+[duplicate-within-file] 04_manuscript.md: | 기준 | 묻는 것 | 왜 이것이 기준인가 | |---|---|---| | 연결 범위 | 다른 시스템이나 다른 에이전트를 호출하는가 | 연결이 늘면 영향 범위가 늘어난다 | | 접근 권한 | 어떤 데이터와 기능에 닿는가 | 닿는 곳이 곧 사고 시 피해 범위다 | | 상시 운영 여부 |
+[duplicate-within-file] 04_manuscript.md: | 등급 | 근거 | 인정 | |---|---|---| | 실측 | 시스템 로그·처리 기록 | 전부 | | 표본 | 시간일지·직접 관찰 등 표본 실측 | 일부 할인 | | 자기보고 | 담당자 추정 | 절반 |
+[duplicate-within-file] 04_manuscript.md: > **측정 결과 사용 제한 선언 (초안)** > > 1. 이 체계가 산출하는 절감 수치는 개인 또는 조직 단위의 인력 조정 근거로 사용하지 않는다. 적용 기간은 ○○년 ○월까지이며, 연장 여부는 그 시점에 다시 논의한다. **재논의 없이 기한이 지나면 본 선언은 자동 연장된 것으로 본
+[strong-claim-word] 04_manuscript.md: line 49: 모두
+[strong-claim-word] 04_manuscript.md: line 63: 모두
+[strong-claim-word] 04_manuscript.md: line 75: 모두
+[strong-claim-word] 04_manuscript.md: line 83: 모두
+[strong-claim-word] 04_manuscript.md: line 87: 대부분
+[strong-claim-word] 04_manuscript.md: line 97: 저절로
+[strong-claim-word] 04_manuscript.md: line 129: 저절로
+[strong-claim-word] 04_manuscript.md: line 133: 저절로
+[strong-claim-word] 04_manuscript.md: line 137: 대부분
+[strong-claim-word] 04_manuscript.md: line 159: 반드시
+[strong-claim-word] 04_manuscript.md: line 175: 모두
+[strong-claim-word] 04_manuscript.md: line 183: 저절로
+[strong-claim-word] 04_manuscript.md: line 203: 저절로
+[strong-claim-word] 04_manuscript.md: line 224: 전부
+[strong-claim-word] 04_manuscript.md: line 224: 전부
+[strong-claim-word] 04_manuscript.md: line 226: 전부
+[strong-claim-word] 04_manuscript.md: line 234: 대부분
+[strong-claim-word] 04_manuscript.md: line 234: 대부분
+[strong-claim-word] 04_manuscript.md: line 252: 반드시
+[strong-claim-word] 04_manuscript.md: line 258: 반드시
+[strong-claim-word] 04_manuscript.md: line 282: 전부
+[strong-claim-word] 04_manuscript.md: line 292: 반드시
+[strong-claim-word] 04_manuscript.md: line 300: 전부
+[strong-claim-word] 04_manuscript.md: line 302: 전부
+[strong-claim-word] 04_manuscript.md: line 366: 전부
+[strong-claim-word] 04_manuscript.md: line 366: 전부
+[strong-claim-word] 04_manuscript.md: line 372: 전부
+[strong-claim-word] 04_manuscript.md: line 446: 전부
+[strong-claim-word] 04_manuscript.md: line 463: 전부
+[strong-claim-word] 04_manuscript.md: line 479: 저절로
+[strong-claim-word] 04_manuscript.md: line 481: 대부분
+[strong-claim-word] 04_manuscript.md: line 485: 반드시
+[strong-claim-word] 04_manuscript.md: line 487: 대부분
+[strong-claim-word] 04_manuscript.md: line 491: 모두
+[strong-claim-word] 04_manuscript.md: line 495: 대부분
+[strong-claim-word] 04_manuscript.md: line 525: 전부
+[strong-claim-word] 04_manuscript.md: line 527: 전부
+[strong-claim-word] 04_manuscript.md: line 556: 전부
+[strong-claim-word] 04_manuscript.md: line 558: 전부
+[strong-claim-word] 04_manuscript.md: line 566: 대부분
+[strong-claim-word] 04_manuscript.md: line 572: 저절로
+[strong-claim-word] 04_manuscript.md: line 584: 대부분
+[strong-claim-word] 04_manuscript.md: line 596: 저절로
+[strong-claim-word] 04_manuscript.md: line 598: 자연히
+[strong-claim-word] 04_manuscript.md: line 605: 저절로
+[strong-claim-word] 04_manuscript.md: line 629: 모두
+[strong-claim-word] 04_manuscript.md: line 686: 반드시
+[strong-claim-word] 04_manuscript.md: line 686: 전부
+[strong-claim-word] 04_manuscript.md: line 686: 저절로
+[strong-claim-word] 04_manuscript.md: line 688: 저절로
+[strong-claim-word] 04_manuscript.md: line 719: 대부분
+[strong-claim-word] 04_manuscript.md: line 737: 전부
+[strong-claim-word] 04_manuscript.md: line 739: 대부분
+[strong-claim-word] 04_manuscript.md: line 751: 모두
+[strong-claim-word] 04_manuscript.md: line 759: 반드시
+[strong-claim-word] 04_manuscript.md: line 774: 모두
+[strong-claim-word] 04_manuscript.md: line 792: 전부
+[strong-claim-word] 04_manuscript.md: line 802: 대부분
+[strong-claim-word] 04_manuscript.md: line 810: 대부분
+[strong-claim-word] 04_manuscript.md: line 827: 항상
+[strong-claim-word] 04_manuscript.md: line 841: 전부
+[strong-claim-word] 04_manuscript.md: line 842: 항상
+[strong-claim-word] 04_manuscript.md: line 850: 전부
+[strong-claim-word] 04_manuscript.md: line 852: 항상
+[strong-claim-word] 04_manuscript.md: line 869: 대부분
+[strong-claim-word] 04_manuscript.md: line 890: 반드시
+[strong-claim-word] 04_manuscript.md: line 900: 반드시
+[strong-claim-word] 04_manuscript.md: line 910: 반드시
+[strong-claim-word] 04_manuscript.md: line 922: 자연히
+[strong-claim-word] 04_manuscript.md: line 975: 대부분
+[strong-claim-word] 04_manuscript.md: line 1004: 전부
+[strong-claim-word] 04_manuscript.md: line 1008: 유일
+[strong-claim-word] 04_manuscript.md: line 1131: 모두
+[strong-claim-word] 04_manuscript.md: line 1156: 전부
+[strong-claim-word] 04_manuscript.md: line 1164: 반드시
+[strong-claim-word] 04_manuscript.md: line 1182: 유일한
+[strong-claim-word] 04_manuscript.md: line 1218: 전부
+[strong-claim-word] 04_manuscript.md: line 1252: 반드시
+[strong-claim-word] 04_manuscript.md: line 1262: 반드시
+[strong-claim-word] 04_manuscript.md: line 1304: 대부분
+[strong-claim-word] 04_manuscript.md: line 1310: 전부
+[strong-claim-word] 04_manuscript.md: line 1350: 반드시
+[strong-claim-word] 04_manuscript.md: line 1354: 전부
+[strong-claim-word] 04_manuscript.md: line 1386: 전부
+[strong-claim-word] 04_manuscript.md: line 1398: 전부
+[strong-claim-word] 04_manuscript.md: line 1417: 모두
+[strong-claim-word] 04_manuscript.md: line 1419: 모두
+[strong-claim-word] 04_manuscript.md: line 1454: 반드시
+[strong-claim-word] 04_manuscript.md: line 1462: 전부
+[strong-claim-word] 04_manuscript.md: line 1531: 항상
+[strong-claim-word] 04_manuscript.md: line 1648: 대부분
+[strong-claim-word] 04_manuscript.md: line 1666: 모두
+[strong-claim-word] 04_manuscript.md: line 1668: 모두
+[strong-claim-word] 04_manuscript.md: line 1681: 대부분
+[strong-claim-word] 04_manuscript.md: line 1685: 반드시
+[strong-claim-word] 04_manuscript.md: line 1719: 자연히
+[strong-claim-word] 04_manuscript.md: line 1719: 모두
+[strong-claim-word] 04_manuscript.md: line 1817: 반드시
+[strong-claim-word] 04_manuscript.md: line 1821: 대부분
+[strong-claim-word] 04_manuscript.md: line 1823: 모두
+[strong-claim-word] 04_manuscript.md: line 1823: 전부
+[strong-claim-word] 04_manuscript.md: line 1825: 전부
+[strong-claim-word] 04_manuscript.md: line 1827: 모두
+[strong-claim-word] 04_manuscript.md: line 1907: 모두
+[strong-claim-word] 04_manuscript.md: line 1919: 모두
+[strong-claim-word] 04_manuscript.md: line 1923: 전부
+[strong-claim-word] 04_manuscript.md: line 1944: 저절로
+[strong-claim-word] 04_manuscript.md: line 1950: 전부
+[strong-claim-word] 04_manuscript.md: line 1954: 전부
+[strong-claim-word] 04_manuscript.md: line 1970: 대부분
+[strong-claim-word] 04_manuscript.md: line 1970: 전부
+[strong-claim-word] 04_manuscript.md: line 2000: 반드시
+[strong-claim-word] 04_manuscript.md: line 2027: 전부
+[strong-claim-word] 04_manuscript.md: line 2036: 반드시
+[strong-claim-word] 04_manuscript.md: line 2065: 항상
+[strong-claim-word] 04_manuscript.md: line 2065: 반드시
+[strong-claim-word] 04_manuscript.md: line 2112: 모두
+[strong-claim-word] 04_manuscript.md: line 2189: 항상
+[strong-claim-word] 04_manuscript.md: line 2195: 전부
+[strong-claim-word] 04_manuscript.md: line 2223: 전부
+[strong-claim-word] 04_manuscript.md: line 2244: 모두
+[strong-claim-word] 04_manuscript.md: line 2248: 유일한
+[strong-claim-word] 04_manuscript.md: line 2275: 반드시
+[strong-claim-word] 04_manuscript.md: line 2319: 자연히
+[strong-claim-word] 04_manuscript.md: line 2349: 반드시
+[strong-claim-word] 04_manuscript.md: line 2357: 전부
+[strong-claim-word] 04_manuscript.md: line 2398: 전부
+[strong-claim-word] 04_manuscript.md: line 2402: 유일한
+[strong-claim-word] 04_manuscript.md: line 2409: 전부
+[strong-claim-word] 04_manuscript.md: line 2435: 모두
+[strong-claim-word] 04_manuscript.md: line 2454: 모두
+[strong-claim-word] 04_manuscript.md: line 2476: 대부분
+[strong-claim-word] 04_manuscript.md: line 2492: 전부
+[strong-claim-word] 04_manuscript.md: line 2591: 전부
+[strong-claim-word] 04_manuscript.md: line 2657: 전부
+[strong-claim-word] 04_manuscript.md: line 2697: 전부
+[strong-claim-word] 04_manuscript.md: line 2719: 전부
+[strong-claim-word] 04_manuscript.md: line 2723: 유일한
+[strong-claim-word] 04_manuscript.md: line 2747: 모두
+[strong-claim-word] 04_manuscript.md: line 2837: 반드시
+[strong-claim-word] 04_manuscript.md: line 2905: 모두
 ```
 
-epub-responsive-img · epub-image-missing · svg-stretched-corner 등 독자 단 렌더 결함 **0건**.
-
-## check (정적 프로즈 린트) — 자문 133건, 차단 0건 판정
-
-| 규칙 | 건수 | 판정 |
-|---|---|---|
-| `strong-claim-word` (항상·반드시·전부·모두·유일한 등) | 127 | **자문 — 조치 없음.** 일반 단어 목록 린트. 이 원고의 단정 표현은 Phase 4 fact-checker가 약 200건 주장 검증(출처 라벨·완충 규율 R0-1·R0-12)에서 개별 심사했고, 잔존 사용처의 다수는 워크시트의 절차 명령형("반드시 확인하라")이다. Phase 4.5 라운드 2 ACCEPT 상태의 텍스트를 단어 목록 기준으로 재수정하지 않는다 |
-| `duplicate-within-file` | 6 | **의도된 설계 — 조치 없음.** 전건이 본문 장 도구(판별 프레임·스키마 표·신뢰도 등급·사용 제한 선언 등)를 **부록 A 워크시트 모음에 재수록**한 것이다. 부록 A의 존재 이유가 그 재수록이다 (계획서 명세) |
-
-## 종합
-
-**게이트 통과.** 차단 결함 0건 — 발행 진행.
+## 규칙별 건수
+-    6 [duplicate-within-file]
+-  141 [strong-claim-word]
