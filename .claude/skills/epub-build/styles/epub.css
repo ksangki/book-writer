@@ -150,3 +150,19 @@ div.conversion > p:first-child { font-weight: bold; margin-top: 0; }
 /* 체크리스트 — pandoc task list ([ ]) 항목 */
 ul.task-list { list-style: none; padding-left: 1em; }
 ul.task-list li { margin-bottom: 0.3em; }
+
+/* 사례 박스 (::: {.case}) — 기술서 「만들어 보기」 등 장 끝 사례 상자 */
+div.case {
+  background: #f3efe6;
+  border: 1px solid #ded3bc;
+  border-left: 5px solid #5c7a52;
+  border-radius: 8px;
+  padding: 0.9em 1.2em;
+  margin: 1.8em 0;
+}
+div.case > p:first-child { color: #3f5a37; margin-top: 0.2em; }
+div.case pre { font-size: 0.82em; }
+@media (prefers-color-scheme: dark) {
+  div.case { background: #22282f; border-color: #3a4450; border-left-color: #7f9e74; }
+  div.case > p:first-child { color: #a9c79c; }
+}
