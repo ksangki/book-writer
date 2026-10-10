@@ -68,6 +68,11 @@ figure.editorial-illustration figcaption{text-align:center;color:#756e61;font-si
 .roadmap-phase .gate{display:block;border-top:1px solid #d9cfb8;margin-top:.8em;padding-top:.7em;color:#6f5423;font-size:.83em;font-weight:700}
 .registry-core{border-left:5px solid #c9963f;border-right:5px solid #c9963f;position:relative}
 .registry-core::before{content:"전 생애주기 관통 기반";display:block;color:#c9b98f;font-size:.72em;font-weight:700;letter-spacing:.1em;margin-bottom:.35em}
+div.case{background:#f3efe6;border:1px solid #ded3bc;border-left:5px solid #5c7a52;border-radius:10px;padding:1.1em 1.4em;margin:2em 0}
+div.case>p:first-child{color:#3f5a37;margin-top:.2em}
+div.case pre{background:#fffdf8;color:#2b2b28;border:1px solid #d9cfb8;border-radius:8px;padding:.9em 1em;overflow-x:auto;font-size:.82em;line-height:1.55}
+div.case pre code{background:none;color:inherit}
+div.case code{font-size:.9em}
 @media (max-width:700px){.lifecycle-grid,.roadmap,.decision-grid{grid-template-columns:1fr}}
 @media (prefers-color-scheme: dark){
  html{background:#10161f} body{background:#10161f;color:#d8d4c8} h1,h2,h3{color:#ece8dc}
@@ -83,10 +88,15 @@ figure.editorial-illustration figcaption{text-align:center;color:#756e61;font-si
  .life-step span{color:#aaa394}
  .registry-core{background:#0b1119;border:1px solid #334050}
  .roadmap-phase .gate{border-color:#334050;color:#e3b45f}
+ div.case{background:#18212d;border-color:#2a3644;border-left-color:#7f9e74}
+ div.case>p:first-child{color:#a9c79c}
+ div.case pre{background:#0b1119;color:#d8d4c8;border-color:#334050}
+ div.case pre span{color:inherit!important} div.case pre span.co{color:#8f9a86!important}
 }
 @media print{
  figure.editorial-illustration,.front-matter,.lifecycle,.roadmap{break-inside:avoid}
- .executive-card,.lifecycle,.roadmap-phase{background:#fff!important}
+ .executive-card,.lifecycle,.roadmap-phase,div.case{background:#fff!important}
+ div.case{break-inside:avoid}
 }
 </style></head>"""
 html = html.replace("</head>", STYLE, 1)
