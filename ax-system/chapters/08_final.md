@@ -284,7 +284,7 @@ stage2 = stage1 * reliability * autonomy
 
 *실행량: 입력 5,494토큰(캐시 읽기 2,978 포함), 출력 2,276토큰, 약 0.06달러.*
 
-직접 돌려 보기: `python run.py a4` — 준비와 읽는 법은 부록 C.
+직접 돌려 보기: `python run.py a4` — ①~③의 실행 기록을 읽는다. 준비와 읽는 법은 부록 C.
 
 코드와 등록부: [github.com/ksangki/ax-system — examples/digital-workers](https://github.com/ksangki/ax-system/tree/main/examples/digital-workers) (`agents/a4_performance.py`, `registry.yaml`, `data/baselines.yaml`)
 :::
