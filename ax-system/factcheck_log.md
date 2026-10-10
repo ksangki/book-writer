@@ -2500,3 +2500,40 @@ FTE 재계산(a4 `fte()` 그대로): AGT-001 60×6/60=6h/150=0.04 → ×0.5×1.0
 
 ### v1.6.0 정정 노트 — 2026-10-10 (orchestrator)
 - 위 v1.6.0 섹션의 "③은 v1.5.0에도 있었음" 취지 서술 정정: 상자 ③은 v1.5.0 출간본에 없던 시범 초고(aaddaaa)였다. 판정 자체(숫자·발췌 대조)는 영향 없음. 상세는 editor_notes.md.
+
+## v1.7.0 부록 C — 2026-10-10 (fact-checker)
+
+대상: `back_matter.md` 부록 C 전체(C-1~C-7), 2·4·7·8·10장 상자의 새 줄 "직접 돌려 보기", `front_matter.md` 55·77행·목차.
+레퍼런스: `/home/user/ax-system/examples/digital-workers/` (main `89ee9d0`과 같음, origin/main 차이 없음). GitHub `ksangki/ax-system`은 공개(private=false)이고, main의 `outputs/`·`logs/`·`registry.yaml`이 추적돼 있다(.gitignore에 걸려 있지만 force-add로 커밋됨, `git ls-files`로 확인).
+방법: 코드 정독, 스크래치 복사본에서 실제 실행(`tests/dry_run.py`, 키 없이 `run.py a1`, 가짜 키로 `run.py a3`(paused, Run 초기화 단계에서 끝나 API를 부르지 않음), 실험 1·1b·2·2b의 등록부를 고친 뒤 dry_run), `logs/*.jsonl` 집계, 가격은 platform.claude.com/docs/en/about-claude/pricing 웹 2차 확인. API 호출 없음. 원본 폴더는 바꾸지 않았다(dry_run 앞뒤 md5 동일).
+
+### ❌ 정정 필요
+- **❌-1 C-3 "행위 허가의 네 갈래(`auto`·`approve`·`suggest`·등록부에 없음)… 차례로 건드린다"**: 기본 dry_run 스크립트(SCRIPTS)는 등록부에 있는 행위만 부른다. 실행 결과에 "등록부에 없는 행위" 문장이 한 번도 나오지 않는다. a2가 registry.yaml을 읽으려다 막히는 것은 `read_denied`(읽기 범위)이지 미등록 행위(`action_denied`)가 아니다. 미등록 갈래는 C-6 실험 2처럼 등록부를 고쳐야 나온다. (dry_run.py docstring도 '미등록'을 적어 과장하고 있으니 저장소 쪽 사안.)
+  → [정정] "등록부 확인, 행위 허가의 세 갈래(`auto`·`approve`·`suggest`)와 읽기 범위 밖 거부, 사람에게 넘김, … 폐기 실행을 차례로 건드린다. 등록부에 없는 행위는 C-6 실험 2에서 직접 만들어 본다."
+- **❌-2 C-5 사건 표 `action_auto` 행 "`auto` 행위를 스스로 실행함 | 69"**: `runtime.authorize()`는 `read` 수준 행위도 따로 갈라 내지 않고 `action_auto`로 남긴다(level이 None·suggest·approve가 아니면 전부 action_auto로 감). 기록본 69건 = `auto` 47(record_verdict 18, record_open_question 9, write_sop 1, propose_triage 8, compute_fte 3, flag_for_review 7, draft_retirement_plan 1) + `read` 수준 22(list_projects 1, read_document 1, list_open_tickets 1, read_ticket_log 8, read_usage 1, read_baselines 1, list_registry 1, get_activity 8). 건수 69는 맞고, 뜻 설명이 틀렸다.
+  → [정정] "`action_auto` | `auto`·`read` 수준 행위를 허가받아 실행함(`read` 수준도 이 이름으로 남는다) | 69". 표 아래에 "69건 가운데 22건은 `read` 수준 행위다"를 덧붙여도 된다.
+
+### ⚠️ 출처 없음 / 정밀화
+- **⚠️-1 C-4 "되돌리지 않고 다시 돌리면 `이미 retired 상태입니다.`라는 답을 받는다"**: 문장은 코드와 글자 단위로 같다. 그런데 `retire_agent`는 그 실행에서 폐기안(`draft_retirement_plan`)을 먼저 저장했는지(`plans`)부터 본다. 그래서 모델이 폐기안을 새로 쓰고 다시 폐기를 요청해야 이 답이 나온다. list_registry에 retired로 보이니 모델이 요청 자체를 하지 않을 수 있다. → [정정] "되돌리지 않고 다시 돌려 AGT-901 폐기를 다시 요청하면 `이미 retired 상태입니다.`라는 답이 돌아온다(모델이 이미 폐기된 것을 보고 요청하지 않을 수도 있다)."
+- **⚠️-2 C-6 실험 2 후반 `status: paused`를 dry_run으로 확인할 때**: 앞 문단이 "먼저 C-3의 점검으로 확인하자"고 안내하는데, ③이 `sys.exit`로 끝나기 때문에 dry_run 전체가 ③에서 멈춘다(④·⑤는 돌지 않고 "점검 통과" 줄도 안 나온다. 종료 코드 1. finally에서 되돌리기는 정상으로 일어난다). 실측 출력은 `[AGT-003] 등록부 상태가 'paused'라 실행하지 않습니다.`로 책과 같다. → [보강] "점검으로 돌리면 ③에서 이 문장을 남기고 점검 전체가 멈춘다. 고장이 아니라 스위치가 작동한 것이다." 덧붙여 `python run.py a3`는 등록부 확인 단계에서 끝나 API를 부르지 않으므로 비용이 들지 않는다(가짜 키로 실측, `run_blocked` 기록 확인). 이것도 쓸 수 있다.
+
+### 🕒 신선도 경고
+- 없음. C-7 단가는 2026-10-10 공식 가격 페이지와 일치한다. Opus 5.5: 입력 $4, 5분 캐시 쓰기 $5, 캐시 적중 $0.20(0.05x, 각주 2), 출력 $20. 코드는 `cache_control={"type":"ephemeral"}`(기본 5분)이므로 $5가 맞다. 이미 "2026년 10월 기준… 가격은 바뀔 수 있고"로 시점을 적어 두었다.
+
+### ✅ 확인됨 (요지)
+- 명령·옵션: `python run.py a1~a5|all`, `--approve ask|yes|no`, 기본값 ask(run.py argparse). `all`은 a1→a5 순서(dict 순서). `python tests/dry_run.py`. 키 없을 때 문장 `ANTHROPIC_API_KEY 환경 변수가 없습니다. 키는 코드나 파일에 적지 말고 환경 변수로 넘기세요.`는 실측과 글자 단위로 같다.
+- requirements 3종(anthropic, ruamel.yaml, PyYAML). Python 3.10+는 README와 일치하고, 코드의 `int | None` 표기도 3.10 이상이 필요하다. clone URL·경로(origin = github.com/ksangki/ax-system, 공개). ZIP에도 추적된 기록본이 들어간다.
+- C-1 표: 파일명 10개는 outputs/ 실물과 같고, AGT-001~005·상자/장 대응도 맞다. AGT-901~903 셋. 허용 수준 넷(registry.py LEVELS).
+- C-3: dry_run 실측. `형식 오류로 저장하지 않았습니다`(S0), `'send_customer_notice'은 제안만 허용됩니다.`, `등록부의 읽기 범위 밖입니다: registry.yaml`, 폐기안 없이 폐기하면 "폐기안이 없습니다", 일곱 항목이 덜 차면 "저장하지 않았습니다". 마지막 줄 `점검 통과: 등록부 상태 retired, 자격 증명 회수, 묘비 기록 확인`. 실행 뒤 logs/·outputs/·registry.yaml md5가 실행 전과 같다. 가짜 클라이언트라 네트워크를 쓰지 않는다. 토큰은 고정값(1000/200)이다.
+- C-4: approve 수준은 retire_agent 하나뿐(AGT-901~903 포함 전 등록부). 승인 프롬프트 3줄 형식, summary는 `{id} {name} — {reason}`, AGT-901 이름 "주간 VOC 요약 봇". 승인 입력값 y/yes/예/ㅇ(소문자 변환 후 비교), 나머지는 전부 거절. 기록이 `--approve yes`였다(README). ③ `절차서: …` 출력과 outputs→fallback 순서(실측 `절차서: outputs/sop_incident_triage.md`), 두 경로 모두 AGT-003 읽기 범위 안. ④ 미실행 문장 글자 일치, 기준값은 AGT-001~003, usage.jsonl 전 줄 누적(dry_run에서 AGT-001 runs 2로 합산되는 것 실측). ⑤ status/credentials/tombstone 갱신. 요약 줄 `처리 18건 · 사람 개입 0회 · 토큰 입력 17,110 / 출력 9,119 · 약 $0.241`은 usage.jsonl 1행과 print 형식으로 재계산해 같다. 처리·사람 개입·입력 토큰 정의는 코드(count 위치, human_touches 증가 지점, 합산식)와 일치한다.
+- C-5: 보류 2건(P04·P09), 열린 질문 9개(`## Q` 9), SOP '사람 확인'·'임시값' 줄 있음, a3_triage 8건 모두 assigned=false, suggestions.jsonl 없음, a4 보고서 첫 절이 사용 제한 선언이고 1단·2단 표 있음, 폐기안 ①~⑦, 기록본 registry의 AGT-901은 active이고 tombstone 없음. audit/usage 필드명. 사건 건수 run_start/run_end 5/5, read 19, handoff 1(T-1008), approved 1, retired 1, 나머지 6종 0(audit 101줄 집계). grep 결과 한 줄. 되돌리기 명령 두 가지는 README와 일치하고 대상 파일이 git에 추적돼 있다.
+- C-6: 실험 1은 dry_run에서 `T-1001를 계정플랫폼팀에 배정했습니다.`가 `'assign_ticket'은 제안만 허용됩니다. …`로 바뀐다(실측). 1b: `발송했습니다.`(실측). 2: `거부됨: 'assign_ticket'은 등록부에 없는 행위입니다. 실행하지 않았습니다.`(실측). paused 문장(실측). dry_run은 고친 등록부를 쓰고 끝난 뒤 고친 상태를 남긴다(백업이 실행 시점 파일이라서. 실측: 실험 1 뒤 suggest 유지). 3: `담당자가 'retire_agent'을 승인하지 않았습니다. 실행하지 않았습니다.`, action_rejected, 거절도 human_touches +1, 폐기안 파일은 남고 자격 증명 3개는 그대로(코드). 4: csv 7열 헤더, baselines 키 3개와 evidence 3등급, 티켓 로그는 `{id}.log`로 짝을 이룬다.
+- C-7: 합계 127,330 / 36,413 / $1.0037(≈1.004), 실행당 $0.0587~$0.2934(≈0.06~0.29), PRICE 4/20/5/0.20(웹 확인).
+- 일반 안내: `$env:VAR = "..."`, `Select-String <pattern> <path>`(위치 인자 Pattern·Path), GitHub Code→Download ZIP, `python -m pip`, macOS `python3` 모두 정확하다.
+- 장 상자 5줄: a1→2장, a2→4장, a3→7장, a4→8장, a5→10장으로 C-1과 일치. front_matter 55·77행과 목차 "부록 C. 예제 직접 돌려 보기"는 back_matter 제목과 일치. 10장 상자 184행 "--approve yes… 사람이 서 있지 않았다"는 C-4의 회고 서술과 정합한다.
+
+### 참고 (판정 아님)
+- C-5 `rm -f logs/*.jsonl outputs/* && …`: macOS 기본 셸(zsh)에서는 폴더가 이미 비어 있으면 glob 미일치 오류("no matches found")가 나서 `&&` 뒤가 실행되지 않는다. README와 같은 명령이고 보통은 파일이 있는 상태에서 쓰니 비블로킹이다.
+- C-2 ZIP 문단 "압축을 다시 풀면 처음으로 돌아간다": C-5에서 '처음 상태'는 기록을 비운 상태를 뜻하는데, 여기서는 기록본 상태를 말한다. 용어가 겹친다. "받은 그대로(기록본)로 돌아간다"를 권장한다(editor 재량).
+
+총평: 명령·파일명·화면 문장·숫자·단가는 실행과 코드로 모두 확인됐다. BLOCKING ❌ 2건(dry_run이 '미등록' 갈래를 건드린다는 과장, `action_auto`의 뜻 설명)만 고치면 된다. ⚠️ 2건은 정밀화 권고다.
