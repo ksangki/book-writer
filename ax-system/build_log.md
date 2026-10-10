@@ -1,8 +1,8 @@
 # Build Log — 디지털 워커의 시대, AI 에이전트를 조직의 성과로 만드는 체계 v1.6.0
 
-- **Date:** 2026-10-10T07:09:11Z
+- **Date:** 2026-10-10T10:37:54Z
 - **Output:** `디지털-워커의-시대,-AI-에이전트를-조직의-성과로-만드는-체계-v1.6.0.epub`
-- **Size:** 390727 bytes
+- **Size:** 390712 bytes
 - **Pandoc exit:** 0
 - **epubcheck:** passed
 - **epubcheck strict:** 1
@@ -44,3 +44,7 @@
 - 위 필수 확인은 pandoc 3.1.3 빌드 기준이다. 그 빌드는 SVG 그림 10점을 `EPUB/media/fileN.svgz` 이름(내용은 비압축 SVG)으로 실어, 확장자로 형식을 판단하는 리더에서 그림이 깨질 위험이 있었다(v1.3.0은 `.svg`).
 - 하네스 스크립트는 바꾸지 않고 pandoc 3.9(pypandoc_binary)를 PATH 앞에 두고 `build_epub.sh ax-system`으로 재빌드했다. 결과: `.svg` 10점·`.svgz` 0, epubcheck 통과(exit 0), `<div class="case">` 5, stylesheet에 `div.case` 규칙, 콜로폰 `CC BY-NC-SA 4.0`, 원고 sha256 b71af5d8be00 그대로. 위 Metadata 절이 재빌드 값이다.
 - 하네스 후속: 환경 pandoc이 3.1.x면 같은 문제가 재발한다 — main에서 최소 pandoc 버전 점검 또는 svgz 후처리 검토.
+
+## 재빌드 — B-7 확인 칸 갱신 (orchestrator, 2026-10-10)
+- 원고 sha256 11b1beaac02f (직전 b71af5d8be00 대비 B-7 한 줄만 변경, 05_acceptance.md 「발간 전 조치 마감」). pandoc 3.9로 `build_epub.sh ax-system` 재빌드.
+- epubcheck 통과(exit 0), `.svg` 10·`.svgz` 0, `<div class="case">` 5, stylesheet `div.case` 규칙 포함, 이미지 10건 모두 있음. 위 Metadata 절이 이번 빌드 값이다.

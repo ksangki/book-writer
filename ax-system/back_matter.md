@@ -477,4 +477,4 @@ SOP는 표준 작업 절차, 곧 누가 무엇을 어떤 순서로 하는지 적
 
 | 자료 | 출처 | 유형 | 확인 | 쓰인 장 |
 |---|---|---|---|---|
-| ax-system `examples/digital-workers` — 디지털 워커 예제 에이전트 다섯과 등록부(`registry.yaml`)·실행 런타임 *v1.6.0* | [github.com/ksangki/ax-system](https://github.com/ksangki/ax-system/tree/main/examples/digital-workers) | `[저자 자료]` | ★(로컬 저장소 열람) / 공개 URL은 main 병합 후 확인 | 2·4·7·8·10장 |
+| ax-system `examples/digital-workers` — 디지털 워커 예제 에이전트 다섯과 등록부(`registry.yaml`)·실행 런타임 *v1.6.0* | [github.com/ksangki/ax-system](https://github.com/ksangki/ax-system/tree/main/examples/digital-workers) | `[저자 자료]` | ★ (공개 URL 2026-10-10 확인) | 2·4·7·8·10장 |
