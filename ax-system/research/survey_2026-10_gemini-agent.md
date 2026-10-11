@@ -28,3 +28,23 @@
 
 ## 원문 대조 전 쓰지 말 것
 MAU 10억·포천 100 약 90%, "추가 요금 없음", 상주 동료 에이전트의 '역할', 감사 기록의 항목 구성.
+
+## 1차 출처 대조 — 2026-10-11 (orchestrator)
+**원문:** Thomas Kurian, "Gemini at Work 2026: Introducing Gemini agent", Google Cloud Blog, 2026-10-08 (`datePublished`) — https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026 — `[공식]` ★ (원문 직접 열람, 검색: 2026-10-11 기준). 기조연설을 옮긴 글.
+
+**원문에서 확인된 것 (인용):**
+- 동료 에이전트: "The agent receives its own Workspace account, including an email address, calendar, Drive, and presence in your company directory." / "A coworker agent acts under its own identity rather than yours, and it sees only what you share with it." / "Coworker agents have dedicated identities including their own @agents.company.com emails, their own persistent storage"
+- 하위 에이전트: "a roster of sub-agents — temporary, job-specific agents, each with their own identity"
+- 거버넌스 네 질문: "Who is the agent, and what identity does it have? / What is it allowed to do or what permissions is it granted? / What did it do and where can I see what it did? / What should it never touch?"
+- 신원: "Every agent gets its own identity, cryptographically attested and governed like an employee, with least-privilege permissions. That identity is stamped into the logs that capture its work"
+- 권한: "fine-grained, role-based access permissions, approved by your organization’s security administrators" / 외부 시스템에는 "identity is mapped and propagated through industry standards such as OAuth"
+- 감사: "every action Gemini takes is written to an audit trail and attributed to the agent rather than to a person"
+- 정책: Agent Sandbox, Agent Gateway("an AI network firewall"), 예 "agents may not open documents classified Need to Know"
+- 비용: "Real-time spend caps … if a spend cap is triggered, that project's agent pauses … Because the tracking is per project, companies can charge AI costs back to specific departments."
+- 모델: Gemini 계열과 Anthropic Claude 모델을 오케스트레이션, Smart Routing
+- 연결: Confluence·Microsoft Office·Teams·Slack·Workspace·Git·Jira·Salesforce·ServiceNow·BigQuery·Databricks·Postgres·Snowflake, MCP 서버, "enterprise tools registry"
+- 수치(`[벤더 자체 발표]`): "nearly 90% of the Fortune 100 use Gemini Enterprise", "nearly 80% of all Google Cloud customers are using our AI products"
+- 가용성: 산업별(금융·법률) "now in preview"
+
+**지디넷 기사에 있으나 원문에서 확인 안 됨 → 쓰지 않음:** '업무 승인권자' 파악, '작업 수신함', 제미나이 MAU 10억, 테스트 참여사(온·쇼피파이·페이팔), 피차이 인용(blog.google 글에 있을 수 있으나 그 도메인은 이 환경에서 차단).
+**국내 보도:** 지디넷코리아 김미정, 2026-10-11 — https://zdnet.co.kr/view/?no=20261010221851 — `[언론]` 2차(외신 인용), 원문 대조 결과 일부 항목 원문에 없음.
