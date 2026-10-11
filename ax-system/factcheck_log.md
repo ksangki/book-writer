@@ -2577,3 +2577,62 @@ FTE 재계산(a4 `fte()` 그대로): AGT-001 60×6/60=6h/150=0.04 → ×0.5×1.0
 - 승인 프롬프트, 입력값, 실험 1~4 화면 문장, C-7 숫자와 단가: 앞 라운드와 동일하다. ✅
 
 총평: 앞 라운드 ❌ 2건과 ⚠️ 2건은 모두 정확히 반영됐다. 새 주장 13건 중 ⚠️은 1건(YAML 들여쓰기 "실행이 멈춘다" 과잉 일반화)뿐이다. 이 건은 사실이 반쯤 틀렸으므로 정정을 권한다. 나머지는 ✅이고 참고 2건(Windows PATH 체크, 8장 "읽는다"를 "환산한다"로)은 비블로킹이다. BLOCKING ❌ 0.
+
+## v1.8.0 제미나이 에이전트 보강 — 2026-10-11 (fact-checker)
+
+**대상:** `diff X_v1.7.0.md X.md` 변경분 — 05_final 114·116·120·227행, 06_final 148·150·152·179행, 10_final 113행, back_matter 266·297·298행.
+**1차 대조:** Thomas Kurian, "Gemini at Work 2026: Introducing Gemini agent", Google Cloud Blog — 2026-10-11 curl로 직접 열람. 메타 `headline` = "Gemini at Work 2026: Introducing Gemini agent", `datePublished` = 2026-10-08, 바이라인 "Thomas Kurian / CEO, Google Cloud", 편집자 주 "adapted from Thomas Kurian's keynote address at Gemini at Work 2026". (페이지 H1은 "Welcome to Gemini at Work 2026: Introducing the Gemini agent". 부록 B가 쓴 메타 제목도 정당하다.)
+**보조:** research/survey_2026-10_gemini-agent.md 「1차 출처 대조」, 01_reference.md §(Deutsche Bank 행 757·1187), fact_rules_active.md R3-1.
+
+### (a) 영문 인용 글자 일치 — 전부 ✅
+| 위치 | 인용 | 원문 |
+|---|---|---|
+| 5장 227 | "attributed to the agent rather than to a person" | Auditing 절 "every action Gemini takes is written to an audit trail and attributed to the agent rather than to a person." ✅ |
+| 5장 227·6장 148 | "acts under its own identity rather than yours" | "A coworker agent acts under its own identity rather than yours, and it sees only what you share with it." ✅ |
+| 6장 148 | "its own Workspace account" | "The agent receives its own Workspace account, including an email address, calendar, Drive, and presence in your company directory." ✅ |
+| 6장 148 | "each with their own identity" | "a roster of sub-agents — temporary, job-specific agents, each with their own identity — to tackle multi-step tasks" ✅ |
+| 6장 150 | "governed like an employee" | "Every agent gets its own identity, cryptographically attested and governed like an employee" ✅ (주어가 '모든 에이전트'다. 동료 에이전트에 적용해도 틀리지 않다) |
+| 5장 116 | 'Need to Know' | "agents may not open documents classified Need to Know." ✅ |
+
+### (b) 요지 옮김
+1. 네 질문(5장 114): ✅ "governance comes down to answering four fundamental questions"와 네 질문의 번역이 일치한다.
+2. 여덟 칸 대응(5장 116): ✅ 5장 56–63행 정의와 맞는다. 1번 디지털 신원(누구·신원), 2·4번 권한·행위(allowed to do / permissions), 6번 감사(What did it do / where can I see), 넷째 질문→3번 데이터 민감도. 5·7·8번이 남는다는 서술과 스폰서(84–86행 "처음에는 세 칸… 디지털 신원, 스폰서, 행위 범위")도 맞다. 원문에는 소유자·책임자·수명주기·폐기에 해당하는 서술이 없다(owner/accountab/lifecycle/retire/decommission/offboard/revoke 검색 0건, lifecycle 1건은 Onit 계약 관리 문맥). "묻지 않는다"는 ✅이다.
+   - 참고(비블로킹): 원문은 "Identity, policy, and observability answer the first three. The fourth is Agent Gateway."라고 적었다. Need to Know 예는 Agent Gateway 정책의 예다. 그러므로 "원문이 든 예도"는 ✅이다. 넷째→3번 대응은 이 책의 대응으로 읽힌다.
+3. "에이전트 자신에 걸린 칸은 플랫폼이 기본값으로": ✅ "Gemini gives you identity, discovery, governance, and security by default."
+4. 동료 에이전트 계정 구성(6장 148·10장 113): ✅ 역할을 설명하면 만들어 준다("describe the role you need, and Gemini creates it"). 이메일·캘린더·드라이브·디렉터리, 채팅방 추가·@멘션도 원문과 같다.
+5. 하위 에이전트 신원(6장 148·152): ✅ "temporary, job-specific", 여러 단계 작업. "하위 신원을 어디까지 목록으로 보여 주는지는 원문에 없다"도 ✅이다. 참고(비블로킹): 원문이 'discovery'를 기본 제공 항목으로 이름만 든다. 범위는 밝히지 않으므로 문장은 그대로 성립한다.
+6. 감사 귀속(5장 227): ✅ '누구'의 기록 칸, 권한 맥락 기록 여부는 원문에 없다(identity가 "stamped into the logs"라는 것까지만 있다. OAuth는 신원 전파를 말할 뿐 기록 항목이 아니다).
+7. on behalf of 서술(5장 227): ✅(근사) — 정밀화 권고 P3.
+8. 지출 한도·멈춤·부서 귀속(6장 179): ✅ "set a hard limit on a project's AI spend in the Cloud Billing Console … if a spend cap is triggered, that project's agent pauses … charge AI costs back to specific departments." 토큰·샌드박스: ✅ "Gemini monitors token usage and sandbox costs" — 정밀화 권고 P4.
+9. 날짜: ✅ 2026-10-08(5·6·10장, 부록 B). 부록 B 266행 v1.8.0 접근일 2026-10-11 ✅(열람일과 일치).
+
+### (c) 원문이 말하지 않은 것의 단정 여부 — 위반 없음 ✅
+- 출시 단계: 6장 148 "출시 단계는 원문에 없으니" ✅. 원문의 "now in preview"는 산업별 특화(Financial Services·Legal)에만 걸린다. 동료 에이전트에는 단계 표기가 없다. 2차 보도의 "초기 비공개 프리뷰"는 본문에 들어오지 않았다 ✅.
+- 감사 기록 칸 구성: 5장 116 괄호와 227이 "원문에 없다"로 처리했다 ✅.
+- 폐기: 10장 113 "원문은 폐기를 다루지 않는다 … 이 책의 추론" ✅.
+- survey의 '원문에 없는 항목'(업무 승인권자, 작업 수신함, MAU 10억, 테스트 참여사 온·쇼피파이·페이팔, 피차이 인용, 추가 요금 없음) — 5·6·10장, 부록, 앞부속을 검색한 결과 0건 ✅. 원문 수치(포천 100 약 90% 등)도 쓰지 않았다 ✅.
+
+### (d) 책 내부 대조
+- 도이체방크(6장 148): ✅ 6장 129–133행("2020년 7월 … 'allocated an employee number and has a dedicated working email address'")과 맞는다. 01_reference 757행(사번+전용 업무 이메일, 2020-07-20)·1187행과도 맞는다. "디지털 직원 하나"는 133행 "그것은 하나였다"와 맞는다. "6년 뒤"는 2020→2026이다 ✅.
+- 1계층 식별자(6장 152): ✅ 71행 정의("에이전트마다 붙이는 고유 번호 … 관리와 관측")와 맞는다.
+- '발급 주체는 런타임'(6장 150): ✅(인용 일치, 137행). 참고 P6.
+- 6장 105행 토큰 뜻 구분: ✅ 105행 "자격 증명은 … 키나 토큰 같은 증표"(접속용). 179행의 사용량 토큰과 "(접속용 토큰과는 다른 뜻이다.)"로 구분된다.
+- "표의 여섯 항목"(6장 179): ✅ 비용 표가 6행이다(동기화·자격 증명 교체·감사 로그·회귀 테스트·라이선스·등록 인건비).
+- 10장 ④·⑤(113): ✅ ④ "인바운드 호출 차단 — 엔드포인트·웹훅·큐"에 들어오는 메일·채팅 호출이 대응한다. ⑤ "보관·익명화·안전 삭제" 세 갈래(111행)에 메일함·드라이브가 대응한다. "키를 거두는 데서"는 ②(자격 증명·토큰 즉시 폐기)를 가리키며 맞다.
+- 5장 120 "레지스트리 네 벌 가운데 하나": ✅ 112행 네 벌(서비스나우·워크데이·마이크로소프트·사비언트)에 엔트라가 든다. 사실 변경은 없다.
+
+### (e) 부록 B
+- 297행 Kurian: 제목 ✅(메타 headline과 일치), 날짜 ✅, URL ✅(열람 확인), `[공식]` ✅ — 범례 264행 "`[공식]` 공식 문서·보도자료". CEO 바이라인 공식 발표라 Okta·SailPoint 발표 행의 `[공식]`과 같은 처리다. 본문은 "벤더 발표"로 성격을 따로 밝혔다(R3-1 정합). 참고: 인접한 SAP LeanIX 블로그 발표는 `[벤더]`이다. 통일하려면 editor 재량이며 비블로킹이다.
+- 298행 지디넷: `[매체]` ✅. 범례에 있다(survey의 `[언론]`을 범례에 맞게 바꾼 것이 옳다). 제목·날짜·URL은 survey에 적힌 저자 제공 본문 기록과 일치한다. 사이트가 이 환경에서 차단되어 직접 확인은 하지 못했다. 2차·△ 표기와 "본문은 1차 원문 기준" 고지가 있으므로 ✅이다.
+- 링크 형식: 마크다운 링크는 유효하다 ✅. 참고 P7.
+
+### 정밀화 권고 (모두 비블로킹, editor/writer 재량)
+- **P1 (5장 114, 🕒 어순):** "2026년 10월 8일 기조연설을 옮겨 공식 블로그에 올린 글"은 기조연설 날짜로도 읽힌다. 원문은 연설 날짜를 밝히지 않는다. 권고: "기조연설을 옮겨 2026년 10월 8일 공식 블로그에 올린 글".
+- **P3 (5장 227):** 원문의 on behalf of 문장(84행)은 주어가 제미나이 일반이다("Gemini can function as your personal assistant or as a team member, where it works on behalf of a group of people … or on behalf of a specific role"). '위해'는 on behalf of를 약하게 옮겼다. 이 대목이 둘째 항 '대신하여'로 이어지므로 권고한다: "원문은 제미나이가 팀원으로 일할 때 한 무리의 사람이나 조직 안의 특정 역할을 대신해(on behalf of) 일한다고 설명한다". 아울러 225행은 "어떤 사용자를 대신하여"인데 227행은 '누구를 대신하여'로 인용 표기했다. 225행 표현에 맞추거나 따옴표를 빼자.
+- **P4 (6장 179):** "샌드박스에서 코드를 돌린 비용"은 원문보다 좁다. 원문은 "sandbox costs"이고, 모든 에이전트가 작업을 Agent Sandbox 안에서 실행한다고 적었다. 권고: "샌드박스(격리된 실행 공간)에서 작업을 돌린 비용". 선택 사항: "멈춘다" 뒤에 "(콘솔에서 한 번에 재개할 수 있다)"를 덧붙이면 원문의 pause에 더 가깝다.
+- **P6 (6장 150):** 이 장의 답은 "런타임이 짧은 수명으로 발급"(137행)이다. 원문은 신원의 수명을 말하지 않고, 동료 에이전트 계정은 상주형이다("persistent, defined role", "persistent storage"). "구현된 셈이다"는 발급 주체 절반에만 성립한다. 권고: "'발급 주체는 런타임'이라는 절반이 제품으로 구현된 셈이다"처럼 범위를 밝히자.
+- **P7 (부록 B 297):** 링크 앵커가 `[Google Cloud Blog]`이다. 같은 표의 v1.5.0 행은 도메인 앵커(`[docs.cloud.google.com]`·`[leanix.net]`)를 쓴다. 통일하려면 `[cloud.google.com](…)`로 바꾸자.
+
+### 판정 집계
+✅ 확인 28건(인용 6 + 요지 9 + 비단정 4 + 내부 대조 7 + 부록 2) / ❌ 0 / ⚠️ 0 / 🕒 1(P1, 비블로킹) / 정밀화 권고 P3·P4·P6·P7. 의심 식별자 없음.
+**총평:** BLOCKING 항목은 없다. 영문 인용 6건이 원문과 글자 단위로 일치한다. 원문에 없는 2차 보도 항목이 본문에 하나도 들어오지 않았다. 남는 것은 어순 1건과 옮김의 정밀도 4건으로, 모두 editor 재량이다.
