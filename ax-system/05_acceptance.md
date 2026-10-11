@@ -1,96 +1,84 @@
-# 수락 검수: 「디지털 워커의 시대」 v1.7.0 개정판
+# 수락 검수: 「디지털 워커의 시대」 v1.8.0 개정판
 
-<!-- 검수: 2026-10-10 · v1.7.0 라운드 1 · 검수자: manuscript-reviewer (fresh context) -->
+<!-- 검수: 2026-10-11 · v1.8.0 라운드 1 · 검수자: manuscript-reviewer (fresh context) -->
 
-- **판정 대상:** `04_manuscript.md` — sha256 **`646b9fca677b109717786e95b70e4a08d473b781713d14d2bfc332c80624f1d3`** (직접 계측, coordinator 통지 `646b9fca677b…`와 일치), 228,118자(파이썬 `len`), 3,314줄
-- 이전 판정: v1.6.0 ACCEPT, 발간 전 조치 마감 뒤 최종 sha `11b1beaac02f…`(218,321자). `04_manuscript_v1.6.0.md`의 sha256이 `11b1beaac02f2adf…`임을 직접 확인함. 이전 판정 기록은 `05_acceptance_v1.6.0.md`에 있음(덮어쓰기 전에 `cmp`로 현재 `05_acceptance.md`와 같은 파일임을 확인)
-- 장르 `tech-book` · 슬러그 `ax-system` · 위임 모드 `production` · 매니페스트 `version 1.7.0` / `pub_date 2026-10-10` / `harness_version 1.11.0` / `license CC BY-NC-SA 4.0`
-- **범위:** v1.7.0 변경분만 본다. 상자 밖 본문과 부록 A·B는 재판정하지 않고 v1.6.0의 PASS를 유지한다. 이 전제는 아래 diff로 직접 확인했다.
+- **판정 대상:** `04_manuscript.md` — sha256 **`746ce0dd21b336b246afc8c06a7fe41c77000d1d9f07d8fdf6e87f6567a895a3`** (직접 계측. 통지된 `746ce0dd21b3…`와 같다), 231,692자(파이썬 `len`)
+- **기준 원고:** `04_manuscript_v1.7.0.md` — sha256 `770c8ddb092a7ebb8f5a85e89d5d5f52ae817a99ac2ce6c4a6f311fa86418685`(직접 계측). v1.7.0 수락본(646b9fca677b)에 관찰 1 한 줄을 반영한 수락 후 sha와 같다(`05_acceptance_v1.7.0.md` 「수락 후 조치」). 이전 판정 기록은 `05_acceptance_v1.7.0.md`에 있다. 덮어쓰기 전에 `cmp`로 현재 `05_acceptance.md`와 같은 파일임을 확인했다
+- 장르 `tech-book` · 슬러그 `ax-system` · 위임 모드 `production` · 매니페스트 `version 1.8.0` / `pub_date 2026-10-11` / `harness_version 1.11.0` / `license CC BY-NC-SA 4.0` / identifier `urn:uuid:5cef80ff…`(그대로)
+- **범위:** v1.8.0 변경분만 본다. 나머지 본문과 부록 A·C는 재판정하지 않고 v1.7.0의 PASS를 유지한다. 이 전제는 아래 diff로 직접 확인했다.
 
-## 전제 확인: v1.6.0 수락본 대비 diff
+## 전제 확인: v1.7.0 대비 diff
 
-`diff 04_manuscript_v1.6.0.md 04_manuscript.md` 결과 변경 hunk는 아래 10개뿐이다. 통지된 변경 목록과 정확히 같고, 그 밖의 변경은 0이다.
+`diff 04_manuscript_v1.7.0.md 04_manuscript.md`의 변경 hunk는 아래 11개뿐이다. 통지된 변경 목록과 같고, 그 밖의 변경은 0이다.
 
-| 위치 | 변경 |
-|---|---|
-| L7, L15 | 판본 v1.6.0 → v1.7.0 (본문 상단 판본 줄, 판권) |
-| L77 | "저장소 주소는 각 상자 끝과 부록 B-7에, 직접 돌려 보는 방법은 부록 C에 적었다" |
-| L87 | 「둘째, 시점」에 "v1.7.0의 부록 C" 추가 |
-| L128 | 목차에 "부록 C. 예제 직접 돌려 보기" 추가 |
-| L627·1058·1834·2147·2618 | 상자 ①~⑤에 "직접 돌려 보기: `python run.py aN` — … 부록 C." 한 줄씩 (④만 "①~③의 실행 기록을 환산한다" 추가) |
-| L3121–3314 | `# 부록 C. 예제 직접 돌려 보기` (C-1~C-7) 신설 |
-
-L55 괄호는 style 검수 Nice 3에 따라 v1.6.0 문장으로 되돌아가 있다(diff 0). 상자 다섯의 `::: {.case}` 5개는 그대로이고, 부록 C의 코드 펜스 30개(15블록)는 짝이 맞는다.
-
-## 직접 세기: 부록 C를 예제 저장소 코드·실행과 대조
-
-순환 논증을 피하려고 factcheck_log v1.7.0 절의 ✅ 판정은 근거로 쓰지 않았다. `/home/user/ax-system/examples/digital-workers/`의 코드를 직접 읽고, 원본 파일을 파싱해 세고, 스크래치 복사본에서 실행했다. API는 호출하지 않았다. 복사본은 끝난 뒤 리터럴 경로로 삭제했다.
-
-| 부록 C 주장 | 대조 대상 | 결과 |
+| 위치 (새 원고) | 소절 | 변경 |
 |---|---|---|
-| `python run.py a1~a5`, `all`, `--approve ask\|yes\|no`(기본 ask) | `run.py` argparse(`choices=[*AGENTS,"all"]`, `default="ask"`) | ✅ |
-| 키 없을 때 문장 `ANTHROPIC_API_KEY 환경 변수가 없습니다. 키는 코드나 파일에 적지 말고 환경 변수로 넘기세요.` | 복사본에서 키 없이 `python run.py a1` 실행 → 글자 단위로 같음 | ✅ |
-| `requirements.txt` 세 가지(anthropic·ruamel.yaml·PyYAML), Python 3.10 이상 | `requirements.txt` 3줄, README L41 | ✅ |
-| clone URL `github.com/ksangki/ax-system`, `examples/digital-workers` | `git remote -v` origin. 기록본 `logs/*.jsonl`·`outputs/*`·`registry.yaml`은 `.gitignore` 예외로 git 추적됨(`git ls-files`) → `git checkout -- logs outputs registry.yaml`이 작동함 | ✅ |
-| **`python tests/dry_run.py` 마지막 줄 `점검 통과: 등록부 상태 retired, 자격 증명 회수, 묘비 기록 확인`** | 복사본에서 키 없이 실행 → 마지막 줄이 글자 단위로 같고 종료 코드 0. 실행 뒤 `registry.yaml` sha256, `logs/`, `outputs/`가 원본과 같음(`diff -r` 0) → "스스로 되돌린다" ✅ | ✅ |
-| C-3 화면 문장: S0 → `형식 오류로 저장하지 않았습니다`, 공지 → `'send_customer_notice'은 제안만 허용됩니다.`, 폐기안 없이 폐기 → 거부, 일곱 항목 미달 → 저장 안 됨 | dry_run 출력: "형식 오류로 저장하지 않았습니다: severity='S0'…", "'send_customer_notice'은 제안만 허용됩니다. …", "폐기안이 없습니다. …", "저장하지 않았습니다: ②③④⑤⑥⑦ 항목이 없습니다." | ✅ |
-| C-3 점검 범위 "세 갈래(auto·approve·suggest)와 읽기 범위 밖 거부", 미등록은 실험 2 | dry_run `SCRIPTS`: a2의 `registry.yaml` 읽기(→`read_denied`), 미등록 행위 호출 없음 | ✅ |
-| C-4 승인 프롬프트 3줄 모양, 승인 입력 `y`·`yes`·`예`·`ㅇ`, 나머지 거절 | `runtime._ask_human()` 출력 형식·`answer in ("y","yes","예","ㅇ")`. summary `{id} {name} — {reason}`(a5) | ✅ |
-| `approve` 수준은 ⑤의 `retire_agent` 하나뿐 | `registry.yaml` 전체 8개 항목의 `actions` | ✅ |
-| ③ `절차서: …` 출력, outputs → fallback 순서 | `a3.load_sop()`. dry_run 출력 `절차서: outputs/sop_incident_triage.md` | ✅ |
-| ④ "`AGT-001의 실행 기록이 없습니다. 먼저 그 에이전트를 실행하세요.`", 기준값은 AGT-001~003뿐 | `a4_performance.py` L93, `baselines.yaml`. dry_run에서 AGT-005 → "기준값이 없어 환산하지 않습니다" | ✅ |
-| ⑤ `이미 retired 상태입니다.` (모델이 요청하지 않을 수도 있음) | `a5.retire_agent()` — `plans` 확인 → status 확인 순서. 단서 문장이 이 순서와 맞음 | ✅ |
-| C-4 ① 요약 한 줄 "처리 18건 · 사람 개입 0회 · 토큰 입력 17,110 / 출력 9,119 · 약 $0.241" | `logs/usage.jsonl` AGT-001: items 18, human_touches 0, input+cache_read+cache_write 17,110, output 9,119, cost 0.241. 출력 형식은 `runtime.run()` 끝 print와 같음 | ✅ |
-| C-5 사건 표: run_start/run_end 5/5, read 19, action_auto 69, handoff 1, approved 1, retired 1 | `logs/audit.jsonl` 직접 집계: 같음. 나머지 사건 0 | ✅ |
-| "`action_auto` 69건 가운데 22건은 `read` 수준" | action별 집계: list_projects 1 + read_document 1 + list_open_tickets 1 + read_ticket_log 8 + read_usage 1 + read_baselines 1 + list_registry 1 + get_activity 8 = 22 | ✅ |
-| `grep handoff_to_human` → T-1008 한 줄 | audit L65 한 줄, `ticket_id: T-1008` | ✅ |
-| C-5: `hold` 보류 2건, 열린 질문 9개, `assigned` 확인, `suggestions.jsonl` 없음 | `a1_verdicts.jsonl` hold=true 2 · audit `record_open_question` 9 · `a3_triage.jsonl` assigned=false 8/8 · `outputs/suggestions.jsonl` 없음 | ✅ |
-| C-6 실험 1: `assign_ticket: suggest` → `'assign_ticket'은 제안만 허용됩니다.` / `send_customer_notice: auto` → `발송했습니다.` | 복사본 등록부를 고쳐 dry_run 실행 → 두 문장 모두 실측과 같음 | ✅ |
-| C-6 실험 2: 줄 삭제 → `거부됨: 'assign_ticket'은 등록부에 없는 행위입니다. 실행하지 않았습니다.` / `status: paused` → `[AGT-003] 등록부 상태가 'paused'라 실행하지 않습니다.`, 점검 전체가 ③에서 멈춤 | 복사본 실측: 두 문장 같음. paused면 a3에서 `sys.exit`, "점검 통과" 줄 없음 | ✅ (관찰 1 참조) |
-| C-6 실험 3: `action_rejected`, `담당자가 'retire_agent'을 승인하지 않았습니다. 실행하지 않았습니다.` | `runtime.authorize()` approve 분기 문자열 | ✅ (API 필요, 코드로만 확인) |
-| C-6 실험 4: `projects.csv` 열 일곱 `id,name,team,description,status,touches,users` | `data/projects.csv` 헤더 | ✅ |
-| C-7 합계 127,330 / 36,413 / 약 1.004달러, 한 번 0.06~0.29달러 | usage 5줄 합: 127,330 / 36,413 / 1.0037. 최소 0.0587, 최대 0.2934 | ✅ |
-| C-7 단가 입력 4·출력 20·캐시 쓰기 5·캐시 읽기 0.20달러 | `runtime.PRICE` | ✅ |
+| L7, L15–16 | 판본 줄·판권 | v1.7.0 · 2026-10-10 → v1.8.0 · 2026-10-11 |
+| L87 | 「둘째, 시점」 | 10월 기준 예외에 "v1.8.0에서 보탠 5·6·10장의 단락" 추가 (style M2 반영) |
+| L1196, L1198 | 5장 「남들은 무엇을 적으라고 하는가」 | 2단락 신설 (네 질문 → 여덟 칸 대조) |
+| L1202 | 5장 「기술 관리와 사업 책임을 가른다」 첫 문장 | "네 벌 중 한 벌" → "레지스트리 네 벌 가운데 하나" — 통지 목록에는 없지만, 바로 앞에 끼어든 "네 질문" 단락 때문에 지시어를 정리한 이음 수정이다. style_log v1.8.0 #1과 factcheck_log (d)에 기록되어 있고 사실 변경은 없다 |
+| L1309 | 5장 「사번이 하는 일은 귀속이다」 | 1단락 신설 |
+| L1502, L1504, L1506 | 6장 「새 신원인가, 있는 신원인가」 | 3단락 신설 |
+| L1533, L1535 | 6장 「청구서를 처음부터 계산에 넣는다」 | 1단락 신설 + 기존 단락의 한 구절("이 장의 표가 준다" → "이 장의 표와 지출 기록이 준다") |
+| L2557 | 10장 「폐기 체크리스트」 | 1단락 신설 |
+| L2922 | 부록 B 서두 | v1.8.0 항목 접근일 2026-10-11 추가 |
+| L2953 | 부록 B-1 | Kurian 행 1개 추가. style_log에 적힌 지디넷 행은 S8 반영으로 삭제되어 원고에 없다 |
 
-**결론:** 부록 C의 명령·파일명·화면 문장·건수·금액이 코드와 실행 결과에 맞는다. `python tests/dry_run.py`의 통과 문장도 실측과 같다.
+## 직접 세기: 1차 원문 대조 (순환 논증 경계)
+
+factcheck_log v1.8.0의 ✅ 판정은 근거로 쓰지 않았다. 원문은 두 경로로 열었다. 사본 `scratchpad/src/g.txt`(42,077바이트)를 쓰고, `curl`로 라이브 URL도 다시 열었다(HTTP 200, 핵심 문장 존재 확인). 덧붙여 fact-checker가 판정한 것은 **style 반영 전** 문면이다. 반영 뒤 바뀐 문장(05:1196 어순, 05:1309 on behalf of, 06:1502 우리말 전달, 06:1533 범위)은 이번에 처음 원문과 대조한 셈이다.
+
+| 원고 주장 | 원문 | 결과 |
+|---|---|---|
+| 5장 L1196 거버넌스 네 질문 (누구·신원 / 해도 되는 것·권한 / 한 일·기록 / 건드리면 안 되는 것) | "governance comes down to answering four fundamental questions: Who is the agent, and what identity does it have? / What is it allowed to do or what permissions is it granted? / What did it do and where can I see what it did? / What should it never touch?" | ✅ 네 질문 순서와 뜻이 같다 |
+| L1196 "기조연설을 옮겨 2026년 10월 8일 공식 블로그에 올린 글" | 편집자 주 "adapted from Thomas Kurian's keynote address", 날짜 October 8, 2026 | ✅ factcheck 🕒 P1(어순)이 문면에서 해소됐다 |
+| L1198 넷째 질문의 예가 'Need to Know' 문서를 열지 못하게 하는 정책 | "The fourth is Agent Gateway. … 'agents may not open documents classified Need to Know.'" | ✅ 3번 칸에 둔 것이 이 책의 판단임을 문면이 밝힌다("여기서는 … 둔다") |
+| L1198 원문은 책임자·폐기를 묻지 않는다 | 네 질문과 그 풀이(Identity·Authorization·Auditing·Gateway)에 owner·sponsor·retire 류 서술 없음 | ✅ |
+| 5장 L1309 "attributed to the agent rather than to a person", "모든 행위" | "every action Gemini takes is written to an audit trail and attributed to the agent rather than to a person" | ✅ 글자와 범위("모든") 모두 같다 |
+| L1309 팀원으로 일할 때 무리·역할을 대신해(on behalf of) 일한다 | "as a team member, where it works on behalf of a group of people … or on behalf of a specific role in an organization" | ✅ (P3 반영 문면) |
+| 6장 L1502 자기 워크스페이스 계정 — 이메일·캘린더·드라이브·디렉터리 | "The agent receives its own Workspace account, including an email address, calendar, Drive, and presence in your company directory." | ✅ |
+| L1502 "acts under its own identity rather than yours" | "A coworker agent acts under its own identity rather than yours" | ✅ 글자 일치 |
+| L1502 "each with their own identity" (하위 에이전트) | "a roster of sub-agents — temporary, job-specific agents, each with their own identity" | ✅ 글자 일치 |
+| L1504 "governed like an employee" / 오래 남는 계정 | "Every agent gets its own identity, cryptographically attested and governed like an employee"; "persistent, defined role", "their own persistent storage" | ✅ |
+| 6장 L1533 토큰 사용량·샌드박스 비용, 프로젝트별 한도에 닿으면 멈춤, 부서별 청구 | "Gemini monitors token usage and sandbox costs, and if a spend cap is triggered, that project's agent pauses … companies can charge AI costs back to specific departments." | ✅ (P4 반영: "작업을 돌린 비용") |
+| 10장 L2557 메일·캘린더·드라이브, 채팅방 추가·이름 호출, 폐기는 원문에 없음(추론 고지) | "adding it to a Chat space or @mentioning it"; 폐기 서술 없음 | ✅ |
+| 부록 B-1 제목·날짜·URL | 라이브 URL 200, 날짜 2026-10-08 | ✅ |
+
+**리서치 노트의 「원문에서 확인 안 됨」 항목 부재 확인.** `research/survey_2026-10_gemini-agent.md` L49의 목록(업무 승인권자 파악·작업 수신함·MAU 10억·테스트 참여사 온/쇼피파이/페이팔·피차이 인용)을 원고 전체에서 grep했다(`승인권자|수신함|MAU|10억|월간 활성|쇼피파이|Shopify|페이팔|PayPal|피차이|Pichai|지디넷|zdnet`). **0건**이다. v1.7.0 원고와 비교해도 새로 생긴 일치가 없다. 벤더 자체 수치(포천 100 약 90%, 고객 약 80%)도 쓰지 않았다.
+
+**style Must M1 (06:150 → 새 원고 L1504) 해소 판정 — 해소됨.** M1이 지적한 것은 두 가지다. 하나는 플랫폼 발급의 오래 남는 계정을 '런타임 발급의 제품 구현'이라고 부른 것이고(L1498 "런타임이 짧은 수명으로 발급"과 반대 방향), 다른 하나는 위임 기본값(L1450)과의 긴장을 말하지 않은 것이다. 현재 문면은 이렇다.
+> "이 장의 답과 맞춰 보면 절반만 겹친다. 플랫폼이 신원을 내준다는 점은 '발급 주체는 런타임'과 같은 쪽이다. 다만 이 장이 말한 런타임의 자격 증명은 짧은 수명으로 쓰고 버리는 것이었다. 메일함과 드라이브가 딸린 계정은 오래 남는다. 그리고 이 에이전트는 자기 신원으로 움직인다. 앞에서 기본값으로 삼은 위임과 달리, 예외로 남겨 둔 쪽이다. …"
+- 일치하는 절반(발급 주체)과 어긋나는 절반(수명)을 둘 다 밝힌다. "구현된 셈"이라는 표현은 사라졌다. factcheck P6의 범위 지적도 함께 풀렸다.
+- 위임 기본값과의 긴장을 명시한다. "예외로 남겨 둔 쪽"은 L1459의 예외("사람의 세션과 무관하게 상시 대기해야 하는 것 … 에이전트가 자기 권한을 가져야 한다")와 맞는다. 다만 L1459가 예외에 붙인 조건은 "자격 증명의 수명을 짧게"다. 메일함 계정이 이 조건을 어떻게 만족하는지는 문면에 없고, 앞 문장("오래 남는다")이 그 어긋남을 이미 드러낸다. 그래서 논지 충돌로 보지 않는다.
+- 6장 클로징은 손대지 않았다(diff 0).
 
 ## 기준 판정
 
 | ID | 기준 | 판정 | 근거 / 조치 |
 |----|------|------|------------|
-| (a) | 챕터 완비·분량 균형 | **PASS** | `# N장` 10개, PART 5개, 부록 A·B·C. 장 구성은 v1.6.0과 같다(위 diff에서 본문 변경 0). H1 grep에 잡히는 `# 1단 —`·`# 2단 —`(L2128·2131)은 상자 ④의 python 코드 블록 안 주석이라 헤딩이 아니다. 부록 C 9,479자는 상한 9,000자를 +479자(+5.3%) 넘는다. 수용 근거(코드 리터럴 때문에 과대 계측됨, 순수 산문 약 7,900자)가 length_report v1.7.0 절과 style_log에 적혀 있어 받아들인다. 뒷부속이라 본문 장 균형에는 들어가지 않는다 |
-| (b) | 미해소 마커 0건 | **PASS** | `(사실 확인 필요)`·`[리서치 공백]`·`[미완성]`·`[이미지 예정]`·TODO·TBD를 원고 전체에서 grep → **0건** |
-| (c) | 사실 미결 해소 | **PASS** | factcheck_log v1.7.0 1차: ❌2(C-3 '네 갈래' 과장, `action_auto`의 뜻)·⚠️2·🕒0. 재확인 라운드: 넷 모두 ✅, 새 ⚠️1(YAML 들여쓰기 과잉 일반화). **원고에서 닫혔는지 직접 확인함:** ❌-1 → L3181 "세 갈래(`auto`·`approve`·`suggest`)와 읽기 범위 밖 거부 … 등록부에 없는 행위는 C-6 실험 2에서" ✅ / ❌-2 → 사건 표 "`auto`·`read` 수준 행위 … (`read` 수준도 이 이름으로 남는다)" + "69건 가운데 22건은 `read` 수준" ✅(직접 집계 22) / ⚠️-1 → "모델이 이미 폐기된 것을 보고 요청하지 않을 수도 있다" ✅ / ⚠️-2 → "점검으로 돌리면 ③에서 이 문장을 남기고 점검 전체가 멈춘다" ✅ / YAML ⚠️ → "실행이 영어 오류로 멈추거나, 멈추지 않고 뜻이 바뀐다" ✅. 의심 식별자(arXiv·URL) 신규 0. 신규 URL은 저장소 1개(B-7과 같은 주소)뿐이다. 보안 규약: 부록 C의 조직 이름은 예제 등록부의 가상 이름을 그대로 인용한 것이다. C-6 실험 4는 실제 조직·고객·개인정보를 넣지 말라고 명시한다 |
-| (d) | 용어 통일 + 챕터 간 변주 | **PASS** | '등록부'·'절차서(SOP)'·'사람 개입'·'판정 보류'·'묘비'·'자격 증명'·'실행 런타임'이 본문·상자와 같은 표기다. 풀이가 필요한 말(터미널·Python·git·패키지·pip·API 키·환경 변수·옵션·토큰·YAML·grep·프록시·FTE)은 첫 등장에서 한 번씩 풀었다(plain_language_rules). 상자 다섯의 새 줄은 같은 틀을 일부러 쓴 안내 줄이다. ④만 내용(앞 상자 기록을 환산)을 덧붙였다. 부속 형식이라 tic으로 보지 않는다 |
-| (e) | 상호 참조 무결성 | **PASS** | 부록 C 안: "예제 저장소(B-7)"(L3114 절) · "(10장)" 자격 증명 회수 · "10장 상자가 정직하게 적었듯"(L2614) · "8장 자율성 계수의 재료"(L1153·1826) · "2장 상자의 보류 2건" · "질문 9개(4장 상자)" · "7장 상자의 '배정 0건'·'공지 제안 0건'"(L1830) · "(7장)" 되돌릴 수 없는 대외 발송 · "(5장)" 등록부 스위치 · "(10장 체크리스트 ①)"(L2525 ① 공식 폐기 워크플로·승인자) · "8장의 분자·분모" · C-1 표의 상자↔장(①2·②4·③7·④8·⑤10)이 상자 위치와 같다. 상자 다섯의 "부록 C" → L3124. 앞부속 L77·목차 → 부록 C 제목과 같다. 끊긴 참조 0 |
-| (f) | 약속 이행 | **PASS** | 매니페스트 description "각 장은 다음 주에 쓸 수 있는 도구를 하나씩 남긴다"를 부록 C가 더 단단하게 한다. 도구 다섯을 독자가 직접 돌려 볼 수 있는 절차가 생겼다. 앞부속 "본문에는 코드가 나오지 않는다"는 여전히 맞다. 새 코드 펜스는 상자 밖이지만 모두 뒷부속 부록 C 안에 있다. 범위·대상 독자는 바뀌지 않았다 |
-| (g) | front/back matter 완비·정합 | **PASS** | 판권 "v1.7.0 / 2026-10-10", 본문 상단 판본 줄, 매니페스트 `1.7.0`·`2026-10-10`이 같다. 식별자 `urn:uuid:5cef80ff…` 유지, 라이선스 `CC BY-NC-SA 4.0`, 하네스 v1.11.0. 「둘째, 시점」이 부록 C를 포함하도록 넓혀졌고, 부록 C 서두가 "2026년 10월 10일 기준"을 따로 밝힌다(v1.5.0 BLOCK-1과 같은 종류의 어긋남 없음). C-7 단가에도 "2026년 10월 기준"이 적혀 있다. 목차에 부록 A·B·C. 서문·목차·판권·에필로그(10장 마지막 절)·부록 A·B·C 모두 있음 |
+| (a) | 챕터 완비·분량 균형 | **PASS** | `# N장` 10개, PART 5개, 부록 A·B·C. 구성은 v1.7.0과 같다. 분량은 5장 19,865자(목표 대비 +24.2%), 6장 15,400자(+10.0%로 상한에 정확히 붙음), 10장 17,134자(상자를 빼면 +14.2%)다. 5장 「남들은 무엇을…」 소절의 순수 산문은 3,250~3,396자로 상한 2,400자를 넘는다(v1.7.0에서 이미 2,495자). length_report v1.8.0 절이 이것을 판본 보강의 저자 재량으로 수용했고 선례(v1.1.0·v1.4.0·v1.5.0)와 조건을 적었다. 어느 장도 평균의 ½ 미만이거나 2배를 넘지 않는다 |
+| (b) | 미해소 마커 0건 | **PASS** | `(사실 확인 필요)`·`[리서치 공백]`·`[미완성]`·`[이미지 예정]`·TODO·TBD를 원고 전체에서 grep했다 → **0건** |
+| (c) | 사실 미결 해소 | **PASS** | factcheck_log v1.8.0의 집계는 ✅28 / ❌0 / ⚠️0 / 🕒1(P1, 비블로킹)이고 의심 식별자는 없다. 🕒 P1은 L1196 문면에서 해소됐다. 정밀화 권고 P3·P4·P6·P7도 반영됐다(L1309 on behalf of, L1533 "작업을 돌린 비용", L1504 절반 범위, B-1 앵커 `[cloud.google.com]`). 반영 뒤 문면을 1차 원문과 직접 대조했고 어긋남은 0이다(위 표). 「원문에서 확인 안 됨」 항목은 0건이다. 새 URL은 1개이고 라이브로 열린다. 출처 성격 라벨("구글 공식 블로그, 벤더 발표")은 R3-1과 맞는다 |
+| (d) | 용어 통일 + 챕터 간 변주 | **PASS** | 제품명은 신규분 전부 영문 'Gemini'로 통일했고 '제미나이'는 원고에서 0건이다. 4장 L997 "Gemini Enterprise"와 같다. L1196에서 첫 풀이를 한다. '동료 에이전트(coworker agent)'는 6장 L1502에서 처음 풀이하고, 10장은 같은 표기로 받는다. 같은 영문 인용이 5·6장에 겹치던 것은 S5 반영으로 6장에만 남았다. style M1은 해소됐다(위). 수사 대구 4형태는 신규분에서 0이다. 관찰 1(비차단) 참조 |
+| (e) | 상호 참조 무결성 | **PASS** | 신규 콜백 12건을 모두 대조했다. "4장에서 본 기업용 서비스 Gemini Enterprise"(L1196→L997, 4장 범위 L832–1083) ✅ · "앞에서 처음부터 채우자고 한 스폰서"(L1198→L1166–1168) ✅ · 여덟 칸 번호 1~8(L1198→L1138–1145 표) ✅ · "앞에서 본 구글 발표"(L1309→L1196) ✅ · 세 항 둘째·셋째(L1309→L1307) ✅ · "5장에서 본 구글 발표(2026년 10월 8일)"(L1502→L1196) ✅ · "앞 절의 도이체방크 … 사번과 전용 업무 이메일, 2020년"(L1502→L1473–1476) ✅ · "'발급 주체는 런타임'"(L1504→L1498) ✅ · "앞에서 기본값으로 삼은 위임 … 예외"(L1504→L1450·1459) ✅ · "2장의 관문"(L1506→2장 「관문 다섯 개」) ✅ · "아직 메워지지 않은 구조적 공백"(L1506→L1465) ✅ · "6장에서 본 구글의 동료 에이전트", ④ 인바운드 차단·⑤ 세 갈래(L2557→L1502, L2553·2555) ✅. 1계층 식별자는 6장의 두 계층 정의와 맞는다. 끊긴 참조는 0이다 |
+| (f) | 약속 이행 | **PASS** | 범위·대상 독자·description은 그대로다. 신규 단락은 "플랫폼이 답하는 칸 / 조직이 채울 칸"을 가른다. 등록(5·6장)과 폐기(10장)의 논지를 외부 1차 자료로 시험하고, 각 단락 끝에 독자가 확인할 질문을 남긴다. 그래서 "다음 주에 쓸 수 있는 도구" 약속과 맞는다. 원문이 말하지 않는 것(감사 기록 칸 구성·출시 단계·하위 신원 목록·폐기)은 단정하지 않고 고지했다 |
+| (g) | front/back matter 완비·정합 | **PASS** | 판권 "v1.8.0 / 2026-10-11", 본문 상단 판본 줄, 매니페스트 `1.8.0`·`2026-10-11`이 같다. 식별자는 그대로이고 라이선스 문자열 `CC BY-NC-SA 4.0`이 판권 지면에 있으며 하네스는 v1.11.0이다. 「둘째, 시점」이 v1.8.0 단락을 예외로 포함한다(style M2 해소. v1.5.0 BLOCK-1과 같은 종류의 어긋남이 다시 생기지 않았다). 본문 다섯 단락은 모두 날짜를 따로 밝힌다(L1196·1502 명시, 1309·1533은 "앞에서 본/같은 발표", 2557 "2026년 10월 8일 발표 기준"). 부록 B 서두 접근일과 B-1 행 *v1.8.0* 표시가 일치한다. 서문·목차·판권·에필로그·부록 A·B·C가 모두 있다 |
 
 ## 평결
 
-# ✅ ACCEPT (sha256 `646b9fca677b109717786e95b70e4a08d473b781713d14d2bfc332c80624f1d3`)
+# ACCEPT (sha256 `746ce0dd21b336b246afc8c06a7fe41c77000d1d9f07d8fdf6e87f6567a895a3`)
 
-7개 기준 모두 PASS다. v1.7.0 개정판은 Phase 5(EPUB·웹 빌드)로 넘어갈 수 있다. 빌드는 이 sha의 원고로 한다. 아래 관찰 1을 반영하면 sha가 바뀐다. 그때는 그 한 줄과 sha 변화만 다시 확인한다.
+7개 기준 모두 PASS다. v1.8.0 개정판은 Phase 5(EPUB·웹 빌드)로 넘어갈 수 있다. 빌드는 이 sha의 원고로 한다. 아래 관찰을 반영해 원고가 바뀌면 해당 줄과 sha 변화만 다시 확인한다.
 
 ## 차단 항목별 조치
 
 - (없음)
 
-## 발간 전 확인 (배포 게이트, 비차단)
+## 관찰 (판정 대상 아님, editor 재량)
 
-### P-1 (권고) 예제 저장소 `main`에 dry_run docstring 정정 커밋 반영 — 담당: 저자/coordinator
+1. **6장 `~해 두다` 계열이 12회다.** 승격 8의 권장치는 장당 6회 이하다. v1.7.0에 이미 11회가 있었고, 이번에 L1504 "남겨 둔"이 +1이다(style 재계측도 +1로 기록). 권장 밴드이고 기존분이 이미 수용됐으므로 BLOCK이 아니다. 원하면 "예외로 남긴 쪽이다"로 바꿔 신규분을 0으로 돌릴 수 있다(분량 −1자. 6장 상한 조건에 저촉되지 않는다).
+2. **L1502 "6년 뒤에는 플랫폼이 그 이메일을 동료 에이전트마다 기본으로 내준다."** 원문은 동료 에이전트를 만들면 계정을 받는다고 적는다. 그래서 '동료 에이전트마다'는 성립한다. 다만 '기본으로'는 구글 한 곳의 사례를 플랫폼 일반처럼 읽히게 할 여지가 조금 있다(style S1이 다른 두 곳에서 지적한 것과 같은 결). 문장 주어가 앞 단락의 "큰 업무 플랫폼 하나"를 받으므로 사실 오류는 아니다.
+3. **로그 판정과의 대조.** factcheck_log v1.8.0의 ✅ 판정과 이 검수의 직접 대조 결과가 어긋나는 곳은 없다. style 반영 뒤 문면은 fact-checker가 다시 보지 않았다. 이 검수가 그 공백을 1차 원문 대조로 메웠다.
 
-- **사실:** 검수 지시는 로컬 예제 폴더가 "ax-system main과 동일"하다고 했지만 정확히는 그렇지 않다. 로컬은 `claude/loving-sagan-1a7tpu` 브랜치 HEAD `460b55b`다. `origin/main`은 `89ee9d0`(`git ls-remote`로 확인)이다. 둘의 차이는 `tests/dry_run.py` docstring 2줄뿐이다(`auto·approve·suggest·미등록` → `auto·approve·suggest)와 읽기 범위 밖 거부` + "미등록은 기본 스크립트에 없다"). 동작은 같다.
-- **영향:** 부록 C의 명령·화면 문장은 main 코드에서도 그대로 나온다. 다만 main에서 받은 독자가 `dry_run.py`를 열면 옛 docstring이 "미등록"도 점검한다고 적고 있다. 이것이 C-3의 "등록부에 없는 행위는 C-6 실험 2에서" 문장과 어긋난다(factcheck ❌-1이 지적한 과장이 저장소 쪽에 남아 있는 상태).
-- **조치:** 외부 배포 전에 `460b55b`를 main에 병합한다. 원고 수정은 필요 없다.
-
-## 관찰 (판정 대상 아님)
-
-1. **C-6 실험 2 "감사 로그에는 `action_denied`가 남는다"(점검으로 돌릴 때).** 런타임은 실행 중에 `action_denied`를 기록한다. 하지만 C-3이 적었듯 dry_run은 끝나면서 `logs/`를 되돌린다. 복사본 실측에서 점검이 끝난 뒤 `logs/audit.jsonl`의 `action_denied`는 **0건**이었다. 독자가 점검 뒤에 그 줄을 찾으면 찾을 수 없다. 사실이 틀린 것은 아니다(실행 중에는 기록된다). 하지만 따라 하는 절차로 읽으면 오해할 수 있다. editor 선택 사항: 예) "감사 로그에도 `action_denied`가 적힌다(점검이 끝나면 로그는 되돌려진다)". 반영하면 sha가 바뀌므로 그 줄만 재확인한다.
-2. **dry_run의 통과 문장과 단언 범위 (원고 밖).** `점검 통과: … 묘비 기록 확인`을 찍기 전의 `assert`는 `status == "retired"`와 `credentials == []`만 확인한다. `tombstone` 존재는 확인하지 않는다. 부록 C는 코드가 찍는 문장을 정확히 인용했으므로 원고 문제는 아니다. 저장소 쪽에서 assert에 `"tombstone" in retired`를 더하면 문장과 검사 범위가 맞는다.
-3. **로그 판정과의 대조.** factcheck_log v1.7.0의 ✅ 판정과 이 검수의 직접 세기 결과가 어긋나는 곳은 없다. 관찰 1은 fact-checker가 다루지 않은 지점이다.
-
-## 수락 후 조치 — 2026-10-10 (orchestrator)
-- **관찰 1 반영:** C-6 실험 2 문장에 "(점검이 끝나면 로그도 되돌려지므로, 화면에서 확인하자)"를 덧붙여 재조립. 수락본(646b9fca677b) 대비 diff는 이 한 줄뿐. 새 원고 sha256 `770c8ddb092a7ebb8f5a85e89d5d5f52ae817a99ac2ce6c4a6f311fa86418685`. 금지 마커 0. ACCEPT 유지 — 이 sha로 빌드한다.
-- **관찰 2 (원고 밖) 반영:** ax-system `tests/dry_run.py`에 묘비(tombstone.reason) assert 추가 — 통과 문장 "묘비 기록 확인"이 실제 검사가 됨(ax-system 브랜치 0526f78, dry_run 통과 확인).
-- **P-1:** ax-system 브랜치 `claude/loving-sagan-1a7tpu`의 dry_run.py 커밋 2건(460b55b docstring, 0526f78 assert)을 main에 병합해야 부록 C-3과 저장소가 완전히 맞는다 — 저자 병합 대기.
+## 수락 후 조치 — 2026-10-11 (orchestrator)
+- 비차단 관찰 1·2 반영(6장 두 구절): "예외로 남겨 둔 쪽이다" → "예외로 남긴 쪽이다", "6년 뒤에는 플랫폼이 그 이메일을 동료 에이전트마다 기본으로 내준다." → "6년 뒤에는 한 플랫폼이 그 이메일을 동료 에이전트마다 내준다." 수락본(746ce0dd21b3) 대비 diff는 이 두 줄뿐. 6장 15,395자(상한 이내). 새 원고 sha256 `9774137fc9645099a479675a585cd0915c397d8d2392fb0da67546f8b9bb3276`. ACCEPT 유지 — 이 sha로 빌드.
