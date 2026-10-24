@@ -113,7 +113,8 @@ def quote(sec, eyebrow, title, q, src=None, after=None):
 
 def table(sec, eyebrow, title, head, rows, lead=None, foot=None):
     th = ''.join(f'<th>{c}</th>' for c in head)
-    tr = ''.join('<tr>' + ''.join(f'<td>{c}</td>' for c in r) + '</tr>' for r in rows)
+    lab = [html.escape(re.sub(r'<[^>]+>', '', str(c)), quote=True) for c in head]
+    tr = ''.join('<tr>' + ''.join(f'<td data-label="{lab[j] if j < len(lab) else ""}">{c}</td>' for j, c in enumerate(r)) + '</tr>' for r in rows)
     slides.append(('content', sec, _head(eyebrow, title) + _opt('lead', lead)
                    + f'<table class="deck-table"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table>'
                    + _opt('foot-note', foot)))
@@ -230,7 +231,19 @@ div.split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:
 .page-footer{position:absolute;bottom:1.2rem;left:1.8rem;right:1.8rem;display:flex;justify-content:space-between;gap:1rem;color:var(--dim);font-size:.75rem}
 .cover .page-num{top:3.5rem;right:3.6rem}.cover .page-section{top:3.5rem;left:3.6rem}.cover .page-footer{bottom:3.2rem;left:3.6rem;right:3.6rem}
 @media(max-width:900px){.cover-wrap.has-art{grid-template-columns:minmax(0,1fr);gap:1.6rem}.cover-sub{overflow-wrap:anywhere}.grid-3,.grid-4{grid-template-columns:1fr}.div-wrap,div.split{grid-template-columns:1fr}.deck-fig img,.deck-fig.tall img{max-height:none;width:100%}
- .page-footer{display:none}.slide{min-height:auto;padding:2.4rem 1.1rem 3rem}.deck-table{display:block;overflow-x:auto}}
+ .page-footer{display:none}.slide{min-height:auto;padding:3.6rem 1.1rem 3rem}.deck-table{display:block;overflow-x:auto}
+ body{scroll-snap-type:none;height:auto;overflow-y:visible}.corner{display:none}
+ .page-num,.page-section,.cover .page-num,.cover .page-section{top:1.1rem;font-size:.7rem}.page-num,.cover .page-num{right:1.1rem}.page-section,.cover .page-section{left:1.1rem}
+ .cover-wrap.has-art .cover-art{max-width:360px;justify-self:center;width:100%}.stat-row{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+ .deck-table th,.deck-table td{min-width:8.5rem}}
+@media(max-width:600px){.deck-table,.deck-table tbody,.deck-table tr,.deck-table td{display:block;width:100%;min-width:0}
+ .deck-table thead{display:none}.deck-table{overflow:visible}
+ .deck-table tr{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.55rem .85rem;margin:0 0 .7rem}
+ .deck-table td{border:0!important;padding:.32rem 0!important}
+ .deck-table td:first-child{font-weight:700;color:var(--cream)}
+ .deck-table td:not(:first-child)::before{content:attr(data-label);display:block;color:var(--coral);font-size:.74rem;font-weight:700;letter-spacing:.04em;margin-bottom:.12rem}}
+@media(max-width:560px){.cover-title{font-size:clamp(2.3rem,11vw,3rem)}.cover-title.end{font-size:clamp(2rem,9vw,2.6rem)}.content-title{font-size:clamp(1.3rem,6vw,1.6rem)}
+ .div-title{font-size:clamp(1.7rem,8vw,2.2rem)}.bigq{font-size:1.08rem}.eyebrow{letter-spacing:.1em;font-size:.72rem}.easy{padding:.75rem .9rem}}
 @media print{body{height:auto;overflow:visible;background:#fff;color:#111}
  .slide{page-break-after:always;min-height:auto;border:none;background:#fff!important;color:#111}
  .card,.stat,.deck-table th{background:#f1f3f5!important;border-color:#ccc!important}

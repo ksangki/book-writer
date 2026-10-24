@@ -60,6 +60,8 @@ if cover_name:
     h = re.sub(r'<svg[^>]*>(?:(?!</svg>).)*?media/[^"]*' + cn + r'(?:(?!</svg>).)*?</svg>', '', h, count=1, flags=re.S)
     h = re.sub(r'<p><img src="media/[^"]*' + cn + r'"[^>]*/></p>', '', h)
 h = re.sub(r'<header id="title-block-header">.*?</header>', '', h, count=1, flags=re.S)
+# EPUB 전용 landmarks 내비(숨김)는 웹에서 대상이 없는 링크가 된다
+h = re.sub(r'<nav epub:type="landmarks".*?</nav>', '', h, flags=re.S)
 h = re.sub(r'<p><img src="([^"]+)" />\s*(그림 [\d-]+\.[^<]*)</p>',
            lambda x: f'<figure><img src="{x.group(1)}" alt="{x.group(2).strip()}" /><figcaption>{x.group(2).strip()}</figcaption></figure>', h)
 h = re.sub(r'<style>.*?</style>', '', h, flags=re.S).replace('</head>', CSS + '\n</head>', 1)
