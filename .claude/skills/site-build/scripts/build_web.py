@@ -5,6 +5,7 @@
   - 제목·부제·표지 alt·저장소 링크(repo_url, 있으면)는 <slug>/book_manifest.json에서 읽는다.
   - 색은 매니페스트의 theme.light_accent / theme.dark_accent(없으면 기본값)로 정한다.
   - site 폴더에는 cover.png·BOOK.md·epub/·presentation/이 함께 놓인다고 가정하고 링크한다.
+  - site 폴더에 media/opening.mp4(와 media/opening.jpg)가 있으면 표지 아래에 영상을 싣는다(매니페스트 web_videos로 바꿀 수 있다).
 그림 캡션은 "그림 N-k." / "그림 N." 둘 다, 표 캡션은 "표 N-k." 문단과 굵은 글씨 문단 둘 다 인식한다.
 """
 import sys, subprocess, pathlib, re, json, html, zipfile
@@ -52,6 +53,7 @@ hr{border:0;border-top:1px solid var(--line);margin:2.4rem 0}
 .cover-hero{text-align:center;margin:8px 0 32px} .cover-hero img{max-width:320px;width:70%;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.25)}
 .dl{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px;font-size:.95rem}
 .dl a{border:1px solid var(--accent);padding:.35rem .9rem;border-radius:999px;text-decoration:none}
+.web-video{margin:0 0 32px} .web-video video{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#000}
 </style>"""
 CSS = CSS.replace('--accent:#9a6b1c', '--accent:' + theme.get('light_accent', '#9a6b1c')).replace('--accent:#e3b35a', '--accent:' + theme.get('dark_accent', '#e3b35a'))
 # EPUB 속 표지(인라인 SVG, 웹에선 경로가 깨짐)는 hero와 중복이라 제거
@@ -66,10 +68,23 @@ h = re.sub(r'<p><img src="([^"]+)" />\s*(그림 [\d-]+\.[^<]*)</p>',
            lambda x: f'<figure><img src="{x.group(1)}" alt="{x.group(2).strip()}" /><figcaption>{x.group(2).strip()}</figcaption></figure>', h)
 h = re.sub(r'<style>.*?</style>', '', h, flags=re.S).replace('</head>', CSS + '\n</head>', 1)
 links = [f'<a href="epub/{epub.name}">EPUB 내려받기</a>', '<a href="BOOK.md">책 소개</a>', '<a href="presentation/">발표자료</a>']
+for l in m.get('web_links', []):   # 표지 아래 버튼 줄에 더할 링크(매니페스트). download 가 참이면 내려받기 링크
+    links.append(f'<a href="{html.escape(l["href"], quote=True)}"' + (' download' if l.get('download') else '') + f'>{html.escape(l["text"])}</a>')
 if m.get('repo_url'):
     links.append(f'<a href="{html.escape(m["repo_url"], quote=True)}">GitHub</a>')
 alt = html.escape(m.get('cover_alt') or f'「{title}」 표지', quote=True)
 hero = f'<div class="cover-hero"><img src="cover.png" alt="{alt}" /><div class="dl">{"".join(links)}</div></div>'
+# 영상 블록: site 폴더에 영상 파일이 있으면 표지 바로 아래에 싣는다. 매니페스트 web_videos로 목록·순서·캡션을 정할 수 있다.
+videos = m.get('web_videos') or [{'src': 'media/opening.mp4', 'poster': 'media/opening.jpg', 'caption': '발표 오프닝 영상 (60초)'}]
+for v in videos:
+    if not (out / v['src']).exists():
+        continue
+    poster = f' poster="{html.escape(v["poster"], quote=True)}"' if v.get('poster') and (out / v['poster']).exists() else ''
+    vid_id = f' id="{html.escape(v["id"], quote=True)}"' if v.get('id') else ''
+    label = f' aria-label="{html.escape(v["label"], quote=True)}"' if v.get('label') else ''
+    hero += (f'\n<figure class="web-video"{vid_id}><video controls playsinline preload="metadata"{poster}{label}>'
+             f'<source src="{html.escape(v["src"], quote=True)}" type="video/mp4" /></video>'
+             f'<figcaption>{v.get("caption", "")}</figcaption></figure>')
 h = re.sub(r'(<body[^>]*>)', lambda x: x.group(1) + '\n' + hero, h, count=1)
 h = re.sub(r'<table', '<div class="tbl"><table', h)
 h = h.replace('</table>', '</table></div>')

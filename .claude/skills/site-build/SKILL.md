@@ -43,6 +43,14 @@ python3 .claude/skills/site-build/scripts/build_web.py {slug} $S/epub/{책-제�
             "deck": {"bg": "#0f1a26", "panel": "#16222f", "line": "#2a3a4c", "accent": "#e3b35a", "accent_d": "#b8862f", "glow": "#1a2a3c"}}
   ```
 - 출력 끝의 "그림 N · 표 캡션 M"이 원고의 그림·표 수와 맞는지 본다.
+- 오프닝 영상: `$S/media/opening.mp4`(포스터는 `$S/media/opening.jpg`)가 있으면 표지 바로 아래에 영상을 싣는다. 파일이 없으면 싣지 않는다. 영상을 다시 만들면 이 두 파일만 바꾸고 웹을 다시 빌드한다.
+- 영상이 여럿이거나 캡션을 바꿀 때는 매니페스트 `web_videos`로 목록·순서를 정한다. 표지 아래 버튼을 더할 때는 `web_links`를 쓴다. 손으로 고친 index.html은 다음 빌드에서 사라지므로 반드시 매니페스트에 옮긴다.
+
+  ```json
+  "web_videos": [{"id": "opening-video", "src": "media/opening.mp4", "poster": "media/opening.jpg",
+                  "caption": "발표 오프닝 영상 · 60초", "label": "발표 오프닝 영상"}],
+  "web_links": [{"href": "presentation/요약본.pptx", "text": "발표자료 요약본", "download": true}]
+  ```
 
 ## 2. 발표자료
 
