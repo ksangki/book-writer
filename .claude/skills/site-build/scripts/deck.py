@@ -225,7 +225,8 @@ div.split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:
 .easy{margin-top:1.3rem;max-width:66rem;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--coral);
  border-radius:10px;padding:.85rem 1.1rem;font-size:clamp(.95rem,1.7vw,1.14rem);line-height:1.65;color:var(--text)}
 .easy-k{display:inline-block;color:var(--coral);font-weight:800;font-size:.8em;letter-spacing:.06em;margin-right:.7rem}
-.slide:has(.easy) .deck-fig:not(.tall) img{max-height:calc(100vh - 25rem)}
+.slide:has(.easy) .deck-fig:not(.tall) img{max-height:calc(100vh - 26rem)}
+@media(min-width:901px){.cover-art.portrait img{max-height:calc(100vh - 10rem);width:auto;max-width:100%;margin:0 auto}}   /* 표지 그림이 짧은 가로 화면(1024×768 등)에서 쪽번호·꼬리말에 닿지 않게 */
 .page-num{position:absolute;top:1.5rem;right:1.8rem;color:var(--dim);font-size:.8rem}
 .page-section{position:absolute;top:1.5rem;left:1.8rem;color:var(--dim);font-size:.8rem;letter-spacing:.08em}
 .page-footer{position:absolute;bottom:1.2rem;left:1.8rem;right:1.8rem;display:flex;justify-content:space-between;gap:1rem;color:var(--dim);font-size:.75rem}

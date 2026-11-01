@@ -6,7 +6,8 @@
   - 색은 매니페스트의 theme.light_accent / theme.dark_accent(없으면 기본값)로 정한다.
   - site 폴더에는 cover.png·BOOK.md·epub/·presentation/이 함께 놓인다고 가정하고 링크한다.
   - site 폴더에 media/opening.mp4(와 media/opening.jpg)가 있으면 표지 아래에 영상을 싣는다(매니페스트 web_videos로 바꿀 수 있다).
-그림 캡션은 "그림 N-k." / "그림 N." 둘 다, 표 캡션은 "표 N-k." 문단과 굵은 글씨 문단 둘 다 인식한다.
+목차("목차"/"차례") 항목은 같은 제목의 장으로 링크한다(toc_links.py).
+그림 캡션은 "그림 N-k." / "그림 N." 둘 다, 표 캡션은 "표 N-k." 문단, 굵은 글씨 문단, 번호만 굵은 문단("**표 N-k.** 제목")을 모두 인식한다.
 """
 import sys, subprocess, pathlib, re, json, html, zipfile
 slug, epub, out = pathlib.Path(sys.argv[1]).resolve(), pathlib.Path(sys.argv[2]).resolve(), pathlib.Path(sys.argv[3]).resolve()
@@ -44,6 +45,7 @@ table{border-collapse:collapse;width:100%;font-size:.9rem;line-height:1.6}
 th,td{border-bottom:1px solid var(--line);padding:.55rem .75rem;vertical-align:top;text-align:left}
 th{background:var(--panel);font-weight:700;white-space:nowrap} tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--panel) 45%,transparent)}
 tbody tr:last-child td{border-bottom:0}
+@media (max-width:600px){td{min-width:6.5em}}
 p.tcap{color:var(--muted);font-size:.88rem;text-align:center;margin:.3rem 0 1.8rem} p.tcap b,figcaption b{color:var(--accent)}
 img,svg{max-width:100%;height:auto} figure{margin:2rem 0;text-align:center}
 figure img{display:block;margin:0 auto;border-radius:10px;border:1px solid var(--line);background:#fbf7f2}
@@ -90,10 +92,14 @@ h = re.sub(r'<table', '<div class="tbl"><table', h)
 h = h.replace('</table>', '</table></div>')
 h = re.sub(r'<p>(표 [A-Z\d-]+\.)', r'<p class="tcap"><b>\1</b>', h)
 h = re.sub(r'<p><strong>(표 [A-Z\d-]+\.)\s*([^<]*)</strong></p>', r'<p class="tcap"><b>\1</b> \2</p>', h)
+h = re.sub(r'<p><strong>(표 [A-Z\d-]+\.)</strong>', r'<p class="tcap"><b>\1</b>', h)   # 번호만 굵은 "**표 N-k.** 제목"
 h = re.sub(r'<figcaption([^>]*)>(?:<p>)?(그림 [\d-]+\.)', r'<figcaption\1><b>\2</b>', h)
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from toc_links import link as _toc_link   # 목차 항목 → 해당 장 링크
+h, n_toc = _toc_link(h)
 (out / 'index.html').write_text(h, encoding='utf-8')
 if cover_name:
     for f in (out / 'media').rglob(cover_name):
         f.unlink()  # EPUB 속 표지 사본만 지운다 — 본문 PNG 그림·사진은 그대로 둔다
 n_fig = h.count('<figure')
-print('web build 완료:', out / 'index.html', '· 그림', n_fig, '· 표 캡션', h.count('class="tcap"'))
+print('web build 완료:', out / 'index.html', '· 그림', n_fig, '· 표 캡션', h.count('class="tcap"'), '· 목차 링크', n_toc)
