@@ -45,7 +45,7 @@ table{border-collapse:collapse;width:100%;font-size:.9rem;line-height:1.6}
 th,td{border-bottom:1px solid var(--line);padding:.55rem .75rem;vertical-align:top;text-align:left}
 th{background:var(--panel);font-weight:700;white-space:nowrap} tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--panel) 45%,transparent)}
 tbody tr:last-child td{border-bottom:0}
-@media (max-width:600px){td{min-width:6.5em}}
+th,td{overflow-wrap:break-word} td{min-width:6.5em}
 p.tcap{color:var(--muted);font-size:.88rem;text-align:center;margin:.3rem 0 1.8rem} p.tcap b,figcaption b{color:var(--accent)}
 img,svg{max-width:100%;height:auto} figure{margin:2rem 0;text-align:center}
 figure img{display:block;margin:0 auto;border-radius:10px;border:1px solid var(--line);background:#fbf7f2}
