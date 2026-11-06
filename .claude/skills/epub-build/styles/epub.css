@@ -35,7 +35,7 @@ figure { text-align: center; margin: 1.2em 0; }
 /* 큰 래스터 삽화가 작은 화면에서 가로 스크롤을 만들지 않게 */
 img { max-width: 100%; height: auto; }
 /* 끊을 곳 없는 긴 토큰(A·B·C, 하이픈 식별자)이 좁은 화면에서 표를 밀어내지 않게 */
-th, td { overflow-wrap: anywhere; }
+th, td { overflow-wrap: break-word; }
 /* 열이 많은 표(성적표 10열 등)는 좁은 화면에서 셀 여백만 줄여 가로 스크롤을 막는다 */
 @media (max-width: 30em) { th, td { padding: 0.25em 0.3em; } }
 /* 참고문헌의 맨 URL처럼 한 줄에 안 들어가는 낱말만 끊는다 */

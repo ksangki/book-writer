@@ -70,7 +70,7 @@ HARNESS_VERSION="${HARNESS_VERSION:-unknown}"
 
 # Rights string: construct from author + license if not set in manifest.
 if [[ -z "$RIGHTS" ]]; then
-  RIGHTS="© $(date +%Y) ${AUTHOR} — Licensed under ${LICENSE}"
+  RIGHTS="© $(date +%Y) ${AUTHOR}. Licensed under ${LICENSE}"
 fi
 
 # Genre default: tech-book unless manifest specifies. Exposed as dc:subject.

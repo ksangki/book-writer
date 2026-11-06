@@ -12,7 +12,7 @@
 import sys, subprocess, pathlib, re, json, html, zipfile
 slug, epub, out = pathlib.Path(sys.argv[1]).resolve(), pathlib.Path(sys.argv[2]).resolve(), pathlib.Path(sys.argv[3]).resolve()
 m = json.loads((slug / 'book_manifest.json').read_text(encoding='utf-8'))
-title = m.get('title', '') + (f" — {m['subtitle']}" if m.get('subtitle') else '')
+title = m.get('title', '') + (f": {m['subtitle']}" if m.get('subtitle') else '')
 theme = m.get('theme', {})
 out.mkdir(parents=True, exist_ok=True)
 subprocess.run(['pandoc', str(epub), '-f', 'epub', '-t', 'html5', '-s',

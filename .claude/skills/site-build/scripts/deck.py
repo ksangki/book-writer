@@ -38,7 +38,7 @@ def setup(slug=None, book=None, by=None, ver=None, theme=None, figdir=None, cove
         p = pathlib.Path(slug) / 'book_manifest.json'
         if p.exists():
             m = json.loads(p.read_text(encoding='utf-8'))
-    _S['book'] = book or (m.get('title', '') + (f" — {m['subtitle']}" if m.get('subtitle') else ''))
+    _S['book'] = book or (m.get('title', '') + (f": {m['subtitle']}" if m.get('subtitle') else ''))
     _S['by'] = by or m.get('author', '')
     _S['ver'] = ver or ('v' + m['version'] if m.get('version') else '')
     _S['theme'] = {**DEFAULT_THEME, **(m.get('theme', {}).get('deck', {})), **(theme or {})}
@@ -277,7 +277,7 @@ def render(out):
     no_ez = [i for i, (k, s, inner) in enumerate(slides, 1) if k.startswith('content') and 'class="easy"' not in inner]
     doc = (f'<!doctype html><html lang="ko"><head><meta charset="utf-8">'
            f'<meta name="viewport" content="width=device-width, initial-scale=1">'
-           f'<title>{html.escape(_S["book"])} — 1시간 발표 자료</title><style>{CSS.replace("__ROOT__", root)}</style></head><body>'
+           f'<title>{html.escape(_S["book"])} | 1시간 발표 자료</title><style>{CSS.replace("__ROOT__", root)}</style></head><body>'
            f'<div class="progress-bar"><div class="progress-fill" id="progress"></div></div><main>'
            + '\n'.join(body) + f'</main><script>{JS}</script></body></html>')
     out = pathlib.Path(out)
