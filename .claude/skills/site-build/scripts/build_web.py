@@ -69,7 +69,9 @@ h = re.sub(r'<nav epub:type="landmarks".*?</nav>', '', h, flags=re.S)
 h = re.sub(r'<p><img src="([^"]+)" />\s*(그림 [\d-]+\.[^<]*)</p>',
            lambda x: f'<figure><img src="{x.group(1)}" alt="{x.group(2).strip()}" /><figcaption>{x.group(2).strip()}</figcaption></figure>', h)
 h = re.sub(r'<style>.*?</style>', '', h, flags=re.S).replace('</head>', CSS + '\n</head>', 1)
-links = [f'<a href="epub/{epub.name}">EPUB 내려받기</a>', '<a href="BOOK.md">책 소개</a>', '<a href="presentation/">발표자료</a>']
+links = [f'<a href="epub/{epub.name}">EPUB 내려받기</a>', '<a href="BOOK.md">책 소개</a>']
+if (out / 'presentation' / 'index.html').exists():   # 발표자료가 아직 없으면 버튼을 달지 않는다(404 링크 방지)
+    links.append('<a href="presentation/">발표자료</a>')
 for l in m.get('web_links', []):   # 표지 아래 버튼 줄에 더할 링크(매니페스트). download 가 참이면 내려받기 링크
     links.append(f'<a href="{html.escape(l["href"], quote=True)}"' + (' download' if l.get('download') else '') + f'>{html.escape(l["text"])}</a>')
 if m.get('repo_url'):
