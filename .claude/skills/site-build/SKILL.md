@@ -23,7 +23,7 @@ EPUB이 나온 뒤 Phase 6에서 돈다. 모든 책이 같은 모양의 동반 �
 {slug}/brag-output/           홍보 영상 (Phase 6-3, 공개 폴더 밖)
 ```
 
-`site/`에는 `.gitignore`를 둔다. 공개 저장소는 `site/`를 따로 만들기 때문에 하네스 루트의 `.gitignore`가 적용되지 않는다. `site/` 밖의 것은 공개하지 않는다. 특히 `brag-output/`의 작업 폴더(node_modules 등)와 `.omc/` 같은 세션 상태 파일을 `site/`나 공개 저장소에 두지 않는다. 공개 저장소에 올릴 때는 `git add -A`를 쓰지 말고 파일을 이름으로 지정한다.
+`site/`에는 `.gitignore`를 둔다. 공개 저장소는 `site/`를 따로 만들기 때문에 하네스 루트의 `.gitignore`가 적용되지 않는다. `site/` 밖의 것은 공개하지 않는다(예외는 덱 원천을 공개할 때의 `deck/slides.py` 하나다). 특히 `brag-output/`의 작업 폴더(node_modules 등)와 `.omc/` 같은 세션 상태 파일을 `site/`나 공개 저장소에 두지 않는다. 공개 저장소에 올릴 때는 `git add -A`를 쓰지 말고 파일을 이름으로 지정한다.
 
 ## 1. 폴더 준비와 웹 버전
 
@@ -42,8 +42,8 @@ python3 .claude/skills/site-build/scripts/build_web.py {slug} $S/epub/{책-제�
   "theme": {"light_accent": "#9a6b1c", "dark_accent": "#e3b35a",
             "deck": {"bg": "#0f1a26", "panel": "#16222f", "line": "#2a3a4c", "accent": "#e3b35a", "accent_d": "#b8862f", "glow": "#1a2a3c"}}
   ```
-- 출력 끝의 "그림 N · 표 캡션 M"이 원고의 그림·표 수와 맞는지 본다.
-- 오프닝 영상: `$S/media/opening.mp4`(포스터는 `$S/media/opening.jpg`)가 있으면 표지 바로 아래에 영상을 싣는다. 파일이 없으면 싣지 않는다. 영상을 다시 만들면 이 두 파일만 바꾸고 웹을 다시 빌드한다.
+- 출력 끝의 "그림 N · 표 캡션 M"이 원고의 그림·표 수와 맞는지 본다. 본문에 맨 주소(https://…)로 적힌 URL은 자동으로 링크가 되고, 바깥 링크는 모두 새 창(`target="_blank" rel="noopener noreferrer"`)으로 열린다. 출력의 "맨 주소 링크 · 새 창 링크" 수로 확인한다.
+- 오프닝 영상: Phase 6-2에서 `showreel` 스킬로 만든 60~90초 영상이다. `$S/media/opening.mp4`(포스터는 `$S/media/opening.jpg`)가 있으면 표지 바로 아래에 영상을 싣는다. 파일이 없으면 싣지 않는다. 영상을 다시 만들면 이 두 파일만 바꾸고 웹을 다시 빌드한다.
 - 영상이 여럿이거나 캡션을 바꿀 때는 매니페스트 `web_videos`로 목록·순서를 정한다. 표지 아래 버튼을 더할 때는 `web_links`를 쓴다. 손으로 고친 index.html은 다음 빌드에서 사라지므로 반드시 매니페스트에 옮긴다.
 
   ```json
@@ -74,7 +74,7 @@ python3 .claude/skills/site-build/scripts/build_web.py {slug} $S/epub/{책-제�
 4. **비유 한 줄:** 모든 내용 슬라이드에 `ez()`로 '쉽게 말하면' 비유를 하나씩 단다. 일상의 장면(요리, 이사, 등산, 도서관 같은 것)으로 그 슬라이드의 요지를 한 문장에 옮긴다. 빠진 슬라이드가 있으면 엔진이 WARNING으로 알린다.
 5. **분량:** 30~45장이다. 1시간 발표에 슬라이드당 1~2분 기준이다.
 6. **내용의 출처는 수락된 `04_manuscript.md`뿐이다.** 원고에 없는 사실·수치·저자 장면을 넣지 않는다. 수치는 원고의 문장 그대로 옮기고, 출처 라벨도 따라 붙인다. 원고의 근거 표지가 '하'인 장은 슬라이드 foot에도 그 한계를 한 줄 적는다.
-7. **금지어·비식별:** 원고의 용어 규칙(`00_direction.md`·`02_plan.md`의 용어 표기)을 그대로 따른다.
+7. **금지어·비식별:** 원고의 용어 규칙(`00_brief.md` 또는 `00_direction.md`, `02_plan.md`의 용어 표기)을 그대로 따른다.
 
 빌드:
 

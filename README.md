@@ -1,11 +1,11 @@
 # Book Writer — AI 책 저술 자동화 하네스
 
-[![Version](https://img.shields.io/badge/harness-v2.1.2-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Version](https://img.shields.io/badge/harness-v2.2.0-blue.svg)](VERSION) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Books: CC BY-NC-SA 4.0](https://img.shields.io/badge/books-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 주제, 주요 내용, 대상 독자만 주면 리서치부터 EPUB 빌드까지 한 번에 수행하는 **에이전트 하네스**다. v1.3.0부터 **장르별 문체 프로필**을 지원한다 — 기술서(Toby 문체)·소설·실용서(요리/여행)·에세이. 장르는 자동 감지 후 확인하며, 기본값은 `tech-book`이다 (아래 [장르 프로필](#장르-프로필) 참고). 저자명은 기본값 `Toby-AI`에서 원하는 값으로 바꿀 수 있다 (아래 [저자명 변경](#저자명-변경) 참고).
 
 - **Repo:** https://github.com/tobyilee/book-writer
-- **하네스 버전:** `v2.1.2` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
+- **하네스 버전:** `v2.2.0` (단일 출처: 프로젝트 루트 [`VERSION`](VERSION). 변경 이력은 [CLAUDE.md](CLAUDE.md#변경-이력) 참조)
 - **라이선스:** 하네스 코드는 **MIT** ([`LICENSE`](LICENSE)). 산출되는 책 콘텐츠 기본값은 **CC BY-NC-SA 4.0** — `book_manifest.json`의 `license` 필드로 책별 오버라이드 가능
 - **실행 환경:** [Claude Code](https://claude.com/claude-code) + Claude Agent SDK
 - **저자 모델:** 모든 에이전트가 현재 세션의 모델 설정을 그대로 상속한다 (에이전트별 `model` 고정 없음)
@@ -23,6 +23,11 @@
 5. **편집** — 챕터 통합, 전환부·용어·통권 변주 다듬기, 서문·에필로그·참고문헌 작성
 6. **수락 게이트** — 새 컨텍스트의 리뷰어가 책 전체를 한 번 판정 (미해소 마커·사실 오류가 남으면 빌드하지 않음)
 7. **표지 + EPUB 빌드 + 책 소개** — 표지 이미지 생성, pandoc으로 EPUB 3 조립, 짝을 이루는 책 소개 markdown 작성
+8. **웹·발표자료·영상** — 웹 버전, 1시간 발표자료, showreel 오프닝 영상(60~90초), brag 홍보 영상
+9. **교차 검토 (요청 시)** — GPT 편집 검토 결과를 받아들이고 로컬 Codex로 원고·삽화를 직접 다시 검토, 사실 지적은 원문 재대조 후 반영
+10. **공개·홍보 (요청 시)** — 공개 저장소·GitHub Pages 배포와 라이브 확인, 링크드인 글과 캐러셀
+
+저자가 자리를 비우며 "검토 없이 끝까지"를 요청하면 **자율 모드**로 위 8번(Phase 6: 웹·발표자료·영상)까지 만들고 멈춘다. 공개는 저자가 돌아와 요청할 때 한다. 저자 관점의 전 과정은 [`docs/author-workflow.md`](docs/author-workflow.md)에 있다.
 
 산출물은 프로젝트 루트에 두 파일이 짝으로 저장된다.
 
@@ -50,6 +55,9 @@
 | `writing-deslop` 스킬 | Phase 4.4 AI 글 문형 11가지 점검 | `~/.claude/skills/writing-deslop/`에 설치 |
 | Google Chrome / Chromium | Phase 6 웹·발표자료 화면 확인 캡처 | 기본 설치 경로 자동 탐지 (`CHROME_BIN`으로 지정 가능) |
 | brag 플러그인 | Phase 6 홍보 영상(`/brag`) | Claude Code 플러그인 마켓플레이스에서 `brag` 설치 |
+| `showreel` 스킬 | Phase 6 오프닝 영상(60~90초 모션그래픽) | `~/.claude/skills/showreel/`에 설치 |
+| Codex CLI | Phase 7 교차 검토(`codex_review.sh`) | `npm i -g @openai/codex` 후 로그인 |
+| GitHub CLI(`gh`) | Phase 8 공개 저장소·Pages | `brew install gh` 후 `gh auth login` |
 
 선택 도구가 없으면 해당 단계만 건너뛰고, 건너뛴 사실을 완료 보고에 적는다.
 
@@ -75,7 +83,7 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 이 주제로 책 써줘.
 ```
 
-오케스트레이터가 Phase 0부터 Phase 6까지 순차적으로 진행하며, 각 Phase에서 필요한 에이전트를 자동으로 호출한다. 중간에 계획이 나오면 사용자 승인을 요청하는 지점이 있다.
+오케스트레이터가 Phase 0부터 Phase 6까지(요청하면 7·8까지) 순차적으로 진행하며, 각 Phase에서 필요한 에이전트를 자동으로 호출한다. 중간에 계획이 나오면 사용자 승인을 요청하는 지점이 있다.
 
 ### 기대 산출물
 
@@ -176,14 +184,26 @@ Claude Code 프롬프트에 주제·내용·대상 독자를 자연어로 입력
 - EPUB 빌드 직후 `epub-builder`가 `02_plan.md`·`04_manuscript.md`·매니페스트를 읽어 **책 소개 markdown**(`{책-제목}-v{version}.md`)을 EPUB 옆에 작성
 - 빌드 CI(`run_ci.sh check-build`) — `No build findings.`가 기준
 
-### Phase 6: 웹 · 발표자료 · 홍보 영상 (매번)
+### Phase 6: 웹 · 발표자료 · 영상 (매번)
 
 - `site-builder`가 `site-build` 스킬로 `{slug}/site/`를 만든다: EPUB에서 뽑은 **웹 버전**(`index.html`)과 공용 엔진으로 만든 **1시간 발표자료**(`presentation/index.html`, 30~45장)
 - 발표자료는 수락된 원고에서만 내용을 가져오고, 모든 내용 슬라이드에 **'쉽게 말하면'** 비유 한 줄을 단다
 - 헤드리스 Chrome 캡처로 표지·그림·표 슬라이드와 웹 첫 화면을 직접 확인
 - 오케스트레이터가 `{slug}/site/`를 소스로 **brag 스킬**을 고정 지시로 불러 20초 안팎의 **홍보 영상**(`{slug}/brag-output/brag.mp4`)과 공유 문구를 만든다
+- **showreel 스킬**로 60~90초 **오프닝 영상**을 만들어 `site/media/opening.mp4`에 두면 웹 표지 아래에 실린다(화면 글자는 두 번 읽을 시간을 준다)
 - 색은 매니페스트 `theme` 하나로 웹·덱·영상이 공유한다
+- 웹판의 맨 주소는 자동으로 링크가 되고, 바깥 링크는 새 창으로 열린다
 - 공개 저장소에는 사용자가 요청할 때만, `site/`의 파일을 이름으로 지정해 올린다(`brag-output/`·`.omc/`는 올리지 않음)
+
+### Phase 7: 교차 검토 (요청 시)
+
+- `cross-review` 스킬: ChatGPT가 만든 편집 검토·삽화 폴더를 받아들이고, 로컬 Codex CLI를 읽기 전용으로 불러(`codex_review.sh`, 삽화 이미지 첨부) 원고 diff·삽화·책 규칙을 다시 검토한다
+- 사실 지적은 `research/`와 1차 출처로 재대조한 뒤에만 반영하고, 기각한 지적도 근거와 함께 `07_cross_review.md`에 남긴다. 판은 minor를 올린다
+
+### Phase 8: 공개 · 홍보 (요청 시)
+
+- `book-launch` 스킬: 공개 저장소 생성·갱신(허용 목록 커밋, `rsync --delete`·`git add -A` 금지), Pages, 라이브 확인
+- 에필로그 중심의 짧은 링크드인 글과 캐러셀(1080×1350 PNG + PDF, `templates/carousel.html`·`scripts/carousel_shot.js`)을 만든다. SNS에 직접 게시하지는 않는다
 
 ## 후속 작업
 

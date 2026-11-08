@@ -97,9 +97,51 @@ h = re.sub(r'<figcaption([^>]*)>(?:<p>)?(그림 [\d-]+\.)', r'<figcaption\1><b>\
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from toc_links import link as _toc_link   # 목차 항목 → 해당 장 링크
 h, n_toc = _toc_link(h)
+# 본문에 맨 주소로 적힌 http(s) URL을 링크로 바꾸고, 바깥 링크는 모두 새 창으로 연다.
+_URL = re.compile(r"https?://[A-Za-z0-9\-._~:/?#\[\]@!$&'()*+,;=%]+")
+_SKIP = ('a', 'code', 'pre', 'script', 'style', 'svg', 'title', 'head')
+def _linkify(doc):
+    parts, depth, n = re.split(r'(<[^>]+>)', doc), {t: 0 for t in _SKIP}, 0
+    for i, p in enumerate(parts):
+        if p.startswith('<'):
+            mt = re.match(r'<(/?)([a-zA-Z0-9]+)', p)
+            if mt and mt.group(2).lower() in depth and not p.endswith('/>'):
+                depth[mt.group(2).lower()] += -1 if mt.group(1) else 1
+            continue
+        if any(depth.values()) or 'http' not in p:
+            continue
+        txt, out_s, last = html.unescape(p), [], 0   # 엔티티를 먼저 풀어야 &quot;·&amp; 끝이 URL에 섞이지 않는다
+        for mu in _URL.finditer(txt):
+            u, tail = mu.group(0), ''
+            while u and (u[-1] in ".,;:!?'\"" or (u[-1] == ')' and u.count('(') < u.count(')'))):
+                tail = u[-1] + tail; u = u[:-1]
+            if not u.split('://', 1)[1]:
+                continue
+            out_s.append(html.escape(txt[last:mu.start()], quote=False))
+            out_s.append(f'<a href="{html.escape(u, quote=True)}">{html.escape(u, quote=False)}</a>')
+            last = mu.start() + len(u); n += 1
+        if out_s:
+            out_s.append(html.escape(txt[last:], quote=False))
+            parts[i] = ''.join(out_s)
+    return ''.join(parts), n
+h, n_url = _linkify(h)
+def _newwin(m):   # 바깥 링크는 기존 target을 덮어 새 창으로, rel에는 noopener noreferrer를 합친다
+    tag = m.group(0)
+    if not re.search(r'\bhref="https?://', tag):
+        return tag
+    tag = re.sub(r'\s+target="[^"]*"', '', tag)
+    mr = re.search(r'\brel="([^"]*)"', tag)
+    if mr:
+        toks = mr.group(1).split()
+        toks += [x for x in ('noopener', 'noreferrer') if x not in toks]
+        tag = tag[:mr.start()] + 'rel="' + ' '.join(toks) + '"' + tag[mr.end():]
+    else:
+        tag = tag[:-1] + ' rel="noopener noreferrer">'
+    return tag[:-1] + ' target="_blank">'
+h = re.sub(r'<a\s[^>]*>', _newwin, h)
 (out / 'index.html').write_text(h, encoding='utf-8')
 if cover_name:
     for f in (out / 'media').rglob(cover_name):
         f.unlink()  # EPUB 속 표지 사본만 지운다 — 본문 PNG 그림·사진은 그대로 둔다
 n_fig = h.count('<figure')
-print('web build 완료:', out / 'index.html', '· 그림', n_fig, '· 표 캡션', h.count('class="tcap"'), '· 목차 링크', n_toc)
+print('web build 완료:', out / 'index.html', '· 그림', n_fig, '· 표 캡션', h.count('class="tcap"'), '· 목차 링크', n_toc, '· 맨 주소 링크', n_url, '· 새 창 링크', h.count('target="_blank"'))
