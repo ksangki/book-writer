@@ -11,6 +11,7 @@ description: Phase 8 — publish a finished book and promote it, only when the a
 
 - 원고에 회사·부서·인물 실명, 사내 시스템·사내 용어, 미공개 수치, 개인정보, 인증정보가 없는지 `grep`으로 한 번 더 본다(`00_brief.md`의 금지 목록 기준).
 - 판권의 판본·발행일·판 이력과 매니페스트 `version`이 같고, EPUB 파일명이 그 판본인지 본다.
+- 오케스트레이터 완료 보고의 산출물 점검표(그림 수, 발표자료, 오프닝 영상)를 다시 센다. 빠진 것이 있으면 공개 전에 저자에게 알리고, 만들고 올릴지 그대로 올릴지 묻는다.
 - `{slug}/site/`에 `index.html`·`presentation/`·`epub/{새 EPUB}`·`cover.png`·`BOOK.md`·`media/`(영상·삽화)·`figures/`가 있는지 본다. 외부 도구가 넣은 낯선 파일이 있으면 공개 대상에서 빼고 저자에게 알린다.
 
 ## 2. 새 공개 저장소 (첫 공개)
