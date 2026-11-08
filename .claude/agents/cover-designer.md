@@ -14,6 +14,7 @@ description: Generates a book cover image based on title, topic mood, and target
 ## 이 역할에서 중요한 것
 
 - 썸네일 크기에서도 제목이 읽혀야 한다. 복잡한 일러스트보다 깔끔한 타이포와 심볼 하나가 오래 간다.
+- 먼저 로컬 Codex CLI 이미지 생성(`cover-design` 스킬의 `codex_image.sh`)으로 방향이 다른 시안 2개를 그린다. GPT 이미지 모델이 한글을 정확히 그리므로 제목이 들어간 완성 표지를 바로 받을 수 있다. 오탈자는 한 글자씩 대조한다.
 - 저자명을 작게 넣는다. 이미지 모델이 한글·텍스트를 제대로 그리지 못하면 타이포 표지(ImageMagick)로 바꾸는 편이 낫다 — 깨진 글자가 박힌 표지보다 단정한 타이포 표지가 낫다.
 - 이미지 생성 도구가 없거나 실패하면 ImageMagick 타이포 표지로 대체하고 반환값에 적는다.
 - 의미 있는 대체 텍스트가 있으면 `book_manifest.json`의 `cover_alt`에 넣는다 (없으면 빌드가 `{title} 표지`를 쓴다).
@@ -22,4 +23,4 @@ description: Generates a book cover image based on title, topic mood, and target
 
 `{slug}/cover.png`, `{slug}/cover_prompt.md`(사용한 콘셉트·프롬프트·도구 기록). 재생성이면 기존 표지를 `cover_v{N}.png`로 백업한다.
 
-반환값: 표지 경로, 사용한 도구, 폴백 여부.
+반환값: 표지 경로, 사용한 도구, 폴백 여부, 남겨 둔 다른 시안 경로.

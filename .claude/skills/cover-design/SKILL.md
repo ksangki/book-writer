@@ -1,11 +1,11 @@
 ---
 name: cover-design
-description: Generate a book cover image (1600x2560 PNG) based on title, topic mood, and target audience. Craft image generation prompts in English, use available image-gen MCPs or APIs, fallback to ImageMagick typography. Use when creating, revising, or A/B testing book covers. Author attribution defaults to Toby-AI (override via orchestrator input).
+description: Generate a book cover image (1600x2400 PNG from GPT via the local Codex CLI, or 1600x2560) based on title, topic mood, and target audience. Craft image generation prompts in English, generate with the local Codex CLI's image_generation (GPT image model, renders Korean text correctly) first, then image-gen MCPs or APIs, fallback to ImageMagick typography. Use when creating, revising, or A/B testing book covers. Author attribution defaults to Toby-AI (override via orchestrator input).
 ---
 
 # Cover Design
 
-책의 표지 이미지를 설계·생성한다. 결과는 `{slug}/cover.png` (1600×2560 권장) + 재생성용 프롬프트 기록.
+책의 표지 이미지를 설계·생성한다. 결과는 `{slug}/cover.png`(Codex 생성이면 1600×2400, 그 밖에는 1600×2560) + 재생성용 프롬프트 기록.
 
 ## 절차
 
@@ -51,9 +51,39 @@ No stock photography. No generic tech gradient.
 
 ## 이미지 생성 도구 우선순위
 
-1. **이미지 생성 MCP** (설치되어 있으면) — 가장 선호
-2. **외부 API** — OpenAI `gpt-image-1`, Stability SDXL 등 (사용자 API 키 필요)
-3. **ImageMagick 폴백** — 단순 타이포그래피 플레이스홀더
+1. **로컬 Codex CLI 이미지 생성** — 가장 선호. `codex features list`에 `image_generation … true`이면 GPT 이미지 모델로 바로 그린다. ChatGPT 웹을 거치지 않고, API 키를 따로 넣지 않으며, 한글 제목·부제·저자를 정확히 그린다(2026-11 「코드 너머의 리더」 표지 시안 2개에서 확인).
+2. **이미지 생성 MCP** (설치되어 있으면)
+3. **외부 API** — OpenAI `gpt-image-1`, Stability SDXL 등 (사용자 API 키 필요)
+4. **ImageMagick 폴백** — 단순 타이포그래피 플레이스홀더
+
+## Codex로 그리기
+
+시안은 2개를 그린다. 하나는 영상·발표자료와 색을 맞춘 상징형, 하나는 본문 삽화와 맞춘 회화형처럼 방향을 다르게 잡는다. 지시문 하나에 시안 하나다.
+
+```bash
+S=.claude/skills/cover-design/scripts
+mkdir -p {slug}/_cover_gpt
+bash $S/codex_image.sh {slug}/_cover_gpt/prompt_a.md {slug}/_cover_gpt/candidate_a.png   # run_in_background, 3~4분
+bash $S/codex_image.sh {slug}/_cover_gpt/prompt_b.md {slug}/_cover_gpt/candidate_b.png   # 동시에 띄워도 된다
+```
+
+- 스크립트는 빈 임시 폴더에서 Codex를 돌리고 결과(1024×1536)를 1600×2400으로 Lanczos 확대한다. 원본은 `_raw.png`로 남는다. 종료 코드 3(codex 없음·기능 꺼짐)이면 다음 도구로 넘어간다.
+- 지시문에는 공개될 글자(제목·부제·저자)와 그림 묘사만 넣는다. 원고·사내 정보·실명·미공개 수치는 넣지 않는다.
+- 지시문에 꼭 넣을 것: 글자를 정확히 쓰라는 요구와 그 글자 목록, "No other text, no numbers, no logos, no watermark, no book mockup", 피할 클리셰(빛나는 뇌·네온·홀로그램·로봇 군단), AI를 사람 모습으로 그리지 말 것(필요하면 작은 기계 도구로).
+
+```
+Create ONE finished Korean nonfiction book cover, portrait 2:3 (1024x1536).
+Render this Korean text exactly, correctly spelled, clean and legible: large title "{제목}",
+smaller subtitle "{부제}", author "{저자}" near the bottom. No other text, no numbers,
+no logos, no watermark, no book mockup, no glowing brains, neon, holograms or robot armies.
+Theme: {책이 말하는 것 한 문장}.
+Style: {색·질감·화풍}. Image: {장면 하나}. Generous negative space.
+```
+
+- 결과를 열어 글자 오탈자를 한 글자씩 대조한다. 틀린 글자가 하나라도 있으면 다시 그린다.
+- 고른 시안을 `{slug}/cover.png`로 복사하고, 다른 시안은 `_cover_gpt/`에 남겨 저자에게 알린다. 매니페스트 `cover_alt`를 새 그림에 맞게 쓴다.
+- 판권 제작 고지에 "표지는 이미지 생성 모델로 그린 그림이다"를 적는다. 사람이 나오면 "표지 속 인물은 실재하는 사람이 아니다"를 더한다.
+- 같은 스크립트로 본문 삽화도 그릴 수 있다(`WxH` 인자로 크기 지정). 삽화를 넣는 절차는 `cross-review` 4절을 따른다.
 
 ## ImageMagick 폴백 명령
 
@@ -71,7 +101,7 @@ convert -size 1600x2560 \
 
 ## 검증 체크
 
-- [ ] 해상도 ≥ 1600×2560
+- [ ] 해상도 ≥ 1600×2560 (Codex 생성은 1600×2400)
 - [ ] 썸네일(200×320)로 축소해도 제목 읽힘
 - [ ] 저자 표기 존재 (기본값 `Toby-AI`, 사용자 지정 시 그 값 — 이미지 안 또는 메타데이터 예정)
 - [ ] 클리셰 회피 (기본 그라데이션, 스톡사진 느낌 없음)
@@ -85,7 +115,7 @@ convert -size 1600x2560 \
 
 ## Version 1 (YYYY-MM-DD)
 - Concept: {A/B/C}
-- Tool: {mcp / api / imagemagick}
+- Tool: {codex / mcp / api / imagemagick}
 - Prompt:
   ```
   ...
@@ -98,6 +128,7 @@ convert -size 1600x2560 \
 
 ## 실패 대응
 
+- Codex 실패(종료 코드 3·4) → MCP·API → ImageMagick 폴백 순서로 내려간다
 - 이미지 API 실패 → ImageMagick 폴백
 - ImageMagick 미설치 → 오케스트레이터에 `brew install imagemagick` 지시 요청, 임시로 단색 PNG 생성
 - 생성 결과가 클리셰이거나 제목이 잘 안 보임 → 프롬프트 구체화 (색상·구도 강화) 후 재시도
